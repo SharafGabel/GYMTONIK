@@ -59,9 +59,9 @@ Mois de janvier 2015
 Mois de mars 2015
 
 ##3. Acteurs du projet
-##Maître d’œuvre
+###Maître d’œuvre
 Le maître d’œuvre est le chef de projet, Sharaf Gabel, qui a pour rôle de répartir les tâches et de planifier la réalisation du projet.
-##Compétences nécessaires
+###Compétences nécessaires
 **Gestion du projet** : planification, définition des objectifs, répartition des tâches, développement 
 
 **Modélisation de la base de données** : modélisation de systèmes (UML), normes sur la modélisation, connaissance du langage SQL (responsable modélisation).
@@ -69,9 +69,9 @@ Le maître d’œuvre est le chef de projet, Sharaf Gabel, qui a pour rôle de r
 **Implémentation de la base de données** : implémenter le modèle (responsable technique).
 
 **Test de qualité** : tester le bon fonctionnement de la base de données et des interfaces à travers de test d’utilisation afin de retrouver les erreurs possibles.
-##Produit du projet
+###Produit du projet
 Le projet doit aboutir à la réalisation d’une application qui permet le suivi et la mise en perspective des progrès d’un utilisateur à travers l’implémentation d’une base de données et des interfaces nécessaires à l’utilisateur.
-##Analyse des risques
+###Analyse des risques
 
 | Numéro          | Description   | Cause     | Conséquences | Criticité  Gravité;Fréquence            |
 | ----------- |:-------------:|:---------:|:------------:|:------------------------|
@@ -80,4 +80,6 @@ Le projet doit aboutir à la réalisation d’une application qui permet le suiv
 | **3**       | Adapter l’application pour une version mobile        |    Mauvais affichage |Mauvais rendu visuel provoquant l’agacement de l’utilisateur.   |5      ;      5           |
 | **4**       | Calcul des algorithmes des pertes de poids         |     Mauvaises formules utilisées|Objectif non atteint par l’utilisateur.         |9      ;      8           |
 
+##4. Diagramme de Cas d'utilisation
+![image Use Case](http://www.plantuml.com/plantuml/png/ZPB1Ja8n44NtVCNia0L_O4W0esvq8T74bIbzLwoqCo_JlY0n_ejRleCViw3WKqf25-tYddllPD8uTrmRDO6Q26iYwBr3-OoCdSzK6gx6uaNf0gWdy-N8D_ZMHIleeLOodv_JZN5CWm7Hj13GqlVozXggogBSFxH9j3t4bGBy2EzbyGjS2gTR4_17RVaFvhnkWjaEqZPyT3htoNaNJKAZJuQ5bpcptn_GsQGBLinSJ0hjjRaV7MI56JOLvR6kLr1g61JNAyCML7Nn1hNEei0FNwL9MmFjA5f_aZSxUy7p84uf8b8DVHOD6ooMPf6GVm9EOk_04Mx66rgOQd5LF5RjSrpUGUPz9EDT02VZz9HSbZ3LpKfUCf7Vl2K98GSTx_hdsLVxlEZO-m80 "USE CASE")
 #### Helping you to get in better shape!
