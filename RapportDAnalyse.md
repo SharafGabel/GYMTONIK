@@ -73,10 +73,11 @@ Le maître d’œuvre est le chef de projet, Sharaf Gabel, qui a pour rôle de r
 Le projet doit aboutir à la réalisation d’une application qui permet le suivi et la mise en perspective des progrès d’un utilisateur à travers l’implémentation d’une base de données et des interfaces nécessaires à l’utilisateur.
 ##Analyse des risques
 
-| header 1      | header 2      | header 3  |
-| ------------- |:-------------:| ---------:|
-| ligne 1       | 1             |     valeur|
-| ligne 2       | 2             |     valeur|
-| ligne 3       | 3             |     valeur|
+| n°     | Description     | Cause  | Conséquences | **Criticité** |
+| ------------- |:-------------:|:---------:|:-------:|**Gravité**|**Fréquence**|
+| **1**       | Gest             |     valeur|ferm|8|1|
+| **2**       | Mise             |     valeur|plain|8|5|
+| **3**       | Adapt            |     valeur|mauv|5|5|
+| **4**       | Calc             |     valeur|obje|9|8|
 
 #### Helping you to get in better shape!
