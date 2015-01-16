@@ -30,7 +30,7 @@
         <entry file="file://$PROJECT_DIR$/RapportDAnalyse.md">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.83809525" vertical-offset="883" max-vertical-offset="1530">
-              <caret line="83" column="458" selection-start-line="83" selection-start-column="458" selection-end-line="83" selection-end-column="458" />
+              <caret line="83" column="452" selection-start-line="83" selection-start-column="452" selection-end-line="83" selection-end-column="452" />
               <folding />
             </state>
           </provider>
@@ -394,7 +394,7 @@
       <workItem from="1421226410199" duration="496000" />
       <workItem from="1421430416816" duration="897000" />
       <workItem from="1421431984050" duration="3810000" />
-      <workItem from="1421438502167" duration="304000" />
+      <workItem from="1421438502167" duration="352000" />
     </task>
     <task id="LOCAL-00001" summary="Rapport d'Analyse au format MarkDown">
       <created>1421430521615</created>
@@ -484,11 +484,15 @@
       <created>1421438671752</created>
       <updated>1421438671752</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Rapport d'Analyse au format MarkDown">
+      <created>1421438817619</created>
+      <updated>1421438817619</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5563000" />
+    <option name="totallyTimeSpent" value="5611000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -613,7 +617,7 @@
     <entry file="file://$PROJECT_DIR$/RapportDAnalyse.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.83809525" vertical-offset="883" max-vertical-offset="1530">
-          <caret line="83" column="458" selection-start-line="83" selection-start-column="458" selection-end-line="83" selection-end-column="458" />
+          <caret line="83" column="452" selection-start-line="83" selection-start-column="452" selection-end-line="83" selection-end-column="452" />
           <folding />
         </state>
       </provider>
