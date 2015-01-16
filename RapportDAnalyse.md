@@ -73,11 +73,11 @@ Le maître d’œuvre est le chef de projet, Sharaf Gabel, qui a pour rôle de r
 Le projet doit aboutir à la réalisation d’une application qui permet le suivi et la mise en perspective des progrès d’un utilisateur à travers l’implémentation d’une base de données et des interfaces nécessaires à l’utilisateur.
 ##Analyse des risques
 
-| n°          | Description   | Cause     | Conséquences | Criticité  Gravité;Fréquence            |
+| Numéro          | Description   | Cause     | Conséquences | Criticité  Gravité;Fréquence            |
 | ----------- |:-------------:|:---------:|:------------:|:------------------------|
-| **1 **       | Gestion interaction entre l’utilisateur et l’application          |Il ne faut pas que l’utilisateur soit lassé rapidement du nombre d’information à entrer |Fermeture de l’application        |8      ;      1           |
-| **2 **       | Mise en œuvre d’un entraînement fixé par l’application          |Le niveau doit correspondre au profil de l’utilisateur|Plainte de l’utilisateur et programme non adapté à l’utilisateur. (danger)         |8     ;       5           |
-| **3 **       | Adapter l’application pour une version mobile        |    Mauvais affichage |Mauvais rendu visuel provoquant l’agacement de l’utilisateur.   |5      ;      5           |
-| **4 **       | Calcul des algorithmes des pertes de poids         |     Mauvaises formules utilisées|Objectif non atteint par l’utilisateur.         |9      ;      8           |
+| **1**       | Gestion interaction entre l’utilisateur et l’application          |Il ne faut pas que l’utilisateur soit lassé rapidement du nombre d’information à entrer |Fermeture de l’application        |8      ;      1           |
+| **2**       | Mise en œuvre d’un entraînement fixé par l’application          |Le niveau doit correspondre au profil de l’utilisateur|Plainte de l’utilisateur et programme non adapté à l’utilisateur. (danger)         |8     ;       5           |
+| **3**       | Adapter l’application pour une version mobile        |    Mauvais affichage |Mauvais rendu visuel provoquant l’agacement de l’utilisateur.   |5      ;      5           |
+| **4**       | Calcul des algorithmes des pertes de poids         |     Mauvaises formules utilisées|Objectif non atteint par l’utilisateur.         |9      ;      8           |
 
 #### Helping you to get in better shape!
