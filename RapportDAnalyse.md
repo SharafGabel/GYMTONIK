@@ -72,4 +72,11 @@ Le maître d’œuvre est le chef de projet, Sharaf Gabel, qui a pour rôle de r
 ##Produit du projet
 Le projet doit aboutir à la réalisation d’une application qui permet le suivi et la mise en perspective des progrès d’un utilisateur à travers l’implémentation d’une base de données et des interfaces nécessaires à l’utilisateur.
 ##Analyse des risques
+
+| header 1      | header 2      | header 3  |
+| ------------- |:-------------:| ---------:|
+| ligne 1       | 1             |     valeur|
+| ligne 2       | 2             |     valeur|
+| ligne 3       | 3             |     valeur|
+
 #### Helping you to get in better shape!
