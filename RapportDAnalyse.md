@@ -1,6 +1,6 @@
 Rapport d'analyse du projet
 =========
--> *Gym Tonik* <-
+->Gym Tonik<-
 #Analyse de la demande
 ##1. Nature du projet
 ###Type de projet
@@ -34,4 +34,39 @@ Nous serons une équipe de cinq à intervenir sur le projet:
 * Responsable communication : Driss Kaaouass
 
 Chaque intervenant participera à tous les domaines du projet.
+
+#Traduction de la demande
+
+##1. Présentation du contexte
+Permettre le suivi et la mise en perspective des progrès pour la pratique d’un sport.
+
+##2. Définition du projet
+###Problématique
+Comment optimiser le suivi d’entraînement sportif pour un utilisateur ?
+###Fonctionnalités attendues
+L’application doit permettre de gérer les entraînements sportifs, elle devra comporter :
+* Une interface textuelle/graphique agréable qui doit permettre à  l’utilisateur de :
+* Enregistrer un exercice (temps, répétition, …)
+* Enregistrer le travail réellement effectué 
+* Enregistrer d’autres mesures dans le temps (poids, sommeil, …)
+* Visualiser ses progrès dans le temps et les mettre en perspective avec les autres éléments enregistrés (autres exercices ou autre mesures)
+* Définir un plan d’entraînement 
+* Visualiser son prochain exercice
+* Visualiser un plan d’entraînement 
+###Début du projet
+Mois de janvier 2015
+###Fin du projet
+Mois de mars 2015
+
+##3. Acteurs du projet
+##Maître d’œuvre
+Le maître d’œuvre est le chef de projet, Sharaf Gabel, qui a pour rôle de répartir les tâches et de planifier la réalisation du projet.
+##Compétences nécessaires
+**Gestion du projet** : planification, définition des objectifs, répartition des tâches, développement 
+**Modélisation de la base de données** : modélisation de systèmes (UML), normes sur la modélisation, connaissance du langage SQL (responsable modélisation).
+**Implémentation de la base de données** : implémenter le modèle (responsable technique).
+**Test de qualité** : tester le bon fonctionnement de la base de données et des interfaces à travers de test d’utilisation afin de retrouver les erreurs possibles.
+##Produit du projet
+Le projet doit aboutir à la réalisation d’une application qui permet le suivi et la mise en perspective des progrès d’un utilisateur à travers l’implémentation d’une base de données et des interfaces nécessaires à l’utilisateur.
+##Analyse des risques
 #### Helping you to get in better shape!
