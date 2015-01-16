@@ -74,10 +74,10 @@ Le projet doit aboutir à la réalisation d’une application qui permet le suiv
 ##Analyse des risques
 
 | n°          | Description   | Cause     | Conséquences | **Criticité**           |
-| ----------- |:-------------:|:---------:|:------------:|:----------:|:----------:|
-| **1**       | Gest          |     valeur|ferm          |8           |1           |
-| **2**       | Mise          |     valeur|plain         |8           |5           |
-| **3**       | Adapt         |     valeur|mauv          |5           |5           |
-| **4**       | Calc          |     valeur|obje          |9           |8           |
+| ----------- |:-------------:|:---------:|:------------:|:------------------------|
+| **1**       | Gest          |     valeur|ferm          |8            1           |
+| **2**       | Mise          |     valeur|plain         |8            5           |
+| **3**       | Adapt         |     valeur|mauv          |5            5           |
+| **4**       | Calc          |     valeur|obje          |9            8           |
 
 #### Helping you to get in better shape!
