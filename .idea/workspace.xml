@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f0b2989e-a464-4782-969c-3061b0071821" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RapportDAnalyse.md" afterPath="$PROJECT_DIR$/RapportDAnalyse.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="GymTonik.iws" />
@@ -31,8 +32,8 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.75714284" vertical-offset="798" max-vertical-offset="1496">
-              <caret line="75" column="30" selection-start-line="75" selection-start-column="30" selection-end-line="75" selection-end-column="30" />
+            <state vertical-scroll-proportion="0.64920634" vertical-offset="781" max-vertical-offset="1496">
+              <caret line="70" column="163" selection-start-line="70" selection-start-column="163" selection-end-line="70" selection-end-column="163" />
               <folding />
             </state>
           </provider>
@@ -392,7 +393,7 @@
       <workItem from="1421225610183" duration="56000" />
       <workItem from="1421226410199" duration="496000" />
       <workItem from="1421430416816" duration="897000" />
-      <workItem from="1421431984050" duration="2867000" />
+      <workItem from="1421431984050" duration="3071000" />
     </task>
     <task id="LOCAL-00001" summary="Rapport d'Analyse au format MarkDown">
       <created>1421430521615</created>
@@ -442,11 +443,15 @@
       <created>1421436857551</created>
       <updated>1421436857551</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Rapport d'Analyse au format MarkDown">
+      <created>1421436889427</created>
+      <updated>1421436889427</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4316000" />
+    <option name="totallyTimeSpent" value="4520000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -562,8 +567,8 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.75714284" vertical-offset="798" max-vertical-offset="1496">
-          <caret line="75" column="30" selection-start-line="75" selection-start-column="30" selection-end-line="75" selection-end-column="30" />
+        <state vertical-scroll-proportion="0.64920634" vertical-offset="781" max-vertical-offset="1496">
+          <caret line="70" column="163" selection-start-line="70" selection-start-column="163" selection-end-line="70" selection-end-column="163" />
           <folding />
         </state>
       </provider>

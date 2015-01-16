@@ -75,9 +75,9 @@ Le projet doit aboutir à la réalisation d’une application qui permet le suiv
 
 | n°          | Description   | Cause     | Conséquences | **Criticité**           |
 | ----------- |:-------------:|:---------:|:------------:|:------------------------|
-| **1**       | Gestidozfvn          |     valeur|ferm          |8            1           |
-| **2**       | Mise          |     valeur|plain         |8            5           |
-| **3**       | Adapt         |     valeur|mauv          |5            5           |
-| **4**       | Calc          |     valeur|obje          |9            8           |
+| **1**       | Gestion interaction entre l’utilisateur et l’application          |Il ne faut pas que l’utilisateur soit lassé rapidement du nombre d’information à entrer |La fermeture de l’application        |8            1           |
+| **2**       | Mise en œuvre d’un entraînement fixé par l’application          |Le niveau doit correspondre au profil de l’utilisateur|La plainte de l’utilisateur et que le programme ne soit pas adapté à l’utilisateur. (danger)         |8            5           |
+| **3**       | Adapter l’application pour une version mobile        |    Mauvais affichage |Mauvais rendu visuel provoquant l’agacement de l’utilisateur.   |5            5           |
+| **4**       | Calcul des algorithmes des pertes de poids         |     Mauvaises formules utilisées|Objectif non atteint par l’utilisateur.         |9            8           |
 
 #### Helping you to get in better shape!
