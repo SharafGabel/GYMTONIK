@@ -1,6 +1,5 @@
-Rapport d'analyse du projet
+Rapport d'analyse du projet ( Gym Tonik )
 =========
-#Gym Tonik
 
 #Analyse de la demande
 ##1. Nature du projet
