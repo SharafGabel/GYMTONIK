@@ -32,8 +32,8 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7031746" vertical-offset="866" max-vertical-offset="1496">
-              <caret line="77" column="20" selection-start-line="77" selection-start-column="20" selection-end-line="77" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.3793651" vertical-offset="866" max-vertical-offset="1496">
+              <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -393,7 +393,7 @@
       <workItem from="1421225610183" duration="56000" />
       <workItem from="1421226410199" duration="496000" />
       <workItem from="1421430416816" duration="897000" />
-      <workItem from="1421431984050" duration="3494000" />
+      <workItem from="1421431984050" duration="3544000" />
     </task>
     <task id="LOCAL-00001" summary="Rapport d'Analyse au format MarkDown">
       <created>1421430521615</created>
@@ -463,11 +463,15 @@
       <created>1421437459685</created>
       <updated>1421437459685</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Rapport d'Analyse au format MarkDown">
+      <created>1421437520481</created>
+      <updated>1421437520481</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4943000" />
+    <option name="totallyTimeSpent" value="4993000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -583,8 +587,8 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7031746" vertical-offset="866" max-vertical-offset="1496">
-          <caret line="77" column="20" selection-start-line="77" selection-start-column="20" selection-end-line="77" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.3793651" vertical-offset="866" max-vertical-offset="1496">
+          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
           <folding />
         </state>
       </provider>
