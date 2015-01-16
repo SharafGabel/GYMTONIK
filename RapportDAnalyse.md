@@ -26,7 +26,7 @@ La version final du projet sera remis le 26/03/2015.
 
 ##2. Moyens mis à disposition
 ###Intervenants affectes au projet
-Nous serons une équipe de cinq à intervenir sur le projet : 
+Nous serons une équipe de cinq à intervenir sur le projet: 
 * Chef de projet : Sharaf Gabel
 * Responsable modélisation : Axel leroy 
 * Responsable technique : Christian Hiroz
