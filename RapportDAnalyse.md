@@ -74,7 +74,7 @@ Le projet doit aboutir à la réalisation d’une application qui permet le suiv
 ##Analyse des risques
 
 | n°          | Description   | Cause     | Conséquences | **Criticité**           |
-| ----------- |:-------------:|:---------:|:------------:|**Gravité**|**Fréquence**|
+| ----------- |:-------------:|:---------:|:------------:|:----------:|:----------:|
 | **1**       | Gest          |     valeur|ferm          |8           |1           |
 | **2**       | Mise          |     valeur|plain         |8           |5           |
 | **3**       | Adapt         |     valeur|mauv          |5           |5           |
