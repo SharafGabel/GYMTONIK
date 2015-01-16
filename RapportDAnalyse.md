@@ -63,8 +63,11 @@ Mois de mars 2015
 Le maître d’œuvre est le chef de projet, Sharaf Gabel, qui a pour rôle de répartir les tâches et de planifier la réalisation du projet.
 ##Compétences nécessaires
 **Gestion du projet** : planification, définition des objectifs, répartition des tâches, développement 
+
 **Modélisation de la base de données** : modélisation de systèmes (UML), normes sur la modélisation, connaissance du langage SQL (responsable modélisation).
+
 **Implémentation de la base de données** : implémenter le modèle (responsable technique).
+
 **Test de qualité** : tester le bon fonctionnement de la base de données et des interfaces à travers de test d’utilisation afin de retrouver les erreurs possibles.
 ##Produit du projet
 Le projet doit aboutir à la réalisation d’une application qui permet le suivi et la mise en perspective des progrès d’un utilisateur à travers l’implémentation d’une base de données et des interfaces nécessaires à l’utilisateur.
