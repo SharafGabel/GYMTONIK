@@ -75,8 +75,8 @@ Le projet doit aboutir à la réalisation d’une application qui permet le suiv
 
 | n°          | Description   | Cause     | Conséquences | Criticité  Gravité;Fréquence            |
 | ----------- |:-------------:|:---------:|:------------:|:------------------------|
-| **1 **       | Gestion interaction entre l’utilisateur et l’application          |Il ne faut pas que l’utilisateur soit lassé rapidement du nombre d’information à entrer |La fermeture de l’application        |8      ;      1           |
-| **2 **       | Mise en œuvre d’un entraînement fixé par l’application          |Le niveau doit correspondre au profil de l’utilisateur|La plainte de l’utilisateur et que le programme ne soit pas adapté à l’utilisateur. (danger)         |8     ;       5           |
+| **1 **       | Gestion interaction entre l’utilisateur et l’application          |Il ne faut pas que l’utilisateur soit lassé rapidement du nombre d’information à entrer |Fermeture de l’application        |8      ;      1           |
+| **2 **       | Mise en œuvre d’un entraînement fixé par l’application          |Le niveau doit correspondre au profil de l’utilisateur|Plainte de l’utilisateur et programme non adapté à l’utilisateur. (danger)         |8     ;       5           |
 | **3 **       | Adapter l’application pour une version mobile        |    Mauvais affichage |Mauvais rendu visuel provoquant l’agacement de l’utilisateur.   |5      ;      5           |
 | **4 **       | Calcul des algorithmes des pertes de poids         |     Mauvaises formules utilisées|Objectif non atteint par l’utilisateur.         |9      ;      8           |
 
