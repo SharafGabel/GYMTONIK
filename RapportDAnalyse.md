@@ -52,7 +52,8 @@ L’application doit permettre de gérer les entraînements sportifs, elle devra
 * Visualiser ses progrès dans le temps et les mettre en perspective avec les autres éléments enregistrés (autres exercices ou autre mesures)
 * Définir un plan d’entraînement 
 * Visualiser son prochain exercice
-* Visualiser un plan d’entraînement 
+* Visualiser un plan d’entraînement
+
 ###Début du projet
 Mois de janvier 2015
 ###Fin du projet
@@ -62,7 +63,7 @@ Mois de mars 2015
 ###Maître d’œuvre
 Le maître d’œuvre est le chef de projet, Sharaf Gabel, qui a pour rôle de répartir les tâches et de planifier la réalisation du projet.
 ###Compétences nécessaires
-**Gestion du projet** : planification, définition des objectifs, répartition des tâches, développement 
+**Gestion du projet** : planification, définition des objectifs, répartition des tâches, développement.
 
 **Modélisation de la base de données** : modélisation de systèmes (UML), normes sur la modélisation, connaissance du langage SQL (responsable modélisation).
 
