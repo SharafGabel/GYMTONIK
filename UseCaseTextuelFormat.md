@@ -21,12 +21,23 @@ skinparam usecase{
 }
 
 Utilisateur_anonyme --> (S'enregistrer)
+
 Utilisateur --> (Se connecter)
+
 Utilisateur --> (Créer une séance d'exercice)
+
 Utilisateur --> (Ajouter un exercice à la séance)
+
 Utilisateur --> (Voir ses performances)
+
 Utilisateur --> (Comparer ses performances)
+
 Utilisateur --> (Renseigner son poids)
+
 Utilisateur --> (Voir les conseils alimentaires)
+
 Utilisateur --> (Renseigner son nombre d'heure de sommeil)
+
 Utilisateur --> (Voir le nombre d'heures conseillées)
+
+##End Of UseCaseTextuelFormat
