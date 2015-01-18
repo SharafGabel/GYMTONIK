@@ -1,6 +1,6 @@
 #USE CASE ( Format Textuel )
 
-skinparam usecase {
+skinparam usecase{
 	BackgroundColor DeepSkyBlue
 	BorderColor DeepSkyBlue
 
