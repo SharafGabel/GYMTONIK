@@ -3,14 +3,11 @@
 skinparam usecase{
 	BackgroundColor DeepSkyBlue
 	BorderColor DeepSkyBlue
-
 	BackgroundColor<< Main >>  blue
 	BorderColor<< Main >> blue
-    
 	ArrowColor DeepSkyBlue
 	ActorBorderColor GreenYellow
 	ActorFontName GreenYellow
-
 	ActorBackgroundColor<< Human >> GreenYellow
 }
 
