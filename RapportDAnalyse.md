@@ -1,4 +1,4 @@
-Rapport d'analyse du projet ( Gym Tonik )
+Rapport d'analyse du projet ( GymTonik )
 =========
 
 #Analyse de la demande
