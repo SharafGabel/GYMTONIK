@@ -74,12 +74,12 @@ Le maître d’œuvre est le chef de projet, Sharaf Gabel, qui a pour rôle de r
 Le projet doit aboutir à la réalisation d’une application qui permet le suivi et la mise en perspective des progrès d’un utilisateur à travers l’implémentation d’une base de données et des interfaces nécessaires à l’utilisateur.
 ###Analyse des risques
 
-| Numéro          | Description   | Cause     | Conséquences | Niveau de risque (/10)              |
+| Numéro          | Description   | Cause     | Conséquences | Criticité  Gravité;Fréquence            |
 | ----------- |:-------------:|:---------:|:------------:|:------------------------|
-| **1**       | Mauvaise interaction entre l'utilisateur et l'application        |Eléments superflus à renseigner ou à faire  par l'utilisateur | Lassitude du client qui peut fermer l’application        |7           |
-| **2**       | Entrainement non adapté à l'utilisateur          |Mauvaise corrélation entre l'historique du client et les objectifs qu'il s'est fixé|Plainte de l’utilisateur et programme non adapté à l’utilisateur. (danger)         |8         |
-| **3**       | Non adaptation de l’application pour une version mobile        | Responsive Web Design non pris en compte dans l'application |Mauvais rendu visuel provoquant l’agacement de l’utilisateur.   |5           |
-| **4**       | Objectifs de perte de poids non adapté à l'utilisateur        |     Mauvaises formules utilisées |Mauvais suivi de l’utilisateur et objectif biaisé.         |8          |
+| **1**       | Gestion interaction entre l’utilisateur et l’application          |Il ne faut pas que l’utilisateur soit lassé rapidement du nombre d’information à entrer |Fermeture de l’application        |8      ;      1           |
+| **2**       | Mise en œuvre d’un entraînement fixé par l’application          |Le niveau doit correspondre au profil de l’utilisateur|Plainte de l’utilisateur et programme non adapté à l’utilisateur. (danger)         |8     ;       5           |
+| **3**       | Adapter l’application pour une version mobile        |    Mauvais affichage |Mauvais rendu visuel provoquant l’agacement de l’utilisateur.   |5      ;      5           |
+| **4**       | Calcul des algorithmes des pertes de poids         |     Mauvaises formules utilisées|Objectif non atteint par l’utilisateur.         |9      ;      8           |
 
 ##4. Diagramme de Cas d'utilisation
 ![image Use Case](http://www.plantuml.com/plantuml/png/ZPB1Ja8n44NtVCNia0L_O4W0esvq8T74bIbzLwoqCo_JlY0n_ejRleCViw3WKqf25-tYddllPD8uTrmRDO6Q26iYwBr3-OoCdSzK6gx6uaNf0gWdy-N8D_ZMHIleeLOodv_JZN5CWm7Hj13GqlVozXggogBSFxH9j3t4bGBy2EzbyGjS2gTR4_17RVaFvhnkWjaEqZPyT3htoNaNJKAZJuQ5bpcptn_GsQGBLinSJ0hjjRaV7MI56JOLvR6kLr1g61JNAyCML7Nn1hNEei0FNwL9MmFjA5f_aZSxUy7p84uf8b8DVHOD6ooMPf6GVm9EOk_04Mx66rgOQd5LF5RjSrpUGUPz9EDT02VZz9HSbZ3LpKfUCf7Vl2K98GSTx_hdsLVxlEZO-m80 "USE CASE")
