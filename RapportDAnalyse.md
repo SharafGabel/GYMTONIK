@@ -81,5 +81,17 @@ Le projet doit aboutir à la réalisation d’une application qui permet le suiv
 | **3**       | Adapter l’application pour une version mobile        |    Mauvais affichage |Mauvais rendu visuel provoquant l’agacement de l’utilisateur.   |5      ;      5           |
 | **4**       | Calcul des algorithmes des pertes de poids         |     Mauvaises formules utilisées|Objectif non atteint par l’utilisateur.         |9      ;      8           |
 
+## Description des cas d'utilisation
+### Enregistrer un exercice
+ 
+### Enregistrer le travail effectué
+ 
+### Enregistrer d'autres mesures
+ 
+### Visualiser les progrès
+ 
+### Définir un plan d'entrainement
+ 
+
 ##4. Diagramme de Cas d'utilisation
 ![image Use Case](http://www.plantuml.com/plantuml/png/ZPB1Ja8n44NtVCNia0L_O4W0esvq8T74bIbzLwoqCo_JlY0n_ejRleCViw3WKqf25-tYddllPD8uTrmRDO6Q26iYwBr3-OoCdSzK6gx6uaNf0gWdy-N8D_ZMHIleeLOodv_JZN5CWm7Hj13GqlVozXggogBSFxH9j3t4bGBy2EzbyGjS2gTR4_17RVaFvhnkWjaEqZPyT3htoNaNJKAZJuQ5bpcptn_GsQGBLinSJ0hjjRaV7MI56JOLvR6kLr1g61JNAyCML7Nn1hNEei0FNwL9MmFjA5f_aZSxUy7p84uf8b8DVHOD6ooMPf6GVm9EOk_04Mx66rgOQd5LF5RjSrpUGUPz9EDT02VZz9HSbZ3LpKfUCf7Vl2K98GSTx_hdsLVxlEZO-m80 "USE CASE")
