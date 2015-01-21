@@ -12,8 +12,6 @@ Elle proposera différents exercices, les séances pourront être pré-crées à
 Les séances pourront aussi être assemblées par un utilisateur, qui renseignera les exercices, le nombre de répétitions pour chaque exercice, l’ordre des exercices, et les éventuels temps de pose entre chaque exercice. 
 En fonction de tout ça, un indice sera calculé afin de dire si oui ou non, la séance crée est adapté à l’entraînement désiré (par exemple : entraînement sur un ou plusieurs muscles). Cette dernière phrase implique que chaque exercice aura une liste de muscles travaillés, ce qui permettra d’adapter au maximum les séances. 
 
-On pourra aussi proposer une partie gestion de l’alimentation, où chaque utilisateur pourra renseigner son alimentation, et en fonction de ça, évaluer l’évolution possible sur ses performances/poids, ou s’il le manque un type d’aliment dans son alimentation (par exemple : des protéines), on lui conseillera d’ajouter cet aliment, il aura ensuite la possibilité de choisir entre son régime alimentaire, et le régime alimentaire proposé. 
-
 Il pourra aussi renseigner son nombre d’heures de sommeil et lui conseiller un nombre d’heures de sommeil adapté à ses séances.
 
 Le choix des heures de sommeil, et du niveau d’alimentation sera optionnel, tout comme l’élaboration d’une séance à partir d’exercices par l’utilisateur.
@@ -44,6 +42,23 @@ Mois de mars 2015
 
 ##3. Acteurs du projet
 
+###a. Utilisateur Anonyme
+Il aura uniquement l'accès à l'inscription sur le site.
+
+###b. Utilisateur en attente de confirmation
+Il devra confirmer son inscription en cliquant sur un lien dans son e-mail afin de pouvoir accèder à l'application.
+
+###c. Utilisateur confirmé
+
+Il aura la possibilité :
+       * De se connecter à l'application.
+       * De créer une séance composé d'exercices.
+       * D'ajouter un exercice à une séance.
+       * De consulter ses performances.
+       * De comparer ses performances avec d'autres utilisateurs enregistrés ou lui-même.
+       * De renseigner son poids.
+       * De renseigner son nombre d'heures de sommeil.
+       
 ###Produit du projet
 Le projet doit aboutir à la réalisation d’une application qui permet le suivi et la mise en perspective des progrès d’un utilisateur à travers l’implémentation d’une base de données et des interfaces nécessaires à l’utilisateur.
 ###Analyse des risques
@@ -56,7 +71,7 @@ Le projet doit aboutir à la réalisation d’une application qui permet le suiv
 | **4**       | Objectifs de perte de poids non adapté à l'utilisateur        |     Mauvaises formules utilisées |Mauvais suivi de l’utilisateur et objectif biaisé.         |8          |
 
 
-## Description des cas d'utilisation
+##4. Description des cas d'utilisation
 
 ### Inscription
  **Acteur(s) :** Utilisateur
