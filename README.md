@@ -25,15 +25,14 @@ Permettre le suivi et la mise en perspective des progrès pour la pratique d’u
 
 ##2. Définition du projet
 ###Fonctionnalités attendues
-L’application doit permettre de gérer les entraînements sportifs, elle devra comporter :
-* Une interface textuelle/graphique agréable qui doit permettre à  l’utilisateur de :
-* Enregistrer un exercice (temps, répétition, …)
-* Enregistrer le travail réellement effectué 
-* Enregistrer d’autres mesures dans le temps (poids, sommeil, …)
-* Visualiser ses progrès dans le temps et les mettre en perspective avec les autres éléments enregistrés (autres exercices ou autre mesures)
-* Définir un plan d’entraînement 
-* Visualiser son prochain exercice
-* Visualiser un plan d’entraînement
+L’application doit permettre de gérer les entraînements sportifs, elle devra comporter une interface textuelle/graphique agréable qui doit permettre à  l’utilisateur :
+* D'Enregistrer un exercice (temps, répétition, …)
+* D'Enregistrer le travail réellement effectué 
+* D'Enregistrer d’autres mesures dans le temps (poids, sommeil, …)
+* De Visualiser ses progrès dans le temps et les mettre en perspective avec les autres éléments enregistrés (autres exercices ou autre mesures)
+* De Définir un plan d’entraînement 
+* De Visualiser son prochain exercice
+* De Visualiser un plan d’entraînement
 
 ###Début du projet
 Mois de janvier 2015
@@ -51,13 +50,13 @@ Il devra confirmer son inscription en cliquant sur un lien dans son e-mail afin 
 ###c. Utilisateur confirmé
 
 Il aura la possibilité :
-       * De se connecter à l'application.
-       * De créer une séance composé d'exercices.
-       * D'ajouter un exercice à une séance.
-       * De consulter ses performances.
-       * De comparer ses performances avec d'autres utilisateurs enregistrés ou lui-même.
-       * De renseigner son poids.
-       * De renseigner son nombre d'heures de sommeil.
+* De se connecter à l'application.
+* De créer une séance composé d'exercices.
+* D'ajouter un exercice à une séance.
+* De consulter ses performances.
+* De comparer ses performances avec d'autres utilisateurs enregistrés ou lui-même.
+* De renseigner son poids.
+* De renseigner son nombre d'heures de sommeil.
        
 ###Produit du projet
 Le projet doit aboutir à la réalisation d’une application qui permet le suivi et la mise en perspective des progrès d’un utilisateur à travers l’implémentation d’une base de données et des interfaces nécessaires à l’utilisateur.
