@@ -66,14 +66,32 @@ Le projet doit aboutir à la réalisation d’une application qui permet le suiv
  **Scénario nominal :**
  
   1. L'utilisateur clique sur le bouton "Inscription"
-  2. Un formulaire d'inscription est proposé à l'utilisateur. Il doit entrer <liste des informations nécessaires à l'inscription>
-  3. L'utilisateur entre les informations qui lui sont demandées et valide le formulaire
+  2. Un formulaire d'inscription est présenté à l'utilisateur. Il doit entrer <liste des informations nécessaires à l'inscription>
+  3. L'utilisateur entre les informations qui lui sont demandées et soumets le formulaire
   4. Un e-mail est envoyé à l'adresse indiquée afin que l'utilisateur puisse valider son inscription en cliquant sur un lien fourni dans l'e-mail
   5. L'utilisateur clique sur le lien de validation
   6. L'inscription est validée, un message de confirmation est affiché.
+  
+ **Scénario alternatif :**
+  
+ &nbsp;&nbsp;&nbsp; 4.a. Les informations saisies sont invalides ou incomplètes. Retour à l'étape 2 et l'application indique les champs invalides ou vides  
    
 ### Connexion
- 
+ **Acteur(s) :** Utilisateur
+  
+ **Pré-conditions :** L'utilisateur n'est pas connecté et se trouve sur la page d'accueil
+  
+ **Scénario nominal :**
+  
+  1. L'utilisateur clique sur le bouton "Connexion"
+  2. Un formulaire de connexion est présenté à l'utilisateur
+  3. L'utilisateur entre son adresse e-mail, son mot de passe et soumets le formulaire
+  4. L'utilisateur est connecté
+   
+ **Scénario alternatif :**
+   
+ &nbsp;&nbsp;&nbsp; 4.a. L'adresse e-mail n'existe pas ou le mot de passe est invalide. Retour à l'étape 2 et l'application indique que les informations saisies sont invalides. 
+   
 ### Enregistrer un exercice
  
 ### Enregistrer le travail effectué
