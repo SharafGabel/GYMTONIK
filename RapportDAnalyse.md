@@ -20,9 +20,9 @@ Le choix des heures de sommeil, et du niveau d’alimentation sera optionnel, to
 
 L’application donnera la possibilité à l’utilisateur d’avoir un aperçu plus concret des progrès réalisés grâce à diverses représentations graphiques de ces performances.
 
-##Début du projet
+###Début du projet
 Mois de janvier 2015
-##Fin du projet
+###Fin du projet
 Mois de mars 2015
 
 ##2. Moyens mis à disposition
