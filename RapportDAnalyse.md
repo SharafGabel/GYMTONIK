@@ -66,7 +66,7 @@ Le projet doit aboutir à la réalisation d’une application qui permet le suiv
  **Scénario nominal :**
  
   1. L'utilisateur clique sur le bouton "Inscription"
-  2. Un formulaire d'inscription est présenté à l'utilisateur. Il doit entrer <liste des informations nécessaires à l'inscription>
+  2. Un formulaire d'inscription est présenté à l'utilisateur. Il doit entrer [liste des informations nécessaires à l'inscription]
   3. L'utilisateur entre les informations qui lui sont demandées et soumets le formulaire
   4. Un e-mail est envoyé à l'adresse indiquée afin que l'utilisateur puisse valider son inscription en cliquant sur un lien fourni dans l'e-mail
   5. L'utilisateur clique sur le lien de validation
