@@ -107,15 +107,128 @@ Le projet doit aboutir à la réalisation d’une application qui permet le suiv
  &nbsp;&nbsp;&nbsp; 4.a. L'adresse e-mail n'existe pas ou le mot de passe est invalide. Retour à l'étape 2 et l'application indique que les informations saisies sont invalides. 
    
 ### Enregistrer un exercice
+ **Acteur(s) :** Utilisateur
+   
+ **Pré-conditions :** L'utilisateur est connecté et se trouve sur la page d'accueil
+   
+ **Scénario nominal :**
+  
+  1. L'utilisateur sélectionne "Exercices"
+  2. La liste des exercices disponibles s'affiche
+  3. L'utilisateur sélectionne "Enregistrer un exercice"
+  4. Un formulaire permettant d'entrer les détails de l'exerice est présenté à l'utilisateur
+  5. L'utilisateur rempli le formulaire et le soumets
+  6. L'exercice est enregistré
+  
+  **Scénario alternatif :**
+     
+ &nbsp;&nbsp;&nbsp; 6.a. Les informations saisies sont invalides ou incomplètes. Retour à l'étape 3 et l'application indique les champs invalides ou vides
+   
+### Modifier un exercice
+ **Acteur(s) :** Utilisateur
+   
+ **Pré-conditions :** L'utilisateur est connecté et se trouve sur la page d'accueil
+   
+ **Scénario nominal :**
+  
+  1. L'utilisateur sélectionne "Exercices"
+  2. La liste des exercices disponibles s'affiche
+  3. L'utilisateur clique sur le bouton "Modifier" d'un exercice
+  4. Un formulaire permettant de modifier les détails de l'exerice est présenté à l'utilisateur
+  5. L'utilisateur rempli le formulaire et le soumets
+  6. L'exercice est enregistré
+  
+  **Scénario alternatif :**
+     
+ &nbsp;&nbsp;&nbsp; 6.a. Les informations saisies sont invalides ou incomplètes. Retour à l'étape 3 et l'application indique les champs invalides ou vides
  
+### Supprimer un exercice
+ **Acteur(s) :** Utilisateur
+   
+ **Pré-conditions :** L'utilisateur est connecté et se trouve sur la page d'accueil
+   
+ **Scénario nominal :**
+  
+  1. L'utilisateur sélectionne "Exercices"
+  2. La liste des exercices disponibles s'affiche
+  3. L'utilisateur clique sur le bouton "Supprimer" d'un exercice
+  4. L'exercice est supprimé
+  
 ### Enregistrer le travail effectué
+ **Acteur(s) :** Utilisateur
+   
+ **Pré-conditions :** L'utilisateur est connecté et se trouve sur la page d'accueil
+   
+ **Scénario nominal :**
+  
+  1. L'utilisateur sélectionne "Exercices"
+  2. La liste des exercices enregistrés s'affiche 
+  3. L'utilisateur sélectionne un exercice
+  4. Un formulaire permettant d'entrer les valeurs liées à l'exerice est présenté à l'utilisateur
+  5. L'utilisateur rempli le formulaire et le soumets
+  6. L'exercice est enregistré
+  
+  **Scénario alternatif :**
+     
+ &nbsp;&nbsp;&nbsp; 6.a. Les informations saisies sont invalides ou incomplètes. Retour à l'étape 4 et l'application indique les champs invalides ou vides  
  
-### Enregistrer d'autres mesures
+### Enregistrer et modifier d'autres mesures
+ **Acteur(s) :** Utilisateur
+   
+ **Pré-conditions :** L'utilisateur est connecté et se trouve sur la page d'accueil
+   
+ **Scénario nominal :**
+  
+  1. L'utilisateur sélectionne "Condition physique"
+  2. Un formulaire permettant d'entrer les détails sur sa condition physique est présenté à l'utilisateur
+  3. L'utilisateur rempli le formulaire et le soumets
+  4. L'exercice est enregistré
+  
+  **Scénario alternatif :**
+     
+ &nbsp;&nbsp;&nbsp; 4.a. Les informations saisies sont invalides ou incomplètes. Retour à l'étape 2 et l'application indique les champs invalides ou vides  
  
-### Visualiser les progrès
+### Définir un plan d'entraînement
+ **Acteur(s) :** Utilisateur
+   
+ **Pré-conditions :** L'utilisateur est connecté et se trouve sur la page d'accueil
+   
+ **Scénario nominal :**
+  
+  1. L'utilisateur sélectionne "Plan d'entraînement"
+  2. Une liste des exercices dsponibles est affichée
+  3. L'utilisateur sélectionne les exercices qu'il souhaite réaliser et valide
+  4. Le plan d'entraînement est enregistré
+  
+  **Scénario alternatif :**
+     
+ &nbsp;&nbsp;&nbsp; 4.a. L'utilisateur n'a sélectionné aucun exercice. Retour à l'étape 2 et l'application indique l'erreur
  
-### Définir un plan d'entrainement
- 
+### Modifier un plan d'entraînement
+ **Acteur(s) :** Utilisateur
+   
+ **Pré-conditions :** L'utilisateur est connecté et se trouve sur la page d'accueil
+   
+ **Scénario nominal :**
+  
+  1. L'utilisateur sélectionne "Plan d'entraînement"
+  2. Une liste des exercices dsponibles est affichée
+  3. L'utilisateur sélectionne et déselectionne les exercices qu'il souhaite réaliser ou non et valide
+  4. Le plan d'entraînement est enregistré
+  
+  **Scénario alternatif :**
+     
+ &nbsp;&nbsp;&nbsp; 4.a. L'utilisateur n'a sélectionné aucun exercice. Retour à l'étape 2 et l'application indique l'erreur  
 
+### Visualiser les progrès
+ **Acteur(s) :** Utilisateur
+   
+ **Pré-conditions :** L'utilisateur est connecté et se trouve sur la page d'accueil
+   
+ **Scénario nominal :**
+  
+  1. L'utilisateur sélectionne "Progrès"
+  2. Un graphe récapitulant les progrès de l'utilisateur est affiché
+ 
 ##4. Diagramme de Cas d'utilisation
 ![image Use Case](http://www.plantuml.com:80/plantuml/png/hLExRXin4AnpNx6Tuy9_O0YG5STEaI28aIALiBuRAxJ8vM59sZ4C_qjQDVc9-x6G9rdInIV4258Hs9dPdNqmB8sqhEme1TGSy5XLRywuNYxK9sbctdgbTq1xjNmuima5zTf0Hv6XxlIKFh8Hcao8hbzezz0DE5NrzsDvftNqkb_sGW7v1clz_JFytalyn0vZs4jVbybnNth0VgguqEbhDDO4ZaWwP_7ou322GEOS8oHYtc1UUxanwZWQBoFa3TojggeQZTF9oOJUNe5oH517w76b-MLPMD2vHENkby3bUlHOqH_KjNgctGfAIK2XMx7KE2xCaV2QFxtrAVO8uGUqDZMe-qcMNoS_5ukxVvVFl8HaItsBiCqGgC4WnTFU63v3RtmUSWOE3s6RDkHaxKuHrdOEmyzwbp_4_vSJtw7kM-KKDJzfTmPXsEO7wLNbb4A-4DVQRbKMpwRe3ZN-1H9W5b9gUw7McsRj-UzSyUvQGStHzsm6PGF1EmTZYw-1iL2hQOkntiR8HzdSyP7fgThVmEj-pNPz9R8nPdO5ivNV "USE CASE")
