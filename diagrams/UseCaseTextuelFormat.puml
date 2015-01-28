@@ -1,5 +1,4 @@
-#USE CASE ( Format Textuel )
-
+@startuml
 skinparam usecase{
 
 	BackgroundColor DeepSkyBlue
@@ -45,5 +44,4 @@ rectangle Inscription {
   Utilisateur_anonyme --> (S'inscrire)
   Utilisateur_en_attente_de_confirmation --> (Confirmer son inscription)
 }
-
-###End Of UseCaseTextuelFormat
+@enduml
