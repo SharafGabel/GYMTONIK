@@ -215,4 +215,4 @@ Le projet doit aboutir à la réalisation d’une application qui permet le suiv
   2. Un graphe récapitulant les progrès de l'utilisateur est affiché
  
 ##4. Diagramme de Cas d'utilisation
-![image Use Case](http://www.plantuml.com:80/plantuml/png/hLExRXin4AnpNx6Tuy9_O0YG5STEaI28aIALiBuRAxJ8vM59sZ4C_qjQDVc9-x6G9rdInIV4258Hs9dPdNqmB8sqhEme1TGSy5XLRywuNYxK9sbctdgbTq1xjNmuima5zTf0Hv6XxlIKFh8Hcao8hbzezz0DE5NrzsDvftNqkb_sGW7v1clz_JFytalyn0vZs4jVbybnNth0VgguqEbhDDO4ZaWwP_7ou322GEOS8oHYtc1UUxanwZWQBoFa3TojggeQZTF9oOJUNe5oH517w76b-MLPMD2vHENkby3bUlHOqH_KjNgctGfAIK2XMx7KE2xCaV2QFxtrAVO8uGUqDZMe-qcMNoS_5ukxVvVFl8HaItsBiCqGgC4WnTFU63v3RtmUSWOE3s6RDkHaxKuHrdOEmyzwbp_4_vSJtw7kM-KKDJzfTmPXsEO7wLNbb4A-4DVQRbKMpwRe3ZN-1H9W5b9gUw7McsRj-UzSyUvQGStHzsm6PGF1EmTZYw-1iL2hQOkntiR8HzdSyP7fgThVmEj-pNPz9R8nPdO5ivNV "USE CASE")
+![Diagramme de Cas d'utilisation](https://raw.githubusercontent.com/Miage-Paris-Ouest/m120142015-gymtonik/master/diagrams/images/UseCase.png)
