@@ -182,13 +182,13 @@ Le projet doit aboutir à la réalisation d’une application qui permet le suiv
   1. L'utilisateur sélectionne "Condition physique"
   2. Un formulaire permettant d'entrer les détails sur sa condition physique est présenté à l'utilisateur
   3. L'utilisateur rempli le formulaire et le soumets
-  4. L'exercice est enregistré
+  4. Les informations sont enregistrées
   
   **Scénario alternatif :**
      
  &nbsp;&nbsp;&nbsp; 4.a. Les informations saisies sont invalides ou incomplètes. Retour à l'étape 2 et l'application indique les champs invalides ou vides  
  
-### Définir un plan d'entraînement
+### Définir et modifier un plan d'entraînement
  **Acteur(s) :** Utilisateur
    
  **Pré-conditions :** L'utilisateur est connecté et se trouve sur la page d'accueil
@@ -196,29 +196,13 @@ Le projet doit aboutir à la réalisation d’une application qui permet le suiv
  **Scénario nominal :**
   
   1. L'utilisateur sélectionne "Plan d'entraînement"
-  2. Une liste des exercices dsponibles est affichée
-  3. L'utilisateur sélectionne les exercices qu'il souhaite réaliser et valide
+  2. Une liste des exercices disponibles est affichée
+  3. L'utilisateur sélectionne les exercices qu'il souhaite réaliser ou non et valide
   4. Le plan d'entraînement est enregistré
   
   **Scénario alternatif :**
      
  &nbsp;&nbsp;&nbsp; 4.a. L'utilisateur n'a sélectionné aucun exercice. Retour à l'étape 2 et l'application indique l'erreur
- 
-### Modifier un plan d'entraînement
- **Acteur(s) :** Utilisateur
-   
- **Pré-conditions :** L'utilisateur est connecté et se trouve sur la page d'accueil
-   
- **Scénario nominal :**
-  
-  1. L'utilisateur sélectionne "Plan d'entraînement"
-  2. Une liste des exercices dsponibles est affichée
-  3. L'utilisateur sélectionne et déselectionne les exercices qu'il souhaite réaliser ou non et valide
-  4. Le plan d'entraînement est enregistré
-  
-  **Scénario alternatif :**
-     
- &nbsp;&nbsp;&nbsp; 4.a. L'utilisateur n'a sélectionné aucun exercice. Retour à l'étape 2 et l'application indique l'erreur  
 
 ### Visualiser les progrès
  **Acteur(s) :** Utilisateur
