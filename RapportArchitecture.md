@@ -27,6 +27,33 @@ La difficulté réside dans la façon de calculer cet indice de progrès en fonc
 ##6. Présentation des diagrammes
 ###a. Diagramme de séquence
 
+#### Inscription
+![Diagramme de séquence de l'inscription](https://github.com/Miage-Paris-Ouest/m120142015-gymtonik/raw/3572e507dfee0199ed3112e18ea06d3d930e99c1/diagrams/images/Inscription.png)
+
+#### Connexion
+![Diagramme de séquence de la connexion](https://github.com/Miage-Paris-Ouest/m120142015-gymtonik/raw/3572e507dfee0199ed3112e18ea06d3d930e99c1/diagrams/images/Connexion.png)
+
+#### Enregistrement d'un exercice 
+![Diagramme de séquence de l'enregistrement d'un exercice](https://github.com/Miage-Paris-Ouest/m120142015-gymtonik/raw/3572e507dfee0199ed3112e18ea06d3d930e99c1/diagrams/images/EnregistrementExercice.png)
+
+#### Modification d'un exercice 
+![Diagramme de séquence de la modification d'un exercice](https://github.com/Miage-Paris-Ouest/m120142015-gymtonik/raw/3572e507dfee0199ed3112e18ea06d3d930e99c1/diagrams/images/ModificationExercice.png)
+
+#### Supression d'un exercice 
+![Diagramme de séquence de la supression d'un exercice](https://github.com/Miage-Paris-Ouest/m120142015-gymtonik/raw/3572e507dfee0199ed3112e18ea06d3d930e99c1/diagrams/images/SupressionExercice.png)
+
+#### Enregistrement du travail effectué 
+![Diagramme de séquence d'enregistrement du travail effectué](https://github.com/Miage-Paris-Ouest/m120142015-gymtonik/raw/3572e507dfee0199ed3112e18ea06d3d930e99c1/diagrams/images/EnregistrementTravailEffectue.png)
+
+#### Enregistrement et modification des autres mesures 
+![Diagramme de séquence d'enregistrement et modification des autres mesures](https://github.com/Miage-Paris-Ouest/m120142015-gymtonik/raw/3572e507dfee0199ed3112e18ea06d3d930e99c1/diagrams/images/EnregistrementAutreMesures.png)
+
+#### Création et modifcation du plan d'entraînement 
+![Diagramme de séquence de création et modifcation du plan d'entraînement](https://github.com/Miage-Paris-Ouest/m120142015-gymtonik/raw/3572e507dfee0199ed3112e18ea06d3d930e99c1/diagrams/images/CreationPlanEntrainement.png)
+
+#### Visualisation des progrès 
+![Diagramme de séquence de la visualisation des progrès](https://github.com/Miage-Paris-Ouest/m120142015-gymtonik/raw/3572e507dfee0199ed3112e18ea06d3d930e99c1/diagrams/images/VisualisationProgres.png)
+
 ###b. Diagramme de classe
 
 ##7. Versions textuelles des diagrammes
