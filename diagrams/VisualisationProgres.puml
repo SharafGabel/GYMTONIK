@@ -1,0 +1,9 @@
+@startuml
+hide footbox
+actor Utilisateur
+
+title Diagramme de séquence de visualisation\ndes progrès
+
+Utilisateur -> Application: Clic sur "Progrès"
+Utilisateur <-- Application: Affichage d'un graphe récapitulant\nles progrès de l'utilisateur
+@enduml

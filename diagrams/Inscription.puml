@@ -1,0 +1,24 @@
+@startuml
+hide footbox
+actor Utilisateur
+
+title Diagramme de séquence de l'inscription
+
+Utilisateur -> Application: Clic sur "Inscription"
+Application --> Utilisateur: Affichage du formulaire d'inscription
+|||
+Utilisateur -> Application: Soumission du formulaire
+
+alt Données du formulaire valides
+
+    Utilisateur <-- Application: Envoi d'un e-mail de validation
+
+    Utilisateur -> Application: Clic sur le lien de validation de l'e-mail
+    Utilisateur <-- Application: L'inscription est complète\nAffichage d'un message de confirmation
+
+else Données du formulaire invalides
+
+    Utilisateur <-- Application: Affichage d'un message indiquant que les données du formulaire\n sont invalides ou incomplètes
+
+end
+@enduml

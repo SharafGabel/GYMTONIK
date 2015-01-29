@@ -1,0 +1,20 @@
+@startuml
+hide footbox
+actor Utilisateur
+
+title Diagramme de séquence de création et modification\nd'un plan d'entraînement
+
+Utilisateur -> Application: Clic sur "Plan d'entraînement"
+Utilisateur <-- Application: Affichage des exercices disponibles
+
+Utilisateur -> Application: Sélection des exercices souhaités et validation
+
+alt Nombre d'exercices sélectionnés > 0
+
+    Utilisateur <-- Application: Le plan d'entraînement est enregistré\nUn message de confirmation est affiché
+
+else Nombre d'exercices sélectionnés = 0
+
+    Utilisateur <-- Application: Affichage d'un message d'erreur
+end
+@enduml

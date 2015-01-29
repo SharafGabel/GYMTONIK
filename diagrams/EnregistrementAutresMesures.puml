@@ -1,0 +1,20 @@
+@startuml
+hide footbox
+actor Utilisateur
+
+title Diagramme de séquence d'enregistrement\net de modification des autres mesures
+
+Utilisateur -> Application: Clic sur "Condition physique"
+Utilisateur <-- Application: Affichage d'un formulaire permettant de modifier\nles valeurs liées à l'exercice
+|||
+Utilisateur -> Application: Soumission du formulaire
+
+alt Données du formulaire valides et complètes
+
+    Utilisateur <-- Application: Les modifications sont enregistrées\nUn message de confirmation est affiché
+
+else Données du formulaire invalides ou incomplètes
+
+    Utilisateur <-- Application: Affichage des champs invalides ou incomplets
+end
+@enduml

@@ -1,0 +1,13 @@
+@startuml
+hide footbox
+actor Utilisateur
+
+title Diagramme de séquence de suppression d'un exercice
+
+Utilisateur -> Application: Clic sur "Exercices"
+Utilisateur <-- Application: Affichage des exercices disponibles
+
+Utilisateur -> Application: Clic sur le bouton "Supprimer" d'un exercice
+Utilisateur <-- Application: L'exercice est supprimé
+
+@enduml
