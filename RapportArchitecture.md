@@ -39,14 +39,14 @@ La difficulté réside dans la façon de calculer cet indice de progrès en fonc
 #### Modification d'un exercice 
 ![Diagramme de séquence de la modification d'un exercice](https://github.com/Miage-Paris-Ouest/m120142015-gymtonik/raw/3572e507dfee0199ed3112e18ea06d3d930e99c1/diagrams/images/ModificationExercice.png)
 
-#### Supression d'un exercice 
-![Diagramme de séquence de la supression d'un exercice](https://github.com/Miage-Paris-Ouest/m120142015-gymtonik/raw/3572e507dfee0199ed3112e18ea06d3d930e99c1/diagrams/images/SupressionExercice.png)
+#### Suppression d'un exercice 
+![Diagramme de séquence de la suppression d'un exercice](https://github.com/Miage-Paris-Ouest/m120142015-gymtonik/raw/3572e507dfee0199ed3112e18ea06d3d930e99c1/diagrams/images/SuppressionExercice.png)
 
 #### Enregistrement du travail effectué 
 ![Diagramme de séquence d'enregistrement du travail effectué](https://github.com/Miage-Paris-Ouest/m120142015-gymtonik/raw/3572e507dfee0199ed3112e18ea06d3d930e99c1/diagrams/images/EnregistrementTravailEffectue.png)
 
 #### Enregistrement et modification des autres mesures 
-![Diagramme de séquence d'enregistrement et modification des autres mesures](https://github.com/Miage-Paris-Ouest/m120142015-gymtonik/raw/3572e507dfee0199ed3112e18ea06d3d930e99c1/diagrams/images/EnregistrementAutreMesures.png)
+![Diagramme de séquence d'enregistrement et modification des autres mesures](https://github.com/Miage-Paris-Ouest/m120142015-gymtonik/raw/3572e507dfee0199ed3112e18ea06d3d930e99c1/diagrams/images/EnregistrementAutresMesures.png)
 
 #### Création et modifcation du plan d'entraînement 
 ![Diagramme de séquence de création et modifcation du plan d'entraînement](https://github.com/Miage-Paris-Ouest/m120142015-gymtonik/raw/3572e507dfee0199ed3112e18ea06d3d930e99c1/diagrams/images/CreationPlanEntrainement.png)
