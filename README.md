@@ -215,4 +215,4 @@ Le projet doit aboutir à la réalisation d’une application qui permet le suiv
   2. Un graphe récapitulant les progrès de l'utilisateur est affiché
  
 ##4. Diagramme de Cas d'utilisation
-![Diagramme de Cas d'utilisation](https://raw.githubusercontent.com/Miage-Paris-Ouest/m120142015-gymtonik/master/diagrams/images/UseCase.png)
+![Diagramme de Cas d'utilisation](https://raw.githubusercontent.com/Miage-Paris-Ouest/m120142015-gymtonik/master/diagrams/images/UseCase.png?token=AC_voNAvZWtuRSvvSuxPaJOsAxj5z9Cwks5U07H3wA%3D%3D)
