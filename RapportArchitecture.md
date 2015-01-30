@@ -65,7 +65,17 @@ Un algorithme permettant d'adapter un entrainement à un utilisateur en fonction
 
 ###b. Diagramme de classe
 
-##7. Versions textuelles des diagrammes
+#### 1 - Présentation du diagramme de classe
+Ce diagramme permet de représenter l'architecture que nous allons utiliser.
+
+Trois abstractions ont été mise en place dans le but de ne pas se fermer les portes d'évolutions futures du programme:
+
+* Celle sur l'utilisateur, en effet, si dans le futur le programme doit pouvoir accueillir un autre type d'utilisateur, se sera possible.
+* Sur les entraînements, pour l'instant il n'y a que des exercices, mais il pourra y avoir des étirements ou des pauses.
+* Sur les parties du corps, pour l'instant on ne prend en compte que les muscles sur lesquels les entrainements font travailler, mais on pourrait aller plus loin, sur les parties du corps que les étirements font se détendre.
+
+#### 2 - Diagramme
+![Diagramme de séquence de la visualisation des progrès](https://github.com/Miage-Paris-Ouest/m120142015-gymtonik/blob/master/diagrams/images/DiagrammeClasse.png)
 
 
 
