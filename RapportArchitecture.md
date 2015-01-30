@@ -61,7 +61,9 @@ La difficulté réside dans la façon de calculer cet indice de progrès en fonc
 
 ###b. Diagramme de classe
 
-##7. Versions textuelles des diagrammes
+#### 1 - Présentation du diagramme de classe
+
+#### 2 - Diagramme
 
 
 
