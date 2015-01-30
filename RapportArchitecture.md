@@ -2,12 +2,15 @@
 ##1. Présentation du projet
 L’utilisateur souhaite avoir une application qui permet le suivi et la mise en perspective des progrès pour la pratique d’un sport.
 
-L’application sera orienté coté web avec une base de données où elle proposera notamment les différents exercices adaptés à l’utilisateur en fonction de ses progrès.
+L’application reposera sur une architecture J2EE où elle proposera notamment les différents exercices adaptés à l’utilisateur en fonction de ses progrès.
+Cette application respectera l'architecture 3 tiers.
 
 ##2. Technologies utilisées
 * Java et le langage utilisé pour le développement de l’application GymTonik, TestNG sera l'outil utilisé pour les test unitaires.
+* Tomcat, comme serveur d'application J2EE.
 * Markdown, un langage textuel, permettra d'avoir un aperçu immédiat sur github.
 * SQL sera le langage utilisé pour le SGBD.
+
 
 
 ##3. Choix des outils de développement
@@ -15,6 +18,8 @@ L’application sera orienté coté web avec une base de données où elle propo
 * plantUML pour la modélisation UML.
 * MySQL comme SGBD.
 * TestNG un outil de test, de qualité de code. 
+* CVS pour la gestion des sources informatiques.
+
 
 ##4.Contraintes techniques
 L'outil plantUML n’est pas installé sur l’environnement de travail ( les machines de la fac ), nous utilisons en attendant une possible installation, plantUML en ligne, ce qui ne permet pas une facilité de code comme ça l’aurait été sur l’outil plantUML en local, ce qui nous retarde un peu dans notre travail.
