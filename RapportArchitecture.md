@@ -69,6 +69,7 @@ Trois abstractions ont été mise en place dans le but de ne pas se fermer les p
 * Celle sur l'utilisateur, en effet, si dans le futur le programme doit pouvoir accueillir un autre type d'utilisateur, se sera possible.
 * Sur les entraînements, pour l'instant il n'y a que des exercices, mais il pourra y avoir des étirements ou des pauses.
 * Sur les parties du corps, pour l'instant on ne prend en compte que les muscles sur lesquels les entrainements font travailler, mais on pourrait aller plus loin, sur les parties du corps que les étirements font se détendre.
+
 #### 2 - Diagramme
 ![Diagramme de séquence de la visualisation des progrès](https://github.com/Miage-Paris-Ouest/m120142015-gymtonik/blob/master/diagrams/images/DiagrammeClasse.png)
 
