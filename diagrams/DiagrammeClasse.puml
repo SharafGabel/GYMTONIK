@@ -1,0 +1,56 @@
+@startuml
+
+interface IUtilisateur {
+    String username
+    String username_canonical
+    String email
+    String email_canonical
+    String password
+    String salt
+    Integer poid
+    Integer tempsSommeil
+    void creeSeance()
+    void modifierSeance(Seance sceance)
+    bool supprimerSeance(Seance sceance)
+    void modifierPoid()
+    void modifierTempsSommeil()
+}
+abstract class AUtilisateur
+class Utilisateur
+class Performance
+class Exercice
+class Seance {
+    DateTime dateProgram
+    bool realiser
+    Performance calculPerformance()
+    void ajoutEntrainement()
+    void supprimerEntrainement(Entrainement entrainement)
+    void viderEntrainement()
+    void modifierEntrainement(Entrainement entrainement)
+}
+interface IEntrainement {
+    Integer duree
+    String name
+    String explication
+}
+abstract class AEntrainement
+interface IPartieCorps {
+    String nom
+    String description
+}
+abstract class AMuscle
+class Muscle
+
+
+AUtilisateur <|-- Utilisateur
+IUtilisateur <|--- AUtilisateur
+IEntrainement <|-- AEntrainement
+AEntrainement <|-- Exercice
+Seance o-- Performance
+Seance *-- IEntrainement
+IPartieCorps <|-- AMuscle
+AMuscle <|-- Muscle
+IEntrainement *-- IPartieCorps
+IUtilisateur o-- Seance
+
+@enduml
