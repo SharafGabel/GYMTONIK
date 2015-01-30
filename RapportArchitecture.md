@@ -21,15 +21,15 @@ Elle respectera l'architecture 3 tiers.
 * CVS pour la gestion des sources informatiques.
 
 
-##4.Contraintes techniques
+##4. Contraintes techniques
 L'outil plantUML n’est pas installé sur l’environnement de travail ( les machines de la fac ), nous utilisons en attendant une possible installation, plantUML en ligne, ce qui ne permet pas une facilité de code comme ça l’aurait été sur l’outil plantUML en local, ce qui nous retarde un peu dans notre travail.
 
-##5.Algorithme(s) complexe(s)
+##5. Algorithme(s) complexe(s)
 Un algorithme permettant en fonction du poids et du nombre d'heures de sommeil d'évaluer les progrès d'un utilisateur. 
 
 La difficulté réside dans la façon de calculer cet indice de progrès en fonction d'indicateur comme le poids et le nombre d'heures de sommeil.
 
-##6.Présentation des diagrammes
+##6. Présentation des diagrammes
 ###a. Diagramme de séquence
 
 #### 1 - Inscription
