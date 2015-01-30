@@ -29,6 +29,10 @@ Un algorithme permettant en fonction du poids et du nombre d'heures de sommeil d
 
 La difficulté réside dans la façon de calculer cet indice de progrès en fonction d'indicateur comme le poids et le nombre d'heures de sommeil.
 
+En effet, il va falloir que nos algorithmes prennent en considération de vrais analyses de la médecine sportive afin d'être le plus proche de la réalité possible.
+
+Un algorithme permettant d'adapter un entrainement à un utilisateur en fonction de son historique et de ces objectifs sera tout aussi délicat. Plusieurs élements devront être pris en considération.
+
 ##6. Présentation des diagrammes
 ###a. Diagramme de séquence
 
@@ -61,16 +65,7 @@ La difficulté réside dans la façon de calculer cet indice de progrès en fonc
 
 ###b. Diagramme de classe
 
-#### 1 - Présentation du diagramme de classe
-Ce diagramme permet de représenter l'architecture que nous allons utiliser.
+##7. Versions textuelles des diagrammes
 
-Trois abstractions ont été mise en place dans le but de ne pas se fermer les portes d'évolutions futures du programme:
-
-* Celle sur l'utilisateur, en effet, si dans le futur le programme doit pouvoir accueillir un autre type d'utilisateur, se sera possible.
-* Sur les entraînements, pour l'instant il n'y a que des exercices, mais il pourra y avoir des étirements ou des pauses.
-* Sur les parties du corps, pour l'instant on ne prend en compte que les muscles sur lesquels les entrainements font travailler, mais on pourrait aller plus loin, sur les parties du corps que les étirements font se détendre.
-
-#### 2 - Diagramme
-![Diagramme de séquence de la visualisation des progrès](https://github.com/Miage-Paris-Ouest/m120142015-gymtonik/blob/master/diagrams/images/DiagrammeClasse.png)
 
 
