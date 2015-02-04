@@ -4,11 +4,12 @@ L’utilisateur souhaite avoir une application qui permet le suivi et la mise en
 
 L’application reposera sur une architecture J2EE.
 Elle respectera l'architecture 3 tiers.
+À noter que le paradigme MVC sera utilisé pour gérer les composants J2EE.
 
 ##2. Technologies utilisées
 * Java est le langage utilisé pour le développement de l’application GymTonik, TestNG sera l'outil utilisé pour les test unitaires.
 * Tomcat, comme serveur d'application J2EE.
-* Markdown, un langage textuel, permettra d'avoir un aperçu immédiat sur github.
+* Markdown, un langage textuel, permettra d'avoir un aperçu immédiat sur Github.
 * SQL sera le langage utilisé pour le SGBD.
 
 
@@ -76,6 +77,17 @@ Trois abstractions ont été mise en place dans le but de ne pas se fermer les p
 
 #### 2 - Diagramme
 ![Diagramme de séquence de la visualisation des progrès](https://github.com/Miage-Paris-Ouest/m120142015-gymtonik/blob/master/diagrams/images/DiagrammeClasse.png)
+
+
+##8. Glossaire
+J2EE   : Ensemble de technologies basé sur une approche multi-niveaux (JSP,Servlet,JDBC)
+MVC    : Méthode de conception qui organise l'interface homme-machine d'une application 
+Github : Service web d'hébergement et de gestion de codes d'une application
+SQL    : Structured Query Language , langage informatique normalisé pour gérer la base de données 
+UML    : Unified Modelling Language, langage de modélisation graphique pour le développement d'une application
+SGBD   : Système de gestions de bases de données 
+GIT    : Logiciel de gestion de versions décentralisé
+
 
 
 
