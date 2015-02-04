@@ -28,6 +28,7 @@ class Session{
     void deleteTraining(Training training)
     void clearTraining()
     void setTraining(Training training)
+    void runTraining()
 }
 interface ITraining {
     Integer length

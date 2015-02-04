@@ -2,6 +2,6 @@
 hide footbox
 actor User
 
-User->User: createSession()
+User->Session: updateTraining()
 
 @enduml

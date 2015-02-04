@@ -1,23 +1,10 @@
 @startuml
 hide footbox
-actor Utilisateur
+actor User
 
 title Diagramme de séquence d'enregistrement du travail effectué
 
-Utilisateur -> Application: Clic sur "Exercices"
-Utilisateur <-- Application: Affichage des exercices disponibles
+User->Seance: runTraining(Exercice)
+Seance->User: OK
 
-Utilisateur -> Application: Sélection d'un exercice
-Utilisateur <-- Application: Affichage d'un formulaire permettant d'entrer\nles valeurs liées à l'exercice
-|||
-Utilisateur -> Application: Soumission du formulaire
-
-alt Données du formulaire valides et complètes
-
-    Utilisateur <-- Application: L'exercice est enregistré\nUn message de confirmation est affiché
-
-else Données du formulaire invalides ou incomplètes
-
-    Utilisateur <-- Application: Affichage des champs invalides ou incomplets
-end
 @enduml
