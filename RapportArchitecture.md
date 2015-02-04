@@ -48,31 +48,31 @@ Integer calculatePerformance(User user)
 ###a. Diagramme de séquence
 
 #### 1 - Inscription
-![Diagramme de séquence de l'inscription](https://github.com/Miage-Paris-Ouest/m120142015-gymtonik/raw/3572e507dfee0199ed3112e18ea06d3d930e99c1/diagrams/images/Inscription.png)
+![Diagramme de séquence de l'inscription](https://raw.githubusercontent.com/Miage-Paris-Ouest/m120142015-gymtonik/master/diagrams/images/Inscription.png)
 
 #### 2 - Connexion
-![Diagramme de séquence de la connexion](https://raw.githubusercontent.com/Miage-Paris-Ouest/m120142015-gymtonik/2cea2a6a9ae34fabe3372957f9f0892f2170b58b/diagrams/images/Inscription.png)
+![Diagramme de séquence de la connexion](https://raw.githubusercontent.com/Miage-Paris-Ouest/m120142015-gymtonik/master/diagrams/images/Connexion.png)
 
 #### 3 - Enregistrement d'un exercice 
 ![Diagramme de séquence de l'enregistrement d'un exercice](https://raw.githubusercontent.com/Miage-Paris-Ouest/m120142015-gymtonik/2cea2a6a9ae34fabe3372957f9f0892f2170b58b/diagrams/images/EnregistrementExercice.png)
 
 #### 4 - Modification d'un exercice 
-![Diagramme de séquence de la modification d'un exercice](https://raw.githubusercontent.com/Miage-Paris-Ouest/m120142015-gymtonik/2cea2a6a9ae34fabe3372957f9f0892f2170b58b/diagrams/images/ModificationExercice.png)
+![Diagramme de séquence de la modification d'un exercice](https://raw.githubusercontent.com/Miage-Paris-Ouest/m120142015-gymtonik/master/diagrams/images/ModificationExercice.png)
 
 #### 5 - Suppression d'un exercice 
-![Diagramme de séquence de la suppression d'un exercice](https://raw.githubusercontent.com/Miage-Paris-Ouest/m120142015-gymtonik/2cea2a6a9ae34fabe3372957f9f0892f2170b58b/diagrams/images/SuppressionExercice.png)
+![Diagramme de séquence de la suppression d'un exercice](https://raw.githubusercontent.com/Miage-Paris-Ouest/m120142015-gymtonik/master/diagrams/images/SuppressionExercice.png)
 
 #### 6 - Enregistrement du travail effectué 
-![Diagramme de séquence d'enregistrement du travail effectué](https://raw.githubusercontent.com/Miage-Paris-Ouest/m120142015-gymtonik/2cea2a6a9ae34fabe3372957f9f0892f2170b58b/diagrams/images/EnregistrementTravailEffectue.png)
+![Diagramme de séquence d'enregistrement du travail effectué](https://raw.githubusercontent.com/Miage-Paris-Ouest/m120142015-gymtonik/master/diagrams/images/EnregistrementTravailEffectue.png)
 
 #### 7 - Enregistrement et modification des autres mesures 
-![Diagramme de séquence d'enregistrement et modification des autres mesures](https://raw.githubusercontent.com/Miage-Paris-Ouest/m120142015-gymtonik/2cea2a6a9ae34fabe3372957f9f0892f2170b58b/diagrams/images/EnregistrementAutresMesures.png)
+![Diagramme de séquence d'enregistrement et modification des autres mesures](https://raw.githubusercontent.com/Miage-Paris-Ouest/m120142015-gymtonik/master/diagrams/images/EnregistrementAutresMesures.png)
 
 #### 8 - Création du plan d'entraînement 
-![Diagramme de séquence de création du plan d'entraînement](https://raw.githubusercontent.com/Miage-Paris-Ouest/m120142015-gymtonik/2cea2a6a9ae34fabe3372957f9f0892f2170b58b/diagrams/images/CreationPlanEntrainement.png)
+![Diagramme de séquence de création du plan d'entraînement](https://raw.githubusercontent.com/Miage-Paris-Ouest/m120142015-gymtonik/master/diagrams/images/CreationPlanEntrainement.png)
 
 #### 9 - Modification du plan d'entraînement
-![Diagramme de séquence de modifcation du plan d'entraînement](https://raw.githubusercontent.com/Miage-Paris-Ouest/m120142015-gymtonik/da55ebb2a0308db8783ceaa597c1b9a0c67c2b7a/diagrams/images/ModificationPlanEntrainement.png)
+![Diagramme de séquence de modifcation du plan d'entraînement](https://raw.githubusercontent.com/Miage-Paris-Ouest/m120142015-gymtonik/master/diagrams/images/ModificationPlanEntrainement.png)
 
 #### 10 - Visualisation des progrès 
 ![Diagramme de séquence de la visualisation des progrès](https://github.com/Miage-Paris-Ouest/m120142015-gymtonik/raw/3572e507dfee0199ed3112e18ea06d3d930e99c1/diagrams/images/VisualisationProgres.png)
