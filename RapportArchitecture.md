@@ -34,9 +34,13 @@ La difficulté réside dans la façon de calculer cet indice de performance en f
 En effet, il va falloir que nos algorithmes prennent en considération de vrais analyses de la médecine sportive afin d'être le plus proche possible de la réalité.
 
 Algorithme :
+
 Integer calculatePerformance(User user)
+
   If REALISER FALSE || user.weight = 0
+  
     RETURN
+    
   RETURN user.weight / ( user.height + user.timeSleep )
 
 ##6. Présentation des diagrammes
