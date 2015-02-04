@@ -18,6 +18,7 @@ Elle respectera l'architecture 3 tiers.
 * IntelliJ IDEA pour le développement.
 * plantUML pour la modélisation UML.
 * MySQL comme SGBD (compatible avec le driver JDBC).
+* Hibernate sera utilisé comme ORM.
 * TestNG un outil de test, de qualité de code. 
 * GIT pour la gestion des sources informatiques.
 
@@ -78,6 +79,21 @@ Trois abstractions ont été mise en place dans le but de ne pas se fermer les p
 #### 2 - Diagramme
 ![Diagramme de séquence de la visualisation des progrès](https://github.com/Miage-Paris-Ouest/m120142015-gymtonik/blob/master/diagrams/images/DiagrammeClasse.png)
 
+##7. Stockage des données
+
+### 1 - Stockage
+Le stockage de la base de donnée sera faite sur un host gratuit : AlwaysData (https://www.alwaysdata.com/)
+
+Nous avons fait ce choix car il nous est impossible d'utiliser le serveur de la faculté de Nanterre et qu'un host payant n'est pas envisagable.
+
+### 2 - Hibernate
+Hiberate est un ORM. Nous avons fait le choix d'utiliser un ORM pour ne pas avoir à convertir les données relationnelles en objets.
+
+Ainsi nous aurons des classes qui correspondrons aux tables de notre base de données. Ce qui donnera l'illusion d'avoir une base de données objet et nous offriras une meilleur flexibilité lors de notre développement car nous n'aurons plus à faire la convertion décrite plus haut.
+
+Le choix d'Hibernate plutôt qu'un autre est dû au fait qu'il est open source et que c'est un des plus connus des ORM JAVA.
+
+### 3 - Diagramme
 
 ##8. Glossaire
 
@@ -88,6 +104,7 @@ Trois abstractions ont été mise en place dans le but de ne pas se fermer les p
 * UML    : Unified Modelling Language, langage de modélisation graphique pour le développement d'une application.
 * SGBD   : Système de gestions de bases de données. 
 * GIT    : Logiciel de gestion de versions décentralisé.
+* ORM    : Object Relationnal Mapping, mapping objet-relationnel en français. Permet de créer un lien entre la base de données et les objets utilisés dans le langage.
 
 
 

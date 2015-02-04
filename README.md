@@ -10,7 +10,7 @@ Proposer une application web permettant d’améliorer ses performances pour la 
 
 Elle proposera différents exercices, les séances pourront être pré-crées à partir d’une suite d’exercice. 
 Les séances pourront aussi être assemblées par un utilisateur, qui renseignera les exercices, le nombre de répétitions pour chaque exercice, l’ordre des exercices, et les éventuels temps de pose entre chaque exercice. 
-En fonction de tout ça, un indice sera calculé afin de dire si oui ou non, la séance crée est adapté à l’entraînement désiré (par exemple : entraînement sur un ou plusieurs muscles). Cette dernière phrase implique que chaque exercice aura une liste de muscles travaillés, ce qui permettra d’adapter au maximum les séances. 
+En fonction de tout ça, ainsi que du poid et de la taille de l'utilisateur, un indice sera calculé afin de dire si oui ou non, la séance crée est adapté à l’entraînement désiré (par exemple : entraînement sur un ou plusieurs muscles). Cette dernière phrase implique que chaque exercice aura une liste de muscles travaillés, ce qui permettra d’adapter au maximum les séances. 
 
 Il pourra aussi renseigner son nombre d’heures de sommeil et lui conseiller un nombre d’heures de sommeil adapté à ses séances.
 
@@ -28,7 +28,7 @@ Permettre le suivi et la mise en perspective des progrès pour la pratique d’u
 L’application doit permettre de gérer les entraînements sportifs, elle devra comporter une interface textuelle/graphique agréable qui doit permettre à  l’utilisateur :
 * D'Enregistrer un exercice (temps, répétition, …)
 * D'Enregistrer le travail réellement effectué 
-* D'Enregistrer d’autres mesures dans le temps (poids, sommeil, …)
+* D'Enregistrer d’autres mesures dans le temps (poids, taille, sommeil, …)
 * De Visualiser ses progrès dans le temps et les mettre en perspective avec les autres éléments enregistrés (autres exercices ou autre mesures)
 * De Définir un plan d’entraînement 
 * De Visualiser son prochain exercice
@@ -55,7 +55,7 @@ Il aura la possibilité :
 * D'ajouter un exercice à une séance.
 * De consulter ses performances.
 * De comparer ses performances avec d'autres utilisateurs enregistrés ou lui-même.
-* De renseigner son poids.
+* De renseigner son poids et sa taille.
 * De renseigner son nombre d'heures de sommeil.
        
 ###Produit du projet
