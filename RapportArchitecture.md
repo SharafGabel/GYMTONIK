@@ -1,6 +1,7 @@
 #Rapport d'architecture du projet ( GymTonik )
 ##1. Présentation du projet
-L’utilisateur souhaite avoir une application qui permet le suivi et la mise en perspective des progrès pour la pratique d’un sport.
+L’utilisateur souhaite avoir une application qui permet le suivi et la mise en perspective des progrès pour la pratique d’un sport. 
+Cette application aura un rendu sous deux interfaces l'une sous forme de page web et l'autre sous console, ceci dans le but de respecter le cahier des charges.
 
 L’application reposera sur une architecture J2EE.
 Elle respectera l'architecture 3 tiers.
