@@ -1,56 +1,57 @@
 @startuml
 
-interface IUtilisateur {
+interface IUser{
     String username
     String username_canonical
     String email
     String email_canonical
     String password
     String salt
-    Integer poid
-    Integer tempsSommeil
-    void creeSeance()
-    void modifierSeance(Seance sceance)
-    bool supprimerSeance(Seance sceance)
-    void modifierPoid()
-    void modifierTempsSommeil()
+    Integer height
+    Integer weight
+    Integer timeSleep
+    void createSession()
+    void setSession(Session session)
+    bool deleteSession(Session session)
+    void setWeight()
+    void setTimeSleep()
 }
-abstract class AUtilisateur
-class Utilisateur
+abstract class AUser
+class User
 class Performance
-class Exercice
-class Seance {
+class Exercise
+class Session{
     DateTime dateProgram
-    bool realiser
-    Performance calculPerformance()
-    void ajoutEntrainement()
-    void supprimerEntrainement(Entrainement entrainement)
-    void viderEntrainement()
-    void modifierEntrainement(Entrainement entrainement)
+    bool perform
+    Performance calculatePerformance(User user)
+    void addTraining()
+    void deleteTraining(Training training)
+    void clearTraining()
+    void setTraining(Training training)
 }
-interface IEntrainement {
-    Integer duree
+interface ITraining {
+    Integer length
     String name
-    String explication
+    String explanation
 }
-abstract class AEntrainement
-interface IPartieCorps {
-    String nom
+abstract class ATraining
+interface IBodyPart {
+    String name
     String description
 }
 abstract class AMuscle
 class Muscle
 
 
-AUtilisateur <|-- Utilisateur
-IUtilisateur <|--- AUtilisateur
-IEntrainement <|-- AEntrainement
-AEntrainement <|-- Exercice
-Seance o-- Performance
-Seance *-- IEntrainement
-IPartieCorps <|-- AMuscle
+AUser <|-- User
+IUser <|--- AUser
+ITraining <|-- ATraining
+ATraining <|-- Exercise
+Session o-- Performance
+Session *-- ITraining
+IBodyPart <|-- AMuscle
 AMuscle <|-- Muscle
-IEntrainement *-- IPartieCorps
-IUtilisateur o-- Seance
+ITraining *-- IBodyPart
+IUser o-- Session
 
 @enduml
