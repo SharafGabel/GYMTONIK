@@ -18,7 +18,7 @@ Elle respectera l'architecture 3 tiers.
 * plantUML pour la modélisation UML.
 * MySQL comme SGBD (compatible avec le driver JDBC).
 * TestNG un outil de test, de qualité de code. 
-* CVS pour la gestion des sources informatiques.
+* GIT pour la gestion des sources informatiques.
 
 
 ##4. Contraintes techniques
