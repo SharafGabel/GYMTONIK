@@ -24,16 +24,20 @@ Elle respectera l'architecture 3 tiers.
 
 
 ##4. Contraintes techniques
-L'outil plantUML n’est pas installé sur l’environnement de travail ( les machines de la fac ), nous utilisons en attendant une possible installation, plantUML en ligne, d'utiliser l'outil le plus facilement possible, comme ça l’aurait été sur l’outil plantUML en local, ce qui a pour effet un léger retard dans notre travail.
+L'outil plantUML n’est pas installé sur l’environnement de travail ( les machines de la fac ), nous utilisons en attendant une possible installation, plantUML en ligne, d'utiliser l'outil le plus facilement possible, comme ça l’aurait été sur l’outil plantUML en local.
 
 ##5. Algorithme(s) complexe(s)
-Un algorithme permettant en fonction du poids et du nombre d'heures de sommeil d'évaluer les progrès d'un utilisateur. 
+Un algorithme permettant en fonction du poids, du nombre d'heures de sommeil et de la taille d'évaluer les progrès d'un utilisateur. 
 
-La difficulté réside dans la façon de calculer cet indice de progrès en fonction d'indicateur comme le poids et le nombre d'heures de sommeil.
+La difficulté réside dans la façon de calculer cet indice de performance en fonction d'indicateur comme le poids, le nombre d'heures de sommeil et la taille.
 
 En effet, il va falloir que nos algorithmes prennent en considération de vrais analyses de la médecine sportive afin d'être le plus proche possible de la réalité.
 
-Un algorithme permettant d'adapter un entrainement à un utilisateur en fonction de son historique et de ces objectifs sera tout aussi délicat.
+Algorithme :
+Integer calculatePerformance(User user)
+  If REALISER FALSE || user.weight = 0
+    RETURN
+  RETURN user.weight / ( user.height + user.timeSleep )
 
 ##6. Présentation des diagrammes
 ###a. Diagramme de séquence
