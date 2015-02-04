@@ -97,11 +97,13 @@ Nous avons fait ce choix car il nous est impossible d'utiliser le serveur de la 
 ### 2 - Hibernate
 Hiberate est un ORM. Nous avons fait le choix d'utiliser un ORM pour ne pas avoir à convertir les données relationnelles en objets.
 
-Ainsi nous aurons des classes qui correspondrons aux tables de notre base de données. Ce qui donnera l'illusion d'avoir une base de données objet et nous offriras une meilleur flexibilité lors de notre développement car nous n'aurons plus à faire la convertion décrite plus haut.
+Ainsi nous aurons des classes qui correspondent aux tables de notre base de données. Ce qui donnera l'illusion d'avoir une base de données objet et nous offriras une meilleur flexibilité lors de notre développement car nous n'aurons plus à faire la convertion décrite plus haut.
+Les fonctions du CRUD seront donc beaucoup plus simple à mettre en oeuvre, car pas de conversion, et les requêtes vers la base seront simplifiées.
 
 Le choix d'Hibernate plutôt qu'un autre est dû au fait qu'il est open source et que c'est un des plus connus des ORM JAVA.
 
 ### 3 - Diagramme
+Vu que nous utilisons un ORM, le diagramme de donnée correspondant au diagramme de classe. De ce fait la modélisation des données se fera lors de la modélisation des classes.
 
 ##8. Glossaire
 
