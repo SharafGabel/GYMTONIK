@@ -1,13 +1,9 @@
 @startuml
 hide footbox
-actor Utilisateur
+actor User
 
-title Diagramme de séquence de suppression d'un exercice
+title Diagramme de séquence de modification d'un exercice
 
-Utilisateur -> Application: Clic sur "Exercices"
-Utilisateur <-- Application: Affichage des exercices disponibles
-
-Utilisateur -> Application: Clic sur le bouton "Supprimer" d'un exercice
-Utilisateur <-- Application: L'exercice est supprimé
+User -> Seance: deleteTraining(Exercise exercice)
 
 @enduml

@@ -1,23 +1,14 @@
 @startuml
 hide footbox
-actor Utilisateur
+actor User
 
 title Diagramme de séquence de l'enregistrement d'exercice
 
-Utilisateur -> Application: Clic sur "Exercices"
-Utilisateur <-- Application: Affichage des exercices disponibles
+User -> Seance: addTraining(new Exercise())
 
-Utilisateur -> Application: Clic sur "Enregistrer un exercice"
-Utilisateur <-- Application: Affichage d'un formulaire permettant d'entrer\nles détails de l'exercice
-|||
-Utilisateur -> Application: Soumission du formulaire
-
-alt Données du formulaire valides et complètes
-
-    Utilisateur <-- Application: L'exercice est enregistré\nUn message de confirmation est affiché
-
-else Données du formulaire invalides ou incomplètes
-
-    Utilisateur <-- Application: Affichage des champs invalides ou incomplets
+alt Paramètres valides
+    User <-- Seance: OK
+else Paramètres invalides
+    User <-- Seance: new IllegalArgumentException()
 end
 @enduml

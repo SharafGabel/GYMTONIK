@@ -4,18 +4,11 @@ actor Utilisateur
 
 title Diagramme de séquence de le connexion
 
-Utilisateur -> Application: Clic sur "Connexion"
-Application --> Utilisateur: Affichage du formulaire de connexion
-|||
-Utilisateur -> Application: Soumission du formulaire
+Utilisateur -> User: connection(String username, String password)
 
-alt Adresse e-mail et mot de passe valides
-
-    Utilisateur <-- Application: Utilisateur connecté, affichage de la page d'accueil
-
-else Adresse e-mail ou mot de passe sont invalides
-
-    Utilisateur <-- Application: Affichage d'un message indiquant que\nl'adresse e-mail ou le mot de passe sont invalides
-
+alt Paramètres valides
+    Utilisateur <-- User: OK
+else Paramètres invalides
+    Utilisateur <-- User: new IllegalArgumentException()
 end
 @enduml
