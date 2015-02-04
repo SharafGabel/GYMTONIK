@@ -80,13 +80,14 @@ Trois abstractions ont été mise en place dans le but de ne pas se fermer les p
 
 
 ##8. Glossaire
-J2EE   : Ensemble de technologies basé sur une approche multi-niveaux (JSP,Servlet,JDBC).
-MVC    : Méthode de conception qui organise l'interface homme-machine d'une application. 
-Github : Service web d'hébergement et de gestion de codes d'une application.
-SQL    : Structured Query Language , langage informatique normalisé pour gérer la base de données. 
-UML    : Unified Modelling Language, langage de modélisation graphique pour le développement d'une application.
-SGBD   : Système de gestions de bases de données. 
-GIT    : Logiciel de gestion de versions décentralisé.
+
+* J2EE   : Ensemble de technologies basé sur une approche multi-niveaux (JSP,Servlet,JDBC).
+* MVC    : Méthode de conception qui organise l'interface homme-machine d'une application. 
+* Github : Service web d'hébergement et de gestion de codes d'une application.
+* SQL    : Structured Query Language , langage informatique normalisé pour gérer la base de données. 
+* UML    : Unified Modelling Language, langage de modélisation graphique pour le développement d'une application.
+* SGBD   : Système de gestions de bases de données. 
+* GIT    : Logiciel de gestion de versions décentralisé.
 
 
 
