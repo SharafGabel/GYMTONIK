@@ -53,7 +53,7 @@ public class User extends AUser {
     public boolean equals(Object o){
         if(this ==o) return true;
         if(o==null || getClass() != o.getClass()) return false;
-        User user =(User)o;
+        User user = (User)o;
         if(username != null ? !username.equals(user.username) : user.username !=null)return false;
         if(email != null ? !email.equals(user.email) : user.email !=null)return false;
         return true;
