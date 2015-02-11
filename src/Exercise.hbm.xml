@@ -2,22 +2,20 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="model.Exercise" table="EXERCISE">
-        <id name="idTraining" type="java.lang.Integer" column="idExercise">
+    <class name="model.Exercise" table="EXERCISE" catalog="gymtonik_database">
+        <id name="idExercice" type="int" column="idExercise">
             <generator class="native"/>
         </id>
         <property name="name" type="string" not-null="true" />
         <property name="explanation" type="string" not-null="true" />
         <property name="length" type="int"/>
-        <list name="bodyPart" inverse="false" table="MUSCLE" lazy="true">
+        <list name="bodyPart" inverse="false" table="MUSCLE">
             <key>
                 <column name="id" />
             </key>
-            <list-index>
-
-            </list-index>
-            <one-to-many class="model.Muscle"/>
-            <element type="java.lang.String">
+            <index>
+            </index>
+            <element type="string">
                 <column name="refBodyPart" />
             </element>
         </list>

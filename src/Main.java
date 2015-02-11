@@ -39,15 +39,14 @@ public class Main {
 
         final Session session = getSession();
 
-
-        //Performance performance = new Performance();
+        /**Création d'une séance d'entrainement**/
         SessionUser session1 = new SessionUser(500);
         session1.setDateProgram(Date.from(Instant.now()));
         session1.setPerform(true);
         session1.setTrainings(new ArrayList<ITraining>(500));
         session.save(session1);
+        /**Fin création de la séance d'entrainement**/
 
-        //session.save(performance);
         session.getTransaction().commit();
 
     }

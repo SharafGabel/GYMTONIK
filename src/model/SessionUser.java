@@ -9,15 +9,25 @@ public class SessionUser{
     private Date dateProgram;
     private boolean perform;
     private List<ITraining> trainings;
+    private List<Performance> performances;
     private int timeSleep;
 
     public SessionUser(int timeSleep)
     {
         trainings = new ArrayList<ITraining>();
+        performances = new ArrayList<Performance>();
         this.timeSleep = timeSleep;
     }
 
     public SessionUser() {
+    }
+
+    public List<Performance> getPerformances() {
+        return performances;
+    }
+
+    public void setPerformances(List<Performance> performances) {
+        this.performances = performances;
     }
 
     public int calculatePerformance(IUser user)

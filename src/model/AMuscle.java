@@ -2,8 +2,8 @@ package model;
 
 public abstract class AMuscle implements IBodyPart{
     private Integer idMuscle;
-    public String name;
-    public String description;
+    private String name;
+    private String description;
     
     public AMuscle()
     {

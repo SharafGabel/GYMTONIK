@@ -3,7 +3,7 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="model.SessionUser" table="sessionUser"
+    <class name="model.SessionUser" table="SESSIONUSER"
            catalog="gymtonik_database">
         <id name="idSession" type="java.lang.Integer">
             <column name="idSession"/>
@@ -12,18 +12,24 @@
         <property name="timeSleep" type="int"/>
         <property name="perform" type="boolean"/>
         <property name="dateProgram" type="timestamp"/>
-        <list name="trainings" inverse="false" table="EXERCISE" lazy="true">
-            <list-index>
-            </list-index>
+        <list name="trainings" inverse="false" table="EXERCISE">
+            <key>
+                <column name="id"/>
+            </key>
+            <index>
+                <column name="idx"/>
+            </index>
+            <one-to-many class="model.Exercise"/>
+        </list>
+        <list name="performances" inverse="false" table="PERFORMANCE">
             <key>
                 <column name="id" />
             </key>
-            <one-to-many class="model.Exercise"/>
-            <element type="java.lang.String">
-                <column name="refTrainings" />
-            </element>
+            <index>
+                <column name="idx"/>
+            </index>
+            <one-to-many class="model.Performance"/>
         </list>
-
 
     </class>
 </hibernate-mapping>

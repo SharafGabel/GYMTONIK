@@ -4,6 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
+
         <property name="connection.url">jdbc:mysql://mysql1.alwaysdata.com/gymtonik_database</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="connection.username">gymtonik</property>
@@ -16,9 +17,8 @@
         <property name="hbm2ddl.auto">create</property>
         <mapping resource="Performance.hbm.xml"/>
         <mapping resource="SessionUser.hbm.xml"/>
-
-
-
+        <mapping resource="Muscle.hbm.xml"/>
+        <mapping resource="Exercise.hbm.xml"/>
 
     </session-factory>
 </hibernate-configuration>
