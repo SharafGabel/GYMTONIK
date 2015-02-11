@@ -1,7 +1,6 @@
-import org.hibernate.HibernateException;
-import org.hibernate.SessionFactory;
-import org.hibernate.Session;
-import org.hibernate.Query;
+import model.AMuscle;
+import model.Exercise;
+import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.service.ServiceRegistry;
@@ -34,7 +33,14 @@ public class Main {
 
     public static void main(final String[] args) throws Exception {
         final Session session = getSession();
-        try {
+        Transaction tx = session.beginTransaction();
+
+        Exercise exercise= new Exercise();
+        String name = (String) session.save(exercise);
+        System.out.println("Name : "+name);
+        tx.commit();
+        session.close();
+        /*try {
             System.out.println("querying all the managed entities...");
             final Map metadataMap = session.getSessionFactory().getAllClassMetadata();
             for (Object key : metadataMap.keySet()) {
@@ -48,6 +54,6 @@ public class Main {
             }
         } finally {
             session.close();
-        }
+        }*/
     }
 }

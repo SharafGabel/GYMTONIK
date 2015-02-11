@@ -4,11 +4,26 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url"/>
-        <property name="connection.driver_class"/>
-        <property name="connection.username"/>
-        <property name="connection.password"/>
+        <property name="connection.url">jdbc:mysql://mysql1.alwaysdata.com/gymtonik_database</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.username">gymtonik</property>
+        <property name="connection.password">projetsi2014gym</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.cache.use_second_level_cache">false</property>
+
         <!-- DB schema will be updated if needed -->
-        <!-- <property name="hbm2ddl.auto">update</property> -->
+        <property name="hbm2ddl.auto">create</property>
+        <mapping class="model.AMuscle" />
+        <mapping class="model.ATraining" />
+        <mapping class="model.Exercise" />
+        <mapping class="model.IBodyPart" />
+        <mapping class="model.ITraining" />
+        <mapping class="model.IUser" />
+        <mapping class="model.Muscle" />
+        <mapping class="model.Performance" />
+        <mapping class="model.Session" />
+        <mapping class="model.User" />
+
     </session-factory>
 </hibernate-configuration>
