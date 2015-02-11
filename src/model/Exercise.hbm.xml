@@ -16,6 +16,7 @@
             <list-index>
 
             </list-index>
+            <one-to-many class="model.Muscle"/>
             <element type="java.lang.String">
                 <column name="refBodyPart" />
             </element>
