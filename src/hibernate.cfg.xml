@@ -14,11 +14,10 @@
 
         <!-- DB schema will be updated if needed -->
         <property name="hbm2ddl.auto">create</property>
-        <mapping class="model.Exercise" />
-        <mapping class="model.Muscle" />
-        <mapping class="model.Performance" />
-        <mapping class="model.Session" />
-        <mapping class="model.User" />
+        <mapping resource="Performance.hbm.xml"/>
+
+
+
 
     </session-factory>
 </hibernate-configuration>

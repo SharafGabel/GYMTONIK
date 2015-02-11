@@ -1,5 +1,6 @@
 import model.AMuscle;
 import model.Exercise;
+import model.Performance;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.metadata.ClassMetadata;
@@ -32,28 +33,16 @@ public class Main {
     }
 
     public static void main(final String[] args) throws Exception {
-        final Session session = getSession();
-        Transaction tx = session.beginTransaction();
+        System.out.println("Hibernate component mapping");
 
-        Exercise exercise= new Exercise();
-        String name = (String) session.save(exercise);
-        System.out.println("Name : "+name);
-        tx.commit();
-        session.close();
-        /*try {
-            System.out.println("querying all the managed entities...");
-            final Map metadataMap = session.getSessionFactory().getAllClassMetadata();
-            for (Object key : metadataMap.keySet()) {
-                final ClassMetadata classMetadata = (ClassMetadata) metadataMap.get(key);
-                final String entityName = classMetadata.getEntityName();
-                final Query query = session.createQuery("from " + entityName);
-                System.out.println("executing: " + query.getQueryString());
-                for (Object o : query.list()) {
-                    System.out.println("  " + o);
-                }
-            }
-        } finally {
-            session.close();
-        }*/
+        final Session session = getSession();
+
+
+        Performance performance = new Performance();
+
+
+        session.save(performance);
+        session.getTransaction().commit();
+
     }
 }
