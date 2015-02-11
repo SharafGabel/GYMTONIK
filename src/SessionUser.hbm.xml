@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="model.SessionUser" table="sessionUser"
+           catalog="gymtonik_database">
+        <id name="idSession" type="java.lang.Integer">
+            <column name="idSession"/>
+            <generator class="identity"/>
+        </id>
+        <property name="timeSleep" type="int"/>
+        <property name="perform" type="boolean"/>
+        <property name="dateProgram" type="timestamp"/>
+        <list name="trainings" inverse="false" table="EXERCISE" lazy="true">
+            <list-index>
+            </list-index>
+            <key>
+                <column name="id" />
+            </key>
+            <one-to-many class="model.Exercise"/>
+            <element type="java.lang.String">
+                <column name="refTrainings" />
+            </element>
+        </list>
+
+
+    </class>
+</hibernate-mapping>
