@@ -14,12 +14,7 @@
 
         <!-- DB schema will be updated if needed -->
         <property name="hbm2ddl.auto">create</property>
-        <mapping class="model.AMuscle" />
-        <mapping class="model.ATraining" />
         <mapping class="model.Exercise" />
-        <mapping class="model.IBodyPart" />
-        <mapping class="model.ITraining" />
-        <mapping class="model.IUser" />
         <mapping class="model.Muscle" />
         <mapping class="model.Performance" />
         <mapping class="model.Session" />

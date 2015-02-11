@@ -2,7 +2,6 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
 
     <persistence-unit name="NewPersistenceUnit">
-        <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <properties>
             <property name="hibernate.connection.url" value="jdbc:mysql://mysql1.alwaysdata.com/gymtonik_database"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>

@@ -5,4 +5,5 @@ public class Muscle extends AMuscle{
     {
         super();
     }
+
 }

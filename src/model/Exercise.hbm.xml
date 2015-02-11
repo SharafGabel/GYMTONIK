@@ -1,0 +1,24 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping
+        PUBLIC "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd">
+<hibernate-mapping>
+    <class name="model.Exercise" table="EXERCISE">
+        <id name="id" type="int" column="idExercise">
+            <generator class="native"/>
+        </id>
+        <property name="name" type="string" not-null="true" />
+        <property name="explanation" type="string" not-null="true" />
+        <property name="length" type="int"/>
+        <list name="bodyPart" inverse="false" table="MUSCLE" lazy="true">
+            <key>
+                <column name="id" />
+            </key>
+            <list-index>
+
+            </list-index>
+            <element type="java.lang.String">
+                <column name="refBodyPart" />
+            </element>
+        </list>
+    </class>
+</hibernate-mapping>
