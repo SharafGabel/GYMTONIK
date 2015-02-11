@@ -1,13 +1,13 @@
-<?xml version="1.0"?><!DOCTYPE hibernate-mapping
-        PUBLIC "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
-        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd">
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="model.Muscle" table="MUSCLE">
-        <id name="id" type="int" column="idMuscle">
+        <id name="idMuscle" type="java.lang.Integer" column="idMuscle">
             <generator class="native"/>
         </id>
-        <property name="name" type="string" not-null="true" />
-        <property name="description" type="string" not-null="true" />
+        <property name="name" type="java.lang.String" not-null="true" />
+        <property name="description" type="java.lang.String" not-null="true" />
 
     </class>
 </hibernate-mapping>

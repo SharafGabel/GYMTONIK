@@ -1,12 +1,14 @@
-import model.AMuscle;
-import model.Exercise;
-import model.Performance;
+import model.*;
+//import model.Session;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -38,10 +40,14 @@ public class Main {
         final Session session = getSession();
 
 
-        Performance performance = new Performance();
+        //Performance performance = new Performance();
+        SessionUser session1 = new SessionUser(500);
+        session1.setDateProgram(Date.from(Instant.now()));
+        session1.setPerform(true);
+        session1.setTrainings(new ArrayList<ITraining>(500));
+        session.save(session1);
 
-
-        session.save(performance);
+        //session.save(performance);
         session.getTransaction().commit();
 
     }

@@ -10,12 +10,12 @@ public class User extends AUser {
     }
 
     @Override
-    public void setSession(Session session) {
+    public void setSession(SessionUser session) {
 
     }
 
     @Override
-    public boolean deleteSession(Session session) {
+    public boolean deleteSession(SessionUser session) {
         return false;
     }
 

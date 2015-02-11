@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class ATraining implements  ITraining{
-
+    private Integer idTraining;
     public int length;
     public String name;
     public String explanation;

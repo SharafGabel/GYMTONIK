@@ -4,16 +4,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Session{
+public class SessionUser{
+    private Integer idSession;
     private Date dateProgram;
     private boolean perform;
     private List<ITraining> trainings;
     private int timeSleep;
 
-    public Session(int timeSleep)
+    public SessionUser(int timeSleep)
     {
         trainings = new ArrayList<ITraining>();
         this.timeSleep = timeSleep;
+    }
+
+    public SessionUser() {
     }
 
     public int calculatePerformance(IUser user)
@@ -45,7 +49,7 @@ public class Session{
     public boolean equals(Object o){
         if(this ==o) return true;
         if(o==null || getClass() != o.getClass()) return false;
-        Session session =(Session)o;
+        SessionUser session =(SessionUser)o;
 
         return true;
     }
@@ -80,5 +84,13 @@ public class Session{
 
     public void setTimeSleep(int timeSleep) {
         this.timeSleep = timeSleep;
+    }
+
+    public Integer getIdSession() {
+        return idSession;
+    }
+
+    public void setIdSession(Integer idSession) {
+        this.idSession = idSession;
     }
 }
