@@ -2,22 +2,22 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="model.Exercise" table="EXERCISE" catalog="gymtonik_database">
-        <id name="idExercice" type="int" column="idExercise">
-            <generator class="native"/>
+    <class name="model.Exercise" table="exercise" catalog="gymtonik_database">
+        <id name="idExercise" type="int" column="idExercise">
+            <generator class="identity" />
         </id>
         <property name="name" type="string" not-null="true" />
         <property name="explanation" type="string" not-null="true" />
         <property name="length" type="int"/>
-        <list name="bodyPart" inverse="false" table="MUSCLE">
+        <!--Clé étrangère : Dans la table muscle on aura un attribut bodyPart -->
+        <list name="bodyPart" cascade="all">
             <key>
-                <column name="id" />
+                <column name="bodyPart" />
             </key>
-            <index>
-            </index>
-            <element type="string">
-                <column name="refBodyPart" />
-            </element>
+            <index column="idMuscle"/>
+            <one-to-many class="model.Muscle"/>
         </list>
+
+
     </class>
 </hibernate-mapping>

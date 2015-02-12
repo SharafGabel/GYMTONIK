@@ -1,14 +1,22 @@
 package model;
 
 public class Exercise extends ATraining{
-    private int idExercice;
+    private int idExercise;
+
+    public int getIdExercise() {
+        return idExercise;
+    }
+
+    public void setIdExercise(int idExercise) {
+        this.idExercise = idExercise;
+    }
 
     public int getIdExercice() {
-        return idExercice;
+        return idExercise;
     }
 
     public void setIdExercice(int idExercice) {
-        this.idExercice = idExercice;
+        this.idExercise = idExercice;
     }
 
     public Exercise()

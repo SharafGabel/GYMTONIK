@@ -3,7 +3,7 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="model.Performance" table="PERFORMANCE"
+    <class name="model.Performance" table="performance"
            catalog="gymtonik_database">
 
         <id name="perfId" type="java.lang.Integer">

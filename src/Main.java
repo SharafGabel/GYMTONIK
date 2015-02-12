@@ -38,13 +38,23 @@ public class Main {
         System.out.println("Hibernate component mapping");
 
         final Session session = getSession();
+        Exercise exercise = new Exercise();
+        exercise.setName("Abdos");
+        exercise.setIdExercise(1);
+        exercise.setExplanation("travail les abdominaux");
+        exercise.setLength(10);
+        session.save(exercise);
+
+
 
         /**Création d'une séance d'entrainement**/
+        /*
         SessionUser session1 = new SessionUser(500);
         session1.setDateProgram(Date.from(Instant.now()));
         session1.setPerform(true);
         session1.setTrainings(new ArrayList<ITraining>(500));
         session.save(session1);
+        */
         /**Fin création de la séance d'entrainement**/
 
         session.getTransaction().commit();

@@ -20,5 +20,6 @@
         <mapping resource="Muscle.hbm.xml"/>
         <mapping resource="Exercise.hbm.xml"/>
 
+
     </session-factory>
 </hibernate-configuration>
