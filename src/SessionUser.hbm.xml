@@ -12,6 +12,7 @@
         <property name="timeSleep" type="int"/>
         <property name="perform" type="boolean"/>
         <property name="dateProgram" type="timestamp"/>
+        <!--ajout d'un attribut dans la classe Exercice -->
         <list name="trainings" cascade="all" >
             <key column="idExercise"/>
             <index column="idx"/>

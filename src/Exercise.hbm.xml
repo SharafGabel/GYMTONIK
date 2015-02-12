@@ -9,14 +9,17 @@
         <property name="name" type="string" not-null="true" />
         <property name="explanation" type="string" not-null="true" />
         <property name="length" type="int"/>
-        <!--Clé étrangère : Dans la table muscle on aura un attribut bodyPart -->
+        <!--Clé étrangère : Dans la table muscle on aura un attribut bodyPart (Probleme) -->
+        <!--
         <list name="bodyPart" cascade="all">
             <key>
                 <column name="bodyPart" />
             </key>
             <index column="idMuscle"/>
             <one-to-many class="model.Muscle"/>
-        </list>
+        </list>-->
+
+
 
 
     </class>

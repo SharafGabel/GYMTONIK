@@ -38,12 +38,16 @@ public class Main {
         System.out.println("Hibernate component mapping");
 
         final Session session = getSession();
+        Integer exerciseId = null;
+
+
         Exercise exercise = new Exercise();
         exercise.setName("Abdos");
-        exercise.setIdExercise(1);
+        //exercise.setIdExercise(1);
         exercise.setExplanation("travail les abdominaux");
         exercise.setLength(10);
-        session.save(exercise);
+        exerciseId=(Integer)session.save(exercise);
+        session.getTransaction().commit();
 
 
 
@@ -57,7 +61,6 @@ public class Main {
         */
         /**Fin création de la séance d'entrainement**/
 
-        session.getTransaction().commit();
 
     }
 }
