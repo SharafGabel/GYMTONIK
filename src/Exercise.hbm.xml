@@ -10,17 +10,14 @@
         <property name="explanation" type="string" not-null="true" />
         <property name="length" type="int"/>
         <!--Clé étrangère : Dans la table muscle on aura un attribut bodyPart (Probleme) -->
-        <!--
-        <list name="bodyPart" cascade="all">
+
+        <list name="bodyPart" table="muscle" inverse="true" fetch="select" cascade="all">
             <key>
-                <column name="bodyPart" />
+                <column name="idExercise"/>
             </key>
             <index column="idMuscle"/>
             <one-to-many class="model.Muscle"/>
-        </list>-->
-
-
-
+        </list>
 
     </class>
 </hibernate-mapping>

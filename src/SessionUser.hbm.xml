@@ -13,21 +13,19 @@
         <property name="perform" type="boolean"/>
         <property name="dateProgram" type="timestamp"/>
         <!--ajout d'un attribut dans la classe Exercice -->
-        <list name="trainings" cascade="all" >
-            <key column="idExercise"/>
-            <index column="idx"/>
+        <list name="trainings" table="exercise" inverse="true" fetch="select" cascade="all" >
+            <key column="idSession"/>
+            <index column="idExercise"/>
             <one-to-many class="model.Exercise"/>
         </list>
 
 
 
-        <list name="performances" inverse="false" table="PERFORMANCE">
+        <list name="performances" inverse="true" fetch="select" table="performance">
             <key>
-                <column name="id" />
+                <column name="idSession" />
             </key>
-            <index>
-                <column name="idx"/>
-            </index>
+            <index column="idPerformance"/>
             <one-to-many class="model.Performance"/>
         </list>
 
