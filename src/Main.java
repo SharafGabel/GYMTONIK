@@ -1,15 +1,9 @@
 import model.*;
-//import model.Session;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Map;
 
 /**
  * Created by kukugath on 11/02/2015.
@@ -40,14 +34,14 @@ public class Main {
         final Session session = getSession();
         Integer exerciseId = null;
 
-
+        Transaction tx = session.beginTransaction();
         Exercise exercise = new Exercise();
         exercise.setName("Abdos");
         //exercise.setIdExercise(1);
         exercise.setExplanation("travail les abdominaux");
         exercise.setLength(10);
         exerciseId=(Integer)session.save(exercise);
-        session.getTransaction().commit();
+        tx.commit();
 
 
 
