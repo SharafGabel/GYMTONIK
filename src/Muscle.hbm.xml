@@ -4,7 +4,7 @@
 <hibernate-mapping>
     <class name="model.Muscle" table="muscle" catalog="gymtonik_database">
         <id name="idMuscle" type="int" column="idMuscle">
-            <generator class="identity"/>
+            <generator class="increment"/>
         </id>
         <property name="name" type="string" not-null="true" />
         <property name="description" type="string" not-null="true" />

@@ -23,4 +23,5 @@ public class Exercise extends ATraining{
     {
         super();
     }
+
 }

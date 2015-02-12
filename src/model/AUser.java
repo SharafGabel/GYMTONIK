@@ -1,21 +1,34 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by shagabel on 04/02/2015.
  */
 public abstract class AUser implements IUser{
 
-    public String username;
-    public String username_canonical;
-    public String email;
-    public String email_canonical;
-    public String password;
-    public String salt;
-    public int height;
-    public int weight;
+    protected String username;
+    protected String username_canonical;
+    protected String email;
+    protected String email_canonical;
+    protected String password;
+    protected String salt;
+    protected int height;
+    protected int weight;
+    protected List<SessionUser> sessionUsers;
     public AUser()
     {
         super();
+        sessionUsers = new ArrayList<SessionUser>();
+    }
+
+    public List<SessionUser> getSessionUsers() {
+        return sessionUsers;
+    }
+
+    public void setSessionUsers(List<SessionUser> sessionUsers) {
+        this.sessionUsers = sessionUsers;
     }
 
     @Override

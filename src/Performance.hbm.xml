@@ -8,7 +8,7 @@
 
         <id name="perfId" type="java.lang.Integer">
             <column name="PERF_ID" />
-            <generator class="identity" />
+            <generator class="increment" />
         </id>
 
 

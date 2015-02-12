@@ -4,16 +4,15 @@
 <hibernate-mapping>
     <class name="model.Exercise" table="exercise" catalog="gymtonik_database">
         <id name="idExercise" type="int" column="idExercise">
-            <generator class="identity" />
+            <generator class="increment"/>
         </id>
         <property name="name" type="string" not-null="true" />
         <property name="explanation" type="string" not-null="true" />
         <property name="length" type="int"/>
-        <!--Clé étrangère : Dans la table muscle on aura un attribut bodyPart (Probleme) -->
 
         <list name="bodyPart" table="muscle" inverse="true" fetch="select" cascade="all">
             <key>
-                <column name="idExercise"/>
+                <column not-null="true" name="idExercise"/>
             </key>
             <index column="idMuscle"/>
             <one-to-many class="model.Muscle"/>
