@@ -1,5 +1,8 @@
 package model;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +11,9 @@ import java.util.List;
  */
 public abstract class AUser implements IUser{
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    protected Integer user_id;
     protected String username;
     protected String username_canonical;
     protected String email;
@@ -17,6 +23,7 @@ public abstract class AUser implements IUser{
     protected int height;
     protected int weight;
     protected List<SessionUser> sessionUsers;
+
     public AUser()
     {
         super();
@@ -29,6 +36,16 @@ public abstract class AUser implements IUser{
 
     public void setSessionUsers(List<SessionUser> sessionUsers) {
         this.sessionUsers = sessionUsers;
+    }
+
+    @Override
+    public Integer getUser_id() {
+        return user_id;
+    }
+
+    @Override
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
     }
 
     @Override

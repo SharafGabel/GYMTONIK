@@ -3,8 +3,7 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="model.SessionUser" table="sessionuser"
-           catalog="gymtonik_database">
+    <class name="model.SessionUser" table="sessionuser" catalog="gymtonik_database">
         <id name="idSession" type="java.lang.Integer">
             <column name="idSession" not-null="true"/>
             <generator class="increment"/>

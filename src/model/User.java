@@ -5,6 +5,9 @@ package model;
  */
 public class User extends AUser {
 
+    public User() {
+    }
+
     @Override
     public void createSession() {
 
@@ -23,6 +26,11 @@ public class User extends AUser {
     @Override
     public void setWeight(int weight) {
 
+    }
+
+    @Override
+    public Integer getUser_id() {
+        return user_id;
     }
 
     @Override

@@ -2,8 +2,9 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="model.User" table="User" catalog="gymtonik_database">
-        <id name="?" type="int" column="?">
+    <class name="model.User" table="user" catalog="gymtonik_database">
+        <id name="user_id" type="java.lang.Integer"  >
+            <column name="user_id" not-null="true"/>
             <generator class="increment"/>
         </id>
         <property name="username" type="string" not-null="true" />
@@ -15,13 +16,15 @@
         <property name="height" type="int"/>
         <property name="weight" type="int"/>
 
+
         <list name="sessionUsers" table="sessionuser" inverse="true" fetch="select" cascade="all">
             <key>
-                <column not-null="true" name="?"/>
+                <column not-null="true" name="user_id"/>
             </key>
-            <index column="?"/>
-            <one-to-many class="?"/>
+            <index column="idSession"/>
+            <one-to-many class="model.SessionUser"/>
         </list>
+
 
     </class>
 </hibernate-mapping>
