@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="model.User" table="User" catalog="gymtonik_database">
+        <id name="?" type="int" column="?">
+            <generator class="increment"/>
+        </id>
+        <property name="username" type="string" not-null="true" />
+        <property name="username_canonical" type="string" not-null="true" />
+        <property name="email" type="string"/>
+        <property name="email_canonical" type="string"/>
+        <property name="password" type="string"/>
+        <property name="salt" type="string"/>
+        <property name="height" type="int"/>
+        <property name="weight" type="int"/>
+
+        <list name="sessionUsers" table="sessionuser" inverse="true" fetch="select" cascade="all">
+            <key>
+                <column not-null="true" name="?"/>
+            </key>
+            <index column="?"/>
+            <one-to-many class="?"/>
+        </list>
+
+    </class>
+</hibernate-mapping>
