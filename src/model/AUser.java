@@ -5,23 +5,33 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.*;
 
 /**
  * Created by shagabel on 04/02/2015.
  */
 public abstract class AUser implements IUser{
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @Id @GeneratedValue
+    @Column(name="user_id",nullable = false)
     protected Integer user_id;
+    @Column(name="username",nullable = false)
     protected String username;
+    @Column(name="username_canonical",nullable = false)
     protected String username_canonical;
+    @Column(name="email",nullable = false)
     protected String email;
+    @Column(name="email_canonical",nullable = false)
     protected String email_canonical;
+    @Column(name="password",nullable = false)
     protected String password;
+    @Column(name="salt")
     protected String salt;
+    @Column(name="height")
     protected int height;
+    @Column(name="weight")
     protected int weight;
+    @Column(name="sessionUsers")
     protected List<SessionUser> sessionUsers;
 
     public AUser()

@@ -4,14 +4,14 @@
 <hibernate-mapping>
     <class name="model.User" table="user" catalog="gymtonik_database">
         <id name="user_id" type="java.lang.Integer"  >
-            <column name="user_id" not-null="true"/>
+            <column name="user_id" unique="true" not-null="true"/>
             <generator class="increment"/>
         </id>
         <property name="username" type="string" not-null="true" />
         <property name="username_canonical" type="string" not-null="true" />
-        <property name="email" type="string"/>
+        <property name="email" type="string" not-null="true"/>
         <property name="email_canonical" type="string"/>
-        <property name="password" type="string"/>
+        <property name="password" type="string" not-null="true"/>
         <property name="salt" type="string"/>
         <property name="height" type="int"/>
         <property name="weight" type="int"/>

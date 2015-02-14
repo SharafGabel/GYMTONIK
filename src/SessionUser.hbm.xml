@@ -6,7 +6,7 @@
     <class name="model.SessionUser" table="sessionuser" catalog="gymtonik_database">
         <id name="idSession" type="java.lang.Integer">
             <column name="idSession" not-null="true"/>
-            <generator class="increment"/>
+            <generator class="native"/>
         </id>
         <property name="timeSleep" type="int"/>
         <property name="perform" type="boolean"/>

@@ -4,7 +4,7 @@
 <hibernate-mapping>
     <class name="model.Exercise" table="exercise" catalog="gymtonik_database">
         <id name="idExercise" type="int" column="idExercise">
-            <generator class="increment"/>
+            <generator class="native"/>
         </id>
         <property name="name" type="string" not-null="true" />
         <property name="explanation" type="string" not-null="true" />

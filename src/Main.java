@@ -41,10 +41,7 @@ public class Main {
         Integer muscleId = null;
 
         Transaction tx = session.beginTransaction();
-        /***ETAPE 1 : Créer le .hbm pour User**/
-        /**ETAPE 2 : IL FAUT CREER DEJA UN USER, pour pouvoir ensuite créer une séance ( sessionuser ), à cause des clés étrangère qui ne peut pas être nulle**/
         User user = new User();
-        //user.setUser_id(1);
         user.setUsername("Jean Baptiste Tartaupion");
         user.setUsername_canonical("Jean Baptiste Tartaupion");
         user.setHeight(173);
@@ -52,8 +49,9 @@ public class Main {
         user.setEmail("jbtartaupion@gmail.com");
         user.setEmail_canonical("jbtartaupion@gmail.com");
         user.setPassword("jbtartaupion");
+        userId=(Integer)session.save(user);
         /**FIN création user**/
-        Exercise exercise = new Exercise();
+       /* Exercise exercise = new Exercise();
         exercise.setName("Abdos");
         exercise.setIdExercise(1);
         exercise.setExplanation("travail les abdominaux");
@@ -75,7 +73,7 @@ public class Main {
         userId=(Integer)session.save(user);
         seanceId=(Integer)session.save(seance);
         exerciseId = (Integer)session.save(exercise);/**idExercise doesn't have a default value**/
-        muscleId = (Integer)session.save(muscle);/**idSession doesn't have a default value**/
+        /*muscleId = (Integer)session.save(muscle);*//**idSession doesn't have a default value**/
         tx.commit();
 
         /**Création d'une séance d'entrainement**/

@@ -1,8 +1,11 @@
 package model;
-
+import javax.persistence.*;
 /**
  * Created by shagabel on 04/02/2015.
  */
+
+@Entity
+@Table(name="User")
 public class User extends AUser {
 
     public User() {
