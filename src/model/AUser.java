@@ -40,6 +40,12 @@ public abstract class AUser implements IUser{
         sessionUsers = new ArrayList<SessionUser>();
     }
 
+    public AUser(String username, String email, String password) {
+        this.username=username;
+        this.email=email;
+        this.password=password;
+    }
+
     public List<SessionUser> getSessionUsers() {
         return sessionUsers;
     }

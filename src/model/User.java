@@ -11,6 +11,10 @@ public class User extends AUser {
     public User() {
     }
 
+    public User(String username, String email, String password) {
+        super(username,email,password);
+    }
+
     @Override
     public void createSession() {
 
