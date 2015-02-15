@@ -74,6 +74,7 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
+    <orderEntry type="library" name="javax.servlet.jsp:javax.servlet.jsp-api:2.3.0" level="project" />
   </component>
 </module>
 

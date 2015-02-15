@@ -29,10 +29,10 @@ public class RegisterServlet extends javax.servlet.http.HttpServlet {
             out.println("<center>");
             if(result){
                 out.println("<h1>Registration Successful</h1>");
-                out.println("To login with your username and Password<a href=login.jsp>Click here</a>");
+                out.println("To login with your username and Password<a href=\"login.jsp\">Click here</a>");
             }else{
                 out.println("<h1>Registration Unsuccessful</h1>");
-                out.println("To try again<a href=register.jsp>Click here</a>");
+                out.println("To try again <a href=\"register.jsp\">Click here</a>");
             }
             out.println("</center>");
             out.println("</body>");
@@ -43,6 +43,8 @@ public class RegisterServlet extends javax.servlet.http.HttpServlet {
     }
 
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
-
+        /*L'utilisateur n'est pas censé atteindre cette page via une requête GET,
+        on le redirige vers vers register.jsp*/
+        getServletContext().getRequestDispatcher("register.jsp").forward(request,response);
     }
 }
