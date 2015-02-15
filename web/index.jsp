@@ -8,9 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
-    <title></title>
+    <title>test tomcat</title>
   </head>
   <body>
-
+    test du serveur tomcat sur la machine local sous Intellij.
   </body>
 </html>
