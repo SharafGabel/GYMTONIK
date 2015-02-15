@@ -1,5 +1,7 @@
 package model;
 
+import org.hibernate.annotations.IndexColumn;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.GeneratedValue;
@@ -18,11 +20,9 @@ public abstract class ATraining implements  ITraining{
     protected String name;
     @Column(name="explanation",nullable = false)
     public String explanation;
-    @Column(name="sessionUsers")
-    public List<IBodyPart> bodyPart;
+
     public ATraining()
     {
-        bodyPart = new ArrayList<IBodyPart>();
     }
 
     @Override
@@ -52,9 +52,5 @@ public abstract class ATraining implements  ITraining{
     @Override
     public List<IBodyPart> getBodyPart() {
         return bodyPart;
-    }
-    @Override
-    public void setBodyPart(List<IBodyPart> bodyPart) {
-        this.bodyPart = bodyPart;
     }
 }

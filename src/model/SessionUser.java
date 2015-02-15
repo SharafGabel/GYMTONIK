@@ -1,25 +1,56 @@
 package model;
 
+import org.hibernate.annotations.IndexColumn;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+@Entity
+@Table(name="SessionUser")
 public class SessionUser{
+    @Id @GeneratedValue
+    @Column(name="idSession",nullable = false)
     private Integer idSession;
+    @Column(name="dateProgram",nullable = false)
+    @Type(type="date")
     private Date dateProgram;
+    @Column(name="perform",nullable = false)
     private boolean perform;
-    private List<ITraining> trainings;
-    private List<Performance> performances;
+    @Column(name = "timeSleep")
     private int timeSleep;
+    @ManyToOne
+    @JoinColumn(name="user_id",
+            insertable=false, updatable=false,
+            nullable=false)
+    private AUser user;
+    @OneToMany(cascade={CascadeType.ALL})
+    @JoinColumn(name="idSession")
+    @IndexColumn(name="idx")
+    private List<ITraining> trainings;
+    @OneToMany(cascade={CascadeType.ALL})
+    @JoinColumn(name="idSession")
+    @IndexColumn(name="idx")
+    private List<Performance> performances;
 
     public SessionUser(int timeSleep)
     {
         trainings = new ArrayList<ITraining>();
         performances = new ArrayList<Performance>();
         this.timeSleep = timeSleep;
+        user = new User();
     }
 
     public SessionUser() {
+    }
+
+    public AUser getUser() {
+        return user;
+    }
+
+    public void setUser(AUser user) {
+        this.user = user;
     }
 
     public List<Performance> getPerformances() {

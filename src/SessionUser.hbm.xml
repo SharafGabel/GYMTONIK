@@ -10,7 +10,7 @@
         </id>
         <property name="timeSleep" type="int"/>
         <property name="perform" type="boolean"/>
-        <property name="dateProgram" type="timestamp"/>
+        <property name="dateProgram" type="date"/>
 
         <list name="trainings" table="exercise" inverse="true" fetch="select" cascade="all" >
             <key column="idSession" not-null="true"/>

@@ -1,10 +1,26 @@
 package model;
 
+import javax.persistence.*;
+
 public abstract class AMuscle implements IBodyPart{
 
-    private int idMuscle;
-    private String name;
-    private String description;
+    @Column(name="name",nullable = false)
+    protected String name;
+    @Column(name="description")
+    protected String description;
+    @ManyToOne
+    @JoinColumn(name="idTraining",
+            insertable=false, updatable=false,
+            nullable=false)
+    protected ITraining training;
+
+    public ITraining getTraining() {
+        return training;
+    }
+
+    public void setTraining(ITraining training) {
+        this.training = training;
+    }
 
     public String getDescription() {
         return description;
@@ -22,14 +38,8 @@ public abstract class AMuscle implements IBodyPart{
         this.name = name;
     }
 
-    public int getIdMuscle() {
-        return idMuscle;
-    }
-
-    public void setIdMuscle(int idMuscle) {
-        this.idMuscle = idMuscle;
-    }
     public AMuscle()
     {
+        training=new Exercise();
     }
 }

@@ -1,6 +1,13 @@
 package model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="Exercise")
 public class Exercise extends ATraining{
+    @Id
+    @GeneratedValue
+    @Column(name="idExercise",nullable = false)
     private int idExercise;
 
     public int getIdExercise() {

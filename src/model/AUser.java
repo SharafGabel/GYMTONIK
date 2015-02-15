@@ -1,5 +1,7 @@
 package model;
 
+import org.hibernate.annotations.IndexColumn;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,7 +33,9 @@ public abstract class AUser implements IUser{
     protected int height;
     @Column(name="weight")
     protected int weight;
-    @Column(name="sessionUsers")
+    @OneToMany(cascade={CascadeType.ALL})
+    @JoinColumn(name="user_id")
+    @IndexColumn(name="idx")
     protected List<SessionUser> sessionUsers;
 
     public AUser()
