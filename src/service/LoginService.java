@@ -42,6 +42,7 @@ public class LoginService {
         }finally {
             session.close();
         }
+        HibernateUtil.closeSession();
         return user;
     }
 
@@ -62,6 +63,7 @@ public class LoginService {
         }finally {
             session.close();
         }
+        HibernateUtil.closeSession();
         return list;
     }
 }
