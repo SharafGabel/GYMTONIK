@@ -6,6 +6,9 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by kuga on 15/02/2015.
  */
@@ -40,5 +43,25 @@ public class LoginService {
             session.close();
         }
         return user;
+    }
+
+    public List<User> getUserList(){
+        List<User> list = new ArrayList<User>();
+        Session session = HibernateUtil.openSession();
+        Transaction tx = null;
+        try{
+            tx=session.getTransaction();
+            tx.begin();
+            list = session.createQuery("from User ").list();
+            tx.commit();
+        }catch (Exception e){
+            if(tx != null){
+                tx.rollback();
+            }
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+        return list;
     }
 }
