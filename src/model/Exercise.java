@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="Exercise")
@@ -25,6 +26,8 @@ public class Exercise extends ATraining{
     public void setIdExercice(int idExercice) {
         this.idExercise = idExercice;
     }
+    
+    public void setBodyPart(List<IBodyPart> bodyPart){ this.bodyPart = bodyPart;}
 
     public Exercise()
     {

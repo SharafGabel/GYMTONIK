@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.*;
+import java.util.List;
 
 public abstract class AMuscle implements IBodyPart{
 
@@ -13,7 +14,7 @@ public abstract class AMuscle implements IBodyPart{
             insertable=false, updatable=false,
             nullable=false)
     protected ITraining training;
-
+    protected List<IBodyPart> bodyParts;
     public ITraining getTraining() {
         return training;
     }

@@ -20,9 +20,11 @@ public abstract class ATraining implements  ITraining{
     protected String name;
     @Column(name="explanation",nullable = false)
     public String explanation;
+    public List<IBodyPart> bodyPart;
 
     public ATraining()
     {
+        this.bodyPart = new ArrayList<IBodyPart>();
     }
 
     @Override

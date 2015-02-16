@@ -9,7 +9,7 @@ public class Muscle extends AMuscle{
     @Id
     @GeneratedValue
     @Column(name="idMuscle",nullable = false)
-    protected Integer idMuscle;
+    protected int idMuscle;
 
     public Muscle()
     {

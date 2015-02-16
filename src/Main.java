@@ -75,6 +75,8 @@ public class Main {
         exerciseId = (Integer)session.save(exercise);/**idExercise doesn't have a default value**/
         /*muscleId = (Integer)session.save(muscle);*//**idSession doesn't have a default value**/
         tx.commit();
+        user =  (User) session.get(User.class, 1);
+        System.out.println(user.getUsername());
 
         /**Création d'une séance d'entrainement**/
         /*
