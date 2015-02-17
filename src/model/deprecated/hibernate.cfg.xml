@@ -15,11 +15,11 @@
 
         <!-- DB schema will be updated if needed -->
         <property name="hbm2ddl.auto">create</property>
-        <mapping resource="User.hbm.xml"/>
-        <mapping resource="Performance.hbm.xml"/>
-        <mapping resource="SessionUser.hbm.xml"/>
-        <mapping resource="Muscle.hbm.xml"/>
-        <mapping resource="Exercise.hbm.xml"/>
+        <mapping resource="model/deprecated/User.hbm.xmlated/User.hbm.xml"/>
+        <mapping resource="model/deprecated/Performance.hbm.xmlrformance.hbm.xml"/>
+        <mapping resource="model/deprecated/SessionUser.hbm.xmlssionUser.hbm.xml"/>
+        <mapping resource="model/deprecated/Muscle.hbm.xmled/Muscle.hbm.xml"/>
+        <mapping resource="model/deprecated/Exercise.hbm.xml"/>
 
 
     </session-factory>

@@ -16,7 +16,7 @@ public class LoginService {
     
     public boolean authendificate(String userId,String password) {
         User user = getUserById(userId);
-        if(user !=null && user.getUser_id().equals(userId) && user.getPassword().equals(password)){
+        if(user !=null && user.getId().equals(userId) && user.getPassword().equals(password)){
             return true;
         }else {
             return false;

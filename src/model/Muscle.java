@@ -5,23 +5,22 @@ import javax.persistence.*;
 @Entity
 @Table(name="Muscle")
 public class Muscle extends AMuscle{
+    //region Property
+    @Id @GeneratedValue
+    @Column(name="id")
+    protected int id;
+    //endregion
 
-    @Id
-    @GeneratedValue
-    @Column(name="idMuscle",nullable = false)
-    protected int idMuscle;
-
+    //region Constructor
     public Muscle()
     {
         super();
     }
+    //endregion
 
-    public int getIdMuscle() {
-        return idMuscle;
+    //region Getter/Setter
+    public int getId() {
+        return id;
     }
-
-    public void setIdMuscle(int idMuscle) {
-        this.idMuscle = idMuscle;
-    }
-
+    //endregion
 }

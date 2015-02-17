@@ -10,26 +10,44 @@ import javax.persistence.Id;
 import javax.persistence.*;
 
 public abstract class ATraining implements  ITraining{
-
-    @Id @GeneratedValue
-    @Column(name="idTraining",nullable = false)
-    private Integer idTraining;
+    //region Property
     @Column(name="length",nullable = false)
     public int length;
+
     @Column(name="name",nullable = false)
     protected String name;
+
     @Column(name="explanation",nullable = false)
     public String explanation;
-    public List<IBodyPart> bodyPart;
 
+    @ManyToOne
+    @JoinColumn(name="idSession",insertable=false, updatable=false,nullable=false)
+    public SessionUser sessionUser=new SessionUser();
+
+    @OneToMany(cascade={CascadeType.ALL})
+    @JoinColumn(name="idTraining")
+    @IndexColumn(name="idx")
+    public List<IBodyPart> bodyParts;
+    //endregion
+
+    //region Constructor
     public ATraining()
     {
-        this.bodyPart = new ArrayList<IBodyPart>();
+        this.bodyParts = new ArrayList<IBodyPart>();
     }
 
+    public ATraining(int length, String name, String explanation) {
+        this.length = length;
+        this.explanation = explanation;
+        this.name = name;
+        this.bodyParts = new ArrayList<IBodyPart>();
+    }
+    //endregion
+
+    //region Getter/Setter
     @Override
     public int getLength() {
-        return length;
+        return this.length;
     }
     @Override
     public void setLength(int length) {
@@ -37,7 +55,7 @@ public abstract class ATraining implements  ITraining{
     }
     @Override
     public String getName() {
-        return name;
+        return this.name;
     }
     @Override
     public void setName(String name) {
@@ -45,7 +63,7 @@ public abstract class ATraining implements  ITraining{
     }
     @Override
     public String getExplanation() {
-        return explanation;
+        return this.explanation;
     }
     @Override
     public void setExplanation(String explanation) {
@@ -53,6 +71,16 @@ public abstract class ATraining implements  ITraining{
     }
     @Override
     public List<IBodyPart> getBodyPart() {
-        return bodyPart;
+        return this.bodyParts;
     }
+    @Override
+    public void setBodyPart(List<IBodyPart> bodyParts) {
+        this.bodyParts = bodyParts;
+    }
+    @Override
+    public void addBodyPart(IBodyPart bodyPart) {
+        this.bodyParts.add(bodyPart);
+    }
+
+    //endregion
 }

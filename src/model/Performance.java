@@ -1,27 +1,31 @@
 package model;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
-/**
- * Created by shagabel on 04/02/2015.
- */
 public class Performance{
+    //region Property
+    @Id
+    @GeneratedValue
+    @Column(name="id")
+    private Integer id;
 
-    private Integer perfId;
     private String name;
+
     @ManyToOne
-    @JoinColumn(name="idSession",
-            insertable=false, updatable=false,
-            nullable=false)
+    @JoinColumn(name="idSession",insertable=false, updatable=false,nullable=false)
     private SessionUser sessionUser;
+    //endregion
 
-    public Integer getPerfId() {
-        return perfId;
+    //region Constructor
+    public Performance()
+    {
+        sessionUser = new SessionUser();
     }
+    //endregion
 
-    public void setPerfId(Integer perfId) {
-        this.perfId = perfId;
+    //region Getter/Setter
+    public Integer getId() {
+        return id;
     }
 
     public String getName() {
@@ -31,9 +35,5 @@ public class Performance{
     public void setName(String name) {
         this.name = name;
     }
-
-    public Performance()
-    {
-        sessionUser = new SessionUser();
-    }
+    //endregion
 }

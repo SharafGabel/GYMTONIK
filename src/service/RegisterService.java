@@ -40,7 +40,7 @@ public class RegisterService {
         try{
             tx = session.getTransaction();
             tx.begin();
-            Query query = session.createQuery("from User where user_id="+user.getUser_id()+"");
+            Query query = session.createQuery("from User where id="+user.getId()+"");
             User u = (User)query.uniqueResult();
             tx.commit();
             if(u != null) result = true;

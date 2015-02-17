@@ -9,39 +9,42 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
-/**
- * Created by shagabel on 04/02/2015.
- */
 public abstract class AUser implements IUser{
-
-    @Id @GeneratedValue
-    @Column(name="user_id",nullable = false)
-    protected Integer user_id;
+    //region Parameter
     @Column(name="username",nullable = false)
     protected String username;
+
     @Column(name="username_canonical",nullable = false)
     protected String username_canonical;
+
     @Column(name="email",nullable = false)
     protected String email;
+
     @Column(name="email_canonical",nullable = false)
     protected String email_canonical;
+
     @Column(name="password",nullable = false)
     protected String password;
+
     @Column(name="salt")
     protected String salt;
+
     @Column(name="height")
     protected int height;
+
     @Column(name="weight")
     protected int weight;
-    @OneToMany(cascade={CascadeType.ALL})
-    @JoinColumn(name="user_id")
-    @IndexColumn(name="idx")
-    protected List<SessionUser> sessionUsers;
 
-    public AUser()
-    {
+    @OneToMany(cascade={CascadeType.ALL})
+    @JoinColumn(name="id")
+    @IndexColumn(name="sessions")
+    protected List<SessionUser> sessions;
+    //endregion
+
+    //region Constructor
+    public AUser(){
         super();
-        sessionUsers = new ArrayList<SessionUser>();
+        sessions = new ArrayList<SessionUser>();
     }
 
     public AUser(String username, String email, String password) {
@@ -49,26 +52,9 @@ public abstract class AUser implements IUser{
         this.email=email;
         this.password=password;
     }
+    //endregion
 
-    public List<SessionUser> getSessionUsers() {
-        return sessionUsers;
-    }
-
-    public void setSessionUsers(List<SessionUser> sessionUsers) {
-        this.sessionUsers = sessionUsers;
-    }
-
-    @Override
-    public Integer getUser_id() {
-        return user_id;
-    }
-
-    @Override
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
-    }
-
-    @Override
+    //region Getter/Setter
     public String getUsername() {
         return username;
     }
@@ -137,4 +123,15 @@ public abstract class AUser implements IUser{
     public void setWeight(int weight) {
         this.weight = weight;
     }
+
+    public List<SessionUser> getSessionUsers() {
+        return sessions;
+    }
+
+    public void addSession(SessionUser session) { this.sessions.add(session);}
+
+    public void setSessionUsers(List<SessionUser> sessionUsers) {
+        this.sessions = sessionUsers;
+    }
+    //endregion
 }

@@ -4,17 +4,26 @@ import javax.persistence.*;
 import java.util.List;
 
 public abstract class AMuscle implements IBodyPart{
-
+    //region Property
     @Column(name="name",nullable = false)
     protected String name;
+
     @Column(name="description")
     protected String description;
+
     @ManyToOne
-    @JoinColumn(name="idTraining",
-            insertable=false, updatable=false,
-            nullable=false)
+    @JoinColumn(name="idTraining",insertable=false, updatable=false,nullable=false)
     protected ITraining training;
-    protected List<IBodyPart> bodyParts;
+    //endregion
+
+    //region Constructor
+    public AMuscle()
+    {
+        training=new Exercise();
+    }
+    //endregion
+
+    //region Getter/Setter
     public ITraining getTraining() {
         return training;
     }
@@ -38,9 +47,5 @@ public abstract class AMuscle implements IBodyPart{
     public void setName(String name) {
         this.name = name;
     }
-
-    public AMuscle()
-    {
-        training=new Exercise();
-    }
+    //endregion
 }

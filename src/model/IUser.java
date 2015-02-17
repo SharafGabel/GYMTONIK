@@ -3,9 +3,7 @@ package model;
 import java.lang.String;
 
 public interface IUser {
-
-    public Integer getUser_id();
-    public void setUser_id(Integer user_id);
+    //region Method
     public void createSession();
     public void setSession(SessionUser session);
     public boolean deleteSession(SessionUser session);
@@ -15,5 +13,5 @@ public interface IUser {
     public String getPassword();
     public int getWeight();
     public int getHeight();
-
+    //endregion
 }

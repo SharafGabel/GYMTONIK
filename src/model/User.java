@@ -7,12 +7,24 @@ import javax.persistence.*;
 @Entity
 @Table(name="User")
 public class User extends AUser {
+    //region Property
+    @Id @GeneratedValue
+    @Column(name="id")
+    protected Integer id;
+    //endregion
 
+    //region Constructor
     public User() {
     }
 
     public User(String username, String email, String password) {
         super(username,email,password);
+    }
+    //endregion
+
+    //region Getter/Setter
+    public Integer getId() {
+        return id;
     }
 
     @Override
@@ -33,11 +45,6 @@ public class User extends AUser {
     @Override
     public void setWeight(int weight) {
 
-    }
-
-    @Override
-    public Integer getUser_id() {
-        return user_id;
     }
 
     @Override
@@ -64,7 +71,9 @@ public class User extends AUser {
     public int getHeight() {
         return height;
     }
+    //endregion
 
+    //region Method
     @Override
     public boolean equals(Object o){
         if(this ==o) return true;
@@ -74,6 +83,6 @@ public class User extends AUser {
         if(email != null ? !email.equals(user.email) : user.email !=null)return false;
         return true;
     }
-
+    //endregion
 }
 

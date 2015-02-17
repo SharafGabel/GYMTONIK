@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface ITraining{
+    //region Method
     public int getLength();
     public void setLength(int length);
     public String getName();
@@ -17,13 +18,7 @@ public interface ITraining{
     public String getExplanation();
     public void setExplanation(String explanation);
     public List<IBodyPart> getBodyPart();
-    @ManyToOne
-    @JoinColumn(name="idSession",
-            insertable=false, updatable=false,
-            nullable=false)
-    public SessionUser sessionUser=new SessionUser();
-    @OneToMany(cascade={CascadeType.ALL})
-    @JoinColumn(name="idTraining")
-    @IndexColumn(name="idx")
-    public List<IBodyPart> bodyPart=new ArrayList<IBodyPart>();
+    public void setBodyPart(List<IBodyPart> bodyParts);
+    public void addBodyPart(IBodyPart bodyPart);
+    //endregion
 }

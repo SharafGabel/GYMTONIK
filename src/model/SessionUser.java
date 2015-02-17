@@ -10,32 +10,38 @@ import java.util.List;
 @Entity
 @Table(name="SessionUser")
 public class SessionUser{
+    //region Property
     @Id @GeneratedValue
-    @Column(name="idSession",nullable = false)
-    private Integer idSession;
+    @Column(name="id",nullable = false)
+    private Integer id;
+
     @Column(name="dateProgram",nullable = false)
     @Type(type="date")
     private Date dateProgram;
+
     @Column(name="perform",nullable = false)
     private boolean perform;
+
     @Column(name = "timeSleep")
     private int timeSleep;
-    @ManyToOne
-    @JoinColumn(name="user_id",
-            insertable=false, updatable=false,
-            nullable=false)
-    private AUser user;
-    @OneToMany(cascade={CascadeType.ALL})
-    @JoinColumn(name="idSession")
-    @IndexColumn(name="idx")
-    private List<ITraining> trainings;
-    @OneToMany(cascade={CascadeType.ALL})
-    @JoinColumn(name="idSession")
-    @IndexColumn(name="idx")
-    private List<Performance> performances;
 
-    public SessionUser(int timeSleep)
-    {
+    @ManyToOne
+    @JoinColumn(name="userId",insertable=false, updatable=false,nullable=false)
+    private AUser user;
+
+    @OneToMany(cascade={CascadeType.ALL})
+    @JoinColumn(name="id")
+    @IndexColumn(name="trainings")
+    private List<ITraining> trainings;
+
+    @OneToMany(cascade={CascadeType.ALL})
+    @JoinColumn(name="id")
+    @IndexColumn(name="performances")
+    private List<Performance> performances;
+    //endregion
+
+    //region Constructor
+    public SessionUser(int timeSleep){
         trainings = new ArrayList<ITraining>();
         performances = new ArrayList<Performance>();
         this.timeSleep = timeSleep;
@@ -43,6 +49,12 @@ public class SessionUser{
     }
 
     public SessionUser() {
+    }
+    //endregion
+
+    //region Getter/Setter
+    public Integer getId() {
+        return id;
     }
 
     public AUser getUser() {
@@ -61,38 +73,20 @@ public class SessionUser{
         this.performances = performances;
     }
 
-    public int calculatePerformance(IUser user)
-    {
-        return -1;
-    }
-
-    public void addTraining(ITraining training)
-    {
+    public void addTraining(ITraining training) {
 
     }
 
-    public void deleteTrainig(ITraining training)
-    {
+    public void deleteTraining(ITraining training) {
 
     }
 
-    public void clearTraining()
-    {
+    public void clearTraining() {
 
     }
 
-    public void updateTraining(ITraining training)
-    {
+    public void updateTraining(ITraining training) {
 
-    }
-
-    @Override
-    public boolean equals(Object o){
-        if(this ==o) return true;
-        if(o==null || getClass() != o.getClass()) return false;
-        SessionUser session =(SessionUser)o;
-
-        return true;
     }
 
     public Date getDateProgram() {
@@ -126,12 +120,21 @@ public class SessionUser{
     public void setTimeSleep(int timeSleep) {
         this.timeSleep = timeSleep;
     }
+    //endregion
 
-    public Integer getIdSession() {
-        return idSession;
+    //region Method
+
+    public int calculatePerformance(IUser user) {
+        return -1;
     }
 
-    public void setIdSession(Integer idSession) {
-        this.idSession = idSession;
+    @Override
+    public boolean equals(Object o) {
+        if(this ==o) return true;
+        if(o==null || getClass() != o.getClass()) return false;
+        SessionUser session =(SessionUser)o;
+
+        return true;
     }
+    //endregion
 }
