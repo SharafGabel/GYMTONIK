@@ -60,6 +60,8 @@ public abstract class AUser {
         this.username=username;
         this.email=email;
         this.password=password;
+        setEmail_canonical();
+        setUsername_canonical();
     }
     //endregion
 
@@ -81,8 +83,8 @@ public abstract class AUser {
         return username_canonical;
     }
 
-    public void setUsername_canonical(String username_canonical) {
-        this.username_canonical = username_canonical;
+    public void setUsername_canonical() {
+        username_canonical = username.toLowerCase();
     }
 
     public String getEmail() {
@@ -97,8 +99,8 @@ public abstract class AUser {
         return email_canonical;
     }
 
-    public void setEmail_canonical(String email_canonical) {
-        this.email_canonical = email_canonical;
+    public void setEmail_canonical() {
+        email_canonical = email.toLowerCase();
     }
 
     public String getPassword() {
