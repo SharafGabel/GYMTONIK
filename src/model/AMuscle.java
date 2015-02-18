@@ -1,10 +1,20 @@
 package model;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.List;
 
-public abstract class AMuscle implements IBodyPart{
-    //region Property
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class AMuscle{
+    //region Property    
+    @Id
+    @GeneratedValue(generator="idGen")
+    @GenericGenerator(name="idGen",strategy="org.hibernate.id.IncrementGenerator")
+    @Column(name = "id", unique = true, nullable = false)
+    protected int id;
+    
     @Column(name="name",nullable = false)
     protected String name;
 
@@ -13,7 +23,7 @@ public abstract class AMuscle implements IBodyPart{
 
     @ManyToOne
     @JoinColumn(name="idTraining",insertable=false, updatable=false,nullable=false)
-    protected ITraining training;
+    protected ATraining training;
     //endregion
 
     //region Constructor
@@ -24,11 +34,15 @@ public abstract class AMuscle implements IBodyPart{
     //endregion
 
     //region Getter/Setter
-    public ITraining getTraining() {
+    public int getId() {
+        return id;
+    }
+    
+    public ATraining getTraining() {
         return training;
     }
 
-    public void setTraining(ITraining training) {
+    public void setTraining(ATraining training) {
         this.training = training;
     }
 

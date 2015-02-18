@@ -31,7 +31,7 @@ public class SessionUser implements Serializable {
     private User user;
 
     @OneToMany(cascade={CascadeType.ALL}, mappedBy = "id")
-    private List<Exercise> trainings;
+    private List<ATraining> trainings;
 
     @OneToMany(cascade={CascadeType.ALL}, mappedBy = "id")
     private List<Performance> performances;
@@ -39,7 +39,7 @@ public class SessionUser implements Serializable {
 
     //region Constructor
     public SessionUser(int timeSleep){
-        trainings = new ArrayList<Exercise>();
+        trainings = new ArrayList<ATraining>();
         performances = new ArrayList<Performance>();
         this.timeSleep = timeSleep;
         user = new User();
@@ -70,11 +70,11 @@ public class SessionUser implements Serializable {
         this.performances = performances;
     }
 
-    public void addTraining(ITraining training) {
+    public void addTraining(ATraining training) {
 
     }
 
-    public void deleteTraining(ITraining training) {
+    public void deleteTraining(ATraining training) {
 
     }
 
@@ -82,7 +82,7 @@ public class SessionUser implements Serializable {
 
     }
 
-    public void updateTraining(ITraining training) {
+    public void updateTraining(ATraining training) {
 
     }
 
@@ -102,11 +102,11 @@ public class SessionUser implements Serializable {
         this.perform = perform;
     }
 
-    public List<Exercise> getTrainings() {
+    public List<ATraining> getTrainings() {
         return trainings;
     }
 
-    public void setTrainings(List<Exercise> trainings) {
+    public void setTrainings(List<ATraining> trainings) {
         this.trainings = trainings;
     }
 
@@ -121,7 +121,7 @@ public class SessionUser implements Serializable {
 
     //region Method
 
-    public int calculatePerformance(IUser user) {
+    public int calculatePerformance(AUser user) {
         return -1;
     }
 

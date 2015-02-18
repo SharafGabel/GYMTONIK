@@ -1,5 +1,6 @@
 package model;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.IndexColumn;
 
 import javax.persistence.GeneratedValue;
@@ -9,9 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
-@MappedSuperclass
-public abstract class AUser implements IUser{
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class AUser {
     //region Parameter
+    @Id
+    @GeneratedValue(generator="idGen")
+    @GenericGenerator(name="idGen",strategy="org.hibernate.id.IncrementGenerator")
+    @Column(name = "id", unique = true, nullable = false)
+    protected Integer id;
+    
     @Column(name="username",nullable = false)
     protected String username;
 
@@ -56,6 +64,11 @@ public abstract class AUser implements IUser{
     //endregion
 
     //region Getter/Setter
+
+    public Integer getId() {
+        return id;
+    }
+    
     public String getUsername() {
         return username;
     }
@@ -72,7 +85,6 @@ public abstract class AUser implements IUser{
         this.username_canonical = username_canonical;
     }
 
-    @Override
     public String getEmail() {
         return email;
     }
@@ -89,7 +101,6 @@ public abstract class AUser implements IUser{
         this.email_canonical = email_canonical;
     }
 
-    @Override
     public String getPassword() {
         return password;
     }
@@ -106,22 +117,18 @@ public abstract class AUser implements IUser{
         this.salt = salt;
     }
 
-    @Override
     public int getHeight() {
         return height;
     }
 
-    @Override
     public void setHeight(int height) {
         this.height = height;
     }
 
-    @Override
     public int getWeight() {
         return weight;
     }
 
-    @Override
     public void setWeight(int weight) {
         this.weight = weight;
     }

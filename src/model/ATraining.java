@@ -1,5 +1,6 @@
 package model;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.IndexColumn;
 
 import java.util.ArrayList;
@@ -9,8 +10,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.*;
 
-public abstract class ATraining implements  ITraining{
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class ATraining {
     //region Property
+    @Id
+    @GeneratedValue(generator="idGen")
+    @GenericGenerator(name="idGen",strategy="org.hibernate.id.IncrementGenerator")
+    @Column(name = "id", unique = true, nullable = false)
+    private int id;
+    
     @Column(name="length",nullable = false)
     public int length;
 
@@ -25,60 +34,63 @@ public abstract class ATraining implements  ITraining{
     public SessionUser sessionUser;
 
     @OneToMany(cascade={CascadeType.ALL})
-    @JoinColumn(name="idTraining")
-    @IndexColumn(name="idx")
-    public List<IBodyPart> bodyParts;
+    @JoinColumn(name="id")
+    @IndexColumn(name="bodyparts")
+    public List<AMuscle> bodyParts;
     //endregion
 
     //region Constructor
     public ATraining()
     {
-        this.bodyParts = new ArrayList<IBodyPart>();
+        this.bodyParts = new ArrayList<AMuscle>();
     }
 
     public ATraining(int length, String name, String explanation) {
         this.length = length;
         this.explanation = explanation;
         this.name = name;
-        this.bodyParts = new ArrayList<IBodyPart>();
+        this.bodyParts = new ArrayList<AMuscle>();
     }
     //endregion
 
     //region Getter/Setter
-    @Override
+    public int getId() {
+        return id;
+    }
+    
     public int getLength() {
         return this.length;
     }
-    @Override
+    
     public void setLength(int length) {
         this.length = length;
     }
-    @Override
+
     public String getName() {
         return this.name;
     }
-    @Override
+
     public void setName(String name) {
         this.name = name;
     }
-    @Override
+
     public String getExplanation() {
         return this.explanation;
     }
-    @Override
+
     public void setExplanation(String explanation) {
         this.explanation = explanation;
     }
-    @Override
-    public List<IBodyPart> getBodyPart() {
+
+    public List<AMuscle> getBodyPart() {
         return this.bodyParts;
     }
-    @Override
-    public void setBodyPart(List<IBodyPart> bodyParts) {
+
+    public void setBodyPart(List<AMuscle> bodyParts) {
         this.bodyParts = bodyParts;
     }
-    @Override
-    public void addBodyPart(IBodyPart bodyPart) {
+
+    public void addBodyPart(AMuscle bodyPart) {
         this.bodyParts.add(bodyPart);
     }
 

@@ -39,7 +39,7 @@ public class Main {
         int userId;
         int seanceId;
         int muscleId;
-        int weight = 120, height = 150;
+        int weight = 200, height = 9000;
         Transaction tx = session.beginTransaction();
         User user = new User();
         user.setUsername("Jean Baptiste Tartaupion");
@@ -75,7 +75,7 @@ public class Main {
         exerciseId = (Integer)session.save(exercise);/**idExercise doesn't have a default value**/
         /*muscleId = (Integer)session.save(muscle);*//**idSession doesn't have a default value**/
         tx.commit();
-        user =  (User) session.get(User.class, 12);
+        user =  (User) session.get(User.class, 1);
         System.out.println(user.getUsername());
 
         /**Création d'une séance d'entrainement**/
