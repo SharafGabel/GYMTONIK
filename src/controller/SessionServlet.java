@@ -14,7 +14,7 @@ import java.io.IOException;
  * Created by kukugath on 18/02/2015.
  */
 public class SessionServlet extends HttpServlet {
-    SessionService sessionService = new SessionService();
+//    SessionService sessionService = new SessionService();
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -29,7 +29,7 @@ public class SessionServlet extends HttpServlet {
         if(user == null){
             return false;
         }
-        sessionService.addSession(user);
+//        sessionService.addSession(user);
         return true;
     }
 
@@ -38,7 +38,7 @@ public class SessionServlet extends HttpServlet {
         if(sessionUser == null){
             return false;
         }
-        sessionService.deleteSession(sessionUser);
+//        sessionService.deleteSession(sessionUser);
         return true;
     }
 
@@ -46,7 +46,7 @@ public class SessionServlet extends HttpServlet {
         if(sessionUser == null){
             return false;
         }
-        sessionService.updateSession(sessionUser);
+//        sessionService.updateSession(sessionUser);
         return true;
     }
     

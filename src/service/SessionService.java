@@ -11,8 +11,13 @@ import util.HibernateUtil;
  */
 public class SessionService {
 
+    Session session;
+
+    public SessionService(Session session) {
+        this.session = session;
+    }
+
     public boolean addSession(User user) {
-        Session session = HibernateUtil.openSession();
         int id;
         try {
             Transaction tx = session.getTransaction();
@@ -36,7 +41,6 @@ public class SessionService {
         if(sessionUser == null){
             return false;
         }
-        Session session = HibernateUtil.openSession();
         try{
             Transaction tx = session.getTransaction();
             tx.begin();
@@ -48,7 +52,6 @@ public class SessionService {
             return false;
         }finally {
             session.close();
-            HibernateUtil.closeSessionFactory();
         }
     }
     
@@ -56,7 +59,6 @@ public class SessionService {
         if(sessionUser == null){
             return false;
         }
-        Session session = HibernateUtil.openSession();
         try{
             Transaction tx = session.getTransaction();
             tx.begin();
@@ -68,14 +70,7 @@ public class SessionService {
             return false;
         }finally {
             session.close();
-            HibernateUtil.closeSessionFactory();
         }
         
     }
-    
-    
-    
-    
-    
-    
 }

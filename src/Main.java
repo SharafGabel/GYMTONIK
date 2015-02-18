@@ -45,14 +45,13 @@ public class Main {
         int muscleId;
         int weight = 200, height = 9000;
 
-        User didier = new User("Didier", "didier@gmail.com", "didier!");
+        /*User didier = new User("Didier", "didier@gmail.com", "didier!");
         RegisterService rs = new RegisterService(getSession());
         System.out.println("Utilisateur créé : " + rs.register(didier));
-        System.out.println(didier.getPassword());
+        System.out.println(didier.getPassword());*/
 
         LoginService ls = new LoginService(getSession());
-        User didier1 = ls.getUserByUsername("Didier");
-        System.out.println(didier1.getPassword());
+        System.out.println(ls.authenticate("Didier", "didier!"));
 
     }
 }

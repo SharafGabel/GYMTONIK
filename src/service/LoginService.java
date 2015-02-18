@@ -18,13 +18,14 @@ public class LoginService {
 
     public LoginService(Session session) {
         this.session = session;
-        sessionService = new SessionService();
+        sessionService = new SessionService(session);
     }
 
     public boolean authenticate(String username, String password) {
         User user = getUserByUsername(username);
         if (user != null && user.validatePassword(password)) {
-            sessionService.addSession(user);
+// TODO : corriger ce "truc"
+//            sessionService.addSession(user);
             return true;
         } else return false;
     }
