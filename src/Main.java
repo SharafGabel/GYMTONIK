@@ -35,17 +35,17 @@ public class Main {
         System.out.println("Hibernate component mapping");
 
         final Session session = getSession();
-        Integer exerciseId = null;
-        Integer userId = null;
-        Integer seanceId = null;
-        Integer muscleId = null;
-
+        int exerciseId;
+        int userId;
+        int seanceId;
+        int muscleId;
+        int weight = 120, height = 150;
         Transaction tx = session.beginTransaction();
         User user = new User();
         user.setUsername("Jean Baptiste Tartaupion");
         user.setUsername_canonical("Jean Baptiste Tartaupion");
-        user.setHeight(173);
-        user.setWeight(120);
+        user.setHeight(height);
+        user.setWeight(weight);
         user.setEmail("jbtartaupion@gmail.com");
         user.setEmail_canonical("jbtartaupion@gmail.com");
         user.setPassword("jbtartaupion");
@@ -75,7 +75,7 @@ public class Main {
         exerciseId = (Integer)session.save(exercise);/**idExercise doesn't have a default value**/
         /*muscleId = (Integer)session.save(muscle);*//**idSession doesn't have a default value**/
         tx.commit();
-        user =  (User) session.get(User.class, 1);
+        user =  (User) session.get(User.class, 12);
         System.out.println(user.getUsername());
 
         /**Création d'une séance d'entrainement**/
@@ -89,10 +89,5 @@ public class Main {
         /**Fin création de la séance d'entrainement**/
 
 
-    }
-    
-    public void frontPage(){
-        System.out.print("Enter something:");
-        String input = System.console().readLine();
     }
 }

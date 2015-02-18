@@ -39,36 +39,6 @@ public class User extends AUser implements Serializable {
     public boolean deleteSession(SessionUser session) {
         return false;
     }
-
-    @Override
-    public void setWeight(int weight) {
-
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
-    }
-
-    @Override
-    public String getEmail() {
-        return email;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public int getWeight() {
-        return weight;
-    }
-
-    @Override
-    public int getHeight() {
-        return height;
-    }
     //endregion
 
     //region Method
