@@ -8,9 +8,7 @@ import java.util.List;
 @Table(name="Exercise")
 public class Exercise extends ATraining implements Serializable {
     //region Property
-    @Id @GeneratedValue
-    @Column(name="id")
-    private int id;
+
     //endregion
 
     //region Constructor
@@ -21,8 +19,5 @@ public class Exercise extends ATraining implements Serializable {
     //endregion
 
     //region Getter/Setter
-    public int getId() {
-        return id;
-    }
     //endregion
 }

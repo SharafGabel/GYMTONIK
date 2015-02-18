@@ -1,6 +1,5 @@
 package controller;
 
-import model.IUser;
 import model.SessionUser;
 import model.User;
 import service.SessionService;

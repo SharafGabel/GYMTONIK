@@ -6,9 +6,6 @@ import java.io.Serializable;
 @Table(name="User")
 public class User extends AUser implements Serializable {
     //region Property
-    @Id @GeneratedValue
-    @Column(name="id")
-    protected Integer id;
     //endregion
 
     //region Constructor
@@ -21,53 +18,17 @@ public class User extends AUser implements Serializable {
     //endregion
 
     //region Getter/Setter
-    public Integer getId() {
-        return id;
-    }
 
-    @Override
     public void createSession() {
 
     }
 
-    @Override
     public void setSession(SessionUser session) {
 
     }
 
-    @Override
     public boolean deleteSession(SessionUser session) {
         return false;
-    }
-
-    @Override
-    public void setWeight(int weight) {
-
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
-    }
-
-    @Override
-    public String getEmail() {
-        return email;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public int getWeight() {
-        return weight;
-    }
-
-    @Override
-    public int getHeight() {
-        return height;
     }
     //endregion
 
