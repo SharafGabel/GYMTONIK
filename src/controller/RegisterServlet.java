@@ -1,6 +1,7 @@
 package controller;
 
 import model.User;
+import service.LoginService;
 import service.RegisterService;
 
 import java.io.IOException;
@@ -54,6 +55,18 @@ public class RegisterServlet extends javax.servlet.http.HttpServlet {
             RegisterService registerService = new RegisterService();
             return registerService.register(user);
         }
+    }
+    
+    public boolean login(String username,String password){
+        if( username == null || username.trim().isEmpty() ||  password == null || password.trim().isEmpty()  )
+        {
+            return false;
+        }else {
+            LoginService loginService = new LoginService();
+            
+            return loginService.authendificate(username,password);
+        }
+        
     }
 
     @Override
