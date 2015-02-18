@@ -1,6 +1,7 @@
 package controller;
 
 import model.IUser;
+import model.SessionUser;
 import model.User;
 import service.SessionService;
 
@@ -14,6 +15,8 @@ import java.io.IOException;
  * Created by kukugath on 18/02/2015.
  */
 public class SessionServlet extends HttpServlet {
+    SessionService sessionService = new SessionService();
+    
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
@@ -27,11 +30,27 @@ public class SessionServlet extends HttpServlet {
         if(user == null){
             return false;
         }
-        SessionService sessionService = new SessionService();
         sessionService.addSession(user);
         return true;
-        
-       
     }
+
+
+    public boolean deleteSession(SessionUser sessionUser){
+        if(sessionUser == null){
+            return false;
+        }
+        sessionService.deleteSession(sessionUser);
+        return true;
+    }
+
+    public boolean updateSession(SessionUser sessionUser){
+        if(sessionUser == null){
+            return false;
+        }
+        sessionService.updateSession(sessionUser);
+        return true;
+    }
+    
+    
     
 }
