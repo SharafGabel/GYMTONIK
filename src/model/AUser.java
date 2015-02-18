@@ -69,6 +69,7 @@ public abstract class AUser implements IUser{
 
     public void setUsername(String username) {
         this.username = username;
+        setUsername_canonical();
     }
 
     public String getUsername_canonical() {
@@ -86,6 +87,7 @@ public abstract class AUser implements IUser{
 
     public void setEmail(String email) {
         this.email = email;
+        setEmail_canonical();
     }
 
     public String getEmail_canonical() {
