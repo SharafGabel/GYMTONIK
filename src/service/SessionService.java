@@ -27,4 +27,20 @@ public class SessionService {
             return false;
         }
     }
+    
+    public boolean deleteSession(SessionUser sessionUser){
+        if(sessionUser == null){
+            return false;
+        }
+        Session session = HibernateUtil.openSession();
+        try{
+            Transaction tx = session.getTransaction();
+            session.delete(sessionUser);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        
+    }
 }
