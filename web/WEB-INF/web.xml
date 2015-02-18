@@ -12,6 +12,10 @@
         <servlet-name>SessionServlet</servlet-name>
         <servlet-class>controller.SessionServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ExerciseServlet</servlet-name>
+        <servlet-class>controller.ExerciseServlet</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
