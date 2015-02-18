@@ -33,7 +33,7 @@ public class SessionUser implements Serializable {
     @OneToMany(cascade={CascadeType.ALL}, mappedBy = "id")
     private List<ATraining> trainings;
 
-    @OneToOne(cascade={CascadeType.ALL}, mappedBy = "id")
+    @OneToOne(cascade={CascadeType.ALL})
     private Performance performance;
     //endregion
 
