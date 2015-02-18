@@ -16,7 +16,6 @@ import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@EntityListeners(UserDebugListener.class)
 public abstract class AUser {
     //region Parameter
     @Id
@@ -158,7 +157,10 @@ public abstract class AUser {
         return sessions;
     }
 
-    public void addSession(SessionUser session) { this.sessions.add(session);}
+    public void addSession(SessionUser session) {
+        this.sessions.add(session);
+        session.setUser(this);
+    }
 
     public void setSessionUsers(List<SessionUser> sessionUsers) {
         this.sessions = sessionUsers;

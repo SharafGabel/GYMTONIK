@@ -27,13 +27,13 @@ public class SessionUser implements Serializable {
     private int timeSleep;
 
     @ManyToOne
-    @JoinColumn(name="userId",insertable=false, updatable=false,nullable=false)
-    private User user;
+    @JoinColumn(name="userId",nullable=false)
+    private AUser user;
 
     @OneToMany(cascade={CascadeType.ALL}, mappedBy = "id")
     private List<ATraining> trainings;
 
-    @OneToOne(cascade={CascadeType.ALL})
+    @OneToOne(cascade={CascadeType.ALL},mappedBy = "session")
     private Performance performance;
     //endregion
 
@@ -60,7 +60,7 @@ public class SessionUser implements Serializable {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(AUser user) {
         this.user = user;
     }
 

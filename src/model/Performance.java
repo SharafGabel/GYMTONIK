@@ -15,6 +15,9 @@ public class Performance implements Serializable {
     @Column(name="name",nullable = false)
     private String name;
 
+    @OneToOne
+    @JoinColumn(name="session",nullable = false)
+    private SessionUser session;
     //endregion
 
     //region Constructor
