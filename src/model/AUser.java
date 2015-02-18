@@ -60,8 +60,6 @@ public abstract class AUser {
         this.username=username;
         this.email=email;
         this.password=password;
-        setEmail_canonical();
-        setUsername_canonical();
     }
     //endregion
 
@@ -143,6 +141,16 @@ public abstract class AUser {
 
     public void setSessionUsers(List<SessionUser> sessionUsers) {
         this.sessions = sessionUsers;
+    }
+    //endregion
+
+    //region listeners
+
+    @PreUpdate
+    @PrePersist
+    public void prePersist(){
+        setEmail_canonical();
+        setUsername_canonical();
     }
     //endregion
 }

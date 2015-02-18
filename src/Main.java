@@ -42,13 +42,11 @@ public class Main {
         int weight = 200, height = 9000;
         Transaction tx = session.beginTransaction();
         User user = new User();
-        user.setUsername("Jean Baptiste Tartaupion");
-        user.setUsername_canonical("Jean Baptiste Tartaupion");
+        user.setUsername("JB TTP");
         user.setHeight(height);
         user.setWeight(weight);
-        user.setEmail("jbtartaupion@gmail.com");
-        user.setEmail_canonical("jbtartaupion@gmail.com");
-        user.setPassword("jbtartaupion");
+        user.setEmail("TarteAuPion@gmail.com");
+        user.setPassword("TarteAuPion");
         userId=(Integer)session.save(user);
         /**FIN création user**/
         tx.commit();

@@ -33,14 +33,14 @@ public class SessionUser implements Serializable {
     @OneToMany(cascade={CascadeType.ALL}, mappedBy = "id")
     private List<ATraining> trainings;
 
-    @OneToMany(cascade={CascadeType.ALL}, mappedBy = "id")
-    private List<Performance> performances;
+    @OneToOne(cascade={CascadeType.ALL}, mappedBy = "id")
+    private Performance performance;
     //endregion
 
     //region Constructor
     public SessionUser(int timeSleep){
         trainings = new ArrayList<ATraining>();
-        performances = new ArrayList<Performance>();
+        performance = new Performance();
         this.timeSleep = timeSleep;
         user = new User();
     }
@@ -62,12 +62,12 @@ public class SessionUser implements Serializable {
         this.user = user;
     }
 
-    public List<Performance> getPerformances() {
-        return performances;
+    public Performance getPerformance() {
+        return performance;
     }
 
-    public void setPerformances(List<Performance> performances) {
-        this.performances = performances;
+    public void setPerformance(Performance performance) {
+        this.performance = performance;
     }
 
     public void addTraining(ATraining training) {
