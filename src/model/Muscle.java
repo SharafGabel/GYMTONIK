@@ -7,9 +7,7 @@ import java.io.Serializable;
 @Table(name="Muscle")
 public class Muscle extends AMuscle implements Serializable {
     //region Property
-    @Id @GeneratedValue
-    @Column(name="id")
-    protected int id;
+
     //endregion
 
     //region Constructor
@@ -20,8 +18,5 @@ public class Muscle extends AMuscle implements Serializable {
     //endregion
 
     //region Getter/Setter
-    public int getId() {
-        return id;
-    }
     //endregion
 }

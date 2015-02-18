@@ -39,7 +39,7 @@ public class Main {
         int userId;
         int seanceId;
         int muscleId;
-        int weight = 120, height = 150;
+        int weight = 200, height = 9000;
         Transaction tx = session.beginTransaction();
         User user = new User();
         user.setUsername("Jean Baptiste Tartaupion");
@@ -52,7 +52,7 @@ public class Main {
         userId=(Integer)session.save(user);
         /**FIN création user**/
         tx.commit();
-        user =  (User) session.get(User.class, 12);
+        user =  (User) session.get(User.class, 1);
         System.out.println(user.getUsername());
 
     }
