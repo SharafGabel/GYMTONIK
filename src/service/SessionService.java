@@ -20,6 +20,7 @@ public class SessionService {
             sessionUser.setUser(user);
             id = (Integer) session.save(sessionUser);
             tx.commit();
+            session.close();
             return true;
 
         } catch (Exception e) {
@@ -36,6 +37,7 @@ public class SessionService {
         try{
             Transaction tx = session.getTransaction();
             session.delete(sessionUser);
+            session.close();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
