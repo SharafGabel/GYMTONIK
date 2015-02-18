@@ -1,24 +1,24 @@
 package controller;
 
-import model.User;
 import service.LoginService;
-import service.RegisterService;
+import service.SessionService;
 
 import javax.servlet.http.HttpServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * Created by kuga  on 15/02/2015.
+ * Created by axel on 18/02/15.
  */
-public class RegisterServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet{
+
+    LoginService loginService = new LoginService();
 
     @Override
     protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
 
         PrintWriter out = response.getWriter();
         String username= request.getParameter("username");
-        String email = request.getParameter("email");
         String password = request.getParameter("password");
 
         try {
@@ -29,12 +29,12 @@ public class RegisterServlet extends HttpServlet {
             out.println("<body>");
             out.println("<center>");
 
-            if (register(username, email, password)) {
-                out.println("<h1>Registration Successful</h1>");
-                out.println("To login with your username and Password<a href=\"login.jsp\">Click here</a>");
+            if (login(username, password)) {
+                out.println("<h1>Login Successful</h1>");
+                getServletContext().getRequestDispatcher("/index.jsp").forward(request,response);
             } else {
                 out.println("<h1>Registration Unsuccessful</h1>");
-                out.println("To try again <a href=\"register.jsp\">Click here</a>");
+                out.println("To try again <a href=\"index.jsp\">Click here</a>");
             }
 
             out.println("</center>");
@@ -45,23 +45,20 @@ public class RegisterServlet extends HttpServlet {
         }
     }
 
-    public boolean register(String username, String email, String password) {
-        if ( username == null || username.trim().isEmpty() ||
-                email == null || email.trim().isEmpty() ||
-                password == null || password.trim().isEmpty())
+    public boolean login(String username,String password){
+        if( username == null || username.trim().isEmpty() ||  password == null || password.trim().isEmpty())
         {
             return false;
-        } else {
-            User user = new User(username, email, password);
-            RegisterService registerService = new RegisterService();
-            return registerService.register(user);
+        }else {
+            return loginService.authenticate(username, password);
         }
+
     }
 
     @Override
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
         /*L'utilisateur n'est pas censé atteindre cette page via une requête GET,
         on le redirige vers vers register.jsp*/
-        getServletContext().getRequestDispatcher("/register.jsp").forward(request,response);
+        getServletContext().getRequestDispatcher("/index.jsp").forward(request,response);
     }
 }
