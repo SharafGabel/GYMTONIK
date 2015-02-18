@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
+@MappedSuperclass
 public abstract class AUser implements IUser{
     //region Parameter
     @Column(name="username",nullable = false)
@@ -30,10 +31,10 @@ public abstract class AUser implements IUser{
     protected String salt;
 
     @Column(name="height")
-    protected int height;
+    protected int height = 0;
 
     @Column(name="weight")
-    protected int weight;
+    protected int weight = 0;
 
     @OneToMany(cascade={CascadeType.ALL})
     @JoinColumn(name="id")
@@ -112,6 +113,7 @@ public abstract class AUser implements IUser{
         return height;
     }
 
+    @Override
     public void setHeight(int height) {
         this.height = height;
     }

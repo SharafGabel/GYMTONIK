@@ -7,11 +7,12 @@ public interface IUser {
     public void createSession();
     public void setSession(SessionUser session);
     public boolean deleteSession(SessionUser session);
-    public void setWeight(int weight);
     public String getUsername();
     public String getEmail();
     public String getPassword();
     public int getWeight();
     public int getHeight();
+    public void setWeight(int weight); 
+    public void setHeight(int height);
     //endregion
 }
