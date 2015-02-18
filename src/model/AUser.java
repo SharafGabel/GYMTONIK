@@ -5,6 +5,10 @@ import org.hibernate.annotations.IndexColumn;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
@@ -50,8 +54,9 @@ public abstract class AUser implements IUser{
     public AUser(String username, String email, String password) {
         this.username=username;
         this.email=email;
-        this.password=password;
 
+        setSalt();
+        setPassword(password);
         setUsername_canonical();
         setEmail_canonical();
     }
@@ -97,15 +102,31 @@ public abstract class AUser implements IUser{
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            String text = password + salt;
+            md.update(text.getBytes("UTF-8"));
+
+            byte[] hashedPassword = md.digest();
+
+            this.password = new String(hashedPassword, "UTF-8");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException ee) {
+            ee.printStackTrace();
+        }
     }
 
     public String getSalt() {
         return salt;
     }
 
-    public void setSalt(String salt) {
-        this.salt = salt;
+    public void setSalt() {
+        try {
+            salt = Integer.toString(SecureRandom.getInstance("SHA1PRNG").nextInt());
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -137,4 +158,24 @@ public abstract class AUser implements IUser{
         this.sessions = sessionUsers;
     }
     //endregion
+
+    public boolean validatePassword(String password) {
+        boolean valid = false;
+
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            String text = password + salt;
+            md.update(text.getBytes("UTF-8"));
+
+            byte[] hashedPassword = md.digest();
+
+            valid = this.password.equals(new String(hashedPassword, "UTF-8"));
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException ee) {
+            ee.printStackTrace();
+        }
+
+        return valid;
+    }
 }
