@@ -12,7 +12,6 @@ import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@EntityListeners(UserDebugListener.class)
 public abstract class AUser {
     //region Parameter
     @Id
@@ -76,6 +75,7 @@ public abstract class AUser {
 
     public void setUsername(String username) {
         this.username = username;
+        setUsername_canonical();
     }
 
     public String getUsername_canonical() {
@@ -92,6 +92,7 @@ public abstract class AUser {
 
     public void setEmail(String email) {
         this.email = email;
+        setEmail_canonical();
     }
 
     public String getEmail_canonical() {
