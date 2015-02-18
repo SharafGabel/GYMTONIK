@@ -27,14 +27,10 @@ public class Main {
         }
     }
 
-    public static Session getSession() throws HibernateException {
-        return ourSessionFactory.openSession();
-    }
-
     public static void main(final String[] args) throws Exception {
         System.out.println("Hibernate component mapping");
 
-        final Session session = getSession();
+        final Session session = ourSessionFactory.openSession();
         Integer exerciseId = null;
         Integer userId = null;
         Integer seanceId = null;
@@ -43,11 +39,9 @@ public class Main {
         Transaction tx = session.beginTransaction();
         User user = new User();
         user.setUsername("Jean Baptiste Tartaupion");
-        user.setUsername_canonical();
         user.setHeight(173);
         user.setWeight(120);
         user.setEmail("jbtartaupion@gmail.com");
-        user.setEmail_canonical();
         user.setPassword("jbtartaupion");
         userId=(Integer)session.save(user);
         /**FIN création user**/
