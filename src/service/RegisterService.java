@@ -29,7 +29,7 @@ public class RegisterService {
         }finally {
             session.close();
         }
-        HibernateUtil.closeSession();
+        HibernateUtil.closeSessionFactory();
         return true;
     }
 
@@ -51,7 +51,7 @@ public class RegisterService {
         }finally{
             session.close();
         }
-        HibernateUtil.closeSession();
+        HibernateUtil.closeSessionFactory();
         return result;
     }
 }

@@ -41,10 +41,10 @@ public class LoginService {
                 tx.rollback();
             }
             e.printStackTrace();
-        }finally {
+        } finally {
             session.close();
+            HibernateUtil.closeSessionFactory();
         }
-        HibernateUtil.closeSession();
         return user;
     }
 
@@ -62,10 +62,10 @@ public class LoginService {
                 tx.rollback();
             }
             e.printStackTrace();
-        }finally {
+        } finally {
             session.close();
+            HibernateUtil.closeSessionFactory();
         }
-        HibernateUtil.closeSession();
         return list;
     }
 }
