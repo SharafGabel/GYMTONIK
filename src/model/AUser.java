@@ -51,6 +51,9 @@ public abstract class AUser implements IUser{
         this.username=username;
         this.email=email;
         this.password=password;
+
+        setUsername_canonical();
+        setEmail_canonical();
     }
     //endregion
 
@@ -67,8 +70,8 @@ public abstract class AUser implements IUser{
         return username_canonical;
     }
 
-    public void setUsername_canonical(String username_canonical) {
-        this.username_canonical = username_canonical;
+    public void setUsername_canonical() {
+        username_canonical = username.toLowerCase();
     }
 
     @Override
@@ -84,8 +87,8 @@ public abstract class AUser implements IUser{
         return email_canonical;
     }
 
-    public void setEmail_canonical(String email_canonical) {
-        this.email_canonical = email_canonical;
+    public void setEmail_canonical() {
+        email_canonical = email.toLowerCase();
     }
 
     @Override

@@ -43,11 +43,11 @@ public class Main {
         Transaction tx = session.beginTransaction();
         User user = new User();
         user.setUsername("Jean Baptiste Tartaupion");
-        user.setUsername_canonical("Jean Baptiste Tartaupion");
+        user.setUsername_canonical();
         user.setHeight(173);
         user.setWeight(120);
         user.setEmail("jbtartaupion@gmail.com");
-        user.setEmail_canonical("jbtartaupion@gmail.com");
+        user.setEmail_canonical();
         user.setPassword("jbtartaupion");
         userId=(Integer)session.save(user);
         /**FIN création user**/
