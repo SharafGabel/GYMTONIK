@@ -21,15 +21,13 @@ public class SessionService {
             sessionUser.setUser(user);
             id = (Integer) session.save(sessionUser);
             tx.commit();
-            HibernateUtil.closeSession();
             return true;
-
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }finally {
             session.close();
-            HibernateUtil.closeSession();
+            HibernateUtil.closeSessionFactory();
         }
         
     }
@@ -44,14 +42,13 @@ public class SessionService {
             tx.begin();
             session.delete(sessionUser);
             tx.commit();
-            HibernateUtil.closeSession();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }finally {
             session.close();
-            HibernateUtil.closeSession();
+            HibernateUtil.closeSessionFactory();
         }
     }
     
@@ -65,14 +62,13 @@ public class SessionService {
             tx.begin();
             session.update(sessionUser);
             tx.commit();
-            HibernateUtil.closeSession();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }finally {
             session.close();
-            HibernateUtil.closeSession();
+            HibernateUtil.closeSessionFactory();
         }
         
     }
