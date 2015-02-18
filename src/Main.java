@@ -51,43 +51,9 @@ public class Main {
         user.setPassword("jbtartaupion");
         userId=(Integer)session.save(user);
         /**FIN création user**/
-       /* Exercise exercise = new Exercise();
-        exercise.setName("Abdos");
-        exercise.setIdExercise(1);
-        exercise.setExplanation("travail les abdominaux");
-        exercise.setLength(10);
-        List<IBodyPart> muscleL = new ArrayList<IBodyPart>();
-        AMuscle muscle = new Muscle();
-        muscle.setName("PECTORAUX");
-        muscle.setDescription("PECTORAUX DU BAS");
-        muscle.setIdMuscle(1);
-        muscleL.add(muscle);
-        exercise.setBodyPart(muscleL);
-        SessionUser seance = new SessionUser();
-        seance.setIdSession(1);
-        seance.setPerform(false);
-        seance.setTimeSleep(18);
-        seance.addTraining(exercise);
-        user.setSession(seance);
-
-        userId=(Integer)session.save(user);
-        seanceId=(Integer)session.save(seance);
-        exerciseId = (Integer)session.save(exercise);/**idExercise doesn't have a default value**/
-        /*muscleId = (Integer)session.save(muscle);*//**idSession doesn't have a default value**/
         tx.commit();
         user =  (User) session.get(User.class, 12);
         System.out.println(user.getUsername());
-
-        /**Création d'une séance d'entrainement**/
-        /*
-        SessionUser session1 = new SessionUser(500);
-        session1.setDateProgram(Date.from(Instant.now()));
-        session1.setPerform(true);
-        session1.setTrainings(new ArrayList<ITraining>(500));
-        session.save(session1);
-        */
-        /**Fin création de la séance d'entrainement**/
-
 
     }
 }
