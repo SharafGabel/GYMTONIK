@@ -22,7 +22,7 @@ public abstract class ATraining implements  ITraining{
 
     @ManyToOne
     @JoinColumn(name="idSession",insertable=false, updatable=false,nullable=false)
-    public SessionUser sessionUser=new SessionUser();
+    public SessionUser sessionUser;
 
     @OneToMany(cascade={CascadeType.ALL})
     @JoinColumn(name="idTraining")

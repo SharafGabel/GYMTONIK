@@ -1,10 +1,11 @@
 package model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name="Muscle")
-public class Muscle extends AMuscle{
+public class Muscle extends AMuscle implements Serializable {
     //region Property
     @Id @GeneratedValue
     @Column(name="id")

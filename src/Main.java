@@ -90,4 +90,9 @@ public class Main {
 
 
     }
+    
+    public void frontPage(){
+        System.out.print("Enter something:");
+        String input = System.console().readLine();
+    }
 }

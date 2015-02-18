@@ -1,25 +1,26 @@
 package model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
-public class Performance{
+@Entity
+@Table(name="Performance")
+public class Performance implements Serializable {
     //region Property
     @Id
     @GeneratedValue
     @Column(name="id")
     private Integer id;
 
+    @Column(name="name",nullable = false)
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name="idSession",insertable=false, updatable=false,nullable=false)
-    private SessionUser sessionUser;
     //endregion
 
     //region Constructor
     public Performance()
     {
-        sessionUser = new SessionUser();
+
     }
     //endregion
 

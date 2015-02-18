@@ -4,12 +4,13 @@ import org.hibernate.annotations.IndexColumn;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 @Entity
 @Table(name="SessionUser")
-public class SessionUser{
+public class SessionUser implements Serializable {
     //region Property
     @Id @GeneratedValue
     @Column(name="id",nullable = false)
@@ -27,22 +28,18 @@ public class SessionUser{
 
     @ManyToOne
     @JoinColumn(name="userId",insertable=false, updatable=false,nullable=false)
-    private AUser user;
+    private User user;
 
-    @OneToMany(cascade={CascadeType.ALL})
-    @JoinColumn(name="id")
-    @IndexColumn(name="trainings")
-    private List<ITraining> trainings;
+    @OneToMany(cascade={CascadeType.ALL}, mappedBy = "id")
+    private List<Exercise> trainings;
 
-    @OneToMany(cascade={CascadeType.ALL})
-    @JoinColumn(name="id")
-    @IndexColumn(name="performances")
+    @OneToMany(cascade={CascadeType.ALL}, mappedBy = "id")
     private List<Performance> performances;
     //endregion
 
     //region Constructor
     public SessionUser(int timeSleep){
-        trainings = new ArrayList<ITraining>();
+        trainings = new ArrayList<Exercise>();
         performances = new ArrayList<Performance>();
         this.timeSleep = timeSleep;
         user = new User();
@@ -61,7 +58,7 @@ public class SessionUser{
         return user;
     }
 
-    public void setUser(AUser user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
@@ -105,11 +102,11 @@ public class SessionUser{
         this.perform = perform;
     }
 
-    public List<ITraining> getTrainings() {
+    public List<Exercise> getTrainings() {
         return trainings;
     }
 
-    public void setTrainings(List<ITraining> trainings) {
+    public void setTrainings(List<Exercise> trainings) {
         this.trainings = trainings;
     }
 
