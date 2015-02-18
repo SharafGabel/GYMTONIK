@@ -46,6 +46,8 @@ public class SessionUser implements Serializable {
     }
 
     public SessionUser() {
+        this.timeSleep=8;
+        this.perform = false;
     }
     //endregion
 
@@ -70,11 +72,11 @@ public class SessionUser implements Serializable {
         this.performances = performances;
     }
 
-    public void addTraining(ITraining training) {
+    public void addTraining(ATraining training) {
 
     }
 
-    public void deleteTraining(ITraining training) {
+    public void deleteTraining(ATraining training) {
 
     }
 
