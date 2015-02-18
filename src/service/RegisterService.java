@@ -11,14 +11,18 @@ import util.HibernateUtil;
  */
 public class RegisterService {
 
+    Session session;
+
+    public RegisterService(Session session) {
+        this.session = session;
+    }
+
     public boolean register(User user){
-        Session session = HibernateUtil.openSession();
         if(isExistUser(user)) return false;
 
-        Transaction tx = null;
+        Transaction tx = session.beginTransaction();
+
         try{
-            tx = session.getTransaction();
-            tx.begin();
             session.saveOrUpdate(user);
             tx.commit();
         }catch (Exception e){
@@ -27,19 +31,17 @@ public class RegisterService {
             }
             e.printStackTrace();
         }finally {
-            session.close();
+//            session.close();
+            HibernateUtil.closeSessionFactory();
         }
-        HibernateUtil.closeSessionFactory();
         return true;
     }
 
     private boolean isExistUser(User user) {
-        Session session = HibernateUtil.openSession();
         boolean result = false;
         Transaction tx = null;
         try{
-            tx = session.getTransaction();
-            tx.begin();
+            tx = session.beginTransaction();
             Query query = session.createQuery("from User where id="+user.getId()+"");
             User u = (User)query.uniqueResult();
             tx.commit();
@@ -49,9 +51,9 @@ public class RegisterService {
                 tx.rollback();
             }
         }finally{
-            session.close();
+//            session.close();
+            HibernateUtil.closeSessionFactory();
         }
-        HibernateUtil.closeSessionFactory();
         return result;
     }
 }

@@ -188,4 +188,20 @@ public abstract class AUser {
 
         return valid;
     }
+
+    @Override
+    public String toString() {
+        return "AUser{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", username_canonical='" + username_canonical + '\'' +
+                ", email='" + email + '\'' +
+                ", email_canonical='" + email_canonical + '\'' +
+                ", password='" + password + '\'' +
+                ", salt='" + salt + '\'' +
+                ", height=" + height +
+                ", weight=" + weight +
+                ", sessions=" + sessions +
+                '}';
+    }
 }

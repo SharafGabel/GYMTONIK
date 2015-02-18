@@ -13,7 +13,13 @@ import java.util.List;
  * Created by kuga on 15/02/2015.
  */
 public class LoginService {
-    SessionService sessionService = new SessionService();
+    SessionService sessionService;
+    Session session;
+
+    public LoginService(Session session) {
+        this.session = session;
+        sessionService = new SessionService();
+    }
 
     public boolean authenticate(String username, String password) {
         User user = getUserByUsername(username);
@@ -25,15 +31,13 @@ public class LoginService {
 
 
 
-    private User getUserByUsername(String username) {
-        Session session = HibernateUtil.openSession();
+    public User getUserByUsername(String username) {
         Transaction tx = null;
         User user = null;
 
         try{
-            tx=session.getTransaction();
-            tx.begin();
-            Query query = session.createQuery("from User where username_canonical="+username.toLowerCase()+"");
+            tx=session.beginTransaction();
+            Query query = session.createQuery("from User where username_canonical='"+username.toLowerCase()+"'");
             user = (User)query.uniqueResult();
             tx.commit();
         }catch (Exception e){
@@ -50,11 +54,9 @@ public class LoginService {
 
     public List<User> getUserList(){
         List<User> list = new ArrayList<User>();
-        Session session = HibernateUtil.openSession();
         Transaction tx = null;
         try{
-            tx=session.getTransaction();
-            tx.begin();
+            tx=session.beginTransaction();
             list = session.createQuery("from User ").list();
             tx.commit();
         }catch (Exception e){

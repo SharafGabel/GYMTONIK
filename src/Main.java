@@ -1,8 +1,12 @@
+import controller.LoginServlet;
+import controller.SessionServlet;
 import model.*;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
+import service.LoginService;
+import service.RegisterService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,18 +44,15 @@ public class Main {
         int seanceId;
         int muscleId;
         int weight = 200, height = 9000;
-        Transaction tx = session.beginTransaction();
-        User user = new User();
-        user.setUsername("JB TTP");
-        user.setHeight(height);
-        user.setWeight(weight);
-        user.setEmail("TarteAuPion@gmail.com");
-        user.setPassword("TarteAuPion");
-        userId=(Integer)session.save(user);
-        /**FIN création user**/
-        tx.commit();
-        user =  (User) session.get(User.class, 1);
-        System.out.println(user.getUsername());
+
+        User didier = new User("Didier", "didier@gmail.com", "didier!");
+        RegisterService rs = new RegisterService(getSession());
+        System.out.println("Utilisateur créé : " + rs.register(didier));
+        System.out.println(didier.getPassword());
+
+        LoginService ls = new LoginService(getSession());
+        User didier1 = ls.getUserByUsername("Didier");
+        System.out.println(didier1.getPassword());
 
     }
 }

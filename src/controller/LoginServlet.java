@@ -12,7 +12,7 @@ import java.io.PrintWriter;
  */
 public class LoginServlet extends HttpServlet{
 
-    LoginService loginService = new LoginService();
+    //static LoginService loginService = new LoginService();
 
     @Override
     protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
@@ -29,13 +29,13 @@ public class LoginServlet extends HttpServlet{
             out.println("<body>");
             out.println("<center>");
 
-            if (login(username, password)) {
+            /*if (login(username, password)) {
                 out.println("<h1>Login Successful</h1>");
                 getServletContext().getRequestDispatcher("/index.jsp").forward(request,response);
             } else {
                 out.println("<h1>Registration Unsuccessful</h1>");
                 out.println("To try again <a href=\"index.jsp\">Click here</a>");
-            }
+            }*/
 
             out.println("</center>");
             out.println("</body>");
@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet{
         }
     }
 
-    public boolean login(String username,String password){
+    /*public static boolean login(String username,String password){
         if( username == null || username.trim().isEmpty() ||  password == null || password.trim().isEmpty())
         {
             return false;
@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet{
             return loginService.authenticate(username, password);
         }
 
-    }
+    }*/
 
     @Override
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {

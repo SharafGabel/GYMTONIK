@@ -29,13 +29,13 @@ public class RegisterServlet extends HttpServlet {
             out.println("<body>");
             out.println("<center>");
 
-            if (register(username, email, password)) {
+            /*if (register(username, email, password)) {
                 out.println("<h1>Registration Successful</h1>");
                 out.println("To login with your username and Password<a href=\"login.jsp\">Click here</a>");
             } else {
                 out.println("<h1>Registration Unsuccessful</h1>");
                 out.println("To try again <a href=\"register.jsp\">Click here</a>");
-            }
+            }*/
 
             out.println("</center>");
             out.println("</body>");
@@ -45,7 +45,7 @@ public class RegisterServlet extends HttpServlet {
         }
     }
 
-    public boolean register(String username, String email, String password) {
+    /*public boolean register(String username, String email, String password) {
         if ( username == null || username.trim().isEmpty() ||
                 email == null || email.trim().isEmpty() ||
                 password == null || password.trim().isEmpty())
@@ -56,7 +56,7 @@ public class RegisterServlet extends HttpServlet {
             RegisterService registerService = new RegisterService();
             return registerService.register(user);
         }
-    }
+    }*/
 
     @Override
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {

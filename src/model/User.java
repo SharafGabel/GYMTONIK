@@ -10,6 +10,7 @@ public class User extends AUser implements Serializable {
 
     //region Constructor
     public User() {
+        super();
     }
 
     public User(String username, String email, String password) {
