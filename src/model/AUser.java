@@ -103,17 +103,11 @@ public abstract class AUser implements IUser{
 
     public void setPassword(String password) {
         try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            String text = password + salt;
-            md.update(text.getBytes("UTF-8"));
-
-            byte[] hashedPassword = md.digest();
-
-            this.password = new String(hashedPassword, "UTF-8");
+            this.password = hashPassword(password);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-        } catch (UnsupportedEncodingException ee) {
-            ee.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
     }
 
@@ -159,21 +153,25 @@ public abstract class AUser implements IUser{
     }
     //endregion
 
+    public String hashPassword(String password) throws NoSuchAlgorithmException, UnsupportedEncodingException{
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        String text = password + salt;
+        md.update(text.getBytes("UTF-8"));
+
+        byte[] hashedPassword = md.digest();
+
+        return new String(hashedPassword, "UTF-8");
+    }
+
     public boolean validatePassword(String password) {
         boolean valid = false;
 
         try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            String text = password + salt;
-            md.update(text.getBytes("UTF-8"));
-
-            byte[] hashedPassword = md.digest();
-
-            valid = this.password.equals(new String(hashedPassword, "UTF-8"));
+            valid = this.password.equals(hashPassword(password));
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-        } catch (UnsupportedEncodingException ee) {
-            ee.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
 
         return valid;
