@@ -16,17 +16,22 @@ public class SessionService {
         int id;
         try {
             Transaction tx = session.getTransaction();
+            tx.begin();
             SessionUser sessionUser = new SessionUser();
             sessionUser.setUser(user);
             id = (Integer) session.save(sessionUser);
             tx.commit();
-            session.close();
+            HibernateUtil.closeSession();
             return true;
 
         } catch (Exception e) {
             e.printStackTrace();
             return false;
+        }finally {
+            session.close();
+            HibernateUtil.closeSession();
         }
+        
     }
     
     public boolean deleteSession(SessionUser sessionUser){
@@ -36,13 +41,45 @@ public class SessionService {
         Session session = HibernateUtil.openSession();
         try{
             Transaction tx = session.getTransaction();
+            tx.begin();
             session.delete(sessionUser);
-            session.close();
+            tx.commit();
+            HibernateUtil.closeSession();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
+        }finally {
+            session.close();
+            HibernateUtil.closeSession();
+        }
+    }
+    
+    public boolean updateSession(SessionUser sessionUser){
+        if(sessionUser == null){
+            return false;
+        }
+        Session session = HibernateUtil.openSession();
+        try{
+            Transaction tx = session.getTransaction();
+            tx.begin();
+            session.update(sessionUser);
+            tx.commit();
+            HibernateUtil.closeSession();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }finally {
+            session.close();
+            HibernateUtil.closeSession();
         }
         
     }
+    
+    
+    
+    
+    
+    
 }
