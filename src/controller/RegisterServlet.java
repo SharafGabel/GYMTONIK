@@ -10,6 +10,8 @@ import java.io.PrintWriter;
  * Created by kuga  on 15/02/2015.
  */
 public class RegisterServlet extends javax.servlet.http.HttpServlet {
+
+    @Override
     protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
 
         PrintWriter out = response.getWriter();
@@ -25,26 +27,14 @@ public class RegisterServlet extends javax.servlet.http.HttpServlet {
             out.println("<body>");
             out.println("<center>");
 
-            if ( username == null || username.trim().isEmpty() ||
-                    email == null || email.trim().isEmpty() ||
-                    password == null || password.trim().isEmpty())
-            {
-                out.println("<h1>Registration Unsuccessful</h1>");
-                out.println("<h2>One or more fields are empty</h2>");
-                out.println("To try again <a href=\"register.jsp\">Click here</a>");
+            if (register(username, email, password)) {
+                out.println("<h1>Registration Successful</h1>");
+                out.println("To login with your username and Password<a href=\"login.jsp\">Click here</a>");
             } else {
-                User user = new User(username, email, password);
-
-                RegisterService registerService = new RegisterService();
-                boolean result = registerService.register(user);
-                if (result) {
-                    out.println("<h1>Registration Successful</h1>");
-                    out.println("To login with your username and Password<a href=\"login.jsp\">Click here</a>");
-                } else {
-                    out.println("<h1>Registration Unsuccessful</h1>");
-                    out.println("To try again <a href=\"register.jsp\">Click here</a>");
-                }
+                out.println("<h1>Registration Unsuccessful</h1>");
+                out.println("To try again <a href=\"register.jsp\">Click here</a>");
             }
+
             out.println("</center>");
             out.println("</body>");
             out.println("</html>");
@@ -53,6 +43,20 @@ public class RegisterServlet extends javax.servlet.http.HttpServlet {
         }
     }
 
+    public boolean register(String username, String email, String password) {
+        if ( username == null || username.trim().isEmpty() ||
+                email == null || email.trim().isEmpty() ||
+                password == null || password.trim().isEmpty())
+        {
+            return false;
+        } else {
+            User user = new User(username, email, password);
+            RegisterService registerService = new RegisterService();
+            return registerService.register(user);
+        }
+    }
+
+    @Override
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
         /*L'utilisateur n'est pas censé atteindre cette page via une requête GET,
         on le redirige vers vers register.jsp*/
