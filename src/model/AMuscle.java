@@ -20,30 +20,17 @@ public abstract class AMuscle{
 
     @Column(name="description")
     protected String description;
-
-    @ManyToOne
-    @JoinColumn(name="idTraining",insertable=false, updatable=false,nullable=false)
-    protected ATraining training;
     //endregion
 
     //region Constructor
-    public AMuscle()
-    {
-        training=new Exercise();
+    public AMuscle(){
+
     }
     //endregion
 
     //region Getter/Setter
     public int getId() {
         return id;
-    }
-    
-    public ATraining getTraining() {
-        return training;
-    }
-
-    public void setTraining(ATraining training) {
-        this.training = training;
     }
 
     public String getDescription() {
