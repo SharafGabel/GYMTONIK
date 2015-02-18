@@ -73,19 +73,15 @@ public class SessionUser implements Serializable {
     }
 
     public void addTraining(ATraining training) {
-
+        this.trainings.add(training);
     }
 
     public void deleteTraining(ATraining training) {
-
+        this.trainings.remove(training);
     }
 
     public void clearTraining() {
-
-    }
-
-    public void updateTraining(ATraining training) {
-
+        this.trainings.removeAll(this.trainings);
     }
 
     public Date getDateProgram() {
