@@ -36,10 +36,6 @@ public class Main {
         System.out.println("Hibernate component mapping");
 
         final Session session = getSession();
-        int exerciseId;
-        int userId;
-        int seanceId;
-        int muscleId;
         int weight = 200, height = 9000;
         Transaction tx = session.beginTransaction();
         /**Création d'un User
@@ -52,40 +48,38 @@ public class Main {
          userId=(Integer)session.save(user);
          FIN création user**/
 
+        AUser user =  (User) session.get(User.class, 1);
 
         /*Création d'une séance*/
         SessionUser sessionUser = new SessionUser(5);
+        sessionUser.setUser(user);
         sessionUser.setDateProgram(new Date());
-
         /*Fin création d'une séance*/
 
         /**Création d'un muscle */
         AMuscle muscle = new Muscle();
-        muscle.setName("biceps");
-        muscle.setDescription("travail partie haute des biceps");
-
+        muscle.setName("Biceps");
+        muscle.setDescription("Travail partie haute des biceps");
         /** Fin de la création d'un muscle */
 
         /**Création d'un exercice */
-        Exercise exercise = new Exercise();
-        exercise.setName("abdos");
-        exercise.setExplanation("travaille les abdominaux");
+        ATraining exercise = new Exercise();
+        exercise.setName("Abdos");
+        exercise.setExplanation("Travail les abdominaux");
         exercise.setLength(10);
+        exercise.setSessionUser(sessionUser);
         List<AMuscle> muscles = new ArrayList<AMuscle>();
-        List<ATraining> exercises = new ArrayList<ATraining>();
-        exercises.add(exercise);
         muscles.add(muscle);
         exercise.setBodyPart(muscles);
-        sessionUser.setTrainings(exercises);
         /**Fin de la création d'un exercice*/
 
         /*Création d'une performance*/
         Performance performance = new Performance();
         performance.setName("Performance1");
-        sessionUser.setPerformance(performance);
-        AUser user =  (User) session.get(User.class, 1);
-        user.addSession(sessionUser);
+        performance.setSession(sessionUser);
         /**Fin création performance**/
+
+        user.addSession(sessionUser);
         session.save(user);
 
         tx.commit();

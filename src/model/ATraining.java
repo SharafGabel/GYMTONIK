@@ -54,6 +54,7 @@ public abstract class ATraining {
     }
     //endregion
 
+
     //region Getter/Setter
     public int getId() {
         return id;
@@ -88,6 +89,23 @@ public abstract class ATraining {
     }
 
     public void setBodyPart(List<AMuscle> bodyParts) {
+        this.bodyParts = bodyParts;
+    }
+
+    public SessionUser getSessionUser() {
+        return sessionUser;
+    }
+
+    public void setSessionUser(SessionUser sessionUser) {
+        this.sessionUser = sessionUser;
+        sessionUser.addTraining(this);
+    }
+
+    public List<AMuscle> getBodyParts() {
+        return bodyParts;
+    }
+
+    public void setBodyParts(List<AMuscle> bodyParts) {
         this.bodyParts = bodyParts;
     }
 

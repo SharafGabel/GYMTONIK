@@ -39,5 +39,15 @@ public class Performance implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+    public SessionUser getSession() {
+        return session;
+    }
+
+    public void setSession(SessionUser session) {
+        this.session = session;
+        session.setPerformance(this);
+    }
+
     //endregion
 }

@@ -42,7 +42,6 @@ public class SessionUser implements Serializable {
         trainings = new ArrayList<ATraining>();
         performance = new Performance();
         this.timeSleep = timeSleep;
-        user = new User();
     }
 
     public SessionUser() {
