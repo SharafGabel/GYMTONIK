@@ -22,22 +22,20 @@ public abstract class ATraining {
     private int id;
     
     @Column(name="length",nullable = false)
-    public int length;
+    protected int length;
 
     @Column(name="name",nullable = false)
     protected String name;
 
     @Column(name="explanation",nullable = false)
-    public String explanation;
+    protected String explanation;
 
     @ManyToOne
-    @JoinColumn(name="idSession",insertable=false, updatable=false,nullable=false)
-    public SessionUser sessionUser;
+    @JoinColumn(name="idSession", updatable=false,nullable=false)
+    protected SessionUser sessionUser;
 
-    @OneToMany(cascade={CascadeType.ALL})
-    @JoinColumn(name="id")
-    @IndexColumn(name="bodyparts")
-    public List<AMuscle> bodyParts;
+    @OneToMany(cascade={CascadeType.ALL}, mappedBy = "id")
+    protected List<AMuscle> bodyParts;
     //endregion
 
     //region Constructor

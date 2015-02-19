@@ -1,5 +1,6 @@
 package model;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.IndexColumn;
 import org.hibernate.annotations.Type;
 
@@ -12,8 +13,10 @@ import java.util.List;
 @Table(name="SessionUser")
 public class SessionUser implements Serializable {
     //region Property
-    @Id @GeneratedValue
-    @Column(name="id",nullable = false)
+    @Id
+    @GeneratedValue(generator="idGen")
+    @GenericGenerator(name="idGen",strategy="org.hibernate.id.IncrementGenerator")
+    @Column(name="id",unique = true,nullable = false)
     private Integer id;
 
     @Column(name="dateProgram",nullable = false)

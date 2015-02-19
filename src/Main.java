@@ -38,22 +38,22 @@ public class Main {
         final Session session = getSession();
         int weight = 200, height = 9000;
         Transaction tx = session.beginTransaction();
-        /**Création d'un User
+        /**Création d'un User**/
          User user = new User();
          user.setUsername("JB TTP");
          user.setHeight(height);
          user.setWeight(weight);
          user.setEmail("TarteAuPion@gmail.com");
          user.setPassword("TarteAuPion");
-         userId=(Integer)session.save(user);
-         FIN création user**/
+         /**FIN création user**/
 
-        AUser user =  (User) session.get(User.class, 1);
+        //AUser user =  (User) session.get(User.class, 1);
 
         /*Création d'une séance*/
         SessionUser sessionUser = new SessionUser(5);
         sessionUser.setUser(user);
         sessionUser.setDateProgram(new Date());
+
         /*Fin création d'une séance*/
 
         /**Création d'un muscle */
@@ -68,9 +68,7 @@ public class Main {
         exercise.setExplanation("Travail les abdominaux");
         exercise.setLength(10);
         exercise.setSessionUser(sessionUser);
-        List<AMuscle> muscles = new ArrayList<AMuscle>();
-        muscles.add(muscle);
-        exercise.setBodyPart(muscles);
+        exercise.addBodyPart(muscle);
         /**Fin de la création d'un exercice*/
 
         /*Création d'une performance*/
@@ -80,7 +78,7 @@ public class Main {
         /**Fin création performance**/
 
         user.addSession(sessionUser);
-        session.save(user);
+        session.saveOrUpdate(user);
 
         tx.commit();
     }

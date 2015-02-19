@@ -1,5 +1,7 @@
 package model;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -8,7 +10,8 @@ import java.io.Serializable;
 public class Performance implements Serializable {
     //region Property
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator="idGen")
+    @GenericGenerator(name="idGen",strategy="org.hibernate.id.IncrementGenerator")
     @Column(name="id")
     private Integer id;
 
