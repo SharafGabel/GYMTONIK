@@ -58,6 +58,7 @@ public abstract class AUser {
     public AUser(){
         super();
         sessions = new ArrayList<SessionUser>();
+        setSalt();
     }
 
     public AUser(String username, String email, String password) {
