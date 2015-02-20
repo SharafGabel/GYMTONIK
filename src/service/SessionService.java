@@ -19,8 +19,10 @@ public class SessionService {
 
     public boolean addSession(User user) {
         int id;
+
+        Transaction tx = null;
         try {
-            Transaction tx = session.getTransaction();
+            tx = session.getTransaction();
             tx.begin();
             SessionUser sessionUser = new SessionUser();
             sessionUser.setUser(user);
@@ -28,10 +30,11 @@ public class SessionService {
             tx.commit();
             return true;
         } catch (Exception e) {
+            if (tx != null)
+                tx.rollback();
             e.printStackTrace();
             return false;
         }finally {
-            session.close();
             HibernateUtil.closeSessionFactory();
         }
         
@@ -41,17 +44,19 @@ public class SessionService {
         if(sessionUser == null){
             return false;
         }
+            Transaction tx = null;
         try{
-            Transaction tx = session.getTransaction();
-            tx.begin();
+            tx  = session.beginTransaction();
             session.delete(sessionUser);
             tx.commit();
             return true;
         } catch (Exception e) {
+            if (tx != null)
+                tx.rollback();
             e.printStackTrace();
             return false;
         }finally {
-            session.close();
+            HibernateUtil.closeSessionFactory();
         }
     }
     
@@ -59,17 +64,20 @@ public class SessionService {
         if(sessionUser == null){
             return false;
         }
+
+        Transaction tx = null;
         try{
-            Transaction tx = session.getTransaction();
-            tx.begin();
+            tx = session.beginTransaction();
             session.update(sessionUser);
             tx.commit();
             return true;
         } catch (Exception e) {
+            if (tx != null)
+                tx.rollback();
             e.printStackTrace();
             return false;
         }finally {
-            session.close();
+            HibernateUtil.closeSessionFactory();
         }
         
     }

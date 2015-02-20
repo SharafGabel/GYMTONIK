@@ -37,17 +37,15 @@ public class LoginService {
         User user = null;
 
         try{
-            tx=session.beginTransaction();
+            tx = session.beginTransaction();
             Query query = session.createQuery("from User where username_canonical='"+username.toLowerCase()+"'");
             user = (User)query.uniqueResult();
             tx.commit();
         }catch (Exception e){
-            if(tx != null){
+            if(tx != null)
                 tx.rollback();
-            }
             e.printStackTrace();
         } finally {
-            session.close();
             HibernateUtil.closeSessionFactory();
         }
         return user;
@@ -57,16 +55,14 @@ public class LoginService {
         List<User> list = new ArrayList<User>();
         Transaction tx = null;
         try{
-            tx=session.beginTransaction();
+            tx = session.beginTransaction();
             list = session.createQuery("from User ").list();
             tx.commit();
         }catch (Exception e){
-            if(tx != null){
+            if(tx != null)
                 tx.rollback();
-            }
             e.printStackTrace();
         } finally {
-            session.close();
             HibernateUtil.closeSessionFactory();
         }
         return list;

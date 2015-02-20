@@ -20,9 +20,10 @@ public class RegisterService {
     public boolean register(User user){
         if(isExistUser(user)) return false;
 
-        Transaction tx = session.beginTransaction();
+        Transaction tx = null;
 
         try{
+            tx = session.beginTransaction();
             session.saveOrUpdate(user);
             tx.commit();
         }catch (Exception e){
@@ -31,7 +32,6 @@ public class RegisterService {
             }
             e.printStackTrace();
         }finally {
-//            session.close();
             HibernateUtil.closeSessionFactory();
         }
         return true;
@@ -51,7 +51,6 @@ public class RegisterService {
                 tx.rollback();
             }
         }finally{
-//            session.close();
             HibernateUtil.closeSessionFactory();
         }
         return result;
