@@ -24,16 +24,16 @@ public abstract class AUser {
     @Column(name = "id", unique = true, nullable = false)
     protected Integer id;
     
-    @Column(name="username",nullable = false)
+    @Column(name="username", nullable = false)
     protected String username;
 
-    @Column(name="username_canonical",nullable = false)
+    @Column(name="username_canonical", unique = true, nullable = false)
     protected String username_canonical;
 
-    @Column(name="email",nullable = false)
+    @Column(name="email", nullable = false)
     protected String email;
 
-    @Column(name="email_canonical",nullable = false)
+    @Column(name="email_canonical", unique = true, nullable = false)
     protected String email_canonical;
 
     @Column(name="password",nullable = false)
