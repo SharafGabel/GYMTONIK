@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: admin
+  User: kuga
   Date: 15/02/2015
   Time: 16:10
   To change this template use File | Settings | File Templates.
@@ -9,10 +9,17 @@
 <html>
 <head>
     <title></title>
+    <link rel="stylesheet" href="./style.css" />
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 </head>
 <body>
 <center>
+
     <div id="mystyle" class="myform">
+
+
         <form id="form" name="form" method="post" action="RegisterServlet">
             <h1>Registration</h1>
             <p>Please enter the following information</p>
@@ -39,6 +46,17 @@
 
         </form>
     </div>
+
+
+
+
+
 </center>
+
+<!-- JavaScript includes - jQuery, the complexify plugin and our own script.js -->
+
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script src="./script.js"></script>
+
 </body>
 </html>
