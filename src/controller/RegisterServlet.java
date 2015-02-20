@@ -1,7 +1,10 @@
 package controller;
 
 import model.User;
-import service.LoginService;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+import org.hibernate.service.ServiceRegistryBuilder;
 import service.RegisterService;
 
 import javax.servlet.http.HttpServlet;
@@ -12,6 +15,21 @@ import java.io.PrintWriter;
  * Created by kuga  on 15/02/2015.
  */
 public class RegisterServlet extends HttpServlet {
+
+    private static final SessionFactory ourSessionFactory;
+    private static final ServiceRegistry serviceRegistry;
+
+    static {
+        try {
+            Configuration configuration = new Configuration();
+            configuration.configure();
+
+            serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
+            ourSessionFactory = configuration.buildSessionFactory(serviceRegistry);
+        } catch (Throwable ex) {
+            throw new ExceptionInInitializerError(ex);
+        }
+    }
 
     @Override
     protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
@@ -29,13 +47,13 @@ public class RegisterServlet extends HttpServlet {
             out.println("<body>");
             out.println("<center>");
 
-            /*if (register(username, email, password)) {
+            if (register(username, email, password)) {
                 out.println("<h1>Registration Successful</h1>");
                 out.println("To login with your username and Password<a href=\"login.jsp\">Click here</a>");
             } else {
                 out.println("<h1>Registration Unsuccessful</h1>");
                 out.println("To try again <a href=\"register.jsp\">Click here</a>");
-            }*/
+            }
 
             out.println("</center>");
             out.println("</body>");
@@ -45,7 +63,7 @@ public class RegisterServlet extends HttpServlet {
         }
     }
 
-    /*public boolean register(String username, String email, String password) {
+    public boolean register(String username, String email, String password) {
         if ( username == null || username.trim().isEmpty() ||
                 email == null || email.trim().isEmpty() ||
                 password == null || password.trim().isEmpty())
@@ -53,10 +71,10 @@ public class RegisterServlet extends HttpServlet {
             return false;
         } else {
             User user = new User(username, email, password);
-            RegisterService registerService = new RegisterService();
+            RegisterService registerService = new RegisterService(ourSessionFactory.openSession());
             return registerService.register(user);
         }
-    }*/
+    }
 
     @Override
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
