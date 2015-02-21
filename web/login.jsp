@@ -1,17 +1,9 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: axel
-  Date: 20/02/15
-  Time: 16:25
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-<head>
-
     <meta charset="utf-8">
-    <title>Fullscreen Login</title>
+    <title>Login Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -30,18 +22,19 @@
 </head>
     <title></title>
 </head>
-<body>
+<body id="loginPage" name="loginPage">
 <div class="page-container">
-    <h1>Login</h1>
+    <h1>Sign in</h1>
     <form id="form" name="form" method="post" action="LoginServlet">
 
-        <label>First Name</label>
+        <label>Username</label>
         <input type="text" name="username" id="username" />
 
         <label>Password</label>
+
         <input type="password" name="password" id="password" />
 
-        <button type="submit">Login</button>
+        <button type="submit">Log in</button>
     </form>
 </div>
 <!-- Javascript -->

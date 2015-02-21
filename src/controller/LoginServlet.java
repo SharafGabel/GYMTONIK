@@ -18,6 +18,7 @@ public class LoginServlet extends HttpServlet{
     private static final SessionFactory ourSessionFactory;
     private static final ServiceRegistry serviceRegistry;
     static LoginService loginService;
+    private static int cpt=0;
 
     static {
         try {
@@ -49,10 +50,13 @@ public class LoginServlet extends HttpServlet{
 
             if (login(username, password)) {
                 out.println("<h1>Login Successful</h1>");
-                //getServletContext().getRequestDispatcher("/index.jsp").forward(request,response);
-            } else {
-                out.println("<h1>Registration Unsuccessful</h1>");
-                out.println("To try again <a href=\"index.jsp\">Click here</a>");
+                //response.sendRedirect("accueil.jsp");
+            }
+            else {
+                response.sendRedirect("login.jsp");
+                //out.println("Mauvaise combinaison Username/Mot de passe");
+                //out.println("<h1 style='color:red;text-size:14px;text-align:center'>Registration Unsuccessful</h1>");
+                //out.println("<META HTTP-EQUIV='Refresh' CONTENT='0;URL=login.jsp'>");
             }
 
             out.println("</center>");
