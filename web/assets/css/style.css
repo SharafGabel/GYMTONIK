@@ -23,27 +23,32 @@ body {
     background-size: cover;
 }
 
-.page-container {
-    margin: 15% auto 0 auto;
-}
-
 h1 {
     font-size: 30px;
     font-weight: 700;
+    margin-bottom: 15px;
     text-shadow: 0 1px 4px rgba(0,0,0,.2);
 }
 
-form {
-    position: relative;
+#formLogin {
+    position: absolute;
     width: 305px;
-    margin: 15px auto 0 auto;
+    margin: 17% auto 0 25%;
+    text-align: center;
+}
+
+#formRegister {
+    position: absolute;
+    width: 305px;
+    margin: 12% 25% 0 50%;
     text-align: center;
 }
 
 input {
-    width: 270px;
+    width: 300px;
     height: 42px;
-    margin-top: 25px;
+    margin-top: 5px;
+    margin-bottom: 10px;
     padding: 0 15px;
     background: #2d2d2d; /* browsers that don't support rgba */
     background: rgba(45,45,45,.15);

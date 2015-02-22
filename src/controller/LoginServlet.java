@@ -54,13 +54,13 @@ public class LoginServlet extends HttpServlet{
 
                 httpSession.setAttribute(username, list ); // Donnée de session
                 out.println("<h1>Login Successful</h1>");
-                //response.sendRedirect("accueil.jsp");
+                response.sendRedirect("accueil.jsp");
             }
             else {
-                response.sendRedirect("login.jsp");
+                response.sendRedirect("welcome.jsp");
                 //out.println("Mauvaise combinaison Username/Mot de passe");
                 //out.println("<h1 style='color:red;text-size:14px;text-align:center'>Registration Unsuccessful</h1>");
-                //out.println("<META HTTP-EQUIV='Refresh' CONTENT='0;URL=login.jsp'>");
+                //out.println("<META HTTP-EQUIV='Refresh' CONTENT='0;URL=welcome.jsp'>");
             }
 
             out.println("</center>");
@@ -84,7 +84,7 @@ public class LoginServlet extends HttpServlet{
     @Override
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
         /*L'utilisateur n'est pas censé atteindre cette page via une requête GET,
-        on le redirige vers vers register.jsp*/
+        on le redirige vers vers index.jsp*/
         getServletContext().getRequestDispatcher("/index.jsp").forward(request,response);
     }
 }

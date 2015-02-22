@@ -19,13 +19,14 @@ public class RegisterService {
     }
 
     public boolean register(User user){
-        if(isExistUser(user)) return false;
+        if(isExistUser(user))
+            return false;
 
         Transaction tx = null;
 
         try{
             tx = session.beginTransaction();
-            session.saveOrUpdate(user);
+            session.save(user);
             tx.commit();
         }catch (Exception e){
             if(tx != null){
@@ -39,14 +40,14 @@ public class RegisterService {
     }
 
     private boolean isExistUser(User user) {
-        boolean result = false;
         Transaction tx = null;
         try{
             tx = session.beginTransaction();
             Query query = session.createQuery("from User where username_canonical='"+user.getUsername_canonical()+"'");
             User u = (User)query.uniqueResult();
             tx.commit();
-            if(u != null) result = true;
+            if(u != null)
+                return true;
         }catch(Exception e){
             if(tx != null){
                 tx.rollback();
@@ -54,6 +55,6 @@ public class RegisterService {
         }finally{
             HibernateUtil.closeSessionFactory();
         }
-        return result;
+        return false;
     }
 }

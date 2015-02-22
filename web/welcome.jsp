@@ -24,17 +24,43 @@
 </head>
 <body id="loginPage" name="loginPage">
 <div class="page-container">
-    <h1>Sign in</h1>
-    <form id="form" name="form" method="post" action="LoginServlet">
 
+    <form id="formLogin" name="formLogin" method="post" action="LoginServlet">
+        <h1>Sign in</h1>
         <label>Username</label>
         <input type="text" name="username" id="username" />
 
         <label>Password</label>
-
         <input type="password" name="password" id="password" />
 
         <button type="submit">Log in</button>
+    </form>
+
+    <form id="formRegister" name="formRegister" method="post" action="RegisterServlet">
+        <h1>S'inscrire</h1>
+
+        <label>Username*</label>
+        <input type="text" name="username" id="user" />
+
+        <label>E-Mail*</label>
+        <input type="text" name="email" id="email" />
+
+        <label>Confirmation E-Mail*</label>
+        <input type="text" name="emailVerif" id="emailVerif" />
+
+        <label>Password*</label>
+        <input type="password" name="password" id="pass" />
+
+        <label>Hauteur</label>
+        <input type="text" name="height" id="height" />
+
+        <label>Poids</label>
+        <input type="text" name="weight" id="weight" />
+
+        <button type="submit">Register</button>
+
+        <label>* (Obligatoire)</label>
+
     </form>
 </div>
 <!-- Javascript -->
