@@ -1,5 +1,6 @@
 package controller;
 
+import model.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
@@ -7,18 +8,19 @@ import org.hibernate.service.ServiceRegistryBuilder;
 import service.LoginService;
 
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * Created by axel on 18/02/15.
- */
 public class LoginServlet extends HttpServlet{
 
     private static final SessionFactory ourSessionFactory;
     private static final ServiceRegistry serviceRegistry;
     static LoginService loginService;
-    private static int cpt=0;
+    HttpSession httpSession;
+    public List list = new ArrayList();
 
     static {
         try {
@@ -49,6 +51,8 @@ public class LoginServlet extends HttpServlet{
             out.println("<center>");
 
             if (login(username, password)) {
+
+                httpSession.setAttribute(username, list ); // Donnée de session
                 out.println("<h1>Login Successful</h1>");
                 //response.sendRedirect("accueil.jsp");
             }

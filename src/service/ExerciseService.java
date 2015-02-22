@@ -11,6 +11,7 @@ import util.HibernateUtil;
  * Created by kukugath on 18/02/2015.
  */
 public class ExerciseService {
+
     public boolean addExercise(SessionUser sessionUser) {
         Session session = HibernateUtil.openSession();
         int id;
@@ -57,6 +58,7 @@ public class ExerciseService {
             return false;
         }
         Session session = HibernateUtil.openSession();
+
         try{
             Transaction tx = session.getTransaction();
             tx.begin();

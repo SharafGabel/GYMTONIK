@@ -2,9 +2,7 @@ package controller;
 
 import model.Exercise;
 import model.SessionUser;
-import model.User;
 import service.ExerciseService;
-import service.SessionService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,9 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created by kukugath on 18/02/2015.
- */
 public class ExerciseServlet extends HttpServlet {
     ExerciseService exerciseService = new ExerciseService();
     
@@ -29,7 +24,7 @@ public class ExerciseServlet extends HttpServlet {
 
 
     public boolean addExercise(SessionUser sessionUser){
-        if(sessionUser == null){
+        if(sessionUser==null || sessionUser.getUser() == null){
             return false;
         }
         exerciseService.addExercise(sessionUser);

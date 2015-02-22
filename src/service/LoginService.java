@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class LoginService {
     public boolean authenticate(String username, String password) {
         User user = getUserByUsername(username);
         if (user != null && user.validatePassword(password)) {
-// TODO : corriger ce "truc"
+
 //            sessionService.addSession(user);
             return true;
         } else return false;
