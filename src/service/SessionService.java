@@ -2,24 +2,39 @@ package service;
 
 import model.SessionUser;
 import model.User;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import util.HibernateUtil;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+import org.hibernate.service.ServiceRegistryBuilder;
 
-/**
- * Created by kukugath on 18/02/2015.
- */
 public class SessionService {
 
-    Session session;
+    private static final SessionFactory ourSessionFactory;
+    private static final ServiceRegistry serviceRegistry;
 
-    public SessionService(Session session) {
-        this.session = session;
+    static {
+        try {
+            Configuration configuration = new Configuration();
+            configuration.configure();
+
+            serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
+            ourSessionFactory = configuration.buildSessionFactory(serviceRegistry);
+        } catch (Throwable ex) {
+            throw new ExceptionInInitializerError(ex);
+        }
     }
 
-    public boolean addSession(User user) {
+    private static Session getSession() throws HibernateException {
+        return ourSessionFactory.openSession();
+    }
+
+    public static boolean addSession(User user) {
         int id;
 
+        Session session = getSession();
         Transaction tx = null;
         try {
             tx = session.getTransaction();
@@ -35,16 +50,18 @@ public class SessionService {
             e.printStackTrace();
             return false;
         }finally {
-            HibernateUtil.closeSessionFactory();
+            session.close();
         }
         
     }
     
-    public boolean deleteSession(SessionUser sessionUser){
+    public static boolean deleteSession(SessionUser sessionUser){
         if(sessionUser == null){
             return false;
         }
-            Transaction tx = null;
+
+        Session session = getSession();
+        Transaction tx = null;
         try{
             tx  = session.beginTransaction();
             session.delete(sessionUser);
@@ -56,15 +73,16 @@ public class SessionService {
             e.printStackTrace();
             return false;
         }finally {
-            HibernateUtil.closeSessionFactory();
+            session.close();
         }
     }
     
-    public boolean updateSession(SessionUser sessionUser){
+    public static boolean updateSession(SessionUser sessionUser){
         if(sessionUser == null){
             return false;
         }
 
+        Session session = getSession();
         Transaction tx = null;
         try{
             tx = session.beginTransaction();
@@ -77,7 +95,7 @@ public class SessionService {
             e.printStackTrace();
             return false;
         }finally {
-            HibernateUtil.closeSessionFactory();
+            session.close();
         }
         
     }

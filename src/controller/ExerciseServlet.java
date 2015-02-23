@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class ExerciseServlet extends HttpServlet {
-    ExerciseService exerciseService = new ExerciseService();
-    
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -27,7 +25,7 @@ public class ExerciseServlet extends HttpServlet {
         if(sessionUser==null || sessionUser.getUser() == null){
             return false;
         }
-        exerciseService.addExercise(sessionUser);
+        ExerciseService.addExercise(sessionUser);
         return true;
     }
 
@@ -35,7 +33,7 @@ public class ExerciseServlet extends HttpServlet {
         if(exercise == null){
             return false;
         }
-        exerciseService.deleteExercise(exercise);
+        ExerciseService.deleteExercise(exercise);
         return true;
     }
 
@@ -43,7 +41,7 @@ public class ExerciseServlet extends HttpServlet {
         if(exercise == null){
             return false;
         }
-        exerciseService.updateExercise(exercise);
+        ExerciseService.updateExercise(exercise);
         return true;
     }
     
