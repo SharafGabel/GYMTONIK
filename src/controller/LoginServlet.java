@@ -1,5 +1,8 @@
 package controller;
 
+import model.User;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import service.LoginService;
 
 import javax.servlet.http.HttpServlet;
@@ -25,16 +28,15 @@ public class LoginServlet extends HttpServlet{
             out.println("<center>");
 
             if (login(username, password)) {
-                HttpSession session = request.getSession();// Donnée de session
+                HttpSession session = request.getSession();
+                session.setAttribute("User",LoginService.getUserByUsername(username));
                 session.setAttribute("username",username);
                 out.println("<h1>Login Successful</h1>");
                 response.sendRedirect("accueil.jsp");
             }
             else {
-                response.sendRedirect("welcome.jsp");
-                //out.println("Mauvaise combinaison Username/Mot de passe");
-                //out.println("<h1 style='color:red;text-size:14px;text-align:center'>Registration Unsuccessful</h1>");
-                //out.println("<META HTTP-EQUIV='Refresh' CONTENT='0;URL=welcome.jsp'>");
+                request.getRequestDispatcher("welcome.jsp").include(request, response);
+                out.println("Mauvaise combinaison Username/Mot de passe");
             }
 
             out.println("</center>");
@@ -46,7 +48,7 @@ public class LoginServlet extends HttpServlet{
     }
 
     public static boolean login(String username,String password){
-        if( username == null || username.trim().isEmpty() ||  password == null || password.trim().isEmpty())
+        if( username.equals(null) || username.trim().isEmpty() ||  password.equals(null) || password.trim().isEmpty())
         {
             return false;
         }else {

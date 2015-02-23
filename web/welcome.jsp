@@ -36,7 +36,7 @@
         <button type="submit">Log in</button>
     </form>
 
-    <form id="formRegister" name="formRegister" method="post" action="RegisterServlet">
+    <form id="formRegister" name="formRegister" method="post" action="RegisterServlet" >
         <h1>S'inscrire</h1>
 
         <label>Username*</label>
@@ -68,7 +68,6 @@
 <script src="assets/js/supersized.3.2.7.min.js"></script>
 <script src="assets/js/supersized-init.js"></script>
 <script src="assets/js/scripts.js"></script>
-
 
 </body>
 </html>

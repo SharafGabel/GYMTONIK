@@ -29,37 +29,34 @@ public class RegisterServlet extends HttpServlet {
 
             if(register(username, email, password,emailVerif,poids,taille))
             {
+                request.getRequestDispatcher("welcome.jsp").include(request, response);
                 out.println("<h1>Registration Successful</h1>");
-                response.sendRedirect("welcome.jsp");
             } else
             {
-                out.println("<h1>Registration Unsuccessful</h1>");
-                out.println("To try again <a href=\"welcome.jsp\">Click here</a>");
+                request.getRequestDispatcher("welcome.jsp").include(request, response);
+                out.println("<h1>Registration Unsuccessful</h1><p>Un des champs obligatoire est vide</p>");
             }
 
             out.println("</center>");
             out.println("</body>");
             out.println("</html>");
-
             out.close();
-
     }
 
     public static boolean register(String username, String email, String password,String emailVerif, String poids, String taille) {
 
-        if ( username == null || username.trim().isEmpty() ||
-                email == null || email.trim().isEmpty() ||
-                password == null || password.trim().isEmpty() || !emailVerif.equals(email) ) {
+        if ( username.equals(null) || username.trim().isEmpty() ||
+                email.equals(null) || email.trim().isEmpty() ||
+                password.equals(null) || password.trim().isEmpty() || !emailVerif.equals(email) )
             return false;
-        }
          else
         {
             User user = new User(username, email, password);
-            if(poids.trim().isEmpty() && isInteger(poids))
+            if(isInteger(poids))
             {
                 user.setWeight(Integer.parseInt(poids));
             }
-            if(taille.trim().isEmpty() && isInteger(taille))
+            if(isInteger(taille))
             {
                 user.setHeight(Integer.parseInt(taille));
             }
@@ -69,8 +66,7 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
-        /*L'utilisateur n'est pas censé atteindre cette page via une requête GET,
-        on le redirige vers vers welcome.jsp*/
+
         getServletContext().getRequestDispatcher("/welcome.jsp").forward(request,response);
     }
 

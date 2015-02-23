@@ -19,19 +19,17 @@ public class SessionServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
-     
        
     public boolean addSession(User user){
-        if(user == null){
+        if(user.equals(null)){
             return false;
         }
         SessionService.addSession(user);
         return true;
     }
 
-
     public boolean deleteSession(SessionUser sessionUser){
-        if(sessionUser == null){
+        if(sessionUser.equals(null)){
             return false;
         }
        SessionService.deleteSession(sessionUser);
@@ -39,13 +37,11 @@ public class SessionServlet extends HttpServlet {
     }
 
     public boolean updateSession(SessionUser sessionUser){
-        if(sessionUser == null){
+        if(sessionUser.equals(null)){
             return false;
         }
         SessionService.updateSession(sessionUser);
         return true;
     }
-    
-    
-    
+
 }

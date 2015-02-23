@@ -32,7 +32,6 @@ public class SessionService {
     }
 
     public static boolean addSession(User user) {
-        int id;
 
         Session session = getSession();
         Transaction tx = null;
@@ -41,7 +40,7 @@ public class SessionService {
             tx.begin();
             SessionUser sessionUser = new SessionUser();
             sessionUser.setUser(user);
-            id = (Integer) session.save(sessionUser);
+            session.save(sessionUser);
             tx.commit();
             return true;
         } catch (Exception e) {
