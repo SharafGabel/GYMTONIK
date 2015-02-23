@@ -2,7 +2,7 @@
 <%@ include file="index.jsp" %>
 <html>
 <head>
-    <title>Accueil</title>
+    <title>Seance</title>
 </head>
 <body>
 
