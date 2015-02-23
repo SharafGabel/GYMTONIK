@@ -1,26 +1,37 @@
 package service;
 
 import model.User;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import util.HibernateUtil;
+import org.hibernate.*;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+import org.hibernate.service.ServiceRegistryBuilder;
 
-/**
- * Created by kuga on 15/02/2015.
- */
 public class RegisterService {
 
-    Session session;
+    private static final SessionFactory ourSessionFactory;
+    private static final ServiceRegistry serviceRegistry;
 
+    static {
+        try {
+            Configuration configuration = new Configuration();
+            configuration.configure();
 
-    public RegisterService(Session session) {
-        this.session = session;
+            serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
+            ourSessionFactory = configuration.buildSessionFactory(serviceRegistry);
+        } catch (Throwable ex) {
+            throw new ExceptionInInitializerError(ex);
+        }
     }
 
-    public boolean register(User user){
-        if(isExistUser(user))
+    public static Session getSession() throws HibernateException {
+        return ourSessionFactory.openSession();
+    }
+
+    public static boolean register(User user){
+        if(userExists(user))
             return false;
+
+        Session session = getSession();
 
         Transaction tx = null;
 
@@ -34,12 +45,14 @@ public class RegisterService {
             }
             e.printStackTrace();
         }finally {
-            HibernateUtil.closeSessionFactory();
+            session.close();
         }
         return true;
     }
 
-    private boolean isExistUser(User user) {
+    private static boolean userExists(User user) {
+        Session session = getSession();
+
         Transaction tx = null;
         try{
             tx = session.beginTransaction();
@@ -53,7 +66,7 @@ public class RegisterService {
                 tx.rollback();
             }
         }finally{
-            HibernateUtil.closeSessionFactory();
+            session.close();
         }
         return false;
     }
