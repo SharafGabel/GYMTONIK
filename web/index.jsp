@@ -13,12 +13,14 @@
     <link href="style.css" rel="stylesheet">
 
     <!-- Latest compiled and minified JavaScript -->
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="http://jasny.github.io/bootstrap/dist/js/jasny-bootstrap.min.js"></script>
 </head>
 
 <body>
 
-<div class="navmenu navmenu-default navmenu-fixed-left">
+<div class="navmenu navmenu-default navmenu-fixed-left offcanvas-sm" id="navMenu">
     <a class="navmenu-brand" href="#">Gym Tonik</a>
     <ul class="nav navmenu-nav">
         <li><a href="accueil.jsp">Home</a></li>
@@ -31,10 +33,15 @@
 
 <div class="canvas">
     <div class="navbar navbar-default navbar-fixed-top">
-        <center><a class="navmenu-brand" id="titleProject" href="#">Welcome to Gym Tonik ${sessionScope.username}</a></center>
-
+        <button type="button" class="navbar-toggle hidden-md hidden-lg" data-toggle="offcanvas" data-target="#navMenu" data-canvas="body">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navmenu-brand" id="titleProject" href="#">Welcome to Gym Tonik ${sessionScope.username}</a>
     </div>
 </div>
-
+<div class="navmenu navmenu-default navmenu-fixed-left offcanvas-sm offcanvas-clone"></div>
 </body>
 </html>
