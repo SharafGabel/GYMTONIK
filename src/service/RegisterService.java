@@ -23,7 +23,7 @@ public class RegisterService {
         }
     }
 
-    public static Session getSession() throws HibernateException {
+    private static Session getSession() throws HibernateException {
         return ourSessionFactory.openSession();
     }
 

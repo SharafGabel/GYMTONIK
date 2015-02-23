@@ -1,38 +1,13 @@
 package controller;
 
-import model.User;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
 import service.LoginService;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 public class LoginServlet extends HttpServlet{
-
-    private static final SessionFactory ourSessionFactory;
-    private static final ServiceRegistry serviceRegistry;
-    static LoginService loginService;
-   // public List list = new ArrayList();
-
-    static {
-        try {
-            Configuration configuration = new Configuration();
-            configuration.configure();
-
-            serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
-            ourSessionFactory = configuration.buildSessionFactory(serviceRegistry);
-            loginService = new LoginService(ourSessionFactory.openSession());
-        } catch (Throwable ex) {
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
 
     @Override
     protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
@@ -50,8 +25,6 @@ public class LoginServlet extends HttpServlet{
             out.println("<center>");
 
             if (login(username, password)) {
-
-
                 HttpSession session = request.getSession();// Donnée de session
                 session.setAttribute("username",username);
                 out.println("<h1>Login Successful</h1>");
@@ -77,7 +50,7 @@ public class LoginServlet extends HttpServlet{
         {
             return false;
         }else {
-            return loginService.authenticate(username, password);
+            return LoginService.authenticate(username, password);
         }
 
     }
