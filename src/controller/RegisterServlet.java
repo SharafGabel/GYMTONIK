@@ -1,10 +1,6 @@
 package controller;
 
 import model.User;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
 import service.RegisterService;
 
 import javax.servlet.http.HttpServlet;
@@ -15,21 +11,6 @@ import java.io.PrintWriter;
  * Created by kuga  on 15/02/2015.
  */
 public class RegisterServlet extends HttpServlet {
-
-    private static final SessionFactory ourSessionFactory;
-    private static final ServiceRegistry serviceRegistry;
-
-    static {
-        try {
-            Configuration configuration = new Configuration();
-            configuration.configure();
-
-            serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
-            ourSessionFactory = configuration.buildSessionFactory(serviceRegistry);
-        } catch (Throwable ex) {
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
 
     @Override
     protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
@@ -69,27 +50,23 @@ public class RegisterServlet extends HttpServlet {
 
     public static boolean register(String username, String email, String password,String emailVerif, String poids, String taille) {
 
-        System.out.println("YALALA");
         if ( username == null || username.trim().isEmpty() ||
                 email == null || email.trim().isEmpty() ||
-                password == null || password.trim().isEmpty() || emailVerif!=email ) {
-            System.out.println("PB ICI SINON MARCHE ( mettre en commentaire ce if pour tester l'insertion d'un User");
+                password == null || password.trim().isEmpty() || !emailVerif.equals(email) ) {
             return false;
         }
          else
         {
-            System.out.println("YOO");
             User user = new User(username, email, password);
-            if(poids!="" && isInteger(poids))
+            if(poids.trim().isEmpty() && isInteger(poids))
             {
                 user.setWeight(Integer.parseInt(poids));
             }
-            if(taille!="" && isInteger(taille))
+            if(taille.trim().isEmpty() && isInteger(taille))
             {
                 user.setHeight(Integer.parseInt(taille));
             }
-            RegisterService registerService = new RegisterService(ourSessionFactory.openSession());
-            return registerService.register(user);
+            return RegisterService.register(user);
         }
     }
 
