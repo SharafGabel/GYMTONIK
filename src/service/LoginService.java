@@ -9,9 +9,6 @@ import org.hibernate.service.ServiceRegistryBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by kuga on 15/02/2015.
- */
 public class LoginService {
 
     private static final SessionFactory ourSessionFactory;
