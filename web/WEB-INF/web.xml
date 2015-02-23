@@ -20,6 +20,10 @@
         <servlet-name>ExerciseServlet</servlet-name>
         <servlet-class>controller.ExerciseServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProfileServlet</servlet-name>
+        <servlet-class>controller.ProfileServlet</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>

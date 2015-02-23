@@ -11,6 +11,8 @@
     <title>Vous êtes connecté</title>
 </head>
 <body>
+<p>You are connected with this username: ${sessionScope.username}.</p>
+
 
 </body>
 </html>

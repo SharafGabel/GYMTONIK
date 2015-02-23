@@ -19,8 +19,7 @@ public class LoginServlet extends HttpServlet{
     private static final SessionFactory ourSessionFactory;
     private static final ServiceRegistry serviceRegistry;
     static LoginService loginService;
-    HttpSession httpSession;
-    public List list = new ArrayList();
+   // public List list = new ArrayList();
 
     static {
         try {
@@ -52,7 +51,9 @@ public class LoginServlet extends HttpServlet{
 
             if (login(username, password)) {
 
-                httpSession.setAttribute(username, list ); // Donnée de session
+
+                HttpSession session = request.getSession();// Donnée de session
+                session.setAttribute("username",username);
                 out.println("<h1>Login Successful</h1>");
                 response.sendRedirect("accueil.jsp");
             }
