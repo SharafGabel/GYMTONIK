@@ -109,7 +109,7 @@ public abstract class AUser {
     }
 
     public void setEmail_canonical() {
-        email_canonical = Util.getCanonical(email);
+        email_canonical = email.toLowerCase();
     }
 
     public String getPassword() {
