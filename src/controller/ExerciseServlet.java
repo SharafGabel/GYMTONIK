@@ -32,8 +32,7 @@ public class ExerciseServlet extends HttpServlet {
             HttpSession session = request.getSession();
             User user = (User)session.getAttribute("User");
             SessionUser sessionUserObj = SessionService.getSessionUserBySession(sessionUser);
-
-            if (addExercise(sessionUserObj)) {
+             if (addExercise(sessionUserObj)) {
                 out.println("<h1>Création de l'exercice réussi</h1>");
                 request.getRequestDispatcher("exercise.jsp").include(request, response);
             }
