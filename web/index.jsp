@@ -12,10 +12,17 @@
     <!-- Custom styles for this template -->
     <link href="style.css" rel="stylesheet">
 
+    <!-- CSS -->
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=PT+Sans:400,700'>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/supersized.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script src="http://jasny.github.io/bootstrap/dist/js/jasny-bootstrap.min.js"></script>
+
 </head>
 
 <body>

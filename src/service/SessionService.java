@@ -31,7 +31,7 @@ public class SessionService {
         return ourSessionFactory.openSession();
     }
 
-    public static boolean addSession(User user) {
+    public static boolean addSession(User user,String sommeil) {
 
         Session session = getSession();
         Transaction tx = null;
@@ -39,6 +39,8 @@ public class SessionService {
             tx = session.getTransaction();
             tx.begin();
             SessionUser sessionUser = new SessionUser();
+            if(!sommeil.equals(null))
+                sessionUser.setTimeSleep(Integer.parseInt(sommeil));
             sessionUser.setUser(user);
             session.save(sessionUser);
             tx.commit();
@@ -98,4 +100,5 @@ public class SessionService {
         }
         
     }
+
 }

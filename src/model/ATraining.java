@@ -31,7 +31,7 @@ public abstract class ATraining {
     protected String explanation;
 
     @ManyToOne
-    @JoinColumn(name="idSession", updatable=false,nullable=false)
+    @JoinColumn(name="idSession",nullable=false)
     protected SessionUser sessionUser;
 
     @OneToMany(cascade={CascadeType.ALL}, mappedBy = "id")

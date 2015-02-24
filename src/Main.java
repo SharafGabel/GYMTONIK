@@ -6,8 +6,10 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
+import service.GetList;
 
 import java.util.Date;
+import java.util.List;
 
 public class Main {
     private static final SessionFactory ourSessionFactory;
@@ -31,7 +33,6 @@ public class Main {
 
     public static void main(final String[] args) throws Exception {
         System.out.println("Hibernate component mapping");
-
         final Session session = getSession();
         int weight = 200, height = 9000;
         Transaction tx = session.beginTransaction();
