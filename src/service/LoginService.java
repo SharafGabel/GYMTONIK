@@ -5,6 +5,7 @@ import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
+import util.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,11 +33,7 @@ public class LoginService {
 
     public static boolean authenticate(String username, String password) {
         User user = getUserByUsername(username);
-        if (user != null && user.validatePassword(password)) {
-
-//            sessionService.addSession(user);
-            return true;
-        } else return false;
+        return (user != null && user.validatePassword(password));
     }
 
 
@@ -48,7 +45,7 @@ public class LoginService {
 
         try{
             tx = session.beginTransaction();
-            Query query = session.createQuery("from User where username_canonical='"+username.toLowerCase()+"'");
+            Query query = session.createQuery("from User where username_canonical='"+ Util.getCanonical(username) +"'");
             user = (User)query.uniqueResult();
             tx.commit();
         }catch (Exception e){

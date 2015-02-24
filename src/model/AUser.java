@@ -2,9 +2,9 @@ package model;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.IndexColumn;
+import util.Util;
 
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -92,7 +92,7 @@ public abstract class AUser {
     }
 
     public void setUsername_canonical() {
-        username_canonical = username.toLowerCase();
+        username_canonical = Util.getCanonical(username);
     }
 
     public String getEmail() {
@@ -109,7 +109,7 @@ public abstract class AUser {
     }
 
     public void setEmail_canonical() {
-        email_canonical = email.toLowerCase();
+        email_canonical = Util.getCanonical(email);
     }
 
     public String getPassword() {

@@ -56,7 +56,7 @@ public class RegisterService {
         Transaction tx = null;
         try{
             tx = session.beginTransaction();
-            Query query = session.createQuery("from User where username_canonical='"+user.getUsername_canonical()+"'");
+            Query query = session.createQuery("from User where username_canonical='" + user.getUsername_canonical() + "'");
             User u = (User)query.uniqueResult();
             tx.commit();
             if(u != null)
