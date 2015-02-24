@@ -19,6 +19,9 @@ public class SessionUser implements Serializable {
     @Column(name="id",unique = true,nullable = false)
     private Integer id;
 
+    @Column(name="name",nullable = false)
+    private String name;
+
     @Column(name="dateProgram",nullable = false)
     @Type(type="date")
     private Date dateProgram;
@@ -45,11 +48,14 @@ public class SessionUser implements Serializable {
         trainings = new ArrayList<ATraining>();
         performance = new Performance();
         this.timeSleep = timeSleep;
+        this.dateProgram = new Date();
     }
 
     public SessionUser() {
         this.timeSleep=8;
         this.perform = false;
+        this.dateProgram = new Date();
+
     }
     //endregion
 
@@ -132,6 +138,14 @@ public class SessionUser implements Serializable {
         SessionUser session =(SessionUser)o;
 
         return true;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
     //endregion
 }

@@ -5,6 +5,10 @@
     <title>Accueil</title>
 </head>
 <body>
+<div class="page-container" id="exerciseDiv">
+    Dernière connexion effectué le :
 
+
+</div>
 </body>
 </html>

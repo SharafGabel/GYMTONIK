@@ -2,13 +2,11 @@ package service;
 
 import model.SessionUser;
 import model.User;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
+import util.Util;
 
 public class SessionService {
 
@@ -43,6 +41,8 @@ public class SessionService {
                 sessionUser.setTimeSleep(Integer.parseInt(sommeil));
             sessionUser.setUser(user);
             session.save(sessionUser);
+            sessionUser.setName("seance "+sessionUser.getId());
+            session.update(sessionUser);
             tx.commit();
             return true;
         } catch (Exception e) {
@@ -99,6 +99,28 @@ public class SessionService {
             session.close();
         }
         
+    }
+
+    //return a sessionUser
+    //@param sessionUser
+    public static SessionUser getSessionUserBySession(String sessionUser) {
+        Session session = getSession();
+        Transaction tx = null;
+        SessionUser sessionUserObj = null;
+
+        try{
+            tx = session.beginTransaction();
+            Query query = session.createQuery("from SessionUser where id="+ Util.getCanonical(sessionUser) +"");
+            sessionUserObj = (SessionUser)query.uniqueResult();
+            tx.commit();
+        }catch (Exception e){
+            if(tx != null)
+                tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return sessionUserObj;
     }
 
 }

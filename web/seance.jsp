@@ -22,14 +22,14 @@
     </form>
 
     <select class="selectpicker">
-    <%
-        List<SessionUser> sessionUserList = GetList.getSessionList((User) session.getAttribute("User"));
-        for(SessionUser a:sessionUserList)
-        {
-            a.getTimeSleep();
-    %>
-    <option value="<%=a.getId()%>"> <%=a.getTimeSleep()%></option>
-    <%}%>
+        <%
+            List<SessionUser> sessionUserList = GetList.getSessionList((User) session.getAttribute("User"));
+            for(SessionUser a:sessionUserList)
+            {
+                a.getName();
+        %>
+        <option value="<%=a.getId()%>"> <%=a.getName()%></option>
+        <%}%>
     </select>
 
 </div>

@@ -33,16 +33,18 @@ public class ExerciseService {
 
     public static boolean addExercise(SessionUser sessionUser) {
         Session session = getSession();
-        int id;
+        Transaction tx = null;
         try {
-            Transaction tx = session.getTransaction();
+            tx = session.getTransaction();
             tx.begin();
             Exercise exercise = new Exercise();
-
-            id = (Integer) session.save(sessionUser);
+            exercise.setSessionUser(sessionUser);
+            session.save(exercise);
             tx.commit();
             return true;
         } catch (Exception e) {
+            if (tx != null)
+                tx.rollback();
             e.printStackTrace();
             return false;
         }finally {
@@ -50,6 +52,7 @@ public class ExerciseService {
         }
 
     }
+
 
     public static boolean deleteExercise(Exercise exercise){
         if(exercise == null){
