@@ -45,6 +45,7 @@ public class LoginServlet extends HttpServlet{
     }
 
     public static boolean login(String username,String password){
+        /* PS: string.equals(null) ne veut rien dire. */
         if( username == null || username.trim().isEmpty() ||  password == null || password.trim().isEmpty())
         {
             return false;

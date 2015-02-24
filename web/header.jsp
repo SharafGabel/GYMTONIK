@@ -51,4 +51,3 @@
         <a class="navmenu-brand" id="titleProject" href="#"><% if (title != null) out.print(title); %></a>
     </div>
 </div>
-<div class="navmenu navmenu-default navmenu-fixed-left offcanvas-sm offcanvas-clone"></div>
