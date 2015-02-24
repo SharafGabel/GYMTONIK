@@ -34,6 +34,7 @@ public class ExerciseService {
     public static boolean addExercise(SessionUser sessionUser) {
         Session session = getSession();
         Transaction tx = null;
+        
         try {
             tx = session.getTransaction();
             tx.begin();
