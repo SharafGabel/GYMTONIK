@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="index.jsp" %>
-<html>
-<head>
-    <title>Performance</title>
-</head>
-<body>
-
-</body>
-</html>
+<%
+    // Si aucune session n'est créée, rediriger vers page de login / inscription
+    if (session.getAttribute("User") == null) {
+        response.sendRedirect("welcome.jsp");
+    }
+%>
+<% String title = "Performances"; %>
+<%@ include file="header.jsp" %>
+<%@ include file="footer.jsp" %>

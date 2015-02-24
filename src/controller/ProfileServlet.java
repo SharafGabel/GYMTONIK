@@ -8,9 +8,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-/**
- * Created by admin on 23/02/2015.
- */
 public class ProfileServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -24,7 +21,7 @@ public class ProfileServlet extends HttpServlet {
         HttpSession session=request.getSession(false);        /* Récupération de la session depuis la requête */
         if(session!=null){
             String name=(String)session.getAttribute("username");//Récupération depuis la variable session
-            this.getServletContext().getRequestDispatcher("accueil.jsp").forward( request, response );//redirection
+            this.getServletContext().getRequestDispatcher("index.jsp").forward( request, response );//redirection
 
         }
         else{

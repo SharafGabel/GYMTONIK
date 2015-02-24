@@ -1,8 +1,5 @@
 package controller;
 
-import model.User;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import service.LoginService;
 
 import javax.servlet.http.HttpServlet;
@@ -30,9 +27,9 @@ public class LoginServlet extends HttpServlet{
             if (login(username, password)) {
                 HttpSession session = request.getSession();
                 session.setAttribute("User",LoginService.getUserByUsername(username));
-                session.setAttribute("username",username);
+                session.setAttribute("username", LoginService.getUserByUsername(username).getUsername());
                 out.println("<h1>Login Successful</h1>");
-                response.sendRedirect("accueil.jsp");
+                response.sendRedirect("index.jsp");
             }
             else {
                 request.getRequestDispatcher("welcome.jsp").include(request, response);
@@ -48,7 +45,8 @@ public class LoginServlet extends HttpServlet{
     }
 
     public static boolean login(String username,String password){
-        if( username.equals(null) || username.trim().isEmpty() ||  password.equals(null) || password.trim().isEmpty())
+        /* PS: string.equals(null) ne veut rien dire. */
+        if( username == null || username.trim().isEmpty() ||  password == null || password.trim().isEmpty())
         {
             return false;
         }else {
@@ -61,6 +59,6 @@ public class LoginServlet extends HttpServlet{
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
         /*L'utilisateur n'est pas censé atteindre cette page via une requête GET,
         on le redirige vers vers index.jsp*/
-        getServletContext().getRequestDispatcher("/index.jsp").forward(request,response);
+        getServletContext().getRequestDispatcher("/welcome.jsp").forward(request,response);
     }
 }
