@@ -1,10 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="index.jsp" %>
-<html>
-<head>
-    <title>Exercice</title>
-</head>
-<body>
+<% String title = "Exercice"; %>
+<%@ include file="header.jsp" %>
 <div class="page-container" id="exerciseDiv">
     <form id="formEx" name="formEx" method="post" action="ExerciceServlet">
         <h1>Créer un Exercice</h1>
@@ -22,6 +18,4 @@
     </form>
 
 </div>
-
-</body>
-</html>
+<%@ include file="footer.jsp" %>

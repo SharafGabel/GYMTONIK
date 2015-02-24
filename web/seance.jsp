@@ -3,14 +3,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="index.jsp" %>
-<html>
-<head>
-
-
-    <title>Seance</title>
-</head>
-<body>
+<% String title = "Séance"; %>
+<%@ include file="header.jsp" %>
 <div class="form-group" id="seanceDiv">
     <form id="formSeance" class="form-horizontal" name="formSeance" method="post" action="SessionServlet">
         <h1>Créer une séance</h1>
@@ -33,5 +27,4 @@
     </select>
 
 </div>
-</body>
-</html>
+<%@ include file="footer.jsp" %>
