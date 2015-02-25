@@ -4,13 +4,13 @@ import model.Exercise;
 import model.SessionUser;
 import model.User;
 import service.ExerciseService;
+import service.GetList;
 import service.SessionService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -21,7 +21,7 @@ public class ExerciseServlet extends HttpServlet {
         String length= request.getParameter("duree");
         String nameExercise= request.getParameter("nomEx");
         String description = request.getParameter("descriptionEx");
-        String sessionUserId = request.getParameter("optionName");
+        String sessionUserId = request.getParameter("sessionUser");
         try {
             out.println("<html>");
             out.println("<head>");
@@ -29,15 +29,16 @@ public class ExerciseServlet extends HttpServlet {
             out.println("<body>");
             out.println("<center>");
 
-            SessionUser sessionUserObj = SessionService.getSessionUserByidS(sessionUserId);
+            SessionUser sessionUsers = GetList. getSessionById(Integer.parseInt(sessionUserId));
 
-             if (ExerciseService.addExercise(sessionUserObj,length,nameExercise,description)) {
+             if (ExerciseService.addExercise(sessionUsers, length, nameExercise, description)) {
                 out.println("<h1>Création de l'exercice réussi</h1>");
             }
             else {
                  out.println("<h1>Création de l'exercise  échouée<h1>");
             }
             request.getRequestDispatcher("exercise.jsp").include(request, response);
+            out.println("<p>"+sessionUserId+"</p>");
             out.println("</center>");
             out.println("</body>");
             out.println("</html>");

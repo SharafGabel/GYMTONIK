@@ -49,6 +49,22 @@ public class GetList {
         return list;
     }
 
+    public static SessionUser getSessionById(int idS)
+    {
+        Session session = getSession();
+        List<SessionUser> list = null;
+
+        try{
+            Query query=session.createQuery("from SessionUser where id="+idS);
+            list = query.list();
+
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+        return list.get(0);
+    }
+
     public static List getExerciseList(SessionUser sessionUser1)
     {
         Session session = getSession();
