@@ -2,13 +2,12 @@ package service;
 
 import model.Exercise;
 import model.SessionUser;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
+
+import java.util.List;
 
 public class ExerciseService {
 
@@ -54,6 +53,28 @@ public class ExerciseService {
 
     }
 
+    public static List<Exercise> getExercises(SessionUser sessionUser) {
+        Session session = getSession();
+        Transaction tx = null;
+
+        List<Exercise> exercises;
+        try {
+            tx = session.getTransaction();
+            tx.begin();
+            Query query = session.createQuery("from Exercise where idSession="+ sessionUser.getId());
+            exercises = (List<Exercise>) query.list();
+            tx.commit();
+            return exercises;
+        } catch (Exception e) {
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+            return null;
+        }finally {
+            session.close();
+        }
+    }
+
 
     public static boolean deleteExercise(Exercise exercise){
         if(exercise == null){
@@ -93,7 +114,6 @@ public class ExerciseService {
         }finally {
             session.close();
         }
-
     }
 
 

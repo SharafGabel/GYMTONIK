@@ -2,8 +2,12 @@
 <%@ page import="java.util.List" %>
 <%@ page import="service.GetList" %>
 <%@ page import="model.User" %>
+<%@ page import="model.Exercise" %>
+<%@ page import="model.ATraining" %>
+<%@ page import="service.ExerciseService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="index.jsp" %>
+<% String title = "Exercice"; %>
+<%@ include file="header.jsp" %>
 <html>
 <head>
     <title>Exercice</title>
@@ -37,6 +41,33 @@
         <p><button type="submit">Enregistrer l'exercice</button></p>
     </form>
 
+    <hr/>
+
+    <table id="affSeance" class="table table-condensed">
+        <thead>
+            <tr>
+                <th>Nom Exercice</th>
+                <th>Durée</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <%
+                for(SessionUser u:sessionUserList)
+                {
+                    List<Exercise> trainingList = ExerciseService.getExercises(u);
+                    for (Exercise t:trainingList) {
+                        out.println("<tr>");
+                            out.println("\t<td>" + t.getName() + "</td>" );
+                            out.println("\t<td>" + t.getLength() + "</td>" );
+                            out.println("\t<td>" + t.getExplanation() + "</td>" );
+                        out.println("</tr>");
+                    }
+                }
+            %>
+        </tbody>
+    </table>
 </div>
 
 
