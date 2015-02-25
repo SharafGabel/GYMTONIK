@@ -58,6 +58,6 @@ public class LoginServlet extends HttpServlet{
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
         /*L'utilisateur n'est pas censé atteindre cette page via une requête GET,
         on le redirige vers vers index.jsp*/
-        getServletContext().getRequestDispatcher("/welcome.jsp").forward(request,response);
+        getServletContext().getRequestDispatcher("/index.jsp").forward(request,response);
     }
 }
