@@ -8,14 +8,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% String title = "Exercice"; %>
 <%@ include file="header.jsp" %>
-<html>
-<head>
-    <title>Exercice</title>
-</head>
-<body>
 <div class="page-container" id="exerciseDiv">
     <form id="formEx" name="formEx" method="post" action="ExerciceServlet">
         <h1>Créer un Exercice</h1>
+
+        <!-- Champ caché afin d'indiquer au servlet l'action qu'on souhaite réaliser,
+        ici ajouter un nouvel exercice -->
+        <input type="hidden" name="action" value="add" />
 
         <p><label class="lab">Nom de l'exercice</label></p>
         <input type="text" name="nomEx" id="nomEx" />
@@ -49,6 +48,7 @@
                 <th>Nom Exercice</th>
                 <th>Durée</th>
                 <th>Description</th>
+                <th>Action</th>
             </tr>
         </thead>
 
@@ -62,6 +62,13 @@
                             out.println("\t<td>" + t.getName() + "</td>" );
                             out.println("\t<td>" + t.getLength() + "</td>" );
                             out.println("\t<td>" + t.getExplanation() + "</td>" );
+                            out.println("\t<td>");
+                                out.println("<form method=\"post\" action=\"ExerciceServlet\">");
+                                    out.println("<input type=\"hidden\" name=\"action\" value=\"delete\" />");
+                                    out.println("<input type=\"hidden\" name=\"idEx\" value=\"" + t.getId() + "\" />");
+                                    out.println("<button type=\"submit\" class=\"btn btn-default\">Supprimer</button>");
+                                out.println("</form>");
+                            out.println("</td>" );
                         out.println("</tr>");
                     }
                 }
@@ -69,7 +76,5 @@
         </tbody>
     </table>
 </div>
+<%@ include file="footer.jsp" %>
 
-
-</body>
-</html>

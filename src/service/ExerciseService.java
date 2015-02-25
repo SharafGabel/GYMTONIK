@@ -75,6 +75,28 @@ public class ExerciseService {
         }
     }
 
+    public static Exercise getExercise(String idEx) {
+        Session session = getSession();
+        Transaction tx = null;
+
+        Exercise exercise;
+        try {
+            tx = session.getTransaction();
+            tx.begin();
+            Query query = session.createQuery("from Exercise where id="+ idEx);
+            exercise = (Exercise) query.uniqueResult();
+            tx.commit();
+            return exercise;
+        } catch (Exception e) {
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+            return null;
+        }finally {
+            session.close();
+        }
+    }
+
 
     public static boolean deleteExercise(Exercise exercise){
         if(exercise == null){
