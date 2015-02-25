@@ -56,7 +56,7 @@ public class GetList {
 
         try{
             Query query=session.createQuery("from Exercise");
-            //Query query=session.createQuery("from Exercise where sessionUser="+sessionUser1); //On ne peut pas matcher avec sessionUser, pb au niveau du mapping
+            //Query query=session.createQuery("from Exercise where SessionUser="+sessionUser1); //On ne peut pas matcher avec sessionUser, pb au niveau du mapping
             list = query.list();
 
         }catch(Exception ex){

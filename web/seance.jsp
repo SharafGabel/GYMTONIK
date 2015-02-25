@@ -20,17 +20,28 @@
 
         <button type="submit">Création d'exercices</button>
     </form>
-
-    <select class="selectpicker">
-        <%
-            List<SessionUser> sessionUserList = GetList.getSessionList((User) session.getAttribute("User"));
-            for(SessionUser a:sessionUserList)
-            {
-                a.getName();
-        %>
-        <option value="<%=a.getId()%>"> <%=a.getName()%></option>
-        <%}%>
-    </select>
-
 </div>
+
+<table id="affSeance" class="table table-condensed">
+    <tr>
+        <td>Nom Séance</td>
+        <td>Date création séance</td>
+        <td>Nombre d'exercices</td>
+    </tr>
+    <%
+        List<SessionUser> sessionUserList = GetList.getSessionList((User) session.getAttribute("User"));
+        for(SessionUser a:sessionUserList) {
+            a.getName();
+            if (a.isPerform()) {
+                out.println("<tr id='" + a.getId() + "'class='success'>");
+
+            } else {
+                out.println("<tr id='" + a.getId() + "'class='warning'>");
+            }
+            out.println("<td>" + a.getName() + "</td>");
+            out.println("<td>" + a.getDateProgram() + "</td>");
+            out.println("<td>" + a.getTrainings().size() + "</td>");
+        }
+     %>
+</table>
 <%@ include file="footer.jsp" %>

@@ -40,6 +40,7 @@ public class SessionService {
             if(!sommeil.equals(null))
                 sessionUser.setTimeSleep(Integer.parseInt(sommeil));
             sessionUser.setUser(user);
+            sessionUser.setName("seance "+sessionUser.getId());
             session.save(sessionUser);
             sessionUser.setName("seance "+sessionUser.getId());
             session.update(sessionUser);
@@ -103,14 +104,14 @@ public class SessionService {
 
     //return a sessionUser
     //@param sessionUser
-    public static SessionUser getSessionUserBySession(String sessionUser) {
+    public static SessionUser getSessionUserByidS(String idS) {
         Session session = getSession();
         Transaction tx = null;
         SessionUser sessionUserObj = null;
 
         try{
             tx = session.beginTransaction();
-            Query query = session.createQuery("from SessionUser where id="+ Util.getCanonical(sessionUser) +"");
+            Query query = session.createQuery("from SessionUser where id="+ idS);
             sessionUserObj = (SessionUser)query.uniqueResult();
             tx.commit();
         }catch (Exception e){

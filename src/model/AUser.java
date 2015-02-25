@@ -48,23 +48,23 @@ public abstract class AUser {
     @Column(name="weight")
     protected int weight = 0;
 
-    @OneToMany(cascade={CascadeType.ALL})
+    /*@OneToMany(cascade={CascadeType.ALL})
     @JoinColumn(name="id")
     @IndexColumn(name="sessions")
-    protected List<SessionUser> sessions;
+    protected List<SessionUser> sessions;*/
     //endregion
 
     //region Constructor
     public AUser(){
         super();
-        sessions = new ArrayList<SessionUser>();
+        //sessions = new ArrayList<SessionUser>();
         setSalt();
     }
 
     public AUser(String username, String email, String password) {
         this.username=username;
         this.email=email;
-
+        //sessions = new ArrayList<SessionUser>();
         setSalt();
         setPassword(password);
         setUsername_canonical();
@@ -154,7 +154,7 @@ public abstract class AUser {
         this.weight = weight;
     }
 
-    public List<SessionUser> getSessionUsers() {
+    /*public List<SessionUser> getSessionUsers() {
         return sessions;
     }
 
@@ -165,7 +165,8 @@ public abstract class AUser {
 
     public void setSessionUsers(List<SessionUser> sessionUsers) {
         this.sessions = sessionUsers;
-    }
+    }*/
+
     //endregion
 
     public String hashPassword(String password) throws NoSuchAlgorithmException, UnsupportedEncodingException{
@@ -209,7 +210,7 @@ public abstract class AUser {
                 ", salt='" + salt + '\'' +
                 ", height=" + height +
                 ", weight=" + weight +
-                ", sessions=" + sessions +
+                //", sessions=" + sessions +
                 '}';
     }
 }

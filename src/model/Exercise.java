@@ -16,6 +16,10 @@ public class Exercise extends ATraining implements Serializable {
     {
         super();
     }
+    public Exercise(int length, String name, String explanation)
+    {
+        super(length, name, explanation);
+    }
     //endregion
 
     //region Getter/Setter

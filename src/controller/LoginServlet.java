@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet{
                 session.setAttribute("User",LoginService.getUserByUsername(username));
                 session.setAttribute("username", LoginService.getUserByUsername(username).getUsername());
                 out.println("<h1>Login Successful</h1>");
-                response.sendRedirect("index.jsp");
+                request.getRequestDispatcher("accueil.jsp").include(request, response);
             }
             else {
                 request.getRequestDispatcher("welcome.jsp").include(request, response);
@@ -45,7 +45,6 @@ public class LoginServlet extends HttpServlet{
     }
 
     public static boolean login(String username,String password){
-        /* PS: string.equals(null) ne veut rien dire. */
         if( username == null || username.trim().isEmpty() ||  password == null || password.trim().isEmpty())
         {
             return false;

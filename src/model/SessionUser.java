@@ -55,6 +55,7 @@ public class SessionUser implements Serializable {
         this.timeSleep=8;
         this.perform = false;
         this.dateProgram = new Date();
+        trainings = new ArrayList<ATraining>();
 
     }
     //endregion

@@ -12,7 +12,7 @@ body {
     background: #f8f8f8;
     font-family: 'PT Sans', Helvetica, Arial, sans-serif;
     text-align: center;
-    color: #fff;
+    color: black;
 }
 #loginPage
 {
@@ -34,14 +34,12 @@ h1 {
     position: absolute;
     width: 305px;
     margin: 17% auto 0 25%;
-    text-align: center;
 }
 
 #formRegister {
     position: absolute;
     width: 305px;
     margin: 12% 25% 0 50%;
-    text-align: center;
 }
 
 input {
@@ -193,3 +191,8 @@ button:active {
 
 .connect a:hover { background-position: center bottom; }
 
+select{
+    margin:40px;
+    background: lightgrey;
+    color:#000000;
+}

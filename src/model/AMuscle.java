@@ -18,9 +18,6 @@ public abstract class AMuscle{
     @Column(name="name",nullable = false)
     protected String name;
 
-    @Column(name="description")
-    protected String description;
-
     @ManyToOne
     @JoinColumn(name="id",insertable = false,updatable=false,nullable=false)
     protected ATraining training;
@@ -36,14 +33,6 @@ public abstract class AMuscle{
     //region Getter/Setter
     public int getId() {
         return id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getName() {

@@ -45,8 +45,6 @@ public class Main {
          user.setPassword("TarteAuPion");
          /**FIN création user**/
 
-        //AUser user =  (User) session.get(User.class, 1);
-
         /*Création d'une séance*/
         SessionUser sessionUser = new SessionUser(5);
         sessionUser.setUser(user);
@@ -57,7 +55,6 @@ public class Main {
         /**Création d'un muscle */
         AMuscle muscle = new Muscle();
         muscle.setName("Biceps");
-        muscle.setDescription("Travail partie haute des biceps");
         /** Fin de la création d'un muscle */
 
         /**Création d'un exercice */
@@ -75,7 +72,6 @@ public class Main {
         performance.setSession(sessionUser);
         /**Fin création performance**/
 
-        user.addSession(sessionUser);
         session.saveOrUpdate(user);
 
         tx.commit();

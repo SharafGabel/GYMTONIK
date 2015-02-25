@@ -31,14 +31,14 @@ public class ExerciseService {
         return ourSessionFactory.openSession();
     }
 
-    public static boolean addExercise(SessionUser sessionUser) {
+    public static boolean addExercise(SessionUser sessionUser,String length,String name,String explanation) {
         Session session = getSession();
         Transaction tx = null;
 
         try {
             tx = session.getTransaction();
             tx.begin();
-            Exercise exercise = new Exercise();
+            Exercise exercise = new Exercise(Integer.parseInt(length),name,explanation);
             exercise.setSessionUser(sessionUser);
             session.save(exercise);
             tx.commit();

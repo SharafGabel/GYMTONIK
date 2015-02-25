@@ -49,4 +49,3 @@
     </button>
     <a class="navmenu-brand" id="titleProject" href="#"><% if (title != null) out.print(title); %></a>
 </div>
-<div class="canvas">
