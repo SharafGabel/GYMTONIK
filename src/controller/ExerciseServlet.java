@@ -1,5 +1,6 @@
 package controller;
 
+import model.AMuscle;
 import model.Exercise;
 import model.SessionUser;
 import service.ExerciseService;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 public class ExerciseServlet extends HttpServlet {
 
@@ -25,6 +27,7 @@ public class ExerciseServlet extends HttpServlet {
         String sessionUserId = request.getParameter("sessionUser");
 
         String idExercice = request.getParameter("idEx");
+
         try {
             if (action.equals("add")) {
                 SessionUser sessionUsers = GetList.getSessionById(Integer.parseInt(sessionUserId));
@@ -45,19 +48,25 @@ public class ExerciseServlet extends HttpServlet {
                     out.println("Exercice supprimé");
                 }
             } else if (action.equals("update")) {
+                System.out.println("In action.equals(update)");
                 if (idExercice != null && !idExercice.trim().isEmpty()
                         &&length != null && !length.trim().isEmpty()
                         && nameExercise != null && !nameExercise.trim().isEmpty()
                         && description != null && !description.trim().isEmpty()
                         && sessionUserId != null && !sessionUserId.trim().isEmpty())
                 {
-                    Exercise updatedExercice = new Exercise(
-                            Integer.parseInt(length),
-                            nameExercise,
-                            description
-                    );
+                    System.out.println("In if(inputs not null)");
+                    System.out.println(idExercice + " - " + nameExercise + " - " + length + " - " +
+                    description + " - " + sessionUserId);
 
-                    updatedExercice.setSessionUser(SessionService.getSessionUserByidS(sessionUserId));
+                    Exercise updatedExercice = ExerciseService.getExercise(idExercice);
+                    if (updatedExercice == null) { System.out.println("null :("); }
+                    updatedExercice.setName(nameExercise);
+                    updatedExercice.setLength(Integer.parseInt(length));
+                    updatedExercice.setExplanation(description);
+                    SessionUser seance = SessionService.getSessionUserByidS(sessionUserId);
+                    updatedExercice.setSessionUser(seance);
+                    updatedExercice.setBodyParts(new ArrayList<AMuscle>());
 
                     if (updateExercise(updatedExercice)) {
                         out.println("Exercice mis à jour");
@@ -65,7 +74,7 @@ public class ExerciseServlet extends HttpServlet {
                 } else out.println("Mise à jour échouée");
             }
 
-            request.getRequestDispatcher("exercise.jsp").include(request, response);
+            request.getRequestDispatcher("exercise.jsp").forward(request, response);
         } finally {
             out.close();
         }

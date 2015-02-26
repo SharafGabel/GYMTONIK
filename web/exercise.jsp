@@ -66,7 +66,12 @@
                                 out.println("<form method=\"post\" action=\"ExerciceServlet\">");
                                     out.println("<input type=\"hidden\" name=\"action\" value=\"delete\" />");
                                     out.println("<input type=\"hidden\" name=\"idEx\" value=\"" + t.getId() + "\" />");
-                                    out.println("<button type=\"submit\" class=\"btn btn-default\">Supprimer</button>");
+                                    out.println("<button type=\"submit\">Supprimer</button>");
+                                out.println("</form>");
+
+                                out.println("<form method=\"post\" action=\"update-exercise.jsp\">");
+                                    out.println("<input type=\"hidden\" name=\"idEx\" value=\"" + t.getId() + "\" />");
+                                    out.println("<button type=\"submit\">Modifier</button>");
                                 out.println("</form>");
                             out.println("</td>" );
                         out.println("</tr>");

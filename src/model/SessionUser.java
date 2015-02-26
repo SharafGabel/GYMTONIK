@@ -132,15 +132,6 @@ public class SessionUser implements Serializable {
         return -1;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if(this ==o) return true;
-        if(o==null || getClass() != o.getClass()) return false;
-        SessionUser session =(SessionUser)o;
-
-        return true;
-    }
-
     public String getName() {
         return name;
     }
@@ -149,4 +140,51 @@ public class SessionUser implements Serializable {
         this.name = name;
     }
     //endregion
+
+    @Override
+    public String toString() {
+        return "SessionUser{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", dateProgram=" + dateProgram +
+                ", perform=" + perform +
+                ", timeSleep=" + timeSleep +
+                ", user=" + user +
+                // ", trainings=" + trainings +
+                ", performance=" + performance +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SessionUser that = (SessionUser) o;
+
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        /*
+        if (perform != that.perform) return false;
+        if (timeSleep != that.timeSleep) return false;
+        if (dateProgram != null ? !dateProgram.equals(that.dateProgram) : that.dateProgram != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (performance != null ? !performance.equals(that.performance) : that.performance != null) return false;
+        if (trainings != null ? !trainings.equals(that.trainings) : that.trainings != null) return false;
+        if (user != null ? !user.equals(that.user) : that.user != null) return false;
+        */
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (dateProgram != null ? dateProgram.hashCode() : 0);
+        result = 31 * result + (perform ? 1 : 0);
+        result = 31 * result + timeSleep;
+        result = 31 * result + (user != null ? user.hashCode() : 0);
+        result = 31 * result + (trainings != null ? trainings.hashCode() : 0);
+        result = 31 * result + (performance != null ? performance.hashCode() : 0);
+        return result;
+    }
 }

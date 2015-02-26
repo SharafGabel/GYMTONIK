@@ -95,8 +95,12 @@ public abstract class ATraining {
     }
 
     public void setSessionUser(SessionUser sessionUser) {
-        this.sessionUser = sessionUser;
-        sessionUser.addTraining(this);
+        if (!this.sessionUser.equals(sessionUser)) {
+            /* TODO: corriger le bordel causé lorsqu'une nouvelle session est assignée */
+            this.sessionUser.deleteTraining(this);
+            this.sessionUser = sessionUser;
+            sessionUser.addTraining(this);
+        }
     }
 
     public List<AMuscle> getBodyParts() {
@@ -112,4 +116,17 @@ public abstract class ATraining {
     }
 
     //endregion
+
+
+    @Override
+    public String toString() {
+        return "ATraining{" +
+                "id=" + id +
+                ", length=" + length +
+                ", name='" + name + '\'' +
+                ", explanation='" + explanation + '\'' +
+                //", sessionUser=" + sessionUser +
+                //", bodyParts=" + bodyParts +
+                '}';
+    }
 }
