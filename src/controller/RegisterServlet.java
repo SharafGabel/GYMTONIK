@@ -45,9 +45,14 @@ public class RegisterServlet extends HttpServlet {
 
     public static boolean register(String username, String email, String password,String emailVerif, String poids, String taille) {
 
-        if ( username.equals(null) || username.trim().isEmpty() ||
-                email.equals(null) || email.trim().isEmpty() ||
-                password.equals(null) || password.trim().isEmpty() || !emailVerif.equals(email) )
+        // BORDEL MAIS ARRÊTEZ AVEC STRING.EQUALS(NULL)!
+        /*  String.equals() permet de comparer le *contenu* d'une chaîne de caractère
+            or ici on souhaite vérifier que la variable ne pointe pas vers null (et éviter un bête NullPointerException)
+            donc c'est **var == null**
+         */
+        if ( username == null || username.trim().isEmpty() ||
+                email == null || email.trim().isEmpty() ||
+                password == null || password.trim().isEmpty() || !emailVerif.equals(email) )
             return false;
          else
         {
