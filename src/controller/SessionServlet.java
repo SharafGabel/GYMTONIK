@@ -49,7 +49,7 @@ public class SessionServlet extends HttpServlet {
 
 
     public boolean addSession(User user,String sommeil){
-        if(user.equals(null)){
+        if(user == null){
             return false;
         }
 
@@ -58,7 +58,7 @@ public class SessionServlet extends HttpServlet {
     }
 
     public boolean deleteSession(SessionUser sessionUser){
-        if(sessionUser.equals(null)){
+        if(sessionUser == null){
             return false;
         }
        SessionService.deleteSession(sessionUser);
@@ -66,7 +66,7 @@ public class SessionServlet extends HttpServlet {
     }
 
     public boolean updateSession(SessionUser sessionUser){
-        if(sessionUser.equals(null)){
+        if(sessionUser == null){
             return false;
         }
         SessionService.updateSession(sessionUser);
