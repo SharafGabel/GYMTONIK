@@ -65,14 +65,13 @@ public class GetList {
         return list.get(0);
     }
 
-    public static List getExerciseList(SessionUser sessionUser1)
+    public static List getExerciseList()
     {
         Session session = getSession();
         List list = null;
 
         try{
             Query query=session.createQuery("from Exercise");
-            //Query query=session.createQuery("from Exercise where SessionUser="+sessionUser1); //On ne peut pas matcher avec sessionUser, pb au niveau du mapping
             list = query.list();
 
         }catch(Exception ex){
@@ -96,13 +95,13 @@ public class GetList {
         return list;
     }
 
-    public static List getMuscleList(Exercise exercise1)
+    public static List getMuscleList()
     {
         Session session = getSession();
         List list = null;
 
         try{
-            Query query=session.createQuery("from Muscle where training="+exercise1);
+            Query query=session.createQuery("from Muscle");
             list = query.list();
 
         }catch(Exception ex){

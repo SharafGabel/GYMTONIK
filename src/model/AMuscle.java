@@ -18,10 +18,6 @@ public abstract class AMuscle{
     @Column(name="name",nullable = false)
     protected String name;
 
-    @ManyToOne
-    @JoinColumn(name="id",insertable = false,updatable=false,nullable=false)
-    protected ATraining training;
-
     //endregion
 
     //region Constructor
@@ -41,15 +37,6 @@ public abstract class AMuscle{
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public ATraining getTraining() {
-        return training;
-    }
-
-    public void setTraining(ATraining training) {
-        this.training = training;
-        training.addBodyPart(this);
     }
 
     //endregion

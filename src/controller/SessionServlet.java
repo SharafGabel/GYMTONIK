@@ -29,12 +29,10 @@ public class SessionServlet extends HttpServlet {
             User user = (User)session.getAttribute("User");
 
             if (addSession(user, sommeil)) {
-                out.println("<h1>Création de la séance réussi</h1>");
-                request.getRequestDispatcher("exercise.jsp").include(request, response);
+                response.sendRedirect("exercise.jsp");
             }
             else {
-                request.getRequestDispatcher("seance.jsp").include(request, response);
-                out.println("<h1>Création de la séance échouée<h1>");
+                response.sendRedirect("seance.jsp");
             }
 
             out.println("</center>");

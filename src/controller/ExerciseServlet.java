@@ -1,16 +1,14 @@
 package controller;
 
-import model.AMuscle;
-import model.Exercise;
-import model.SessionUser;
+import model.*;
 import service.ExerciseService;
 import service.GetList;
-import service.SessionService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -25,8 +23,10 @@ public class ExerciseServlet extends HttpServlet {
         String nameExercise= request.getParameter("nomEx");
         String description = request.getParameter("descriptionEx");
         String sessionUserId = request.getParameter("sessionUser");
-
         String idExercice = request.getParameter("idEx");
+
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute("User");
 
         try {
             if (action.equals("add")) {
@@ -35,16 +35,18 @@ public class ExerciseServlet extends HttpServlet {
                         && nameExercise != null && !nameExercise.trim().isEmpty()
                         && description != null && !description.trim().isEmpty()
                         && sessionUserId != null && !sessionUserId.trim().isEmpty()
-                        && ExerciseService.addExercise(sessionUsers, length, nameExercise, description)) {
+                        && ExerciseService.addExercise(user,sessionUsers, length, nameExercise, description)) {
+                    request.getRequestDispatcher("exercise.jsp").forward(request, response);
                     out.println("<h1>Création de l'exercice réussie</h1>");
                 }
                 else {
+                    request.getRequestDispatcher("exercise.jsp").forward(request, response);
                      out.println("<h1>Création de l'exercise  échouée<h1>");
                 }
             } else if (action.equals("delete")) {
                 System.out.println(idExercice);
                 if(idExercice != null && !idExercice.trim().isEmpty()) {
-                    deleteExercise(ExerciseService.getExercise(idExercice));
+                    deleteExercise(user,ExerciseService.getExercise(idExercice));
                     out.println("Exercice supprimé");
                 }
             } else if (action.equals("update")) {
@@ -64,11 +66,9 @@ public class ExerciseServlet extends HttpServlet {
                     updatedExercice.setName(nameExercise);
                     updatedExercice.setLength(Integer.parseInt(length));
                     updatedExercice.setExplanation(description);
-                    SessionUser seance = SessionService.getSessionUserByidS(sessionUserId);
-                    updatedExercice.setSessionUser(seance);
                     updatedExercice.setBodyParts(new ArrayList<AMuscle>());
 
-                    if (updateExercise(updatedExercice)) {
+                    if (updateExercise(user,updatedExercice)) {
                         out.println("Exercice mis à jour");
                     } else out.println("Mise à jour échouée");
                 } else out.println("Mise à jour échouée");
@@ -87,27 +87,27 @@ public class ExerciseServlet extends HttpServlet {
     }
 
 
-    /*public boolean addExercise(SessionUser sessionUser){
+    public boolean addExercise(AUser user,SessionUser sessionUser,String length,String name,String explanation){
         if(sessionUser==null || sessionUser.getUser() == null){
             return false;
         }
-        ExerciseService.addExercise(sessionUser);
-        return true;
-    }*/
-
-    public boolean deleteExercise(Exercise exercise){
-        if(exercise == null){
-            return false;
-        }
-        ExerciseService.deleteExercise(exercise);
+        ExerciseService.addExercise(user,sessionUser,length,name,explanation);
         return true;
     }
 
-    public boolean updateExercise(Exercise exercise){
+    public boolean deleteExercise(AUser aUser,Exercise exercise){
         if(exercise == null){
             return false;
         }
-        ExerciseService.updateExercise(exercise);
+        ExerciseService.deleteExercise(aUser,exercise);
+        return true;
+    }
+
+    public boolean updateExercise(AUser aUser,Exercise exercise){
+        if(exercise == null){
+            return false;
+        }
+        ExerciseService.updateExercise(aUser,exercise);
         return true;
     }
     

@@ -10,6 +10,7 @@
 
 <%
     String idExercice = request.getParameter("idEx");
+    String idSeance = request.getParameter("idS");
     Exercise exercise = ExerciseService.getExercise(idExercice);
 
     /*  Dans le cas où l'utilisateur s'amuserait à appeler cette page
@@ -44,9 +45,8 @@
                 List<SessionUser> sessionUserList = GetList.getSessionList((User) session.getAttribute("User"));
                 for(SessionUser s:sessionUserList)
                 {
-                    //s.getName();
             %>
-            <option name="optionName" value="<%=s.getId()%>" <% if (s.getId().equals(exercise.getSessionUser().getId())) out.println("selected"); %>> <%=s.getName()+" ( Crée le "+s.getDateProgram()+" )"%></option>
+            <option name="optionName" value="<%=s.getId()%>" <% if (s.getId().equals(Integer.parseInt(idSeance))) out.println("selected"); %>> <%=s.getName()+" ( Crée le "+s.getDateProgram()+" )"%></option>
             <%}%>
         </select>
 

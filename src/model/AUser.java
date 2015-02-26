@@ -48,23 +48,17 @@ public abstract class AUser {
     @Column(name="weight")
     protected int weight = 0;
 
-    /*@OneToMany(cascade={CascadeType.ALL})
-    @JoinColumn(name="id")
-    @IndexColumn(name="sessions")
-    protected List<SessionUser> sessions;*/
     //endregion
 
     //region Constructor
     public AUser(){
         super();
-        //sessions = new ArrayList<SessionUser>();
         setSalt();
     }
 
     public AUser(String username, String email, String password) {
         this.username=username;
         this.email=email;
-        //sessions = new ArrayList<SessionUser>();
         setSalt();
         setPassword(password);
         setUsername_canonical();
@@ -153,19 +147,6 @@ public abstract class AUser {
     public void setWeight(int weight) {
         this.weight = weight;
     }
-
-    /*public List<SessionUser> getSessionUsers() {
-        return sessions;
-    }
-
-    public void addSession(SessionUser session) {
-        this.sessions.add(session);
-        session.setUser(this);
-    }
-
-    public void setSessionUsers(List<SessionUser> sessionUsers) {
-        this.sessions = sessionUsers;
-    }*/
 
     //endregion
 

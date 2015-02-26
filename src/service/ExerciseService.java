@@ -1,5 +1,7 @@
 package service;
 
+import model.ATraining;
+import model.AUser;
 import model.Exercise;
 import model.SessionUser;
 import org.hibernate.*;
@@ -7,6 +9,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ExerciseService {
@@ -30,16 +33,19 @@ public class ExerciseService {
         return ourSessionFactory.openSession();
     }
 
-    public static boolean addExercise(SessionUser sessionUser,String length,String name,String explanation) {
+    public static boolean addExercise(AUser user,SessionUser sessionUser,String length,String name,String explanation) {
         Session session = getSession();
         Transaction tx = null;
 
         try {
             tx = session.getTransaction();
             tx.begin();
-            Exercise exercise = new Exercise(Integer.parseInt(length),name,explanation);
-            exercise.setSessionUser(sessionUser);
+            Exercise exercise = new Exercise(user,Integer.parseInt(length),name,explanation);
+            List<ATraining> exerciseList = new ArrayList<ATraining>();
+            exerciseList.add(exercise);
+            sessionUser.setTrainings(exerciseList);
             session.save(exercise);
+            session.saveOrUpdate(sessionUser);
             tx.commit();
             return true;
         } catch (Exception e) {
@@ -53,7 +59,7 @@ public class ExerciseService {
 
     }
 
-    public static List<Exercise> getExercises(SessionUser sessionUser) {
+    public static List<Exercise> getExercises(AUser aUser) {
         Session session = getSession();
         Transaction tx = null;
 
@@ -61,7 +67,8 @@ public class ExerciseService {
         try {
             tx = session.getTransaction();
             tx.begin();
-            Query query = session.createQuery("from Exercise where idSession="+ sessionUser.getId());
+            //Query query = session.createQuery("from Exercise where idUser="+aUser.getId());
+            Query query = session.createQuery("from Exercise");
             exercises = (List<Exercise>) query.list();
             tx.commit();
             return exercises;
@@ -98,8 +105,9 @@ public class ExerciseService {
     }
 
 
-    public static boolean deleteExercise(Exercise exercise){
-        if(exercise == null){
+    public static boolean deleteExercise(AUser user,Exercise exercise){
+        //Car un Utilisateur ne peut supprimer que des exercices qu'il a lui même créé
+        if(exercise == null || user.getId()!=exercise.getUser().getId()){
             return false;
         }
 
@@ -118,8 +126,8 @@ public class ExerciseService {
         }
     }
 
-    public static boolean updateExercise(Exercise exercise){
-        if(exercise == null){
+    public static boolean updateExercise(AUser user,Exercise exercise){
+        if(exercise == null|| user.getId()!=exercise.getUser().getId()){
             return false;
         }
         Session session = getSession();

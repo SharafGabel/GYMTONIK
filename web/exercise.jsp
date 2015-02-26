@@ -3,7 +3,6 @@
 <%@ page import="service.GetList" %>
 <%@ page import="model.User" %>
 <%@ page import="model.Exercise" %>
-<%@ page import="model.ATraining" %>
 <%@ page import="service.ExerciseService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% String title = "Exercice"; %>
@@ -54,30 +53,32 @@
 
         <tbody>
             <%
-                for(SessionUser u:sessionUserList)
-                {
-                    List<Exercise> trainingList = ExerciseService.getExercises(u);
-                    for (Exercise t:trainingList) {
-                        out.println("<tr>");
-                            out.println("\t<td>" + t.getName() + "</td>" );
-                            out.println("\t<td>" + t.getLength() + "</td>" );
-                            out.println("\t<td>" + t.getExplanation() + "</td>" );
+                User user = (User)session.getAttribute("User");
+                for(SessionUser u:sessionUserList) {
+                    List<Exercise> trainingList = ExerciseService.getExercises(user);
+                    for (Exercise t : trainingList) {
+                        if (t.getUser().getId() == user.getId()) {
+                            out.println("<tr>");
+                            out.println("\t<td>" + t.getName() + "</td>");
+                            out.println("\t<td>" + t.getLength() + "</td>");
+                            out.println("\t<td>" + t.getExplanation() + "</td>");
                             out.println("\t<td>");
-                                out.println("<form method=\"post\" action=\"ExerciceServlet\">");
-                                    out.println("<input type=\"hidden\" name=\"action\" value=\"delete\" />");
-                                    out.println("<input type=\"hidden\" name=\"idEx\" value=\"" + t.getId() + "\" />");
-                                    out.println("<button type=\"submit\">Supprimer</button>");
-                                out.println("</form>");
+                            out.println("<form method=\"post\" action=\"ExerciceServlet\">");
+                            out.println("<input type=\"hidden\" name=\"action\" value=\"delete\" />");
+                            out.println("<input type=\"hidden\" name=\"idEx\" value=\"" + t.getId() + "\" />");
+                            out.println("<button type=\"submit\">Supprimer</button>");
+                            out.println("</form>");
 
-                                out.println("<form method=\"post\" action=\"update-exercise.jsp\">");
-                                    out.println("<input type=\"hidden\" name=\"idEx\" value=\"" + t.getId() + "\" />");
-                                    out.println("<button type=\"submit\">Modifier</button>");
-                                out.println("</form>");
-                            out.println("</td>" );
-                        out.println("</tr>");
+                            out.println("<form method=\"post\" action=\"update-exercise.jsp\">");
+                            out.println("<input type=\"hidden\" name=\"idEx\" value=\"" + t.getId() + "\" />");
+                            out.println("<input type=\"hidden\" name=\"idS\" value=\"" + u.getId() + "\" />");
+                            out.println("<button type=\"submit\">Modifier</button>");
+                            out.println("</form>");
+                            out.println("</td>");
+                            out.println("</tr>");
+                        }
                     }
-                }
-            %>
+                }%>
         </tbody>
     </table>
 </div>

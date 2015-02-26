@@ -8,6 +8,7 @@ import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 import service.GetList;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -38,11 +39,11 @@ public class Main {
         Transaction tx = session.beginTransaction();
         /**Création d'un User**/
          User user = new User();
-         user.setUsername("JB TTP");
+         user.setUsername("JB TTP1");
          user.setHeight(height);
          user.setWeight(weight);
-         user.setEmail("TarteAuPion@gmail.com");
-         user.setPassword("TarteAuPion");
+         user.setEmail("TarteAuPion1@gmail.com");
+         user.setPassword("TarteAuPion1");
          /**FIN création user**/
 
         /*Création d'une séance*/
@@ -54,15 +55,17 @@ public class Main {
 
         /**Création d'un muscle */
         AMuscle muscle = new Muscle();
-        muscle.setName("Biceps");
+        muscle.setName("Triceps");
         /** Fin de la création d'un muscle */
 
         /**Création d'un exercice */
         ATraining exercise = new Exercise();
-        exercise.setName("Abdos");
-        exercise.setExplanation("Travail les abdominaux");
+        exercise.setName("Mollet de l'extreme");
+        exercise.setExplanation("Travail les mollets de l'extreme");
         exercise.setLength(10);
-        exercise.setSessionUser(sessionUser);
+        List<ATraining> exerciseList = new ArrayList<ATraining>();
+        exerciseList.add(exercise);
+        sessionUser.setTrainings(exerciseList);
         exercise.addBodyPart(muscle);
         /**Fin de la création d'un exercice*/
 

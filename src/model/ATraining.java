@@ -30,30 +30,41 @@ public abstract class ATraining {
     @Column(name="explanation",nullable = false)
     protected String explanation;
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name="idSession",nullable=false)
     protected SessionUser sessionUser;
+    */
 
     @OneToMany(cascade={CascadeType.ALL}, mappedBy = "id")
     protected List<AMuscle> bodyParts;
+
+    @ManyToOne
+    @JoinColumn(name="userId",nullable=false)
+    private AUser user;
     //endregion
 
     //region Constructor
     public ATraining()
-    {
-        this.bodyParts = new ArrayList<AMuscle>();
-    }
-
-    public ATraining(int length, String name, String explanation) {
+    {}
+    public ATraining(AUser user,int length, String name, String explanation) {
         this.length = length;
         this.explanation = explanation;
         this.name = name;
         this.bodyParts = new ArrayList<AMuscle>();
+        this.user = user;
     }
     //endregion
 
-
     //region Getter/Setter
+
+    public AUser getUser() {
+        return user;
+    }
+
+    public void setUser(AUser user) {
+        this.user = user;
+    }
+
     public int getId() {
         return id;
     }
@@ -90,19 +101,20 @@ public abstract class ATraining {
         this.bodyParts = bodyParts;
     }
 
+    /*
     public SessionUser getSessionUser() {
         return sessionUser;
     }
 
     public void setSessionUser(SessionUser sessionUser) {
         if (!this.sessionUser.equals(sessionUser)) {
-            /* TODO: corriger le bordel causé lorsqu'une nouvelle session est assignée */
+            // TODO: corriger le bordel causé lorsqu'une nouvelle session est assignée
             this.sessionUser.deleteTraining(this);
             this.sessionUser = sessionUser;
             sessionUser.addTraining(this);
         }
     }
-
+    */
     public List<AMuscle> getBodyParts() {
         return bodyParts;
     }
@@ -125,7 +137,6 @@ public abstract class ATraining {
                 ", length=" + length +
                 ", name='" + name + '\'' +
                 ", explanation='" + explanation + '\'' +
-                //", sessionUser=" + sessionUser +
                 //", bodyParts=" + bodyParts +
                 '}';
     }
