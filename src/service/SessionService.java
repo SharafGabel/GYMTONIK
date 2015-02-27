@@ -40,9 +40,9 @@ public class SessionService {
             if(sommeil != null && !sommeil.trim().isEmpty())
                 sessionUser.setTimeSleep(Integer.parseInt(sommeil));
             sessionUser.setUser(user);
-            sessionUser.setName("seance "+sessionUser.getId());
+            sessionUser.setName("seance "+ sessionUser.getIdS());
             session.save(sessionUser);
-            sessionUser.setName("seance "+sessionUser.getId());
+            sessionUser.setName("seance "+ sessionUser.getIdS());
             session.save(sessionUser);
             tx.commit();
             return true;
