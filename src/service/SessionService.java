@@ -1,5 +1,6 @@
 package service;
 
+import model.Exercise;
 import model.SessionUser;
 import model.User;
 import org.hibernate.*;
@@ -55,7 +56,42 @@ public class SessionService {
         }
         
     }
-    
+
+    public static boolean addExToSession(SessionUser sessionUser, Exercise exercise)
+    {
+        System.out.println("SHIT");
+        if(sessionUser == null || sessionUser.getTrainings().contains(exercise)){
+            System.out.println("1");
+            System.out.println("1");
+            System.out.println("1");
+            return false;
+        }
+        System.out.println("1");
+        Session session = getSession();
+        System.out.println("1.2");
+        Transaction tx = null;
+        System.out.println("1.3");
+        try{
+            tx = session.beginTransaction();
+            System.out.println("2");
+            sessionUser.addTraining(exercise);
+            System.out.println("3");
+            session.update(sessionUser);
+            System.out.println("4");
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+            System.out.println("PB");
+            return false;
+        }finally {
+            session.close();
+        }
+
+    }
+
     public static boolean deleteSession(SessionUser sessionUser){
         if(sessionUser == null){
             return false;

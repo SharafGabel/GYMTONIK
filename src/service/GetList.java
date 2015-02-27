@@ -62,6 +62,7 @@ public class GetList {
         catch(Exception ex){
             ex.printStackTrace();
         }
+        session.close();
         return list.get(0);
     }
 

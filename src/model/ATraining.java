@@ -129,7 +129,37 @@ public abstract class ATraining {
 
     //endregion
 
+    //region equals
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ATraining)) return false;
+
+        ATraining aTraining = (ATraining) o;
+
+        if (id != aTraining.id) return false;
+        if (length != aTraining.length) return false;
+        if (!bodyParts.equals(aTraining.bodyParts)) return false;
+        if (!explanation.equals(aTraining.explanation)) return false;
+        if (!name.equals(aTraining.name)) return false;
+        if (!user.equals(aTraining.user)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + length;
+        result = 31 * result + name.hashCode();
+        result = 31 * result + explanation.hashCode();
+        result = 31 * result + bodyParts.hashCode();
+        result = 31 * result + user.hashCode();
+        return result;
+    }
+
+    //endregion
     @Override
     public String toString() {
         return "ATraining{" +

@@ -22,4 +22,5 @@ public class Exercise extends ATraining implements Serializable {
 
     //region Getter/Setter
     //endregion
+
 }
