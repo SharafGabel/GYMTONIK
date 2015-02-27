@@ -1,12 +1,8 @@
 package service;
 
-import model.Exercise;
 import model.SessionUser;
 import model.User;
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
@@ -37,13 +33,17 @@ public class GetList {
     {
         Session session = getSession();
         List list = null;
+        Transaction tx = null;
 
         try{
+            tx = session.beginTransaction();
             Query query=session.createQuery("from SessionUser where user.id="+user1.getId());
             list = query.list();
-
+            tx.commit();
         }
         catch(Exception ex){
+            if (tx != null)
+                tx.rollback();
             ex.printStackTrace();
         }
         return list;

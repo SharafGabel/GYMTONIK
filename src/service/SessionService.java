@@ -34,17 +34,16 @@ public class SessionService {
         Session session = getSession();
         Transaction tx = null;
         try {
-            tx = session.getTransaction();
-            tx.begin();
+            tx = session.beginTransaction();
             SessionUser sessionUser = new SessionUser();
-            if(!sommeil.equals(null))
+
+            if(sommeil != null && !sommeil.trim().isEmpty())
                 sessionUser.setTimeSleep(Integer.parseInt(sommeil));
             sessionUser.setUser(user);
-            sessionUser.setName("seance "+sessionUser.getIdS());
-            System.out.println(sessionUser.toString());
+            sessionUser.setName("seance "+sessionUser.getId());
             session.save(sessionUser);
-           sessionUser.setName("seance "+sessionUser.getIdS());
-            session.update(sessionUser);
+            sessionUser.setName("seance "+sessionUser.getId());
+            session.save(sessionUser);
             tx.commit();
             return true;
         } catch (Exception e) {
