@@ -33,10 +33,10 @@
         for(SessionUser a:sessionUserList) {
             a.getName();
             if (a.isPerform()) {
-                out.println("<tr id='" + a.getId() + "'class='success'>");
+                out.println("<tr id='" + a.getIdS() + "'class='success'>");
 
             } else {
-                out.println("<tr id='" + a.getId() + "'class='warning'>");
+                out.println("<tr id='" + a.getIdS() + "'class='warning'>");
             }
             out.println("<td>" + a.getName() + "</td>");
             out.println("<td>" + a.getDateProgram() + "</td>");

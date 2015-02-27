@@ -18,7 +18,7 @@ public abstract class ATraining {
     @Id
     @GeneratedValue(generator="idGen")
     @GenericGenerator(name="idGen",strategy="org.hibernate.id.IncrementGenerator")
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "idEx", unique = true, nullable = false)
     private int id;
     
     @Column(name="length",nullable = false)
@@ -30,10 +30,9 @@ public abstract class ATraining {
     @Column(name="explanation",nullable = false)
     protected String explanation;
 
-    /*@ManyToOne
-    @JoinColumn(name="idSession",nullable=false)
-    protected SessionUser sessionUser;
-    */
+    @ManyToMany(fetch = FetchType.LAZY,mappedBy = "trainings")
+    protected List<SessionUser> sessionUser;
+
 
     @OneToMany(cascade={CascadeType.ALL}, mappedBy = "id")
     protected List<AMuscle> bodyParts;
@@ -52,6 +51,7 @@ public abstract class ATraining {
         this.name = name;
         this.bodyParts = new ArrayList<AMuscle>();
         this.user = user;
+        this.sessionUser = new ArrayList<SessionUser>();
     }
     //endregion
 
@@ -101,20 +101,38 @@ public abstract class ATraining {
         this.bodyParts = bodyParts;
     }
 
-    /*
-    public SessionUser getSessionUser() {
+    public List<SessionUser> getSessionUser() {
         return sessionUser;
     }
 
-    public void setSessionUser(SessionUser sessionUser) {
-        if (!this.sessionUser.equals(sessionUser)) {
-            // TODO: corriger le bordel causé lorsqu'une nouvelle session est assignée
-            this.sessionUser.deleteTraining(this);
-            this.sessionUser = sessionUser;
-            sessionUser.addTraining(this);
-        }
+    public void setSessionUser(List<SessionUser> sessionUser) {
+        this.sessionUser = sessionUser;
     }
-    */
+
+    public boolean addSession(SessionUser sessionUser1)
+    {
+        if(!sessionUser.contains(sessionUser1)) {
+            this.sessionUser.add(sessionUser1);
+            sessionUser1.addTraining(this);
+            return true;
+        }
+        return false;
+    }
+
+    /*
+        public SessionUser getSessionUser() {
+            return sessionUser;
+        }
+
+        public void setSessionUser(SessionUser sessionUser) {
+            if (!this.sessionUser.equals(sessionUser)) {
+                // TODO: corriger le bordel causé lorsqu'une nouvelle session est assignée
+                this.sessionUser.deleteTraining(this);
+                this.sessionUser = sessionUser;
+                sessionUser.addTraining(this);
+            }
+        }
+        */
     public List<AMuscle> getBodyParts() {
         return bodyParts;
     }

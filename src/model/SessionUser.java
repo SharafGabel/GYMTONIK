@@ -16,8 +16,8 @@ public class SessionUser implements Serializable {
     @Id
     @GeneratedValue(generator="idGen")
     @GenericGenerator(name="idGen",strategy="org.hibernate.id.IncrementGenerator")
-    @Column(name="id",unique = true,nullable = false)
-    private Integer id;
+    @Column(name="idS",unique = true,nullable = false)
+    private Integer idS;
 
     @Column(name="name",nullable = false)
     private String name;
@@ -36,7 +36,10 @@ public class SessionUser implements Serializable {
     @JoinColumn(name="userId",nullable=false)
     private AUser user;
 
-    @OneToMany(cascade={CascadeType.ALL}, mappedBy = "id")
+    @ManyToMany(fetch = FetchType.LAZY,cascade={CascadeType.ALL})
+    @JoinTable(name = "SeanceExercice", joinColumns = {
+            @JoinColumn(name = "idS") },
+            inverseJoinColumns = { @JoinColumn(name = "idEx") })
     private List<ATraining> trainings;
 
     @OneToOne(cascade={CascadeType.ALL},mappedBy = "session")
@@ -61,8 +64,8 @@ public class SessionUser implements Serializable {
     //endregion
 
     //region Getter/Setter
-    public Integer getId() {
-        return id;
+    public Integer getIdS() {
+        return idS;
     }
 
     public AUser getUser() {
@@ -83,6 +86,7 @@ public class SessionUser implements Serializable {
 
     public void addTraining(ATraining training) {
         this.trainings.add(training);
+        training.addSession(this);
     }
 
     public void deleteTraining(ATraining training) {
@@ -144,7 +148,7 @@ public class SessionUser implements Serializable {
     @Override
     public String toString() {
         return "SessionUser{" +
-                "id=" + id +
+                "id=" + idS +
                 ", name='" + name + '\'' +
                 ", dateProgram=" + dateProgram +
                 ", perform=" + perform +
@@ -162,7 +166,7 @@ public class SessionUser implements Serializable {
 
         SessionUser that = (SessionUser) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (idS != null ? !idS.equals(that.idS) : that.idS != null) return false;
         /*
         if (perform != that.perform) return false;
         if (timeSleep != that.timeSleep) return false;
@@ -177,7 +181,7 @@ public class SessionUser implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
+        int result = idS != null ? idS.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (dateProgram != null ? dateProgram.hashCode() : 0);
         result = 31 * result + (perform ? 1 : 0);

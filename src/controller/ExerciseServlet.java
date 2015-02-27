@@ -62,7 +62,6 @@ public class ExerciseServlet extends HttpServlet {
                 if(SessionService.addExToSession(sessionUsers, ExerciseService.getExercise(idExercice)))
                 {
                     out.println("<h1>Ajout de l'exercice à la séance réussie</h1>");
-                    response.sendRedirect("exercice.jsp");
                 }
             }
             else if (action.equals("update")) {

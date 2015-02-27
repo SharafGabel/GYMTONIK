@@ -32,7 +32,7 @@
                 for(SessionUser a:sessionUserList)
                 {
             %>
-            <option name="optionName" value="<%=a.getId()%>"> <%=a.getName()+" ( Crée le "+a.getDateProgram()+" )"%></option>
+            <option name="optionName" value="<%=a.getIdS()%>"> <%=a.getName()+" ( Crée le "+a.getDateProgram()+" )"%></option>
             <%}%>
         </select>
 
@@ -74,7 +74,7 @@
 
                             out.println("<form method=\"post\" action=\"update-exercise.jsp\">");
                             out.println("<input type=\"hidden\" name=\"idEx\" value=\"" + t.getId() + "\" />");
-                            out.println("<input type=\"hidden\" name=\"idS\" value=\"" + u.getId() + "\" />");
+                            out.println("<input type=\"hidden\" name=\"idS\" value=\"" + u.getIdS() + "\" />");
                             out.println("<button type=\"submit\">Modifier</button>");
                             out.println("</form>");
                             out.println("</td>");
@@ -90,12 +90,12 @@
                             out.println("<form method=\"post\" action=\"ExerciceServlet\">");
                             out.println("<input type=\"hidden\" name=\"action\" value=\"addToEx\" />");
                             out.println("<input type=\"hidden\" name=\"idEx\" value=\"" + t.getId() + "\" />");
-                            out.println("<input type=\"hidden\" name=\"idS\" value=\"" + u.getId() + "\" />");
+                            out.println("<input type=\"hidden\" name=\"idS\" value=\"" + u.getIdS() + "\" />");
                             out.println("<select name=\"sessionToAdd\">");
                 for(SessionUser a:sessionUserList)
                 {
             %>
-            <option name="optionName" value="<%=a.getId()%>"> <%=a.getName()+" ( Crée le "+a.getDateProgram()+" )"%></option>
+            <option name="optionName" value="<%=a.getIdS()%>"> <%=a.getName()+" ( Crée le "+a.getDateProgram()+" )"%></option>
             <%}%>
             </select>
             <%

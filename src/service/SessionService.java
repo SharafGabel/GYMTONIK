@@ -40,9 +40,10 @@ public class SessionService {
             if(!sommeil.equals(null))
                 sessionUser.setTimeSleep(Integer.parseInt(sommeil));
             sessionUser.setUser(user);
-            sessionUser.setName("seance "+sessionUser.getId());
+            sessionUser.setName("seance "+sessionUser.getIdS());
+            System.out.println(sessionUser.toString());
             session.save(sessionUser);
-            sessionUser.setName("seance "+sessionUser.getId());
+           sessionUser.setName("seance "+sessionUser.getIdS());
             session.update(sessionUser);
             tx.commit();
             return true;
@@ -59,13 +60,17 @@ public class SessionService {
 
     public static boolean addExToSession(SessionUser sessionUser, Exercise exercise)
     {
+        SessionUser sessionUserObj = null;
+
+
+
         System.out.println("SHIT");
-        if(sessionUser == null || sessionUser.getTrainings().contains(exercise)){
+        /*if(sessionUser == null || sessionUser.getTrainings().contains(exercise)){
             System.out.println("1");
             System.out.println("1");
             System.out.println("1");
             return false;
-        }
+        }*/
         System.out.println("1");
         Session session = getSession();
         System.out.println("1.2");
@@ -73,11 +78,19 @@ public class SessionService {
         System.out.println("1.3");
         try{
             tx = session.beginTransaction();
-            System.out.println("2");
+            System.out.println("123");
+            Query query = session.createQuery("from SessionUser where id="+ sessionUser.getIdS());
+            System.out.println("124");
+            sessionUserObj = (SessionUser)query.uniqueResult();
+            System.out.println("125");
+            sessionUserObj.addTraining(exercise);
+            System.out.println("126");
+            session.saveOrUpdate(sessionUserObj);
+            System.out.println("127");
+            /*System.out.println("2");
             sessionUser.addTraining(exercise);
             System.out.println("3");
-            session.update(sessionUser);
-            System.out.println("4");
+            System.out.println("4");*/
             tx.commit();
             return true;
         } catch (Exception e) {
