@@ -34,6 +34,7 @@ public class RegisterServlet extends HttpServlet {
             } else
             {
                 request.getRequestDispatcher("welcome.jsp").include(request, response);
+                // TODO: Message et/ou tests à revoir, puisque l'échec de l'inscription peut également être dû à un username ou email déjà existant
                 out.println("<h1>Registration Unsuccessful</h1><p>Un des champs obligatoire est vide</p>");
             }
 
