@@ -55,7 +55,8 @@
             <%
                 User user = (User)session.getAttribute("User");
                 for(SessionUser u:sessionUserList) {
-                    List<Exercise> trainingList = ExerciseService.getExercises(user);
+                    List<ATraining> trainingList = u.getTrainings();
+                    //List<Exercise> trainingList = ExerciseService.getExercises(user);
                     for (ATraining t : trainingList)
                     {
                         if (t.getUser().getId() == user.getId())

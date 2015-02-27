@@ -59,6 +59,10 @@ public class SessionService {
 
     public static boolean addExToSession(SessionUser sessionUser, Exercise exercise)
     {
+        SessionUser sessionUserObj = null;
+
+
+
         System.out.println("SHIT");
         /*if(sessionUser == null || sessionUser.getTrainings().contains(exercise)){
             System.out.println("1");
@@ -74,10 +78,13 @@ public class SessionService {
         try{
             tx = session.beginTransaction();
             System.out.println("123");
+            Query query = session.createQuery("from SessionUser where id="+ sessionUser.getIdS());
+            System.out.println("124");
+            sessionUserObj = (SessionUser)query.uniqueResult();
             System.out.println("125");
-            sessionUser.addTraining(exercise);
+            sessionUserObj.addTraining(exercise);
             System.out.println("126");
-            session.saveOrUpdate(sessionUser);
+            session.saveOrUpdate(sessionUserObj);
             System.out.println("127");
             /*System.out.println("2");
             sessionUser.addTraining(exercise);

@@ -113,11 +113,26 @@ public abstract class ATraining {
     {
         if(!sessionUser.contains(sessionUser1)) {
             this.sessionUser.add(sessionUser1);
+            sessionUser1.addTraining(this);
             return true;
         }
         return false;
     }
 
+    /*
+        public SessionUser getSessionUser() {
+            return sessionUser;
+        }
+
+        public void setSessionUser(SessionUser sessionUser) {
+            if (!this.sessionUser.equals(sessionUser)) {
+                // TODO: corriger le bordel causé lorsqu'une nouvelle session est assignée
+                this.sessionUser.deleteTraining(this);
+                this.sessionUser = sessionUser;
+                sessionUser.addTraining(this);
+            }
+        }
+        */
     public List<AMuscle> getBodyParts() {
         return bodyParts;
     }
