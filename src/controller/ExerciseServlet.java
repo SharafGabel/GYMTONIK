@@ -36,11 +36,9 @@ public class ExerciseServlet extends HttpServlet {
                         && description != null && !description.trim().isEmpty()
                         && sessionUserId != null && !sessionUserId.trim().isEmpty()
                         && ExerciseService.addExercise(user,sessionUsers, length, nameExercise, description)) {
-                    request.getRequestDispatcher("exercise.jsp").forward(request, response);
                     out.println("<h1>Création de l'exercice réussie</h1>");
                 }
                 else {
-                    request.getRequestDispatcher("exercise.jsp").forward(request, response);
                      out.println("<h1>Création de l'exercise  échouée<h1>");
                 }
             } else if (action.equals("delete")) {
@@ -73,7 +71,6 @@ public class ExerciseServlet extends HttpServlet {
                     } else out.println("Mise à jour échouée");
                 } else out.println("Mise à jour échouée");
             }
-
             request.getRequestDispatcher("exercise.jsp").forward(request, response);
         } finally {
             out.close();
