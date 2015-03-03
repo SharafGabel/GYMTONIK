@@ -8,6 +8,8 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
+import java.util.List;
+
 public class SessionService {
 
     private static final SessionFactory ourSessionFactory;
@@ -143,26 +145,37 @@ public class SessionService {
         
     }
 
-    //return a sessionUser
-    //@param sessionUser
-    public static SessionUser getSessionUserByidS(String idS) {
+    public static List getSessionList(User user1)
+    {
         Session session = getSession();
-        Transaction tx = null;
-        SessionUser sessionUserObj = null;
+        List list = null;
 
         try{
-            tx = session.beginTransaction();
-            Query query = session.createQuery("from SessionUser where id="+ idS);
-            sessionUserObj = (SessionUser)query.uniqueResult();
-            tx.commit();
-        }catch (Exception e){
-            if(tx != null)
-                tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
+            Query query=session.createQuery("from SessionUser where user.id="+user1.getId());
+            list = query.list();
+
         }
-        return sessionUserObj;
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+        return list;
+    }
+
+    public static SessionUser getSessionById(int idS)
+    {
+        Session session = getSession();
+        List<SessionUser> list = null;
+
+        try{
+            Query query=session.createQuery("from SessionUser where id="+idS);
+            list = query.list();
+
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+        session.close();
+        return list.get(0);
     }
 
 }

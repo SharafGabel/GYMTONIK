@@ -5,6 +5,7 @@
 <%@ page import="model.Exercise" %>
 <%@ page import="service.ExerciseService" %>
 <%@ page import="model.ATraining" %>
+<%@ page import="service.SessionService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% String title = "Exercice"; %>
 <%@ include file="header.jsp" %>
@@ -28,7 +29,7 @@
         <p><label class="lab">Choix de la séance</label></p>
         <select name="sessionUser">
             <%
-                List<SessionUser> sessionUserList = GetList.getSessionList((User) session.getAttribute("User"));
+                List<SessionUser> sessionUserList = SessionService.getSessionList((User) session.getAttribute("User"));
                 for(SessionUser a:sessionUserList)
                 {
             %>

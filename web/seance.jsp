@@ -2,6 +2,7 @@
 <%@ page import="service.GetList" %>
 <%@ page import="java.util.List" %>
 <%@ page import="model.User" %>
+<%@ page import="service.SessionService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     // Si aucune session n'est créée, rediriger vers page de login / inscription
@@ -29,7 +30,7 @@
         <td>Nombre d'exercices</td>
     </tr>
     <%
-        List<SessionUser> sessionUserList = GetList.getSessionList((User) session.getAttribute("User"));
+        List<SessionUser> sessionUserList = SessionService.getSessionList((User) session.getAttribute("User"));
         for(SessionUser a:sessionUserList) {
             a.getName();
             if (a.isPerform()) {

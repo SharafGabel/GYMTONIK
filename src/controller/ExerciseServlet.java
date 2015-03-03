@@ -2,14 +2,12 @@ package controller;
 
 import model.*;
 import service.ExerciseService;
-import service.GetList;
 import service.SessionService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -32,7 +30,7 @@ public class ExerciseServlet extends HttpServlet {
 
                 String sessionUserId = request.getParameter("sessionUser");
                 String idExercice = request.getParameter("idEx");
-                SessionUser sessionUsers = GetList.getSessionById(Integer.parseInt(sessionUserId));
+                SessionUser sessionUsers = SessionService.getSessionById(Integer.parseInt(sessionUserId));
                 if (length != null && !length.trim().isEmpty()
                         && nameExercise != null && !nameExercise.trim().isEmpty()
                         && description != null && !description.trim().isEmpty()
@@ -48,7 +46,7 @@ public class ExerciseServlet extends HttpServlet {
             {
                 String sessionUserId = request.getParameter("sessionUser");
                 String idExercice = request.getParameter("idEx");
-                SessionUser sessionUsers = GetList.getSessionById(Integer.parseInt(sessionUserId));
+                SessionUser sessionUsers = SessionService.getSessionById(Integer.parseInt(sessionUserId));
                 if(idExercice != null && !idExercice.trim().isEmpty()) {
                     deleteExercise(user,ExerciseService.getExercise(idExercice));
                     out.println("Exercice supprimé");
@@ -58,7 +56,7 @@ public class ExerciseServlet extends HttpServlet {
             {
                 String sessionUserId = request.getParameter("sessionToAdd");
                 String idExercice = request.getParameter("idEx");
-                SessionUser sessionUsers = GetList.getSessionById(Integer.parseInt(sessionUserId));
+                SessionUser sessionUsers = SessionService.getSessionById(Integer.parseInt(sessionUserId));
                 if(SessionService.addExToSession(sessionUsers, ExerciseService.getExercise(idExercice)))
                 {
                     out.println("<h1>Ajout de l'exercice à la séance réussie</h1>");
@@ -67,7 +65,7 @@ public class ExerciseServlet extends HttpServlet {
             else if (action.equals("update")) {
                 String sessionUserId = request.getParameter("sessionUser");
                 String idExercice = request.getParameter("idEx");
-                SessionUser sessionUsers = GetList.getSessionById(Integer.parseInt(sessionUserId));
+                SessionUser sessionUsers = SessionService.getSessionById(Integer.parseInt(sessionUserId));
                 System.out.println("In action.equals(update)");
                 if (idExercice != null && !idExercice.trim().isEmpty()
                         &&length != null && !length.trim().isEmpty()
