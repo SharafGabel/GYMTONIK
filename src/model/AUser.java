@@ -169,7 +169,7 @@ public abstract class AUser {
         boolean valid = false;
 
         try {
-            valid = this.password.equals(hashPassword(password));
+            valid = this.password.equals(hashPassword(password)); //?
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {

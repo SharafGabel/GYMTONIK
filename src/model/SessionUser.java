@@ -44,6 +44,8 @@ public class SessionUser implements Serializable {
 
     @OneToOne(cascade={CascadeType.ALL},mappedBy = "session")
     private Performance performance;
+
+
     //endregion
 
     //region Constructor

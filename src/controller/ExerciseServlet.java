@@ -102,7 +102,7 @@ public class ExerciseServlet extends HttpServlet {
     }
 
 
-    public boolean addExercise(AUser user,SessionUser sessionUser,String length,String name,String explanation){
+    public static boolean addExercise(AUser user,SessionUser sessionUser,String length,String name,String explanation){
         if(sessionUser==null || sessionUser.getUser() == null){
             return false;
         }
@@ -110,7 +110,7 @@ public class ExerciseServlet extends HttpServlet {
         return true;
     }
 
-    public boolean deleteExercise(AUser aUser,Exercise exercise){
+    public static boolean deleteExercise(AUser aUser,Exercise exercise){
         if(exercise == null){
             return false;
         }
@@ -118,7 +118,7 @@ public class ExerciseServlet extends HttpServlet {
         return true;
     }
 
-    public boolean updateExercise(AUser aUser,Exercise exercise){
+    public static boolean updateExercise(AUser aUser,Exercise exercise){
         if(exercise == null){
             return false;
         }
