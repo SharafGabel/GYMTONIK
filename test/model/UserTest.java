@@ -1,8 +1,13 @@
 package model;
 
+import controller.LoginServlet;
+import org.hibernate.Session;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import service.LoginService;
+import service.RegisterService;
+import util.HibernateUtil;
 
 import static org.testng.Assert.*;
 
@@ -12,7 +17,9 @@ public class UserTest {
 
     @BeforeMethod
     public void setUp() throws Exception {
-        user = new User("user","email","pass");
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        user= (User)session.get(User.class,1);
     }
 
     @AfterMethod
@@ -22,24 +29,40 @@ public class UserTest {
     @Test
     public void testUser(){
         User user = new User("user","email","pass");
-        assertEquals("user",user.getUsername());
-        assertEquals("email",user.getEmail());
-        assertTrue(user.validatePassword("pass"));
+        assertEquals("Yoshi",user.getUsername());
+        testGetEmail();
+        testValidatePassword();
     }
 
     @Test
     public void testGetUsername(){
-        assertEquals("user",user.getUsername());
+        assertEquals("Yoshi",user.getUsername());
     }
 
     @Test
     public void testGetEmail(){
-        assertEquals("email",user.getEmail());
+        assertEquals("yoshi@gmail.com",user.getEmail());
     }
 
     @Test
     public void testValidatePassword(){
         assertFalse(user.validatePassword("wrongpass"));
-        assertTrue(user.validatePassword("pass"));
+        assertTrue(user.validatePassword("yoshi"));
     }
+    
+    @Test 
+    public void testRegisterUser(){
+        assertTrue(RegisterService.register(user));      
+    }
+    
+    @Test
+    public void testLoggedUser(){
+
+       assertTrue(LoginServlet.login(user.getUsername(),"yoshi"));
+        //RegisterService.register(user);
+        //assertTrue(LoginService.authenticate(user.getUsername(),user.getPassword()));
+    }
+    
+   
+    
 }
