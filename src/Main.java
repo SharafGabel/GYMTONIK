@@ -1,60 +1,54 @@
 import console.LoginConsole;
 import console.RegisterConsole;
-import model.*;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
-import service.GetList;
+import model.User;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     private static final int NB_CHOIX = 2;
 
     public static void main(final String[] args) throws Exception {
-        System.out.println("Bienvenue sur Gym Tonik !\n" +
-                "Que voulez-vous faire ?\n");
-
-        print_menu();
-
-        int choix = choix();
-
-        boolean reussi = false;
-        switch (choix) {
-            case 1:
-                reussi = RegisterConsole.register();
-                break;
-            case 2:
-                reussi = LoginConsole.login();
-                break;
-        }
-
-        System.out.println(reussi);
-
+        System.out.println("Bienvenue sur Gym Tonik !\n");
+        User user = frontPage();
+        userPage(user);
     }
 
-    private static int choix() {
+    private static User frontPage() {
+        User user = new User();
         Scanner sc = new Scanner(System.in);
-        int choix = sc.nextInt();
-
-        if (choix < 0 || choix > NB_CHOIX) {
-            System.out.println("Veuillez saisir un nombre entre 0 et " + NB_CHOIX);
-            choix();
+        int i = 0;
+        System.out.print("Vous êtes sur la page d'accueil de notre site");
+        boolean error = true;
+        boolean connected = false;
+        while (error && !connected) {
+            System.out.println(" \n Tapez:");
+            System.out.println("1 - Connection");
+            System.out.println("2 - Inscription");
+            String rep = sc.nextLine();
+            try {
+                i = Integer.parseInt(rep);
+            }
+            catch(NumberFormatException e){
+            }
+            switch (i) {
+                case 1:
+                    System.out.println("Redirection connection");
+                    user = LoginConsole.login();
+                    error = false;
+                    break;
+                case 2:
+                    System.out.println("Redirection inscription");
+                    user = RegisterConsole.register();
+                    error = false;
+                    break;
+                default:
+                    System.out.println("Une erreur est survenue durant votre saisie !");
+            }
         }
 
-        return choix;
+        return user;
     }
-
-    private static void print_menu() {
-        System.out.println("1 - Inscription");
-        System.out.println("2 - Connexion");
-        System.out.println("\n");
+    private static void userPage(User user){
+        System.out.println("Bonjour " + user.getUsername());
     }
 }

@@ -8,8 +8,9 @@ import java.util.Scanner;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class RegisterConsole {
-    public static boolean register() {
+    public static User register() {
         System.out.println("Inscription\n");
+        User user = new User();
 
         Scanner sc = new Scanner(System.in);
 
@@ -36,20 +37,21 @@ public class RegisterConsole {
                 && email.equals(emailVerif)
                 && !password.trim().isEmpty()
                 && taille > 0 && poids > 0) {
-            User user = new User(login, email, password);
+            user.setEmail(email);
+            user.setUsername(login);
+            user.setPassword(password);
             user.setHeight(taille);
             user.setWeight(poids);
 
             if (RegisterService.register(user)) {
                 System.out.println("Inscription réussie");
-                return true;
             } else {
                 System.out.println("L'identifiant ou l'adresse email saisie existe déjà.");
-                return false;
             }
         } else {
             System.out.println("Un des champs est vide et/ou les adresses ne correspondent pas.");
-            return false;
         }
+
+        return user;
     }
 }
