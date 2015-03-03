@@ -65,6 +65,11 @@ public class UserTest {
         //RegisterService.register(user);
         //assertTrue(LoginService.authenticate(user.getUsername(),user.getPassword()));
     }
+
+    @Test
+    public void testUserExist(){
+        assertFalse(RegisterServlet.register(user.getUsername(),user.getEmail(),user.getPassword(),user.getEmail(),"170","100"));
+    }
     
    
     
