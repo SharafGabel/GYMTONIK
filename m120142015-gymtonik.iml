@@ -50,7 +50,6 @@
     <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="javax.servlet.jsp:javax.servlet.jsp-api:2.3.0" level="project" />
     <orderEntry type="library" name="com.mysql.jdbc_5.1.5" level="project" />
-    <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
   </component>
 </module>
 

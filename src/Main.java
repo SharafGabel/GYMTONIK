@@ -1,6 +1,8 @@
 import console.LoginConsole;
 import console.RegisterConsole;
+import console.SessionConsole;
 import model.User;
+import util.Util;
 
 import java.util.Scanner;
 
@@ -49,6 +51,22 @@ public class Main {
         return user;
     }
     private static void userPage(User user){
-        System.out.println("Bonjour " + user.getUsername());
+        Util.clearConsole();
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Bonjour " + user.getUsername() + "\n");
+
+        System.out.println("1 - Séances");
+
+        int choix = sc.nextInt();
+
+        switch (choix) {
+            case 1:
+                SessionConsole.menu(user);
+                break;
+            default:
+                System.out.println("Veuilles entrer un nombre entre 1 et ...");
+                break;
+        }
     }
 }
