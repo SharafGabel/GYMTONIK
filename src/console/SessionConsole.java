@@ -60,9 +60,9 @@ public class SessionConsole {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Création d'une Séance\n");
-        System.out.println("Combien d'heures avez-vous dormi cette nuit ?");
-        String sommeil = sc.next();
+        System.out.println("Quel nom voulez vous donner à la séance?");
+        String nom = sc.next();
 
-        SessionService.addSession(user, sommeil);
+        SessionService.addSession(user, nom);
     }
 }

@@ -1,6 +1,8 @@
+import console.ExerciseConsole;
 import console.LoginConsole;
 import console.RegisterConsole;
 import console.SessionConsole;
+import model.Exercise;
 import model.User;
 import util.Util;
 
@@ -57,12 +59,16 @@ public class Main {
         System.out.println("Bonjour " + user.getUsername() + "\n");
 
         System.out.println("1 - Séances");
+        System.out.println("2 - Exercices");
 
         int choix = sc.nextInt();
 
         switch (choix) {
             case 1:
                 SessionConsole.menu(user);
+                break;
+            case 2:
+                ExerciseConsole.menu(user);
                 break;
             default:
                 System.out.println("Veuilles entrer un nombre entre 1 et ...");

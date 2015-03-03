@@ -8,6 +8,7 @@ import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
+import util.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,22 @@ public class ExerciseService {
         return ourSessionFactory.openSession();
     }
 
+    public static void createExercise(AUser user, String descritpion, String name, int length){
+        Session session = getSession();
+        Transaction tx = null;
+
+        try{
+            tx = session.getTransaction();
+            tx.begin();
+            Exercise exercise = new Exercise(user,length,name,descritpion);
+            session.save(exercise);
+            tx.commit();
+        }catch (Exception e) {
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+        }
+    }
     public static boolean addExercise(AUser user,SessionUser sessionUser,String length,String name,String explanation) {
         Session session = getSession();
         Transaction tx = null;
@@ -144,6 +161,21 @@ public class ExerciseService {
         }finally {
             session.close();
         }
+    }
+
+    public static List getUserExercises(AUser user){
+        Session session = getSession();List exercises = new ArrayList<Exercise>();
+        try {
+            Transaction tx = session.getTransaction();
+            tx.begin();
+            Query query = session.createQuery("from Exercise where user = :userid");
+            query.setParameter("userid", user.getId());
+            exercises = query.list();
+            tx.commit();
+        } catch (Exception e) {
+        }
+
+        return exercises;
     }
 
 
