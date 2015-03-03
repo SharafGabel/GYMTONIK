@@ -1,3 +1,5 @@
+import console.LoginConsole;
+import console.RegisterConsole;
 import model.*;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -11,72 +13,48 @@ import service.GetList;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
-    private static final SessionFactory ourSessionFactory;
-    private static final ServiceRegistry serviceRegistry;
-
-    static {
-        try {
-            Configuration configuration = new Configuration();
-            configuration.configure();
-
-            serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
-            ourSessionFactory = configuration.buildSessionFactory(serviceRegistry);
-        } catch (Throwable ex) {
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
-
-    public static Session getSession() throws HibernateException {
-        return ourSessionFactory.openSession();
-    }
+    private static final int NB_CHOIX = 2;
 
     public static void main(final String[] args) throws Exception {
-        System.out.println("Hibernate component mapping");
-        final Session session = getSession();
-        int weight = 200, height = 9000;
-        Transaction tx = session.beginTransaction();
-        /**Création d'un User**/
-         User user = new User();
-         user.setUsername("JB TTP1");
-         user.setHeight(height);
-         user.setWeight(weight);
-         user.setEmail("TarteAuPion1@gmail.com");
-         user.setPassword("TarteAuPion1");
-         /**FIN création user**/
+        System.out.println("Bienvenue sur Gym Tonik !\n" +
+                "Que voulez-vous faire ?\n");
 
-        /*Création d'une séance*/
-        SessionUser sessionUser = new SessionUser(5);
-        sessionUser.setUser(user);
-        sessionUser.setDateProgram(new Date());
+        print_menu();
 
-        /*Fin création d'une séance*/
+        int choix = choix();
 
-        /**Création d'un muscle */
-        AMuscle muscle = new Muscle();
-        muscle.setName("Triceps");
-        /** Fin de la création d'un muscle */
+        boolean reussi = false;
+        switch (choix) {
+            case 1:
+                reussi = RegisterConsole.register();
+                break;
+            case 2:
+                reussi = LoginConsole.login();
+                break;
+        }
 
-        /**Création d'un exercice */
-        ATraining exercise = new Exercise();
-        exercise.setName("Mollet de l'extreme");
-        exercise.setExplanation("Travail les mollets de l'extreme");
-        exercise.setLength(10);
-        List<ATraining> exerciseList = new ArrayList<ATraining>();
-        exerciseList.add(exercise);
-        sessionUser.setTrainings(exerciseList);
-        exercise.addBodyPart(muscle);
-        /**Fin de la création d'un exercice*/
+        System.out.println(reussi);
 
-        /*Création d'une performance*/
-        Performance performance = new Performance();
-        performance.setName("Performance1");
-        performance.setSession(sessionUser);
-        /**Fin création performance**/
+    }
 
-        session.saveOrUpdate(user);
+    private static int choix() {
+        Scanner sc = new Scanner(System.in);
+        int choix = sc.nextInt();
 
-        tx.commit();
+        if (choix < 0 || choix > NB_CHOIX) {
+            System.out.println("Veuillez saisir un nombre entre 0 et " + NB_CHOIX);
+            choix();
+        }
+
+        return choix;
+    }
+
+    private static void print_menu() {
+        System.out.println("1 - Inscription");
+        System.out.println("2 - Connexion");
+        System.out.println("\n");
     }
 }
