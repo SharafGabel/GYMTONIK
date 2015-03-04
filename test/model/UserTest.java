@@ -21,7 +21,7 @@ public class UserTest {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         user= (User)session.get(User.class,2);
-        userNoDb = new User("test","test@gmail.com","test");
+        userNoDb = new User("jean","jean@gmail.com","jean");
     }
 
     @AfterMethod
@@ -30,8 +30,8 @@ public class UserTest {
 
     @Test
     public void testUser(){
-        User user = new User("user","email","pass");
-        assertEquals("user",user.getUsername());
+        User user = new User("jean","jean@gmail.com","jean");
+        assertEquals("jean",user.getUsername());
         testGetEmail();
         testValidatePassword();
     }

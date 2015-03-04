@@ -1,7 +1,12 @@
 package model;
 
 import controller.ExerciseServlet;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+import org.hibernate.service.ServiceRegistryBuilder;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -16,14 +21,36 @@ public class ExerciseTest {
     SessionUser sessionUser;
     Exercise exercise;
     User user;
+    Exercise exerciseRecup;
+
+    private static final SessionFactory ourSessionFactory;
+    private static final ServiceRegistry serviceRegistry;
+
+    static {
+        try {
+            Configuration configuration = new Configuration();
+            configuration.configure();
+
+            serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
+            ourSessionFactory = configuration.buildSessionFactory(serviceRegistry);
+        } catch (Throwable ex) {
+            throw new ExceptionInInitializerError(ex);
+        }
+    }
+
+    private static Session getSession() throws HibernateException {
+        return ourSessionFactory.openSession();
+    }
 
     @BeforeMethod
     public void setUp() throws Exception {
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = getSession();
         user = (User)session.get(User.class,2);
         sessionUser= (SessionUser)session.get(SessionUser.class,2);
         exercise = new Exercise(user,50,"travail abdomen","travail les abdominaux");
+        exerciseRecup = (Exercise)session.get(Exercise.class,2);
+        session.close();
     }
 
     @AfterMethod
@@ -40,7 +67,7 @@ public class ExerciseTest {
 
     @Test
     public void testDeleteExercise(){
-        assertTrue(ExerciseService.deleteExercise(user,exercise));
+        assertTrue(ExerciseService.deleteExercise(user,exerciseRecup));
     }
 
     @Test

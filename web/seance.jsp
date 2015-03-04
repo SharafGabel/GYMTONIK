@@ -1,5 +1,4 @@
 <%@ page import="model.SessionUser" %>
-<%@ page import="service.GetList" %>
 <%@ page import="java.util.List" %>
 <%@ page import="model.User" %>
 <%@ page import="service.SessionService" %>

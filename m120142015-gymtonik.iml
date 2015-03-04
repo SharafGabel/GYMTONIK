@@ -63,6 +63,16 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="com.mysql.jdbc_5.1.5" level="project" />
+    <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://Z:/com.mysql.jdbc_5.1.5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
 

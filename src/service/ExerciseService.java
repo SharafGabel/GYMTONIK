@@ -39,8 +39,7 @@ public class ExerciseService {
         Transaction tx = null;
 
         try{
-            tx = session.getTransaction();
-            tx.begin();
+            tx = session.beginTransaction();
             Exercise exercise = new Exercise(user,length,name,descritpion);
             session.save(exercise);
             tx.commit();
@@ -55,8 +54,7 @@ public class ExerciseService {
         Transaction tx = null;
 
         try {
-            tx = session.getTransaction();
-            tx.begin();
+            tx = session.beginTransaction();
             Exercise exercise = new Exercise(user,Integer.parseInt(length),name,explanation);
             List<ATraining> exerciseList = new ArrayList<ATraining>();
             exerciseList.add(exercise);
@@ -82,8 +80,7 @@ public class ExerciseService {
 
         List<Exercise> exercises;
         try {
-            tx = session.getTransaction();
-            tx.begin();
+            tx = session.beginTransaction();
             //Query query = session.createQuery("from Exercise where idUser="+aUser.getId());
             Query query = session.createQuery("from Exercise");
             exercises = (List<Exercise>) query.list();
@@ -105,8 +102,7 @@ public class ExerciseService {
 
         Exercise exercise;
         try {
-            tx = session.getTransaction();
-            tx.begin();
+            tx = session.beginTransaction();
             Query query = session.createQuery("from Exercise where id="+ idEx);
             exercise = (Exercise) query.uniqueResult();
             tx.commit();
@@ -130,8 +126,7 @@ public class ExerciseService {
 
         Session session = getSession();
         try{
-            Transaction tx = session.getTransaction();
-            tx.begin();
+            Transaction tx = session.beginTransaction();
             session.delete(exercise);
             tx.commit();
             return true;
@@ -150,8 +145,7 @@ public class ExerciseService {
         Session session = getSession();
 
         try{
-            Transaction tx = session.getTransaction();
-            tx.begin();
+            Transaction tx = session.beginTransaction();
             session.update(exercise);
             tx.commit();
             return true;
@@ -162,5 +156,21 @@ public class ExerciseService {
             session.close();
         }
     }
+
+    public static List getUserExercises(AUser user){
+        Session session = getSession();List exercises = new ArrayList<Exercise>();
+        try {
+            Transaction tx = session.getTransaction();
+            tx.begin();
+            Query query = session.createQuery("from Exercise where user = :userid");
+            query.setParameter("userid", user.getId());
+            exercises = query.list();
+            tx.commit();
+        } catch (Exception e) {
+        }
+
+        return exercises;
+    }
+
 
 }
