@@ -22,10 +22,10 @@ public class ExerciseServlet extends HttpServlet {
         String description = request.getParameter("descriptionEx");
         String niveau = request.getParameter("niveau");
         User user = (User)(request.getSession()).getAttribute("User");
+        String action = request.getParameter("action");
 
         try {
 
-            String action = request.getParameter("action");
             if (action.equals("add"))
             {
 
@@ -43,17 +43,17 @@ public class ExerciseServlet extends HttpServlet {
                      out.println("<h1>Création de l'exercise  échouée<h1>");
                 }
             }
-            else if (action.equals("delete"))
+
+            if (action.equals("delete"))
             {
-                String sessionUserId = request.getParameter("sessionUser");
                 String idExercice = request.getParameter("idEx");
-                SessionUser sessionUsers = SessionService.getSessionById(Integer.parseInt(sessionUserId));
                 if(idExercice != null && !idExercice.trim().isEmpty()) {
                     deleteExercise(user,ExerciseService.getExercise(idExercice));
                     out.println("Exercice supprimé");
                 }
             }
-            else if(action.equals("addToEx"))
+            
+            if(action.equals("addToEx"))
             {
                 String sessionUserId = request.getParameter("sessionToAdd");
                 String idExercice = request.getParameter("idEx");
@@ -63,7 +63,8 @@ public class ExerciseServlet extends HttpServlet {
                     out.println("<h1>Ajout de l'exercice à la séance réussie</h1>");
                 }
             }
-            else if (action.equals("update")) {
+            
+            if (action.equals("update")) {
                 String sessionUserId = request.getParameter("sessionUser");
                 String idExercice = request.getParameter("idEx");
                 SessionUser sessionUsers = SessionService.getSessionById(Integer.parseInt(sessionUserId));
