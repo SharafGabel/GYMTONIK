@@ -40,7 +40,7 @@ public class ExerciseTest {
 
     @Test
     public void testDeleteExercise(){
-        assertTrue(ExerciseServlet.deleteExercise(user,exercise));
+        assertTrue(ExerciseService.deleteExercise(user,exercise));
     }
 
     @Test
