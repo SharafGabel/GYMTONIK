@@ -13,24 +13,31 @@ import java.util.Scanner;
 public class ExerciseConsole {
     public static void menu(AUser user) {
         Util.clearConsole();
-        List<Exercise> exos = (ArrayList<Exercise>)ExerciseService.getUserExercises(user);
         Scanner sc = new Scanner(System.in);
+        List<Exercise> exos = ExerciseService.getExercises(user);
 
         /* choix_exo = 0 dans le cas où l'utilisateur n'aurait aucun exercice
            choix_exo = nb de exercice + 1 sinon
          */
         int choix_exo = (exos.size() > 0)? exos.size() + 1 : 1;
 
-        System.out.println("-- Exercise --\n");
+        System.out.println("-- Exercises --\n");
         System.out.println("1 - Créer un Exercise");
-        listExercise(exos);
+        if (exos.size() > 0)
+            listExercise(exos);
+        System.out.println((choix_exo + 1) + " - Retour");
 
         int choix = sc.nextInt();
+
         if (choix == 1) {
             createExercise(user);
             menu(user);
-        }
-        else {
+        }else if (choix > 1 && choix < choix_exo + 1) {
+            // modification exo
+            menu(user);
+        } else if (choix == choix_exo + 1) {
+            return;
+        } else {
             System.out.println("Veuillez saisir une valeur entre 0 et " + 2 );
             menu(user);
         }
@@ -38,13 +45,13 @@ public class ExerciseConsole {
     }
 
     private static void listExercise(List<Exercise> exos) {
-        Util.clearConsole();
-        int i  = 2;
-        for(Exercise exo : exos){
+        int i = 2;
+        for (Exercise exo : exos) {
             System.out.println(i + " - "
-                + exo.getName() + " : " 
-                + exo.getExplanation() 
-                + " (" + exo.getLength() + "min)");
+                    + exo.getName() + " : "
+                    + exo.getExplanation()
+                    + " (" + exo.getLength() + " min)");
+            i++;
         }
     }
 

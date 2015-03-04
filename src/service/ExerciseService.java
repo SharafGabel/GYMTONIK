@@ -163,20 +163,4 @@ public class ExerciseService {
         }
     }
 
-    public static List getUserExercises(AUser user){
-        Session session = getSession();List exercises = new ArrayList<Exercise>();
-        try {
-            Transaction tx = session.getTransaction();
-            tx.begin();
-            Query query = session.createQuery("from Exercise where user = :userid");
-            query.setParameter("userid", user.getId());
-            exercises = query.list();
-            tx.commit();
-        } catch (Exception e) {
-        }
-
-        return exercises;
-    }
-
-
 }
