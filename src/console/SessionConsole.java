@@ -20,11 +20,12 @@ public class SessionConsole {
         /* choix_seance = 0 dans le cas où l'utilisateur n'aurait aucune séance
            choix_seance = nb de séance + 1 sinon
          */
-        int choix_seance = (seances.size() > 0)? seances.size() + 1 : 1;
+        int choix_seance = seances.size() + 1;
 
         System.out.println("-- Séances --\n");
         System.out.println("1 - Créer une séance");
-        listSession(seances);
+        if (seances.size() > 0)
+            listSession(seances);
         System.out.println((choix_seance + 1) + " - Retour");
 
 
@@ -36,6 +37,7 @@ public class SessionConsole {
             editSession(seances.get(choix - 2));
             menu(user);
         } else if (choix == choix_seance + 1) {
+            //editSession()
             return;
         } else {
             System.out.println("Veuillez saisir une valeur entre 0 et " + choix_seance );
@@ -44,12 +46,10 @@ public class SessionConsole {
     }
 
     private static void listSession(List<SessionUser> seances) {
-        if (seances.size() > 0) {
-            int i = 2;
-            for (SessionUser s : seances) {
-                System.out.println(i + " - " + s.getName() + " - " + s.getDateProgram());
-                i++;
-            }
+        int i = 2;
+        for (SessionUser s : seances) {
+            System.out.println(i + " - " + s.getName() + " - " + s.getDateProgram());
+            i++;
         }
     }
 
