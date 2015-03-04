@@ -1,6 +1,5 @@
 <%@ page import="model.SessionUser" %>
 <%@ page import="model.User" %>
-<%@ page import="service.GetList" %>
 <%@ page import="java.util.List" %>
 <%@ page import="model.Exercise" %>
 <%@ page import="service.ExerciseService" %>
@@ -47,7 +46,7 @@
                 for(SessionUser s:sessionUserList)
                 {
             %>
-            <option name="optionName" value="<%=s.getId()%>" <% if (s.getId().equals(Integer.parseInt(idSeance))) out.println("selected"); %>> <%=s.getName()+" ( Crée le "+s.getDateProgram()+" )"%></option>
+            <option name="optionName" value="<%=s.getIdS()%>" <% if (s.getIdS().equals(Integer.parseInt(idSeance))) out.println("selected"); %>> <%=s.getName()+" ( Crée le "+s.getDateProgram()+" )"%></option>
             <%}%>
         </select>
 
