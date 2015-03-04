@@ -36,6 +36,9 @@
         <p><label class="lab">Durée (en min)</label></p>
         <input type="number" min="1" max="120" name="duree" id="duree" value="<%= exercise.getLength() %>" />
 
+        <p><label class="lab">Niveau [1..3]</label></p>
+        <input type="number" min="1" max="3" name="niveau" id="niveau" value="<%= exercise.getNiveau() %>" />
+
         <p><label class="lab">Description de l'exercice</label></p>
         <input type="text" name="descriptionEx" id="descriptionEx" value="<%= exercise.getExplanation() %>" />
 
