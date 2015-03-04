@@ -49,7 +49,7 @@ public class ExerciseTest {
         user = (User)session.get(User.class,2);
         sessionUser= (SessionUser)session.get(SessionUser.class,2);
         exercise = new Exercise(user,50,"travail abdomen","travail les abdominaux");
-        exerciseRecup = (Exercise)session.get(Exercise.class,2);
+        exerciseRecup = (Exercise)session.get(Exercise.class,4);
         session.close();
     }
 
@@ -73,9 +73,9 @@ public class ExerciseTest {
     @Test
     public void testUpdateExercise(){
 
-        exercise.setExplanation("travail les abdominaux et les pectoraux ");
-        exercise.setLength(40);
-        exercise.setName("exercise  abdominaux intensif");
-        assertTrue(ExerciseServlet.updateExercise(user,exercise));  //a rectifier ,il ne prend pas en compte l'id
+        exerciseRecup.setExplanation("travail les abdominaux et les pectoraux ");
+        exerciseRecup.setLength(40);
+        exerciseRecup.setName("exercise  abdominaux intensif");
+        assertTrue(ExerciseService.updateExercise(user,exerciseRecup));  //a rectifier ,il ne prend pas en compte l'id
     }
 }
