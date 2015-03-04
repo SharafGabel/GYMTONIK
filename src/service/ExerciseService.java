@@ -49,6 +49,7 @@ public class ExerciseService {
             e.printStackTrace();
         }
     }
+
     public static boolean addExercise(AUser user,SessionUser sessionUser,String length,String name,String explanation,int niveau) {
         Session session = getSession();
         Transaction tx = null;
@@ -81,9 +82,30 @@ public class ExerciseService {
         List<Exercise> exercises;
         try {
             tx = session.beginTransaction();
-            //Query query = session.createQuery("from Exercise where idUser="+aUser.getId());
+            Query query = session.createQuery("from Exercise e left join fetch e.user u where u.id = :userId");
+            query.setParameter("userId", aUser.getId());
+            exercises = query.list();
+            tx.commit();
+            return exercises;
+        } catch (Exception e) {
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+            return null;
+        }finally {
+            session.close();
+        }
+    }
+
+    public static List<Exercise> getAllExercises() {
+        Session session = getSession();
+        Transaction tx = null;
+
+        List<Exercise> exercises;
+        try {
+            tx = session.beginTransaction();
             Query query = session.createQuery("from Exercise");
-            exercises = (List<Exercise>) query.list();
+            exercises = query.list();
             tx.commit();
             return exercises;
         } catch (Exception e) {
@@ -116,7 +138,6 @@ public class ExerciseService {
             session.close();
         }
     }
-
 
     public static boolean deleteExercise(AUser user,Exercise exercise){
         //Car un Utilisateur ne peut supprimer que des exercices qu'il a lui même créé
@@ -164,10 +185,9 @@ public class ExerciseService {
         try {
             Transaction tx = session.getTransaction();
             tx.begin();
-            // TODO: faire la requête avec la table de jointure afin de retourner tous les exercices d'une séance
-            /*Query query = session.createQuery("from Exercise where user = :userid");
-            query.setParameter("userid", user.getId());
-            exercises = query.list();*/
+            Query query = session.createQuery("from Exercise e left join fetch e.sessionUser s where s.id = :sessionId");
+            query.setParameter("sessionId", sessionUser.getIdS());
+            exercises = query.list();
             tx.commit();
         } catch (Exception e) {
         }

@@ -33,8 +33,7 @@ public class SessionConsole {
             createSession(user);
             menu(user);
         } else if (choix > 1 && choix < choix_seance + 1) {
-            // TODO: Finir la fonction getExercices(SessionUser) de ExerciseService avant de décommenter cette ligne
-            //displaySession(seances.get(choix - 2));
+            displaySession(seances.get(choix - 2));
             menu(user);
         } else if (choix == choix_seance + 1) {
             return;
@@ -64,6 +63,7 @@ public class SessionConsole {
     }
 
     private static void displaySession(SessionUser session) {
+        Scanner sc = new Scanner(System.in);
         System.out.println("\n");
 
         List<Exercise> exs = ExerciseService.getExercises(session);
@@ -76,6 +76,9 @@ public class SessionConsole {
                     + " - Niveau :" + exo.getNiveau()
                     + " (" + exo.getLength() + " min)");
         }
+
+        System.out.println("Cliquez sur une touche pour continuer...");
+        sc.nextLine();
 
     }
 }
