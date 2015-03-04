@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class ExerciseConsole {
     public static void menu(AUser user) {
-        Util.clearConsole();
+        CoreConsole.getConnectedHeader(user);
         Scanner sc = new Scanner(System.in);
         List<Exercise> exos = ExerciseService.getExercises(user);
 

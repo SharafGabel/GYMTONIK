@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class SessionConsole {
     public static void menu(User user) {
-        Util.clearConsole();
+        CoreConsole.getConnectedHeader(user);
         Scanner sc = new Scanner(System.in);
         List<SessionUser> seances = SessionService.getSessionList(user);
 
