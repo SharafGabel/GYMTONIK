@@ -20,6 +20,7 @@ public class ExerciseServlet extends HttpServlet {
         String length= request.getParameter("duree");
         String nameExercise= request.getParameter("nomEx");
         String description = request.getParameter("descriptionEx");
+        String niveau = request.getParameter("niveau");
         User user = (User)(request.getSession()).getAttribute("User");
 
         try {
@@ -35,7 +36,7 @@ public class ExerciseServlet extends HttpServlet {
                         && nameExercise != null && !nameExercise.trim().isEmpty()
                         && description != null && !description.trim().isEmpty()
                         && sessionUserId != null && !sessionUserId.trim().isEmpty()
-                        && ExerciseService.addExercise(user,sessionUsers, length, nameExercise, description)) {
+                        && ExerciseService.addExercise(user,sessionUsers, length, nameExercise, description,Integer.parseInt(niveau))) {
                     out.println("<h1>Création de l'exercice réussie</h1>");
                 }
                 else {
@@ -82,6 +83,7 @@ public class ExerciseServlet extends HttpServlet {
                     updatedExercice.setName(nameExercise);
                     updatedExercice.setLength(Integer.parseInt(length));
                     updatedExercice.setExplanation(description);
+                    updatedExercice.setNiveau(Integer.parseInt(niveau));
                     updatedExercice.setBodyParts(new ArrayList<AMuscle>());
 
                     if (updateExercise(user,updatedExercice)) {
@@ -102,11 +104,11 @@ public class ExerciseServlet extends HttpServlet {
     }
 
 
-    public static boolean addExercise(AUser user,SessionUser sessionUser,String length,String name,String explanation){
+    public static boolean addExercise(AUser user,SessionUser sessionUser,String length,String name,String explanation,int niveau){
         if(sessionUser==null || sessionUser.getUser() == null){
             return false;
         }
-        ExerciseService.addExercise(user,sessionUser,length,name,explanation);
+        ExerciseService.addExercise(user,sessionUser,length,name,explanation,niveau);
         return true;
     }
 

@@ -66,8 +66,10 @@ public class ExerciseConsole {
         String description = sc.next();
         System.out.println("Durée (minutes)");
         int length = sc.nextInt();
+        System.out.println("Niveau");
+        int niveau = sc.nextInt();
 
-        ExerciseService.createExercise(user, name, description, length);
+        ExerciseService.createExercise(user, name, description, length,niveau);
 
         System.out.print("Ajout reussi");
     }
