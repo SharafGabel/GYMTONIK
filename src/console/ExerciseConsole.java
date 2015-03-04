@@ -33,7 +33,7 @@ public class ExerciseConsole {
             createExercise(user);
             menu(user);
         }else if (choix > 1 && choix < choix_exo + 1) {
-            // modification exo
+            updateExercise(user, exos.get(choix - 2));
             menu(user);
         } else if (choix == choix_exo + 1) {
             return;
@@ -60,15 +60,45 @@ public class ExerciseConsole {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Création d'un Exercise\n");
-        System.out.println("Nom de l'Exercise");
+        System.out.println("Nom de l'exercice");
         String name = sc.nextLine();
-        System.out.println("Description de l'Exercise");
+        System.out.println("Description");
         String description = sc.next();
-        System.out.println("Durée de l'Exercise");
+        System.out.println("Durée (minutes)");
         int length = sc.nextInt();
 
         ExerciseService.createExercise(user, name, description, length);
 
         System.out.print("Ajout reussi");
+    }
+
+    private static void updateExercise(AUser user, Exercise exo) {
+        Util.clearConsole();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Modification de l'exercice " + exo.getName());
+        System.out.println("(Laissez le champ vide pour ne pas modifier la valeur)\n");
+
+        System.out.println("Nom de l'exercice [" + exo.getName() + "]");
+        String name = sc.nextLine();
+        System.out.println("Description [" + exo.getExplanation() + "]");
+        String description = sc.nextLine();
+        System.out.println("Durée (minutes) [" + exo.getLength() + "]");
+        int length = 0;
+        String lengthString = sc.nextLine();
+
+        try {
+            length = Integer.parseInt(lengthString);
+        } catch (Exception e) {}
+
+        if (!name.trim().isEmpty())
+            exo.setName(name);
+
+        if (!description.trim().isEmpty())
+            exo.setExplanation(description);
+
+        if (length != 0)
+            exo.setLength(length);
+
+        ExerciseService.updateExercise(user, exo);
     }
 }

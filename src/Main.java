@@ -54,6 +54,7 @@ public class Main {
 
         System.out.println("1 - Séances");
         System.out.println("2 - Exercices");
+        System.out.println("3 - Quitter");
 
         int choix = sc.nextInt();
 
@@ -66,6 +67,8 @@ public class Main {
                 ExerciseConsole.menu(user);
                 userPage(user);
                 break;
+            case 3 :
+                return;
             default:
                 System.out.println("Veuilles entrer un nombre entre 1 et ...");
                 break;

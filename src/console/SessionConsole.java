@@ -8,9 +8,6 @@ import util.Util;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * Created by axeleroy on 03/03/2015.
- */
 public class SessionConsole {
     public static void menu(User user) {
         Util.clearConsole();
@@ -37,7 +34,6 @@ public class SessionConsole {
             editSession(seances.get(choix - 2));
             menu(user);
         } else if (choix == choix_seance + 1) {
-            //editSession()
             return;
         } else {
             System.out.println("Veuillez saisir une valeur entre 0 et " + choix_seance );
