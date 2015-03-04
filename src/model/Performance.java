@@ -13,7 +13,7 @@ public class Performance implements Serializable {
     @GeneratedValue(generator="idGen")
     @GenericGenerator(name="idGen",strategy="org.hibernate.id.IncrementGenerator")
     @Column(name="id")
-    private Integer id;
+    private Integer idP;
 
     @Column(name="name",nullable = false)
     private String name;
@@ -31,8 +31,8 @@ public class Performance implements Serializable {
     //endregion
 
     //region Getter/Setter
-    public Integer getId() {
-        return id;
+    public Integer getIdP() {
+        return idP;
     }
 
     public String getName() {

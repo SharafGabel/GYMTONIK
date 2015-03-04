@@ -34,13 +34,13 @@ public class ExerciseService {
         return ourSessionFactory.openSession();
     }
 
-    public static void createExercise(AUser user, String descritpion, String name, int length){
+    public static void createExercise(AUser user, String descritpion, String name, int length,int niveau){
         Session session = getSession();
         Transaction tx = null;
 
         try{
             tx = session.beginTransaction();
-            Exercise exercise = new Exercise(user,length,name,descritpion);
+            Exercise exercise = new Exercise(user,length,name,descritpion,niveau);
             session.save(exercise);
             tx.commit();
         }catch (Exception e) {
@@ -49,13 +49,13 @@ public class ExerciseService {
             e.printStackTrace();
         }
     }
-    public static boolean addExercise(AUser user,SessionUser sessionUser,String length,String name,String explanation) {
+    public static boolean addExercise(AUser user,SessionUser sessionUser,String length,String name,String explanation,int niveau) {
         Session session = getSession();
         Transaction tx = null;
 
         try {
             tx = session.beginTransaction();
-            Exercise exercise = new Exercise(user,Integer.parseInt(length),name,explanation);
+            Exercise exercise = new Exercise(user,Integer.parseInt(length),name,explanation,niveau);
             List<ATraining> exerciseList = new ArrayList<ATraining>();
             exerciseList.add(exercise);
             sessionUser.setTrainings(exerciseList);

@@ -22,20 +22,22 @@ public abstract class ATraining {
     private int id;
     
     @Column(name="length",nullable = false)
-    protected int length;
+    private int length;
 
     @Column(name="name",nullable = false)
-    protected String name;
+    private String name;
 
     @Column(name="explanation",nullable = false)
-    protected String explanation;
+    private String explanation;
 
     @ManyToMany(fetch = FetchType.LAZY,mappedBy = "trainings")
-    protected List<SessionUser> sessionUser;
+    private List<SessionUser> sessionUser;
 
+    @Column(name="niveau",nullable=false)
+    private int niveau;
 
     @OneToMany(cascade={CascadeType.ALL}, mappedBy = "id")
-    protected List<AMuscle> bodyParts;
+    private List<AMuscle> bodyParts;
 
     @ManyToOne
     @JoinColumn(name="userId",nullable=false)
@@ -45,13 +47,15 @@ public abstract class ATraining {
     //region Constructor
     public ATraining()
     {}
-    public ATraining(AUser user,int length, String name, String explanation) {
+
+    public ATraining(AUser user,int length, String name, String explanation,int niveau) {
         this.length = length;
         this.explanation = explanation;
         this.name = name;
         this.bodyParts = new ArrayList<AMuscle>();
         this.user = user;
         this.sessionUser = new ArrayList<SessionUser>();
+        this.niveau = niveau;
     }
     //endregion
 
@@ -128,6 +132,14 @@ public abstract class ATraining {
 
     public void addBodyPart(AMuscle bodyPart) {
         this.bodyParts.add(bodyPart);
+    }
+
+    public int getNiveau() {
+        return niveau;
+    }
+
+    public void setNiveau(int niveau) {
+        this.niveau = niveau;
     }
 
     //endregion

@@ -25,6 +25,9 @@
         <p><label class="lab">Description de l'exercice</label></p>
         <input type="text" name="descriptionEx" id="descriptionEx" />
 
+        <p><label class="lab">Niveau de l'exercice</label></p>
+        <input type="number" min="1" max="3" name="niveau" id="niveau" />
+
         <p><label class="lab">Choix de la séance</label></p>
         <select name="sessionUser">
             <%
@@ -47,6 +50,7 @@
                 <th>Nom Exercice</th>
                 <th>Durée</th>
                 <th>Description</th>
+                <th>Niveau</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -64,6 +68,7 @@
                             out.println("\t<td>" + t.getName() + "</td>");
                             out.println("\t<td>" + t.getLength() + "</td>");
                             out.println("\t<td>" + t.getExplanation() + "</td>");
+                            out.println("\t<td>" + t.getNiveau() + "</td>");
                             out.println("\t<td>");
                             out.println("<form method=\"post\" action=\"ExerciceServlet\">");
                             out.println("<input type=\"hidden\" name=\"action\" value=\"delete\" />");
@@ -85,6 +90,7 @@
                             out.println("\t<td>" + t.getName() + "</td>");
                             out.println("\t<td>" + t.getLength() + "</td>");
                             out.println("\t<td>" + t.getExplanation() + "</td>");
+                            out.println("\t<td>" + t.getNiveau() + "</td>");
                             out.println("\t<td>");
                             out.println("<form method=\"post\" action=\"ExerciceServlet\">");
                             out.println("<input type=\"hidden\" name=\"action\" value=\"addToEx\" />");
