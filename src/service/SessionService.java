@@ -39,7 +39,7 @@ public class SessionService {
             tx = session.getTransaction();
             tx.begin();
             SessionUser sessionUser = new SessionUser();
-            if(!sommeil.equals(null))
+            if(!sommeil.trim().isEmpty())
                 sessionUser.setTimeSleep(Integer.parseInt(sommeil));
             sessionUser.setUser(user);
             sessionUser.setName("seance "+sessionUser.getIdS());
