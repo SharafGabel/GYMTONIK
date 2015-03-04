@@ -157,8 +157,28 @@ public class ExerciseService {
         }
     }
 
-    public static List getUserExercises(AUser user){
-        Session session = getSession();List exercises = new ArrayList<Exercise>();
+    public static List<Exercise> getExercises(SessionUser sessionUser) {
+        Session session = getSession();
+        List<Exercise> exercises = null;
+
+        try {
+            Transaction tx = session.getTransaction();
+            tx.begin();
+            // TODO: faire la requête avec la table de jointure afin de retourner tous les exercices d'une séance
+            /*Query query = session.createQuery("from Exercise where user = :userid");
+            query.setParameter("userid", user.getId());
+            exercises = query.list();*/
+            tx.commit();
+        } catch (Exception e) {
+        }
+
+        return exercises;
+    }
+
+    public static List<Exercise> getUserExercises(AUser user){
+        Session session = getSession();
+        List<Exercise> exercises = null;
+
         try {
             Transaction tx = session.getTransaction();
             tx.begin();

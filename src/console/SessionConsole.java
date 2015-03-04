@@ -1,7 +1,9 @@
 package console;
 
+import model.Exercise;
 import model.SessionUser;
 import model.User;
+import service.ExerciseService;
 import service.SessionService;
 import util.Util;
 
@@ -31,7 +33,8 @@ public class SessionConsole {
             createSession(user);
             menu(user);
         } else if (choix > 1 && choix < choix_seance + 1) {
-            editSession(seances.get(choix - 2));
+            // TODO: Finir la fonction getExercices(SessionUser) de ExerciseService avant de décommenter cette ligne
+            //displaySession(seances.get(choix - 2));
             menu(user);
         } else if (choix == choix_seance + 1) {
             return;
@@ -49,18 +52,30 @@ public class SessionConsole {
         }
     }
 
-    private static void editSession(SessionUser session) {
-
-    }
-
     private static void createSession(User user) {
         Util.clearConsole();
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Création d'une Séance\n");
-        System.out.println("Quel nom voulez vous donner à la séance?");
-        String nom = sc.next();
+        System.out.println("Combien de temps avez-vous dormi ? (en heures)");
+        int sommeil = sc.nextInt();
 
-        SessionService.addSession(user, nom);
+        SessionService.addSession(user, String.valueOf(sommeil));
+    }
+
+    private static void displaySession(SessionUser session) {
+        System.out.println("\n");
+
+        List<Exercise> exs = ExerciseService.getExercises(session);
+
+        System.out.println("Séance " + session.getName() + " du " + session.getDateProgram());
+
+        for (Exercise exo : exs) {
+            System.out.println(exo.getName() + " : "
+                    + exo.getExplanation()
+                    + " - Niveau :" + exo.getNiveau()
+                    + " (" + exo.getLength() + " min)");
+        }
+
     }
 }
