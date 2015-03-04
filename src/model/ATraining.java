@@ -1,5 +1,6 @@
 package model;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.IndexColumn;
 
@@ -17,43 +18,57 @@ public abstract class ATraining {
     @Id
     @GeneratedValue(generator="idGen")
     @GenericGenerator(name="idGen",strategy="org.hibernate.id.IncrementGenerator")
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "idEx", unique = true, nullable = false)
     private int id;
     
     @Column(name="length",nullable = false)
-    public int length;
+    private int length;
 
     @Column(name="name",nullable = false)
-    protected String name;
+    private String name;
 
     @Column(name="explanation",nullable = false)
-    public String explanation;
+    private String explanation;
+
+    @ManyToMany(fetch = FetchType.LAZY,mappedBy = "trainings")
+    private List<SessionUser> sessionUser;
+
+    @Column(name="niveau",nullable=false)
+    private int niveau;
+
+    @OneToMany(cascade={CascadeType.ALL}, mappedBy = "id")
+    private List<AMuscle> bodyParts;
 
     @ManyToOne
-    @JoinColumn(name="idSession",insertable=false, updatable=false,nullable=false)
-    public SessionUser sessionUser;
-
-    @OneToMany(cascade={CascadeType.ALL})
-    @JoinColumn(name="id")
-    @IndexColumn(name="bodyparts")
-    public List<AMuscle> bodyParts;
+    @JoinColumn(name="userId",nullable=false)
+    private AUser user;
     //endregion
 
     //region Constructor
     public ATraining()
-    {
-        this.bodyParts = new ArrayList<AMuscle>();
-    }
+    {}
 
-    public ATraining(int length, String name, String explanation) {
+    public ATraining(AUser user,int length, String name, String explanation,int niveau) {
         this.length = length;
         this.explanation = explanation;
         this.name = name;
         this.bodyParts = new ArrayList<AMuscle>();
+        this.user = user;
+        this.sessionUser = new ArrayList<SessionUser>();
+        this.niveau = niveau;
     }
     //endregion
 
     //region Getter/Setter
+
+    public AUser getUser() {
+        return user;
+    }
+
+    public void setUser(AUser user) {
+        this.user = user;
+    }
+
     public int getId() {
         return id;
     }
@@ -90,9 +105,84 @@ public abstract class ATraining {
         this.bodyParts = bodyParts;
     }
 
+    public List<SessionUser> getSessionUser() {
+        return sessionUser;
+    }
+
+    public void setSessionUser(List<SessionUser> sessionUser) {
+        this.sessionUser = sessionUser;
+    }
+
+    public boolean addSession(SessionUser sessionUser1)
+    {
+        if(!sessionUser.contains(sessionUser1)) {
+            this.sessionUser.add(sessionUser1);
+            return true;
+        }
+        return false;
+    }
+
+    public List<AMuscle> getBodyParts() {
+        return bodyParts;
+    }
+
+    public void setBodyParts(List<AMuscle> bodyParts) {
+        this.bodyParts = bodyParts;
+    }
+
     public void addBodyPart(AMuscle bodyPart) {
         this.bodyParts.add(bodyPart);
     }
 
+    public int getNiveau() {
+        return niveau;
+    }
+
+    public void setNiveau(int niveau) {
+        this.niveau = niveau;
+    }
+
     //endregion
+
+    //region equals
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ATraining)) return false;
+
+        ATraining aTraining = (ATraining) o;
+
+        if (id != aTraining.id) return false;
+        if (length != aTraining.length) return false;
+        if (!bodyParts.equals(aTraining.bodyParts)) return false;
+        if (!explanation.equals(aTraining.explanation)) return false;
+        if (!name.equals(aTraining.name)) return false;
+        if (!user.equals(aTraining.user)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + length;
+        result = 31 * result + name.hashCode();
+        result = 31 * result + explanation.hashCode();
+        result = 31 * result + bodyParts.hashCode();
+        result = 31 * result + user.hashCode();
+        return result;
+    }
+
+    //endregion
+    @Override
+    public String toString() {
+        return "ATraining{" +
+                "id=" + id +
+                ", length=" + length +
+                ", name='" + name + '\'' +
+                ", explanation='" + explanation + '\'' +
+                //", bodyParts=" + bodyParts +
+                '}';
+    }
 }

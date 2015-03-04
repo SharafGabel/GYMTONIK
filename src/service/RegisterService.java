@@ -1,25 +1,43 @@
 package service;
 
 import model.User;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import util.HibernateUtil;
+import org.hibernate.*;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+import org.hibernate.service.ServiceRegistryBuilder;
 
-/**
- * Created by kuga on 15/02/2015.
- */
 public class RegisterService {
 
-    public boolean register(User user){
-        Session session = HibernateUtil.openSession();
-        if(isExistUser(user)) return false;
+    private static final SessionFactory ourSessionFactory;
+    private static final ServiceRegistry serviceRegistry;
+
+    static {
+        try {
+            Configuration configuration = new Configuration();
+            configuration.configure();
+
+            serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
+            ourSessionFactory = configuration.buildSessionFactory(serviceRegistry);
+        } catch (Throwable ex) {
+            throw new ExceptionInInitializerError(ex);
+        }
+    }
+
+    private static Session getSession() throws HibernateException {
+        return ourSessionFactory.openSession();
+    }
+
+    public static boolean register(User user){
+        if(userExists(user))
+            return false;
+
+        Session session = getSession();
 
         Transaction tx = null;
+
         try{
-            tx = session.getTransaction();
-            tx.begin();
-            session.saveOrUpdate(user);
+            tx = session.beginTransaction();
+            session.save(user);
             tx.commit();
         }catch (Exception e){
             if(tx != null){
@@ -29,21 +47,20 @@ public class RegisterService {
         }finally {
             session.close();
         }
-        HibernateUtil.closeSession();
         return true;
     }
 
-    private boolean isExistUser(User user) {
-        Session session = HibernateUtil.openSession();
-        boolean result = false;
+    private static boolean userExists(User user) {
+        Session session = getSession();
+
         Transaction tx = null;
         try{
-            tx = session.getTransaction();
-            tx.begin();
-            Query query = session.createQuery("from User where id="+user.getId()+"");
+            tx = session.beginTransaction();
+            Query query = session.createQuery("from User where username_canonical='" + user.getUsername_canonical() + "'");
             User u = (User)query.uniqueResult();
             tx.commit();
-            if(u != null) result = true;
+            if(u != null)
+                return true;
         }catch(Exception e){
             if(tx != null){
                 tx.rollback();
@@ -51,7 +68,6 @@ public class RegisterService {
         }finally{
             session.close();
         }
-        HibernateUtil.closeSession();
-        return result;
+        return false;
     }
 }

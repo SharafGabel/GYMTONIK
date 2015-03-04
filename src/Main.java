@@ -1,57 +1,63 @@
-import model.*;
-import org.hibernate.*;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
+import console.*;
+import model.Exercise;
+import model.User;
+import util.Util;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Scanner;
 
-
-/**
- * Created by kukugath on 11/02/2015.
- */
 public class Main {
-    private static final SessionFactory ourSessionFactory;
-    private static final ServiceRegistry serviceRegistry;
-
-    static {
-        try {
-            Configuration configuration = new Configuration();
-            configuration.configure();
-
-            serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
-            ourSessionFactory = configuration.buildSessionFactory(serviceRegistry);
-        } catch (Throwable ex) {
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
-
-    public static Session getSession() throws HibernateException {
-        return ourSessionFactory.openSession();
-    }
+    private static final int NB_CHOIX = 2;
 
     public static void main(final String[] args) throws Exception {
-        System.out.println("Hibernate component mapping");
+        System.out.println("Bienvenue sur Gym Tonik !\n");
+        User user = frontPage();
+        userPage(user);
+    }
 
-        final Session session = getSession();
-        int exerciseId;
-        int userId;
-        int seanceId;
-        int muscleId;
-        int weight = 200, height = 9000;
-        Transaction tx = session.beginTransaction();
+    private static User frontPage() {
         User user = new User();
-        user.setUsername("JB TTP");
-        user.setHeight(height);
-        user.setWeight(weight);
-        user.setEmail("TarteAuPion@gmail.com");
-        user.setPassword("TarteAuPion");
-        userId=(Integer)session.save(user);
-        /**FIN création user**/
-        tx.commit();
-        user =  (User) session.get(User.class, 1);
-        System.out.println(user.getUsername());
+        Scanner sc = new Scanner(System.in);
+        boolean error = true;
+        boolean connected = false;
+        while (error && !connected) {
+            CoreConsole.getAnonymousHeader();
+            int i = sc.nextInt();
+            switch (i) {
+                case 1:
+                    user = LoginConsole.login();
+                    error = false;
+                    break;
+                case 2:
+                    user = RegisterConsole.register();
+                    error = false;
+                    break;
+                default:
+                    System.out.println("Une erreur est survenue durant votre saisie !");
+            }
+        }
 
+        return user;
+    }
+    private static void userPage(User user){
+        Scanner sc = new Scanner(System.in);
+
+        CoreConsole.getConnectedHeader(user);
+
+        System.out.println("1 - Séances");
+        System.out.println("2 - Exercices");
+
+        int choix = sc.nextInt();
+
+        switch (choix) {
+            case 1:
+                SessionConsole.menu(user);
+                break;
+            case 2:
+                ExerciseConsole.menu(user);
+                break;
+            default:
+                System.out.println("Veuilles entrer un nombre entre 1 et ...");
+                break;
+        }
     }
 }

@@ -1,69 +1,78 @@
 package service;
 
 import model.User;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import util.HibernateUtil;
+import org.hibernate.*;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+import org.hibernate.service.ServiceRegistryBuilder;
+import util.Util;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by kuga on 15/02/2015.
- */
 public class LoginService {
-    
-    public boolean authendificate(String userId,String password) {
-        User user = getUserById(userId);
-        if(user !=null && user.getId().equals(userId) && user.getPassword().equals(password)){
-            return true;
-        }else {
-            return false;
+
+    private static final SessionFactory ourSessionFactory;
+    private static final ServiceRegistry serviceRegistry;
+
+    static {
+        try {
+            Configuration configuration = new Configuration();
+            configuration.configure();
+
+            serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
+            ourSessionFactory = configuration.buildSessionFactory(serviceRegistry);
+        } catch (Throwable ex) {
+            throw new ExceptionInInitializerError(ex);
         }
     }
 
-    private User getUserById(String userId) {
-        Session session = HibernateUtil.openSession();
+    private static Session getSession() throws HibernateException {
+        return ourSessionFactory.openSession();
+    }
+
+    public static boolean authenticate(String username, String password) {
+        User user = getUserByUsername(username);
+        return (user != null && user.validatePassword(password));
+    }
+
+
+
+    public static User getUserByUsername(String username) {
+        Session session = getSession();
         Transaction tx = null;
         User user = null;
 
         try{
-            tx=session.getTransaction();
-            tx.begin();
-            Query query = session.createQuery("from User where user_id="+userId+"");
+            tx = session.beginTransaction();
+            Query query = session.createQuery("from User where username_canonical='"+ Util.getCanonical(username) +"'");
             user = (User)query.uniqueResult();
             tx.commit();
         }catch (Exception e){
-            if(tx != null){
+            if(tx != null)
                 tx.rollback();
-            }
             e.printStackTrace();
-        }finally {
+        } finally {
             session.close();
         }
-        HibernateUtil.closeSession();
         return user;
     }
 
     public List<User> getUserList(){
+        Session session = getSession();
         List<User> list = new ArrayList<User>();
-        Session session = HibernateUtil.openSession();
         Transaction tx = null;
         try{
-            tx=session.getTransaction();
-            tx.begin();
+            tx = session.beginTransaction();
             list = session.createQuery("from User ").list();
             tx.commit();
         }catch (Exception e){
-            if(tx != null){
+            if(tx != null)
                 tx.rollback();
-            }
             e.printStackTrace();
-        }finally {
+        } finally {
             session.close();
         }
-        HibernateUtil.closeSession();
         return list;
     }
 }

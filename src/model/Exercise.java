@@ -13,11 +13,14 @@ public class Exercise extends ATraining implements Serializable {
 
     //region Constructor
     public Exercise()
+    {}
+    public Exercise(AUser user,int length, String name, String explanation,int niveau)
     {
-        super();
+        super(user,length, name, explanation,niveau);
     }
     //endregion
 
     //region Getter/Setter
     //endregion
+
 }
