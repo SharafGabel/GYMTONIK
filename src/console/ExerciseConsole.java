@@ -50,6 +50,7 @@ public class ExerciseConsole {
             System.out.println(i + " - "
                     + exo.getName() + " : "
                     + exo.getExplanation()
+                    + " - Niveau : " + exo.getNiveau()
                     + " (" + exo.getLength() + " min)");
             i++;
         }
@@ -66,7 +67,7 @@ public class ExerciseConsole {
         String description = sc.next();
         System.out.println("Durée (minutes)");
         int length = sc.nextInt();
-        System.out.println("Niveau");
+        System.out.println("Niveau [1..3]");
         int niveau = sc.nextInt();
 
         ExerciseService.createExercise(user, name, description, length,niveau);
@@ -87,19 +88,28 @@ public class ExerciseConsole {
         System.out.println("Durée (minutes) [" + exo.getLength() + "]");
         int length = 0;
         String lengthString = sc.nextLine();
+        System.out.println("Niveau [" + exo.getNiveau() + "]");
+        int niveau = 0;
+        String niveauString = sc.nextLine();
 
         try {
             length = Integer.parseInt(lengthString);
         } catch (Exception e) {}
 
+        try {
+            niveau = Integer.parseInt(niveauString);
+        } catch (Exception e) {}
         if (!name.trim().isEmpty())
             exo.setName(name);
 
         if (!description.trim().isEmpty())
             exo.setExplanation(description);
 
-        if (length != 0)
+        if (length > 0 && length <= 20)
             exo.setLength(length);
+
+        if (niveau > 0 && niveau < 4)
+            exo.setNiveau(niveau);
 
         ExerciseService.updateExercise(user, exo);
     }

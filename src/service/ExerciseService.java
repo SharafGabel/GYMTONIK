@@ -139,7 +139,7 @@ public class ExerciseService {
     }
 
     public static boolean updateExercise(AUser user,Exercise exercise){
-        if(exercise == null|| user.getId()!=exercise.getUser().getId()){
+        if(exercise == null /*|| user.getId()!=exercise.getUser().getId()*/){
             return false;
         }
         Session session = getSession();
