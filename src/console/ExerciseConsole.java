@@ -1,74 +1,63 @@
 package console;
 
-import com.sun.javafx.geom.AreaOp;
+import model.Exercise;
 import model.AUser;
 import model.Exercise;
-import model.SessionUser;
-import model.User;
 import service.ExerciseService;
-import service.SessionService;
 import util.Util;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * Created by axeleroy on 03/03/2015.
- */
 public class ExerciseConsole {
     public static void menu(AUser user) {
         Util.clearConsole();
+        List<Exercise> exos = (ArrayList<Exercise>)ExerciseService.getUserExercises(user);
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("-- Exercice --\n");
-        System.out.println("1 - Créer un exercice");
-        System.out.println("2 - Voir vos exercices");
+        /* choix_exo = 0 dans le cas où l'utilisateur n'aurait aucun exercice
+           choix_exo = nb de exercice + 1 sinon
+         */
+        int choix_exo = (exos.size() > 0)? exos.size() + 1 : 1;
+
+        System.out.println("-- Exercise --\n");
+        System.out.println("1 - Créer un Exercise");
+        listExercise(exos);
 
         int choix = sc.nextInt();
-        switch(choix){
-            case 1:
-                createExercise(user);
-                menu(user);
-                break;
-            case 2:
-                listExercise(user);
-                menu(user);
-                break;
-            default:
-                System.out.println("Veuillez saisir une valeur entre 0 et " + 2 );
-                menu(user);
-                break;
+        if (choix == 1) {
+            createExercise(user);
+            menu(user);
+        }
+        else {
+            System.out.println("Veuillez saisir une valeur entre 0 et " + 2 );
+            menu(user);
         }
 
     }
 
-    private static void listExercise(AUser user) {
+    private static void listExercise(List<Exercise> exos) {
         Util.clearConsole();
-        Scanner sc = new Scanner(System.in);
-        ArrayList<Exercise> exos = (ArrayList<Exercise>)ExerciseService.getUserExercises(user);
+        int i  = 2;
         for(Exercise exo : exos){
-            System.out.println("===========");
-            System.out.println("Nom: "+exo.getName());
-            System.out.println("Nom: "+exo.getExplanation());
-            System.out.println("Nom: "+exo.getLength());
-            System.out.println("===========");
+            System.out.println(i + " - "
+                + exo.getName() + " : " 
+                + exo.getExplanation() 
+                + " (" + exo.getLength() + "min)");
         }
-
-        System.out.println("Liste des exercices\n");
     }
 
     private static void createExercise(AUser user) {
         Util.clearConsole();
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Création d'un exercice\n");
-        System.out.println("Nom de l'exercice");
+        System.out.println("Création d'un Exercise\n");
+        System.out.println("Nom de l'Exercise");
         String name = sc.nextLine();
-        System.out.println("Description de l'exercice");
+        System.out.println("Description de l'Exercise");
         String description = sc.next();
-        System.out.println("Durée de l'exercice");
+        System.out.println("Durée de l'Exercise");
         int length = sc.nextInt();
 
         ExerciseService.createExercise(user, name, description, length);

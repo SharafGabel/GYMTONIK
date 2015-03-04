@@ -20,7 +20,6 @@ public class Main {
     private static User frontPage() {
         User user = new User();
         Scanner sc = new Scanner(System.in);
-        int i = 0;
         System.out.print("Vous êtes sur la page d'accueil de notre site");
         boolean error = true;
         boolean connected = false;
@@ -28,12 +27,7 @@ public class Main {
             System.out.println(" \n Tapez:");
             System.out.println("1 - Connection");
             System.out.println("2 - Inscription");
-            String rep = sc.nextLine();
-            try {
-                i = Integer.parseInt(rep);
-            }
-            catch(NumberFormatException e){
-            }
+            int i = sc.nextInt();
             switch (i) {
                 case 1:
                     System.out.println("Redirection connection");
@@ -66,9 +60,11 @@ public class Main {
         switch (choix) {
             case 1:
                 SessionConsole.menu(user);
+                userPage(user);
                 break;
             case 2:
                 ExerciseConsole.menu(user);
+                userPage(user);
                 break;
             default:
                 System.out.println("Veuilles entrer un nombre entre 1 et ...");

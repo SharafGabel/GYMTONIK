@@ -17,14 +17,16 @@ public class SessionConsole {
         Scanner sc = new Scanner(System.in);
         List<SessionUser> seances = SessionService.getSessionList(user);
 
-        System.out.println("-- Séances --\n");
-        System.out.println("1 - Créer une session");
-        listSession(seances);
-
-        /* choix_seance = 0 dans le cas où l'utilisateur n'aurait aucun exercice
+        /* choix_seance = 0 dans le cas où l'utilisateur n'aurait aucune séance
            choix_seance = nb de séance + 1 sinon
          */
-        int choix_seance = (seances.size() > 0)? seances.size() + 2 : 1;
+        int choix_seance = (seances.size() > 0)? seances.size() + 1 : 1;
+
+        System.out.println("-- Séances --\n");
+        System.out.println("1 - Créer une séance");
+        listSession(seances);
+        System.out.println((choix_seance + 1) + " - Retour");
+
 
         int choix = sc.nextInt();
         if (choix == 1) {
@@ -33,7 +35,7 @@ public class SessionConsole {
         } else if (choix > 1 && choix < choix_seance + 1) {
             editSession(seances.get(choix - 2));
             menu(user);
-        } else if (choix > choix_seance) {
+        } else if (choix == choix_seance + 1) {
             return;
         } else {
             System.out.println("Veuillez saisir une valeur entre 0 et " + choix_seance );
