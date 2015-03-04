@@ -145,15 +145,14 @@ public class SessionService {
         
     }
 
-    public static List getSessionList(User user1)
+    public static List<SessionUser> getSessionList(User user1)
     {
         Session session = getSession();
-        List list = null;
+        List<SessionUser> list = null;
 
         try{
             Query query=session.createQuery("from SessionUser where user.id="+user1.getId());
-            list = query.list();
-
+            list = (List<SessionUser>) query.list();
         }
         catch(Exception ex){
             ex.printStackTrace();
