@@ -1,7 +1,5 @@
 import console.*;
-import model.Exercise;
 import model.User;
-import util.Util;
 
 import java.util.Scanner;
 
@@ -9,7 +7,6 @@ public class Main {
     private static final int NB_CHOIX = 2;
 
     public static void main(final String[] args) throws Exception {
-        System.out.println("Bienvenue sur Gym Tonik !\n");
         User user = frontPage();
         userPage(user);
     }
