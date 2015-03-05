@@ -1,9 +1,6 @@
 package service;
 
-import model.ATraining;
-import model.AUser;
-import model.Exercise;
-import model.SessionUser;
+import model.*;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
@@ -34,13 +31,13 @@ public class ExerciseService {
         return ourSessionFactory.openSession();
     }
 
-    public static void createExercise(AUser user, String descritpion, String name, int length,int niveau){
+    public static void createExercise(AUser user, String descritpion, String name, int length,int nbRep,int niveau){
         Session session = getSession();
         Transaction tx = null;
 
         try{
             tx = session.beginTransaction();
-            Exercise exercise = new Exercise(user,length,name,descritpion,niveau);
+            Exercise exercise = new Exercise(user,length,nbRep,name,descritpion,niveau);
             session.save(exercise);
             tx.commit();
         }catch (Exception e) {
@@ -50,18 +47,17 @@ public class ExerciseService {
         }
     }
 
-    public static boolean addExercise(AUser user,SessionUser sessionUser,String length,String name,String explanation,int niveau) {
+    public static boolean addExercise(AUser user,SessionUser sessionUser,String length,String nbRep,String name,String explanation,int niveau) {
         Session session = getSession();
         Transaction tx = null;
 
         try {
             tx = session.beginTransaction();
-            Exercise exercise = new Exercise(user,Integer.parseInt(length),name,explanation,niveau);
-            List<ATraining> exerciseList = new ArrayList<ATraining>();
-            exerciseList.add(exercise);
-            sessionUser.setTrainings(exerciseList);
+            Exercise exercise = new Exercise(user,Integer.parseInt(length),Integer.parseInt(nbRep),name,explanation,niveau);
             session.save(exercise);
             session.saveOrUpdate(sessionUser);
+            Historique historique = new Historique(sessionUser.getIdS(),exercise.getId(),user.getId());
+            session.save(historique);
             tx.commit();
             return true;
         } catch (Exception e) {
@@ -185,8 +181,7 @@ public class ExerciseService {
         try {
             Transaction tx = session.getTransaction();
             tx.begin();
-            Query query = session.createQuery("from Exercise e left join fetch e.sessionUser s where s.id = :sessionId");
-            query.setParameter("sessionId", sessionUser.getIdS());
+            Query query = session.createQuery("Select * from Historique h,SessionUser s where h.idS="+sessionUser.getIdS());
             exercises = query.list();
             tx.commit();
         } catch (Exception e) {
@@ -202,8 +197,7 @@ public class ExerciseService {
         try {
             Transaction tx = session.getTransaction();
             tx.begin();
-            Query query = session.createQuery("from Exercise where user = :userid");
-            query.setParameter("userid", user.getId());
+            Query query = session.createQuery("from Exercise where user.id="+user.getId());
             exercises = query.list();
             tx.commit();
         } catch (Exception e) {

@@ -21,6 +21,7 @@ public class ExerciseServlet extends HttpServlet {
         String nameExercise= request.getParameter("nomEx");
         String description = request.getParameter("descriptionEx");
         String niveau = request.getParameter("niveau");
+        String nbRepet = request.getParameter("nbRepet");
         User user = (User)(request.getSession()).getAttribute("User");
 
         String action = request.getParameter("action");
@@ -37,7 +38,7 @@ public class ExerciseServlet extends HttpServlet {
                         && nameExercise != null && !nameExercise.trim().isEmpty()
                         && description != null && !description.trim().isEmpty()
                         && sessionUserId != null && !sessionUserId.trim().isEmpty()
-                        && ExerciseService.addExercise(user,sessionUsers, length, nameExercise, description,Integer.parseInt(niveau))) {
+                        && ExerciseService.addExercise(user,sessionUsers, length,nbRepet, nameExercise, description,Integer.parseInt(niveau))) {
                     out.println("<h1>Création de l'exercice réussie</h1>");
                 }
                 else {
@@ -59,7 +60,7 @@ public class ExerciseServlet extends HttpServlet {
                 String sessionUserId = request.getParameter("sessionToAdd");
                 String idExercice = request.getParameter("idEx");
                 SessionUser sessionUsers = SessionService.getSessionById(Integer.parseInt(sessionUserId));
-                if(SessionService.addExToSession(sessionUsers, ExerciseService.getExercise(idExercice)))
+                if(SessionService.addOrUpdateExToSession(sessionUsers, ExerciseService.getExercise(idExercice)))
                 {
                     out.println("<h1>Ajout de l'exercice à la séance réussie</h1>");
                 }
@@ -77,7 +78,8 @@ public class ExerciseServlet extends HttpServlet {
                     Exercise updatedExercice = ExerciseService.getExercise(idExercice);
                     if (updatedExercice != null ) {
                         updatedExercice.setName(nameExercise);
-                        updatedExercice.setLength(Integer.parseInt(length));
+                        updatedExercice.setDureeExo(Integer.parseInt(length));
+                        updatedExercice.setNbRepetition(Integer.parseInt(nbRepet));
                         updatedExercice.setExplanation(description);
                         updatedExercice.setNiveau(Integer.parseInt(niveau));
                         updatedExercice.setBodyParts(new ArrayList<AMuscle>());
@@ -101,11 +103,11 @@ public class ExerciseServlet extends HttpServlet {
     }
 
 
-    public static boolean addExercise(AUser user,SessionUser sessionUser,String length,String name,String explanation,int niveau){
+    public static boolean addExercise(AUser user,SessionUser sessionUser,String length,String nbRep,String name,String explanation,int niveau){
         if(sessionUser==null || sessionUser.getUser() == null){
             return false;
         }
-        ExerciseService.addExercise(user,sessionUser,length,name,explanation,niveau);
+        ExerciseService.addExercise(user,sessionUser,length,nbRep,name,explanation,niveau);
         return true;
     }
 

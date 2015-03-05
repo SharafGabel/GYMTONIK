@@ -15,10 +15,7 @@
     <form id="formSeance" class="form-horizontal" name="formSeance" method="post" action="SessionServlet">
         <h1>Créer une séance</h1>
 
-        <label class="lab">Temps de sommeil</label>
-        <input type="number" min="0" max="20" name="sommeil" id="sommeil" />
-
-        <button type="submit">Création d'exercices</button>
+        <button type="submit">Créer une nouvelle séance</button>
     </form>
 </div>
 
@@ -26,21 +23,13 @@
     <tr>
         <td>Nom Séance</td>
         <td>Date création séance</td>
-        <td>Nombre d'exercices</td>
     </tr>
     <%
         List<SessionUser> sessionUserList = SessionService.getSessionList((User) session.getAttribute("User"));
         for(SessionUser a:sessionUserList) {
-            a.getName();
-            if (a.isPerform()) {
-                out.println("<tr id='" + a.getIdS() + "'class='success'>");
-
-            } else {
-                out.println("<tr id='" + a.getIdS() + "'class='warning'>");
-            }
+            out.println("<tr id='" + a.getIdS() + "'class='success'>");
             out.println("<td>" + a.getName() + "</td>");
             out.println("<td>" + a.getDateProgram() + "</td>");
-            out.println("<td>" + a.getTrainings().size() + "</td>");
         }
      %>
 </table>

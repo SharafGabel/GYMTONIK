@@ -55,11 +55,9 @@ public class SessionConsole {
         Util.clearConsole();
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Création d'une Séance\n");
-        System.out.println("Combien de temps avez-vous dormi ? (en heures)");
-        int sommeil = sc.nextInt();
+        System.out.println("Séance créée\n");
 
-        SessionService.addSession(user, String.valueOf(sommeil));
+        SessionService.addSession(user);
     }
 
     private static void displaySession(SessionUser session) {
@@ -74,7 +72,8 @@ public class SessionConsole {
             System.out.println(exo.getName() + " : "
                     + exo.getExplanation()
                     + " - Niveau :" + exo.getNiveau()
-                    + " (" + exo.getLength() + " min)");
+                    + " (" + exo.getDureeExo() + " min)"
+                    + " (" + exo.getNbRepetition() + " répétitions)");
         }
 
         System.out.println("Cliquez sur une touche pour continuer...");

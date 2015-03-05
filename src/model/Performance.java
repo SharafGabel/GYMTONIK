@@ -19,8 +19,8 @@ public class Performance implements Serializable {
     private String name;
 
     @OneToOne
-    @JoinColumn(name="session",nullable = false)
-    private SessionUser session;
+    @JoinColumn(name="historique",nullable = false)
+    private Historique historique;
     //endregion
 
     //region Constructor
@@ -43,13 +43,13 @@ public class Performance implements Serializable {
         this.name = name;
     }
 
-    public SessionUser getSession() {
-        return session;
+    public Historique getHistorique() {
+        return historique;
     }
 
-    public void setSession(SessionUser session) {
-        this.session = session;
-        session.setPerformance(this);
+    public void setSession(Historique historique) {
+        this.historique = historique;
+        historique.setPerformance(this);
     }
 
     //endregion

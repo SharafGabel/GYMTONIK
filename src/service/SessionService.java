@@ -1,6 +1,7 @@
 package service;
 
 import model.Exercise;
+import model.Historique;
 import model.SessionUser;
 import model.User;
 import org.hibernate.*;
@@ -31,7 +32,7 @@ public class SessionService {
         return ourSessionFactory.openSession();
     }
 
-    public static boolean addSession(User user,String sommeil) {
+    public static boolean addSession(User user) {
 
         Session session = getSession();
         Transaction tx = null;
@@ -39,8 +40,6 @@ public class SessionService {
             tx = session.getTransaction();
             tx.begin();
             SessionUser sessionUser = new SessionUser();
-            if(!sommeil.trim().isEmpty())
-                sessionUser.setTimeSleep(Integer.parseInt(sommeil));
             sessionUser.setUser(user);
             sessionUser.setName("seance "+sessionUser.getIdS());
             System.out.println(sessionUser.toString());
@@ -60,12 +59,9 @@ public class SessionService {
         
     }
 
-    public static boolean addExToSession(SessionUser sessionUser, Exercise exercise)
+    public static boolean addOrUpdateExToSession(SessionUser sessionUser, Exercise exercise)
     {
-        System.out.println("SHIT");
-        /*if(sessionUser == null || sessionUser.getTrainings().contains(exercise)){
-            System.out.println("1");
-            System.out.println("1");
+        /*if(sessionUser == null ){
             System.out.println("1");
             return false;
         }*/
@@ -78,14 +74,10 @@ public class SessionService {
             tx = session.beginTransaction();
             System.out.println("123");
             System.out.println("125");
-            sessionUser.addTraining(exercise);
+            Historique historique = new Historique(sessionUser.getIdS(),exercise.getId(),sessionUser.getUser().getId());
             System.out.println("126");
-            session.saveOrUpdate(sessionUser);
+            session.saveOrUpdate(historique);
             System.out.println("127");
-            /*System.out.println("2");
-            sessionUser.addTraining(exercise);
-            System.out.println("3");
-            System.out.println("4");*/
             tx.commit();
             return true;
         } catch (Exception e) {

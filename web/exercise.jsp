@@ -22,6 +22,9 @@
         <p><label class="lab">Durée (en min)</label></p>
         <input type="number" min="1" max="120" name="duree" id="duree" />
 
+        <p><label class="lab">Nombre de répétitions </label></p>
+        <input type="number" min="5" max="500" name="nbRepet" id="nbRepet" />
+
         <p><label class="lab">Description de l'exercice</label></p>
         <input type="text" name="descriptionEx" id="descriptionEx" />
 
@@ -49,6 +52,7 @@
             <tr>
                 <th>Nom Exercice</th>
                 <th>Durée</th>
+                <th>Nombre de répétitions</th>
                 <th>Description</th>
                 <th>Niveau</th>
                 <th>Action</th>
@@ -66,7 +70,8 @@
                         {
                             out.println("<tr>");
                             out.println("\t<td>" + t.getName() + "</td>");
-                            out.println("\t<td>" + t.getLength() + "</td>");
+                            out.println("\t<td>" + t.getDureeExo() + "</td>");
+                            out.println("\t<td>" + t.getNbRepetition() + "</td>");
                             out.println("\t<td>" + t.getExplanation() + "</td>");
                             out.println("\t<td>" + t.getNiveau() + "</td>");
                             out.println("\t<td>");
@@ -88,7 +93,8 @@
                         {
                             out.println("<tr>");
                             out.println("\t<td>" + t.getName() + "</td>");
-                            out.println("\t<td>" + t.getLength() + "</td>");
+                            out.println("\t<td>" + t.getDureeExo() + "</td>");
+                            out.println("\t<td>" + t.getNbRepetition() + "</td>");
                             out.println("\t<td>" + t.getExplanation() + "</td>");
                             out.println("\t<td>" + t.getNiveau() + "</td>");
                             out.println("\t<td>");

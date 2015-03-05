@@ -56,7 +56,8 @@ public class ExerciseConsole {
                     + exo.getName() + " : "
                     + exo.getExplanation()
                     + " - Niveau : " + exo.getNiveau()
-                    + " (" + exo.getLength() + " min)");
+                    + " (" + exo.getDureeExo() + " min)"
+                    + " (" + exo.getNbRepetition() + " repetitions)");
             i++;
         }
         System.out.println("Cliquez sur une touche pour continuer...");
@@ -71,7 +72,8 @@ public class ExerciseConsole {
                     + exo.getName() + " : "
                     + exo.getExplanation()
                     + " - Niveau : " + exo.getNiveau()
-                    + " (" + exo.getLength() + " min)");
+                    + " (" + exo.getDureeExo() + " min)"
+                    + " (" + exo.getNbRepetition() + " repetitions)");
             i++;
         }
     }
@@ -87,10 +89,12 @@ public class ExerciseConsole {
         String description = sc.nextLine();
         System.out.println("Durée (minutes)");
         int length = sc.nextInt();
+        System.out.println("Nombre de répétition");
+        int nbRep = sc.nextInt();
         System.out.println("Niveau [1..3]");
         int niveau = sc.nextInt();
 
-        ExerciseService.createExercise(user, name, description, length,niveau);
+        ExerciseService.createExercise(user, name, description, length,niveau,nbRep);
 
         System.out.print("Ajout reussi");
     }
@@ -105,19 +109,20 @@ public class ExerciseConsole {
         String name = sc.nextLine();
         System.out.println("Description [" + exo.getExplanation() + "]");
         String description = sc.nextLine();
-        System.out.println("Durée (minutes) [" + exo.getLength() + "]");
+        System.out.println("Durée (minutes) [" + exo.getDureeExo() + "]");
         int length = 0;
         String lengthString = sc.nextLine();
+        System.out.println("Nombre de répétition(s) [" + exo.getNbRepetition() + "]");
+        int nbRepet = 0;
+        String nbRepetString = sc.nextLine();
         System.out.println("Niveau [" + exo.getNiveau() + "]");
         int niveau = 0;
         String niveauString = sc.nextLine();
 
         try {
             length = Integer.parseInt(lengthString);
-        } catch (Exception e) {}
-
-        try {
             niveau = Integer.parseInt(niveauString);
+            nbRepet = Integer.parseInt(nbRepetString);
         } catch (Exception e) {}
         if (!name.trim().isEmpty())
             exo.setName(name);
@@ -126,7 +131,10 @@ public class ExerciseConsole {
             exo.setExplanation(description);
 
         if (length > 0 && length <= 20)
-            exo.setLength(length);
+            exo.setDureeExo(length);
+
+        if(nbRepet>5 && nbRepet<=500)
+            exo.setNbRepetition(nbRepet);
 
         if (niveau > 0 && niveau < 4)
             exo.setNiveau(niveau);

@@ -16,7 +16,6 @@ public class SessionServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        String sommeil= request.getParameter("sommeil");
 
         try {
             out.println("<html>");
@@ -28,7 +27,7 @@ public class SessionServlet extends HttpServlet {
             HttpSession session = request.getSession();
             User user = (User)session.getAttribute("User");
 
-            if (addSession(user, sommeil)) {
+            if (addSession(user)) {
                 response.sendRedirect("exercise.jsp");
             }
             else {
@@ -48,12 +47,12 @@ public class SessionServlet extends HttpServlet {
     }
 
 
-    public boolean addSession(User user,String sommeil){
+    public boolean addSession(User user){
         if(user == null){
             return false;
         }
 
-        SessionService.addSession(user,sommeil);
+        SessionService.addSession(user);
         return true;
     }
 
