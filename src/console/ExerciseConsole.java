@@ -14,16 +14,16 @@ public class ExerciseConsole {
         Scanner sc = new Scanner(System.in);
         List<Exercise> exos = ExerciseService.getExercises(user);
 
-        /* choix_exo = 0 dans le cas où l'utilisateur n'aurait aucun exercice
+        /* choix_exo = 1 dans le cas où l'utilisateur n'aurait aucun exercice
            choix_exo = nb de exercice + 1 sinon
          */
-        int choix_exo = (exos.size() > 0)? exos.size() + 1 : 1;
+        int choix_exo = exos.size() + 1;
 
         System.out.println("-- Exercises --\n");
         System.out.println("1 - Créer un Exercise");
         if (exos.size() > 0)
             listExercise(exos);
-        System.out.println((choix_exo + 2) + " - Retour");
+        System.out.println((choix_exo + 1) + " - Retour");
 
         int choix = sc.nextInt();
 
@@ -66,7 +66,7 @@ public class ExerciseConsole {
         String description = sc.nextLine();
         System.out.println("Durée (minutes)");
         int length = sc.nextInt();
-        System.out.println("Nombre de répétition");
+        System.out.println("Nombre de répétitions (>5)");
         int nbRep = sc.nextInt();
         System.out.println("Niveau [1..3]");
         int niveau = sc.nextInt();
@@ -79,28 +79,42 @@ public class ExerciseConsole {
     private static void updateExercise(AUser user, Exercise exo) {
         Util.clearConsole();
         Scanner sc = new Scanner(System.in);
+
         System.out.println("Modification de l'exercice " + exo.getName());
         System.out.println("(Laissez le champ vide pour ne pas modifier la valeur)\n");
 
         System.out.println("Nom de l'exercice [" + exo.getName() + "]");
         String name = sc.nextLine();
+
         System.out.println("Description [" + exo.getExplanation() + "]");
         String description = sc.nextLine();
+
         System.out.println("Durée (minutes) [" + exo.getDureeExo() + "]");
         int length = 0;
         String lengthString = sc.nextLine();
-        System.out.println("Nombre de répétition(s) [" + exo.getNbRepetition() + "]");
+
+        System.out.println("Nombre de répétitions [" + exo.getNbRepetition() + "]");
         int nbRepet = 0;
         String nbRepetString = sc.nextLine();
+
         System.out.println("Niveau [" + exo.getNiveau() + "]");
         int niveau = 0;
         String niveauString = sc.nextLine();
 
+        /*  Les parseInt sont chacun dans leur propre bloc try/catch
+            car si l'un d'eux échoue, on sort du bloc et les autres
+            ne seront pas effectué. Ce serait dommage dans le cas où
+             les autres champs ont été modifié. */
         try {
             length = Integer.parseInt(lengthString);
+        } catch (Exception e) {}
+        try {
             niveau = Integer.parseInt(niveauString);
+        } catch (Exception e) {}
+        try {
             nbRepet = Integer.parseInt(nbRepetString);
         } catch (Exception e) {}
+
         if (!name.trim().isEmpty())
             exo.setName(name);
 
