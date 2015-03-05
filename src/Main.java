@@ -56,5 +56,6 @@ public class Main {
                 System.out.println("Veuilles entrer un nombre entre 1 et ...");
                 break;
         }
+        userPage(user);
     }
 }

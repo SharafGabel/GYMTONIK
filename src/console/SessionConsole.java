@@ -68,13 +68,15 @@ public class SessionConsole {
 
         System.out.println("Séance " + session.getName() + " du " + session.getDateProgram());
 
-        for (Exercise exo : exs) {
-            System.out.println(exo.getName() + " : "
-                    + exo.getExplanation()
-                    + " - Niveau :" + exo.getNiveau()
-                    + " (" + exo.getDureeExo() + " min)"
-                    + " (" + exo.getNbRepetition() + " répétitions)");
-        }
+        if (exs.size() > 0) {
+            for (Exercise exo : exs) {
+                System.out.println(exo.getName() + " : "
+                        + exo.getExplanation()
+                        + " - Niveau :" + exo.getNiveau()
+                        + " (" + exo.getDureeExo() + " min)"
+                        + " (" + exo.getNbRepetition() + " répétitions)");
+            }
+        } else System.out.println("Il n'y a aucun exercice pour cette séance");
 
         System.out.println("Cliquez sur une touche pour continuer...");
         sc.nextLine();

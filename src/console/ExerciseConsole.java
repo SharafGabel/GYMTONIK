@@ -1,12 +1,10 @@
 package console;
 
-import model.Exercise;
 import model.AUser;
 import model.Exercise;
 import service.ExerciseService;
 import util.Util;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -23,7 +21,6 @@ public class ExerciseConsole {
 
         System.out.println("-- Exercises --\n");
         System.out.println("1 - Créer un Exercise");
-        System.out.println("2 - Voir les exercise");
         if (exos.size() > 0)
             listExercise(exos);
         System.out.println((choix_exo + 2) + " - Retour");
@@ -32,9 +29,6 @@ public class ExerciseConsole {
 
         if (choix == 1) {
             createExercise(user);
-            menu(user);
-        }else if(choix ==2) {
-            showExercise();
             menu(user);
         }else if (choix > 1 && choix < choix_exo + 1) {
             updateExercise(user, exos.get(choix - 2));
@@ -48,25 +42,8 @@ public class ExerciseConsole {
 
     }
 
-    private static void showExercise() {
-        int i = 1;
-        List<Exercise> exos = ExerciseService.getAllExercises();
-        for (Exercise exo : exos) {
-            System.out.println(i + " - "
-                    + exo.getName() + " : "
-                    + exo.getExplanation()
-                    + " - Niveau : " + exo.getNiveau()
-                    + " (" + exo.getDureeExo() + " min)"
-                    + " (" + exo.getNbRepetition() + " repetitions)");
-            i++;
-        }
-        System.out.println("Cliquez sur une touche pour continuer...");
-        Scanner sc = new Scanner(System.in);
-        sc.nextLine();
-    }
-
     private static void listExercise(List<Exercise> exos) {
-        int i = 3;
+        int i = 2;
         for (Exercise exo : exos) {
             System.out.println(i + " - "
                     + exo.getName() + " : "

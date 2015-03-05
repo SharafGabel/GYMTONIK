@@ -181,7 +181,7 @@ public class ExerciseService {
         try {
             Transaction tx = session.getTransaction();
             tx.begin();
-            Query query = session.createQuery("Select * from Historique h,SessionUser s where h.idS="+sessionUser.getIdS());
+            Query query = session.createQuery("Select e from Exercise e, Historique h where h.idS=" + sessionUser.getIdS() + " and h.idEx=e.id");
             exercises = query.list();
             tx.commit();
         } catch (Exception e) {
