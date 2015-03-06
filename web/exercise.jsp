@@ -47,6 +47,17 @@
 
     <hr/>
 
+    <select name="sessionUser" id="sessionUser">
+        <%
+            List<SessionUser> sessionUserListId = SessionService.getSessionList((User) session.getAttribute("User"));
+            for(SessionUser a:sessionUserListId)
+            {
+        %>
+        <option name="optionName" value="<%=a.getIdS()%>"> <%=a.getName()+" ( Crée le "+a.getDateProgram()+" )"%></option>
+        <%}%>
+    </select>
+
+
     <table id="affSeance" class="table table-condensed">
         <thead>
             <tr>
@@ -119,6 +130,21 @@
                 }%>
         </tbody>
     </table>
+    <input type="button" value="Show Table" id="showTable"/>
+    <div id="tablediv">
+
+    <table cellpadding="0" id="exerciseTable">
+        <tr>
+            <th scope="col">Nom Exercice</th>
+            <th scope="col">Durée</th>
+            <th scope="col">Nombre de répétitions</th>
+            <th scope="col">Description</th>
+            <th scope="col">Niveau</th>
+            <th scope="col">Action</th>
+        </tr>
+    </table>
+    </div>
+
 </div>
 <%@ include file="footer.jsp" %>
 

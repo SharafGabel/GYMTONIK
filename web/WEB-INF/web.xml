@@ -28,6 +28,10 @@
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>controller.LogoutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HistoriqueServlet</servlet-name>
+        <servlet-class>controller.HistoriqueServlet</servlet-class>
+    </servlet>
 
 
     <servlet-mapping>
@@ -53,5 +57,9 @@
     <servlet-mapping>
         <servlet-name>ProfileServlet</servlet-name>
         <url-pattern>/ProfileServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HistoriqueServlet</servlet-name>
+        <url-pattern>/HistoriqueServlet</url-pattern>
     </servlet-mapping>
 </web-app>

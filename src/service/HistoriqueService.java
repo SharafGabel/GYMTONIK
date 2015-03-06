@@ -43,7 +43,7 @@ public class HistoriqueService {
         List<Exercise> exercises;
         try {
             tx = session.beginTransaction();
-            Query query = session.createQuery("from Historique e left join fetch e.idS u where u.id = :seanceId");
+            Query query = session.createQuery("from Historique h left join fetch h.idS u where u.id = :seanceId");
             query.setParameter("seanceId", sessionUser.getIdS());
             exercises = query.list();
             tx.commit();

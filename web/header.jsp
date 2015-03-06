@@ -22,6 +22,64 @@
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script src="http://jasny.github.io/bootstrap/dist/js/jasny-bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+
+    <script>
+        $(document).ready(function() {
+
+            $('#sessionUser').change(function(event) {
+                var sessionuser = $("select#sessionUser").val();
+                $.get('HistoriqueServlet', {
+                    sessionUser : sessionuser
+                }, function(response) {
+
+                    if(response!=null){
+                        $("#exerciseTable").find("tr:gt(0)").remove();
+                        var table1 = $("#exerciseTable");
+                        $.each(response, function(key,value) {
+                            var rowNew = $("<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+                            rowNew.children().eq(0).text(value['code']);
+                            rowNew.children().eq(1).text(value['name']);
+                            rowNew.children().eq(2).text(value['continent']);
+                            rowNew.children().eq(3).text(value['region']);
+                            rowNew.children().eq(4).text(value['population']);
+                            rowNew.children().eq(5).text(value['capital']);
+                            rowNew.appendTo(table1);
+                        });
+                    }
+                });
+                $("#tablediv").show();
+
+            });
+        });
+    </script>
+<!--
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#tablediv").hide();
+            $("#showTable").click(function(event){
+                $.get('HistoriqueServlet',function(responseJson) {
+                    if(responseJson!=null){
+                        $("#exerciseTable").find("tr:gt(0)").remove();
+                        var table1 = $("#exerciseTable");
+                        $.each(responseJson, function(key,value) {
+                            var rowNew = $("<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+                            rowNew.children().eq(0).text(value['code']);
+                            rowNew.children().eq(1).text(value['name']);
+                            rowNew.children().eq(2).text(value['continent']);
+                            rowNew.children().eq(3).text(value['region']);
+                            rowNew.children().eq(4).text(value['population']);
+                            rowNew.children().eq(5).text(value['capital']);
+                            rowNew.appendTo(table1);
+                        });
+                    }
+                });
+                $("#tablediv").show();
+            });
+        });
+    </script>-->
+
 </head>
 
 <body>
