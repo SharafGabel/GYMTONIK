@@ -10,7 +10,6 @@
 
 <%
     String idExercice = request.getParameter("idEx");
-    String idSeance = request.getParameter("idS");
     Exercise exercise = ExerciseService.getExercise(idExercice);
 
     /*  Dans le cas où l'utilisateur s'amuserait à appeler cette page
@@ -34,7 +33,10 @@
         <input type="text" name="nomEx" id="nomEx" value="<%= exercise.getName()%>"/>
 
         <p><label class="lab">Durée (en min)</label></p>
-        <input type="number" min="1" max="120" name="duree" id="duree" value="<%= exercise.getLength() %>" />
+        <input type="number" min="1" max="120" name="duree" id="duree" value="<%= exercise.getDureeExo() %>" />
+
+        <p><label class="lab">Nombre de répétitions </label></p>
+        <input type="number" min="5" max="500" name="nbRepet" id="nbRepet" value="<%= exercise.getNbRepetition() %>" />
 
         <p><label class="lab">Niveau [1..3]</label></p>
         <input type="number" min="1" max="3" name="niveau" id="niveau" value="<%= exercise.getNiveau() %>" />
@@ -49,7 +51,7 @@
                 for(SessionUser s:sessionUserList)
                 {
             %>
-            <option name="optionName" value="<%=s.getIdS()%>" <% if (s.getIdS().equals(Integer.parseInt(idSeance))) out.println("selected"); %>> <%=s.getName()+" ( Crée le "+s.getDateProgram()+" )"%></option>
+            <option name="optionName" value="<%=s.getIdS()%>"> <%=s.getName()+" ( Crée le "+s.getDateProgram()+" )"%></option>
             <%}%>
         </select>
 

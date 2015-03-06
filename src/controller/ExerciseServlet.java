@@ -33,11 +33,21 @@ public class ExerciseServlet extends HttpServlet {
 
                 String sessionUserId = request.getParameter("sessionUser");
                 SessionUser sessionUsers = SessionService.getSessionById(Integer.parseInt(sessionUserId));
-                if (length != null && !length.trim().isEmpty()
+                if(sessionUserId.equals("none") && length != null && !length.trim().isEmpty()
                         && nameExercise != null && !nameExercise.trim().isEmpty()
                         && description != null && !description.trim().isEmpty()
                         && sessionUserId != null && !sessionUserId.trim().isEmpty()
-                        && ExerciseService.addExercise(user,sessionUsers, Integer.parseInt(length),Integer.parseInt(nbRepet), nameExercise, description,Integer.parseInt(niveau))) {
+                        )
+                {
+                    ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length),Integer.parseInt(nbRepet),Integer.parseInt(niveau));
+                }
+                else if (length != null && !length.trim().isEmpty()
+                        && nameExercise != null && !nameExercise.trim().isEmpty()
+                        && description != null && !description.trim().isEmpty()
+                        && sessionUserId != null && !sessionUserId.trim().isEmpty()
+                         ) {
+                    ExerciseService.addExercise(user,sessionUsers, Integer.parseInt(length),Integer.parseInt(nbRepet), nameExercise, description,Integer.parseInt(niveau));
+                }
                     if(Integer.parseInt(niveau)==1) {
                         ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length)*2,Integer.parseInt(nbRepet)*2, 2);
                         ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length)*3,Integer.parseInt(nbRepet)*3, 3);
@@ -55,7 +65,7 @@ public class ExerciseServlet extends HttpServlet {
                 else {
                      out.println("<h1>Création de l'exercise  échouée<h1>");
                 }
-            }
+
 
             if (action.equals("delete"))
             {
@@ -70,16 +80,14 @@ public class ExerciseServlet extends HttpServlet {
             {
                 String sessionUserId = request.getParameter("sessionToAdd");
                 String idExercice = request.getParameter("idEx");
-                SessionUser sessionUsers = SessionService.getSessionById(Integer.parseInt(sessionUserId));
-                if(SessionService.addOrUpdateExToSession(sessionUsers, ExerciseService.getExercise(idExercice)))
-                {
-                    out.println("<h1>Ajout de l'exercice à la séance réussie</h1>");
-                }
+                System.out.println("idS : "+sessionUserId + " idEx : "+idExercice);
+                SessionService.addOrUpdateExToSession(Integer.parseInt(sessionUserId),Integer.parseInt(idExercice),user);
+                out.println("<h1>Ajout de l'exercice à la séance réussie</h1>");
+
             }
             
             if (action.equals("update")) {
                 String idExercice = request.getParameter("idEx");
-                System.out.println("In action.equals(update)");
                 if (idExercice != null && !idExercice.trim().isEmpty()
                         &&length != null && !length.trim().isEmpty()
                         && nameExercise != null && !nameExercise.trim().isEmpty()

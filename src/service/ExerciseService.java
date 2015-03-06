@@ -71,15 +71,38 @@ public class ExerciseService {
 
     }
 
-    public static List<Exercise> getExercises(AUser aUser) {
+    public static boolean addExerciseToSession(AUser user,SessionUser sessionUser,int length,int nbRep,String name,String explanation,int niveau) {
+        Session session = getSession();
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+            Exercise exercise = new Exercise(user,length,nbRep,name,explanation,niveau);
+            session.save(exercise);
+            session.saveOrUpdate(sessionUser);
+            Historique historique = new Historique(sessionUser.getIdS(),exercise.getId(),user.getId());
+            session.save(historique);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+            return false;
+        }finally {
+            session.close();
+        }
+
+    }
+
+    public static List<Exercise> getExercises() {
         Session session = getSession();
         Transaction tx = null;
 
         List<Exercise> exercises;
         try {
             tx = session.beginTransaction();
-            Query query = session.createQuery("from Exercise e left join fetch e.user u where u.id = :userId");
-            query.setParameter("userId", aUser.getId());
+            Query query = session.createQuery("Select e from Exercise e");
             exercises = query.list();
             tx.commit();
             return exercises;

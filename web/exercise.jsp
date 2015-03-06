@@ -5,6 +5,7 @@
 <%@ page import="service.ExerciseService" %>
 <%@ page import="model.ATraining" %>
 <%@ page import="service.SessionService" %>
+<%@ page import="service.HistoriqueService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% String title = "Exercice"; %>
 <%@ include file="header.jsp" %>
@@ -33,6 +34,7 @@
 
         <p><label class="lab">Choix de la séance</label></p>
         <select name="sessionUser">
+            <option name="optionName" value="none">Aucune Séance</option>
             <%
                 List<SessionUser> sessionUserList = SessionService.getSessionList((User) session.getAttribute("User"));
                 for(SessionUser a:sessionUserList)
@@ -45,18 +47,7 @@
         <p><button type="submit">Enregistrer l'exercice</button></p>
     </form>
 
-    <hr/>
-
-    <select name="sessionUser" id="sessionUser">
-        <%
-            List<SessionUser> sessionUserListId = SessionService.getSessionList((User) session.getAttribute("User"));
-            for(SessionUser a:sessionUserListId)
-            {
-        %>
-        <option name="optionName" value="<%=a.getIdS()%>"> <%=a.getName()+" ( Crée le "+a.getDateProgram()+" )"%></option>
-        <%}%>
-    </select>
-
+    </hr>
 
     <table id="affSeance" class="table table-condensed">
         <thead>
@@ -72,12 +63,11 @@
 
         <tbody>
             <%
-                User user = (User)session.getAttribute("User");
-                for(SessionUser u:sessionUserList) {
-                    List<Exercise> trainingList = ExerciseService.getExercises(user);
+                    User user = (User)session.getAttribute("User");
+                    List<Exercise> trainingList = ExerciseService.getExercises();
                     for (ATraining t : trainingList)
                     {
-                        if (t.getUser().getId() == user.getId())
+                         if (t.getUser().getId() == user.getId())
                         {
                             out.println("<tr>");
                             out.println("\t<td>" + t.getName() + "</td>");
@@ -94,11 +84,27 @@
 
                             out.println("<form method=\"post\" action=\"update-exercise.jsp\">");
                             out.println("<input type=\"hidden\" name=\"idEx\" value=\"" + t.getId() + "\" />");
-                            out.println("<input type=\"hidden\" name=\"idS\" value=\"" + u.getIdS() + "\" />");
                             out.println("<button type=\"submit\">Modifier</button>");
                             out.println("</form>");
-                            out.println("</td>");
-                            out.println("</tr>");
+                            List<SessionUser> seance = HistoriqueService.getSessionUserNotHaveThisExercise(t,user);
+                            if(seance.size()!=0)
+                            {
+                                out.println("<form method=\"post\" action=\"ExerciceServlet\">");
+                                out.println("<input type=\"hidden\" name=\"action\" value=\"addToEx\" />");
+                                out.println("<input type=\"hidden\" name=\"idEx\" value=\"" + t.getId() + "\" />");
+                                out.println("<select name=\"sessionToAdd\">");
+                                for(SessionUser a:seance)
+                                {
+            %>
+            <option name="optionName" value="<%=a.getIdS()%>"> <%=a.getName()+" ( Crée le "+a.getDateProgram()+" )"%></option>
+            <%}%>
+            </select>
+            <%
+                    out.println("<button type=\"submit\">Ajouter à cette séance</button>");
+                    out.println("</form>");
+                    out.println("</td>");
+                    out.println("</tr>");
+                }
                         }
                         else
                         {
@@ -112,7 +118,6 @@
                             out.println("<form method=\"post\" action=\"ExerciceServlet\">");
                             out.println("<input type=\"hidden\" name=\"action\" value=\"addToEx\" />");
                             out.println("<input type=\"hidden\" name=\"idEx\" value=\"" + t.getId() + "\" />");
-                            out.println("<input type=\"hidden\" name=\"idS\" value=\"" + u.getIdS() + "\" />");
                             out.println("<select name=\"sessionToAdd\">");
                 for(SessionUser a:sessionUserList)
                 {
@@ -126,7 +131,6 @@
                             out.println("</td>");
                             out.println("</tr>");
                         }
-                    }
                 }%>
         </tbody>
     </table>

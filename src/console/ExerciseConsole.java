@@ -12,7 +12,7 @@ public class ExerciseConsole {
     public static void menu(AUser user) {
         CoreConsole.getConnectedHeader(user);
         Scanner sc = new Scanner(System.in);
-        List<Exercise> exos = ExerciseService.getExercises(user);
+        List<Exercise> exos = ExerciseService.getExercises();
 
         /* choix_exo = 1 dans le cas où l'utilisateur n'aurait aucun exercice
            choix_exo = nb de exercice + 1 sinon
