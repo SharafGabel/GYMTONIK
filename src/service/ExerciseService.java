@@ -47,13 +47,13 @@ public class ExerciseService {
         }
     }
 
-    public static boolean addExercise(AUser user,SessionUser sessionUser,String length,String nbRep,String name,String explanation,int niveau) {
+    public static boolean addExercise(AUser user,SessionUser sessionUser,int length,int nbRep,String name,String explanation,int niveau) {
         Session session = getSession();
         Transaction tx = null;
 
         try {
             tx = session.beginTransaction();
-            Exercise exercise = new Exercise(user,Integer.parseInt(length),Integer.parseInt(nbRep),name,explanation,niveau);
+            Exercise exercise = new Exercise(user,length,nbRep,name,explanation,niveau);
             session.save(exercise);
             session.saveOrUpdate(sessionUser);
             Historique historique = new Historique(sessionUser.getIdS(),exercise.getId(),user.getId());

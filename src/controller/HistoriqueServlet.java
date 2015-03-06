@@ -7,7 +7,6 @@ import com.google.gson.reflect.TypeToken;
 import model.Exercise;
 import model.SessionUser;
 import service.ExerciseService;
-import service.HistoriqueService;
 import service.SessionService;
 
 import javax.servlet.ServletException;
@@ -38,12 +37,12 @@ public class HistoriqueServlet extends HttpServlet {
         List<Exercise> in = new ArrayList<Exercise>();
         in=ExerciseService.getExercises(sessionUsers);
         Gson gson = new Gson();
-        JsonElement element =gson.toJsonTree(in,new TypeToken<List<Exercise>>(){}.getType());
+        /*JsonElement element =gson.toJsonTree(in,new TypeToken<List<Exercise>>(){}.getType());
         response.setContentType("application/json; charset=UTF-8");
-        JsonArray jsonArray = element.getAsJsonArray();
+        JsonArray jsonArray = element.getAsJsonArray();*/
         //out.print(jsonArray);
         //out.flush();
         //jsonArray.toString();
-        response.getWriter().print(jsonArray);
+        //response.getWriter().print(jsonArray);
     }
 }

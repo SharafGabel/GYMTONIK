@@ -32,13 +32,24 @@ public class ExerciseServlet extends HttpServlet {
             {
 
                 String sessionUserId = request.getParameter("sessionUser");
-                String idExercice = request.getParameter("idEx");
                 SessionUser sessionUsers = SessionService.getSessionById(Integer.parseInt(sessionUserId));
                 if (length != null && !length.trim().isEmpty()
                         && nameExercise != null && !nameExercise.trim().isEmpty()
                         && description != null && !description.trim().isEmpty()
                         && sessionUserId != null && !sessionUserId.trim().isEmpty()
-                        && ExerciseService.addExercise(user,sessionUsers, length,nbRepet, nameExercise, description,Integer.parseInt(niveau))) {
+                        && ExerciseService.addExercise(user,sessionUsers, Integer.parseInt(length),Integer.parseInt(nbRepet), nameExercise, description,Integer.parseInt(niveau))) {
+                    if(Integer.parseInt(niveau)==1) {
+                        ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length)*2,Integer.parseInt(nbRepet)*2, 2);
+                        ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length)*3,Integer.parseInt(nbRepet)*3, 3);
+                    }
+                    else if(Integer.parseInt(niveau)==2) {
+                        ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length)/2,Integer.parseInt(nbRepet)/2, 1);
+                        ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length)*3/2,Integer.parseInt(nbRepet)*3/2, 3);
+                    }
+                    else if(Integer.parseInt(niveau)==3){
+                        ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length)/3,Integer.parseInt(nbRepet)/3, 1);
+                        ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length)*2/3,Integer.parseInt(nbRepet)*2/3, 3);
+                    }
                     out.println("<h1>Création de l'exercice réussie</h1>");
                 }
                 else {
@@ -103,11 +114,11 @@ public class ExerciseServlet extends HttpServlet {
     }
 
 
-    public static boolean addExercise(AUser user,SessionUser sessionUser,String length,String nbRep,String name,String explanation,int niveau){
+    public static boolean addExercise(AUser user,SessionUser sessionUser,String length,String nbRepet,String name,String explanation,int niveau){
         if(sessionUser==null || sessionUser.getUser() == null){
             return false;
         }
-        ExerciseService.addExercise(user,sessionUser,length,nbRep,name,explanation,niveau);
+        ExerciseService.addExercise(user,sessionUser,Integer.parseInt(length),Integer.parseInt(nbRepet),name,explanation,niveau);
         return true;
     }
 

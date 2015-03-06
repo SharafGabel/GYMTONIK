@@ -61,7 +61,7 @@ public class ExerciseTest {
     @Test
     public void testAddExercise(){
         SessionUser sessionUsers = SessionService.getSessionById(sessionUser.getIdS());
-        assertTrue(ExerciseService.addExercise(user, sessionUsers, "50","7", exercise.getName(), exercise.getExplanation(),exercise.getNiveau()));
+        assertTrue(ExerciseService.addExercise(user, sessionUsers, 50,7, exercise.getName(), exercise.getExplanation(),exercise.getNiveau()));
 
     }
 

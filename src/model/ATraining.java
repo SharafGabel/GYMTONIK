@@ -56,6 +56,7 @@ public abstract class ATraining {
         this.bodyParts = new ArrayList<AMuscle>();
         this.user = user;
         this.niveau = niveau;
+        this.nbRepetition = nbRepetition;
     }
     //endregion
 
