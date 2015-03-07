@@ -64,6 +64,12 @@
         <option name="optionName" value="<%=a.getIdS()%>"> <%=a.getName()+" ( Crée le "+a.getDateProgram()+" )"%></option>
         <%}%>
     </select>
+    <select name="exerciseLevel" id="exerciseLevel">
+        <option name="optionName" value="1">Niveau 1</option>
+        <option name="optionName" value="2">Niveau 2</option>
+        <option name="optionName" value="3">Niveau 3</option>
+    </select>
+
 
     <table id="affSeance" class="table table-condensed">
         <thead>

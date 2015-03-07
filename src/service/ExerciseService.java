@@ -229,5 +229,21 @@ public class ExerciseService {
         return exercises;
     }
 
+    public static List<Exercise> getExercisesByLevel(int level){
+        Session session = getSession();
+        List<Exercise> exercises = null;
+
+        try {
+            Transaction tx = session.getTransaction();
+            tx.begin();
+            Query query = session.createQuery("from Exercise e where e.niveau="+level+"");
+            exercises = query.list();
+            tx.commit();
+        } catch (Exception e) {
+        }
+
+        return exercises;
+    }
+
 
 }

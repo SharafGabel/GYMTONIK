@@ -20,6 +20,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 /**
@@ -34,15 +35,31 @@ public class HistoriqueServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String idSeance = request.getParameter("sessionUser");
-        SessionUser sessionUsers = SessionService.getSessionById(Integer.parseInt(idSeance));
-        List<Exercise> in ;
-        in=ExerciseService.getExercises(sessionUsers);
-        String json ;
-        json= new Gson().toJson(in);
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(json);
-        // System.out.println(json);//test
+        Enumeration paramNames = request.getParameterNames();
+        String paramName = (String) paramNames.nextElement();
+
+        if (paramName.equalsIgnoreCase("sessionUser")) {
+            String idSeance = request.getParameter("sessionUser");
+            SessionUser sessionUsers = SessionService.getSessionById(Integer.parseInt(idSeance));
+            List<Exercise> in;
+            in = ExerciseService.getExercises(sessionUsers);
+            String json;
+            json = new Gson().toJson(in);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+            // System.out.println(json);//test
+        }
+        if (paramName.equalsIgnoreCase("exerciseLevel")) {
+            String levelId = request.getParameter("exerciseLevel");
+            List<Exercise> in;
+            in = ExerciseService.getExercisesByLevel(Integer.parseInt(levelId));
+            String json;
+            json = new Gson().toJson(in);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+        }
     }
+
 }

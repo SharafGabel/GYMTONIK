@@ -50,6 +50,31 @@
         });
     </script>
 
+    <script>
+        $(document).ready(function() {
+
+            $('#exerciseLevel').change(function(event) {
+                var exerciselevel = $("select#exerciseLevel").val();
+                $.get('HistoriqueServlet', {
+                    exerciseLevel : exerciselevel
+                }, function(response) {
+
+                    $.each(response, function(key, value) {
+                        $('#affSeance').hide();
+                        $('<tr>').append(
+                                $('<td>').text(value.name),
+                                $('<td>').text(value.explanation),
+                                $('<td>').text(value.dureeExo),
+                                $('<td>').text(value.niveau),
+                                $('<td>').text(value.nbRepetition)).appendTo('#table_exercices');
+
+                    });
+
+                });
+            });
+        });
+    </script>
+
 </head>
 
 <body>
