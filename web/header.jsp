@@ -34,51 +34,21 @@
                     sessionUser : sessionuser
                 }, function(response) {
 
-                    if(response!=null){
-                        $("#exerciseTable").find("tr:gt(0)").remove();
-                        var table1 = $("#exerciseTable");
-                        $.each(response, function(key,value) {
-                            var rowNew = $("<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
-                            rowNew.children().eq(0).text(value['code']);
-                            rowNew.children().eq(1).text(value['name']);
-                            rowNew.children().eq(2).text(value['continent']);
-                            rowNew.children().eq(3).text(value['region']);
-                            rowNew.children().eq(4).text(value['population']);
-                            rowNew.children().eq(5).text(value['capital']);
-                            rowNew.appendTo(table1);
-                        });
-                    }
-                });
-                $("#tablediv").show();
+                    $.each(response, function(key, value) {
+                        $('#affSeance').hide();
+                        $('<tr>').append(
+                                $('<td>').text(value.name),
+                                $('<td>').text(value.explanation),
+                                $('<td>').text(value.dureeExo),
+                                $('<td>').text(value.niveau),
+                                $('<td>').text(value.nbRepetition)).appendTo('#table_exercices');
+
+                    });
 
             });
         });
-    </script>
-<!--
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $("#tablediv").hide();
-            $("#showTable").click(function(event){
-                $.get('HistoriqueServlet',function(responseJson) {
-                    if(responseJson!=null){
-                        $("#exerciseTable").find("tr:gt(0)").remove();
-                        var table1 = $("#exerciseTable");
-                        $.each(responseJson, function(key,value) {
-                            var rowNew = $("<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
-                            rowNew.children().eq(0).text(value['code']);
-                            rowNew.children().eq(1).text(value['name']);
-                            rowNew.children().eq(2).text(value['continent']);
-                            rowNew.children().eq(3).text(value['region']);
-                            rowNew.children().eq(4).text(value['population']);
-                            rowNew.children().eq(5).text(value['capital']);
-                            rowNew.appendTo(table1);
-                        });
-                    }
-                });
-                $("#tablediv").show();
-            });
         });
-    </script>-->
+    </script>
 
 </head>
 

@@ -5,7 +5,11 @@
 <%@ page import="service.ExerciseService" %>
 <%@ page import="model.ATraining" %>
 <%@ page import="service.SessionService" %>
+
 <%@ page import="service.HistoriqueService" %>
+
+<%@ page import="java.util.ArrayList" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% String title = "Exercice"; %>
 <%@ include file="header.jsp" %>
@@ -48,6 +52,18 @@
     </form>
 
     </hr>
+
+    Affinez votre recherche :
+    <select name="sessionUser" id="sessionUser">
+        <option name="optionName" value="none">Aucune Séance</option>
+        <%
+            List<SessionUser> sessionUserListJquery = SessionService.getSessionList((User) session.getAttribute("User"));
+            for(SessionUser a:sessionUserListJquery)
+            {
+        %>
+        <option name="optionName" value="<%=a.getIdS()%>"> <%=a.getName()+" ( Crée le "+a.getDateProgram()+" )"%></option>
+        <%}%>
+    </select>
 
     <table id="affSeance" class="table table-condensed">
         <thead>
@@ -134,20 +150,20 @@
                 }%>
         </tbody>
     </table>
-    <input type="button" value="Show Table" id="showTable"/>
-    <div id="tablediv">
 
-    <table cellpadding="0" id="exerciseTable">
+    <table id="table_exercices" border='1' class="table table-condensed">
         <tr>
-            <th scope="col">Nom Exercice</th>
-            <th scope="col">Durée</th>
-            <th scope="col">Nombre de répétitions</th>
-            <th scope="col">Description</th>
-            <th scope="col">Niveau</th>
-            <th scope="col">Action</th>
+            <thead>
+            <th>Nom de exercice</th>
+            <th>Description exercice</th>
+            <th>Duree de l'exercice</th>
+            <th>Niveau de l'exercice</th>
+            <th>Nombre de répetition</th>
+            <thead>
+
         </tr>
     </table>
-    </div>
+
 
 </div>
 <%@ include file="footer.jsp" %>
