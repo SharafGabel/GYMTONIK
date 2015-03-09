@@ -67,7 +67,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Documents/gson-2.3.1.jar!/" />
+          <root url="jar://G:/gson-2.3.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -76,7 +76,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Documents/json-org.jar!/" />
+          <root url="jar://G:/com.mysql.jdbc_5.1.5.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -85,16 +85,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Documents/com.mysql.jdbc_5.1.5.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/src/model/gson-1.1.jar!/" />
+          <root url="jar://Z:/GYM/json-jena-1.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

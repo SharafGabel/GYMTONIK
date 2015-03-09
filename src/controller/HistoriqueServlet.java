@@ -18,8 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -40,15 +38,27 @@ public class HistoriqueServlet extends HttpServlet {
 
         if (paramName.equalsIgnoreCase("sessionUser")) {
             String idSeance = request.getParameter("sessionUser");
-            SessionUser sessionUsers = SessionService.getSessionById(Integer.parseInt(idSeance));
-            List<Exercise> in;
-            in = ExerciseService.getExercises(sessionUsers);
-            String json;
-            json = new Gson().toJson(in);
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(json);
-            // System.out.println(json);//test
+            if(idSeance == "none")
+            {
+                List<Exercise> in;
+                in = ExerciseService.getAllExercises();
+                String json;
+                json = new Gson().toJson(in);
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(json);
+            }
+            else {
+                SessionUser sessionUsers = SessionService.getSessionById(Integer.parseInt(idSeance));
+                List<Exercise> in;
+                in = ExerciseService.getExercises(sessionUsers);
+                String json;
+                json = new Gson().toJson(in);
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(json);
+                // System.out.println(json);//test
+            }
         }
         if (paramName.equalsIgnoreCase("exerciseLevel")) {
             String levelId = request.getParameter("exerciseLevel");

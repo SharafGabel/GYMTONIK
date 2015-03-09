@@ -33,13 +33,15 @@ public class ExerciseServlet extends HttpServlet {
 
                 String sessionUserId = request.getParameter("sessionUser");
                 SessionUser sessionUsers = SessionService.getSessionById(Integer.parseInt(sessionUserId));
+                System.out.println(sessionUserId.equals("none") && length != null && !length.trim().isEmpty()
+                        && nameExercise != null && !nameExercise.trim().isEmpty()
+                        && description != null && !description.trim().isEmpty());
                 if(sessionUserId.equals("none") && length != null && !length.trim().isEmpty()
                         && nameExercise != null && !nameExercise.trim().isEmpty()
                         && description != null && !description.trim().isEmpty()
-                        && sessionUserId != null && !sessionUserId.trim().isEmpty()
                         )
                 {
-                    ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length),Integer.parseInt(nbRepet),Integer.parseInt(niveau));
+                    ExerciseService.createExercise(user, description, nameExercise, Integer.parseInt(length), Integer.parseInt(nbRepet), Integer.parseInt(niveau));
                 }
                 else if (length != null && !length.trim().isEmpty()
                         && nameExercise != null && !nameExercise.trim().isEmpty()
