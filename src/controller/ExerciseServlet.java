@@ -2,6 +2,7 @@ package controller;
 
 import model.*;
 import service.ExerciseService;
+import service.MuscleService;
 import service.SessionService;
 
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ExerciseServlet extends HttpServlet {
 
@@ -25,17 +27,17 @@ public class ExerciseServlet extends HttpServlet {
         User user = (User)(request.getSession()).getAttribute("User");
 
         String action = request.getParameter("action");
+        String[] selecttype=request.getParameterValues("inlineCheckboxMuscle");
+        List<AMuscle> select = new ArrayList<AMuscle>();
+        for(int i=0;i<selecttype.length;i++){
+            select.add(MuscleService.getMuscleById((Integer.parseInt(selecttype[i]))));
+        }
 
         try {
 
             if (action.equals("add"))
             {
-
                 String sessionUserId = request.getParameter("sessionUser");
-                SessionUser sessionUsers = SessionService.getSessionById(Integer.parseInt(sessionUserId));
-                System.out.println(sessionUserId.equals("none") && length != null && !length.trim().isEmpty()
-                        && nameExercise != null && !nameExercise.trim().isEmpty()
-                        && description != null && !description.trim().isEmpty());
                 if(sessionUserId.equals("none") && length != null && !length.trim().isEmpty()
                         && nameExercise != null && !nameExercise.trim().isEmpty()
                         && description != null && !description.trim().isEmpty()
@@ -46,21 +48,23 @@ public class ExerciseServlet extends HttpServlet {
                 else if (length != null && !length.trim().isEmpty()
                         && nameExercise != null && !nameExercise.trim().isEmpty()
                         && description != null && !description.trim().isEmpty()
-                        && sessionUserId != null && !sessionUserId.trim().isEmpty()
+                        && sessionUserId != null && !sessionUserId.trim().isEmpty() && select.size()!=0
                          ) {
-                    ExerciseService.addExercise(user,sessionUsers, Integer.parseInt(length),Integer.parseInt(nbRepet), nameExercise, description,Integer.parseInt(niveau));
+                    SessionUser sessionUsers = SessionService.getSessionById(Integer.parseInt(sessionUserId));
+
+                    ExerciseService.addExerciseWithMuscle(user,sessionUsers, Integer.parseInt(length),Integer.parseInt(nbRepet), nameExercise, description,Integer.parseInt(niveau),select);
                 }
                     if(Integer.parseInt(niveau)==1) {
-                        ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length)*2,Integer.parseInt(nbRepet)*2, 2);
-                        ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length)*3,Integer.parseInt(nbRepet)*3, 3);
+                        ExerciseService.createExerciseWithMuscle(user,description,nameExercise, Integer.parseInt(length)*2,Integer.parseInt(nbRepet)*2, 2,select);
+                        ExerciseService.createExerciseWithMuscle(user,description,nameExercise, Integer.parseInt(length)*3,Integer.parseInt(nbRepet)*3, 3,select);
                     }
                     else if(Integer.parseInt(niveau)==2) {
-                        ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length)/2,Integer.parseInt(nbRepet)/2, 1);
-                        ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length)*3/2,Integer.parseInt(nbRepet)*3/2, 3);
+                        ExerciseService.createExerciseWithMuscle(user,description,nameExercise, Integer.parseInt(length)/2,Integer.parseInt(nbRepet)/2, 1,select);
+                        ExerciseService.createExerciseWithMuscle(user,description,nameExercise, Integer.parseInt(length)*3/2,Integer.parseInt(nbRepet)*3/2, 3,select);
                     }
                     else if(Integer.parseInt(niveau)==3){
-                        ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length)/3,Integer.parseInt(nbRepet)/3, 1);
-                        ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length)*2/3,Integer.parseInt(nbRepet)*2/3, 3);
+                        ExerciseService.createExerciseWithMuscle(user,description,nameExercise, Integer.parseInt(length)/3,Integer.parseInt(nbRepet)/3, 1,select);
+                        ExerciseService.createExerciseWithMuscle(user,description,nameExercise, Integer.parseInt(length)*2/3,Integer.parseInt(nbRepet)*2/3, 3,select);
                     }
                     out.println("<h1>Création de l'exercice réussie</h1>");
                 }

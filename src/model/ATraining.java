@@ -47,7 +47,9 @@ public abstract class ATraining {
 
     //region Constructor
     public ATraining()
-    {}
+    {
+        this.bodyParts = new ArrayList<AMuscle>();
+    }
 
     public ATraining(AUser user,int dureeExo,int nbRepetition, String name, String explanation,int niveau) {
         this.dureeExo = dureeExo;
@@ -104,14 +106,6 @@ public abstract class ATraining {
 
     public void setExplanation(String explanation) {
         this.explanation = explanation;
-    }
-
-    public List<AMuscle> getBodyPart() {
-        return this.bodyParts;
-    }
-
-    public void setBodyPart(List<AMuscle> bodyParts) {
-        this.bodyParts = bodyParts;
     }
 
     public List<AMuscle> getBodyParts() {

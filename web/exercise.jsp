@@ -1,14 +1,15 @@
-<%@ page import="model.SessionUser" %>
 <%@ page import="java.util.List" %>
-<%@ page import="model.User" %>
-<%@ page import="model.Exercise" %>
 <%@ page import="service.ExerciseService" %>
-<%@ page import="model.ATraining" %>
 <%@ page import="service.SessionService" %>
 
 <%@ page import="service.HistoriqueService" %>
 
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="model.*" %>
+<%@ page import="service.MuscleService" %>
+<%@ page import="org.hibernate.Session" %>
+<%@ page import="org.hibernate.Transaction" %>
+<%@ page import="org.hibernate.Hibernate" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% String title = "Exercice"; %>
@@ -47,6 +48,15 @@
             <option name="optionName" value="<%=a.getIdS()%>"> <%=a.getName()+" ( Crée le "+a.getDateProgram()+" )"%></option>
             <%}%>
         </select>
+        <%
+            List<AMuscle> aMuscles = MuscleService.getAllMuscles();
+            for(AMuscle a:aMuscles)
+            {
+        %>
+        <label class="checkbox-inline">
+            <input type="checkbox" name="inlineCheckboxMuscle" value="<%=a.getId()%>"> <%=a.getName()%>
+        </label>
+        <%}%>
 
         <p><button type="submit">Enregistrer l'exercice</button></p>
     </form>
@@ -79,6 +89,7 @@
                 <th>Nombre de répétitions</th>
                 <th>Description</th>
                 <th>Niveau</th>
+                <th>Muscles Travaillés</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -97,6 +108,17 @@
                             out.println("\t<td>" + t.getNbRepetition() + "</td>");
                             out.println("\t<td>" + t.getExplanation() + "</td>");
                             out.println("\t<td>" + t.getNiveau() + "</td>");
+                            out.println("<td>");
+                            int taille=0;
+                            for(AMuscle muscle: t.getBodyParts())
+                            {
+                                taille++;
+                                if(t.getBodyParts().size()!=taille)
+                                  out.print(muscle.getName()+",");
+                                else
+                                    out.print(muscle.getName());
+                            }
+                            out.println("</td>");
                             out.println("\t<td>");
                             out.println("<form method=\"post\" action=\"ExerciceServlet\">");
                             out.println("<input type=\"hidden\" name=\"action\" value=\"delete\" />");
@@ -136,6 +158,19 @@
                             out.println("\t<td>" + t.getNbRepetition() + "</td>");
                             out.println("\t<td>" + t.getExplanation() + "</td>");
                             out.println("\t<td>" + t.getNiveau() + "</td>");
+                            out.println("<td>");
+                            int taille=0;
+                            Hibernate.initialize(t.getBodyParts());
+                            try{
+                            for(AMuscle muscle: t.getBodyParts())
+                            {
+                                taille++;
+                                if(t.getBodyParts().size()!=taille)
+                                    out.print(muscle.getName()+",");
+                                else
+                                    out.print(muscle.getName());
+                            }
+                            out.println("</td>");
                             out.println("\t<td>");
                             out.println("<form method=\"post\" action=\"ExerciceServlet\">");
                             out.println("<input type=\"hidden\" name=\"action\" value=\"addToEx\" />");
@@ -157,7 +192,7 @@
         </tbody>
     </table>
 
-    <table id="table_exercices" border='1' class="table table-condensed">
+    <table id="table_exercices" class="table table-condensed">
         <tr>
             <thead>
             <th>Nom de exercice</th>

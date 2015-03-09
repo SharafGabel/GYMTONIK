@@ -47,6 +47,23 @@ public class ExerciseService {
         }
     }
 
+    public static void createExerciseWithMuscle(AUser user, String descritpion, String name, int length,int nbRep,int niveau,List<AMuscle> aMuscles){
+        Session session = getSession();
+        Transaction tx = null;
+
+        try{
+            tx = session.beginTransaction();
+            Exercise exercise = new Exercise(user,length,nbRep,name,descritpion,niveau);
+            exercise.setBodyParts(aMuscles);
+            session.save(exercise);
+            tx.commit();
+        }catch (Exception e) {
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+        }
+    }
+
     public static boolean addExercise(AUser user,SessionUser sessionUser,int length,int nbRep,String name,String explanation,int niveau) {
         Session session = getSession();
         Transaction tx = null;
@@ -54,6 +71,31 @@ public class ExerciseService {
         try {
             tx = session.beginTransaction();
             Exercise exercise = new Exercise(user,length,nbRep,name,explanation,niveau);
+            session.save(exercise);
+            session.saveOrUpdate(sessionUser);
+            Historique historique = new Historique(sessionUser.getIdS(),exercise.getId(),user.getId());
+            session.save(historique);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+            return false;
+        }finally {
+            session.close();
+        }
+
+    }
+
+    public static boolean addExerciseWithMuscle(AUser user,SessionUser sessionUser,int length,int nbRep,String name,String explanation,int niveau,List<AMuscle> aMuscles) {
+        Session session = getSession();
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+            Exercise exercise = new Exercise(user,length,nbRep,name,explanation,niveau);
+            exercise.setBodyParts(aMuscles);
             session.save(exercise);
             session.saveOrUpdate(sessionUser);
             Historique historique = new Historique(sessionUser.getIdS(),exercise.getId(),user.getId());
