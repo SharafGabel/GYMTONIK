@@ -27,12 +27,13 @@ public class ExerciseServlet extends HttpServlet {
         User user = (User)(request.getSession()).getAttribute("User");
 
         String action = request.getParameter("action");
-        String[] selecttype=request.getParameterValues("inlineCheckboxMuscle");
         List<AMuscle> select = new ArrayList<AMuscle>();
-        for(int i=0;i<selecttype.length;i++){
-            select.add(MuscleService.getMuscleById((Integer.parseInt(selecttype[i]))));
+        if(request.getParameter("inlineCheckboxMuscle") != null) {
+            String[] selecttype = request.getParameterValues("inlineCheckboxMuscle");
+            for (int i = 0; i < selecttype.length; i++) {
+                select.add(MuscleService.getMuscleById((Integer.parseInt(selecttype[i]))));
+            }
         }
-
         try {
 
             if (action.equals("add"))

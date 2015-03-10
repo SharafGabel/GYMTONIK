@@ -1,11 +1,11 @@
 package model;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.IndexColumn;
+import org.hibernate.annotations.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,7 +37,7 @@ public abstract class ATraining {
     @Column(name="niveau",nullable=false)
     private int niveau;
 
-    @OneToMany(cascade={CascadeType.ALL}, mappedBy = "id")
+    @OneToMany(cascade={CascadeType.ALL}, mappedBy = "id",fetch = FetchType.EAGER)
     private List<AMuscle> bodyParts;
 
     @ManyToOne
