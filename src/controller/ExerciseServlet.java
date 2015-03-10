@@ -39,7 +39,7 @@ public class ExerciseServlet extends HttpServlet {
             if (action.equals("add"))
             {
                 String sessionUserId = request.getParameter("sessionUser");
-                if(sessionUserId.equals("none") && length != null && !length.trim().isEmpty()
+                if(sessionUserId.equals("0") && length != null && !length.trim().isEmpty()
                         && nameExercise != null && !nameExercise.trim().isEmpty()
                         && description != null && !description.trim().isEmpty()
                         )
@@ -49,8 +49,9 @@ public class ExerciseServlet extends HttpServlet {
                 else if (length != null && !length.trim().isEmpty()
                         && nameExercise != null && !nameExercise.trim().isEmpty()
                         && description != null && !description.trim().isEmpty()
-                        && sessionUserId != null && !sessionUserId.trim().isEmpty() && select.size()!=0
-                         ) {
+                        && sessionUserId != null && !sessionUserId.trim().isEmpty()
+                         )
+                {
                     SessionUser sessionUsers = SessionService.getSessionById(Integer.parseInt(sessionUserId));
 
                     ExerciseService.addExerciseWithMuscle(user,sessionUsers, Integer.parseInt(length),Integer.parseInt(nbRepet), nameExercise, description,Integer.parseInt(niveau),select);

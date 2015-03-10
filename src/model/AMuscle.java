@@ -3,6 +3,7 @@ package model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,11 +19,13 @@ public abstract class AMuscle{
     @Column(name="name",nullable = false)
     protected String name;
 
+    @ManyToMany(cascade={CascadeType.ALL})
+    private List<ATraining> exercices;
     //endregion
 
     //region Constructor
     public AMuscle(){
-
+        exercices = new ArrayList<ATraining>();
     }
     //endregion
 
@@ -39,5 +42,19 @@ public abstract class AMuscle{
         this.name = name;
     }
 
+    public List<ATraining> getExercices() {
+        return exercices;
+    }
+
+    public void setExercices(List<ATraining> exercices) {
+
+        this.exercices = exercices;
+
+    }
+
+    public void addExercice(ATraining exercise)
+    {
+        this.exercices.add(exercise);
+    }
     //endregion
 }

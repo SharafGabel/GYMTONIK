@@ -37,7 +37,8 @@ public abstract class ATraining {
     @Column(name="niveau",nullable=false)
     private int niveau;
 
-    @OneToMany(cascade={CascadeType.ALL}, mappedBy = "id",fetch = FetchType.EAGER)
+    @ManyToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER)
+    @JoinTable(name = "ExerciceMuscle", joinColumns = @JoinColumn(name = "idEx"), inverseJoinColumns = @JoinColumn(name = "id"))
     private List<AMuscle> bodyParts;
 
     @ManyToOne
@@ -113,10 +114,13 @@ public abstract class ATraining {
     }
 
     public void setBodyParts(List<AMuscle> bodyParts) {
+        for(AMuscle aMuscle:bodyParts)
+            aMuscle.addExercice(this);
         this.bodyParts = bodyParts;
     }
 
     public void addBodyPart(AMuscle bodyPart) {
+        bodyPart.addExercice(this);
         this.bodyParts.add(bodyPart);
     }
 

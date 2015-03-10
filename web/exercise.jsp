@@ -10,7 +10,7 @@
 <% String title = "Exercice"; %>
 <%@ include file="header.jsp" %>
 <div class="page-container" id="exerciseDiv">
-    <form id="formEx" name="formEx" method="post" action="ExerciceServlet">
+    <form id="formEx" class="form-horizontal" name="formEx" method="post" action="ExerciceServlet">
         <h1>Créer un Exercice</h1>
 
         <!-- Champ caché afin d'indiquer au servlet l'action qu'on souhaite réaliser,
@@ -34,7 +34,7 @@
 
         <p><label class="lab">Choix de la séance</label></p>
         <select name="sessionUser">
-            <option name="optionName" value="none">Aucune Séance</option>
+            <option name="optionName" value="0">Aucune Séance</option>
             <%
                 List<SessionUser> sessionUserList = SessionService.getSessionList((User) session.getAttribute("User"));
                 for(SessionUser a:sessionUserList)
@@ -62,7 +62,7 @@
 
     Affinez votre recherche :
     <select name="sessionUser" id="sessionUser">
-        <option name="optionName" value="none">Aucune Séance</option>
+        <option name="optionName" value="0">Aucune Séance</option>
         <%
             List<SessionUser> sessionUserListJquery = SessionService.getSessionList((User) session.getAttribute("User"));
             for(SessionUser a:sessionUserListJquery)
@@ -107,8 +107,9 @@
                             out.println("\t<td>" + t.getNiveau() + "</td>");
                             System.out.println(t.getBodyParts().size());
                             System.out.println(t.getBodyParts().toString());
-                            /*if(t.getBodyParts().size()!=0) {
-                                out.println("<td>");
+                            out.println("<td>");
+                            if(t.getBodyParts().size()!=0) {
+
                                 int taille = 0;
                                 for (AMuscle muscle : t.getBodyParts()) {
                                     taille++;
@@ -117,9 +118,10 @@
                                     else
                                         out.print(muscle.getName());
                                 }
-                                out.println("</td>");
 
-                            }*/
+
+                            }
+                            out.println("</td>");
                             out.println("\t<td>");
                             out.println("<form method=\"post\" action=\"ExerciceServlet\">");
                             out.println("<input type=\"hidden\" name=\"action\" value=\"delete\" />");
@@ -167,7 +169,7 @@
                                     if (t.getBodyParts().size() != taille)
                                         out.print(muscle.getName() + ",");
                                     else
-                                        out.print(muscle.getName());
+                                        out.print(muscle.getId());
                                 }
 
                             }

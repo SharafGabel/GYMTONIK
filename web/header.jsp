@@ -28,10 +28,9 @@
                 $.get('HistoriqueServlet', {
                     sessionUser : sessionuser
                 }, function(response) {
-
+                    $('#affSeance').hide();
+                    $('#table_exercices tbody').remove();
                     $.each(response, function(key, value) {
-                        $('#affSeance').hide();
-                        $('#table_exercices tbody').remove();
                         $('<tr>').append(
                                 $('<td>').text(value.name),
                                 $('<td>').text(value.explanation),
@@ -54,10 +53,9 @@
                 $.get('HistoriqueServlet', {
                     exerciseLevel : exerciselevel
                 }, function(response) {
-
+                    $('#affSeance').hide();
+                    $('#table_exercices tbody').remove();
                     $.each(response, function(key, value) {
-                        $('#affSeance').hide();
-                        $('#table_exercices tbody').remove();
                         $('<tr>').append(
                                 $('<td>').text(value.name),
                                 $('<td>').text(value.explanation),
