@@ -82,6 +82,7 @@
         <li><a href="seance.jsp">Séance</a></li>
         <li><a href="exercise.jsp">Exercice</a></li>
         <li><a href="performance.jsp">Performances</a></li>
+        <li><a href="profil.jsp">Profil</a></li>
         <li><a href="LogoutServlet">Se Déconnecter</a></li>
     </ul>
     <hr />
