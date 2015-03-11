@@ -5,9 +5,6 @@ import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
-import util.Util;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class ExerciseService {
@@ -45,6 +42,9 @@ public class ExerciseService {
                 tx.rollback();
             e.printStackTrace();
         }
+        finally {
+            session.close();
+        }
     }
 
     public static void createExerciseWithMuscle(AUser user, String descritpion, String name, int length,int nbRep,int niveau,List<AMuscle> aMuscles){
@@ -61,6 +61,9 @@ public class ExerciseService {
             if (tx != null)
                 tx.rollback();
             e.printStackTrace();
+        }
+        finally {
+            session.close();
         }
     }
 
@@ -100,6 +103,28 @@ public class ExerciseService {
             session.saveOrUpdate(sessionUser);
             Historique historique = new Historique(sessionUser.getIdS(),exercise.getId(),user.getId());
             session.save(historique);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+            return false;
+        }finally {
+            session.close();
+        }
+
+    }
+
+    public static boolean addExerciseWithMuscleWithoutSession(AUser user,int length,int nbRep,String name,String explanation,int niveau,List<AMuscle> aMuscles) {
+        Session session = getSession();
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+            Exercise exercise = new Exercise(user,length,nbRep,name,explanation,niveau);
+            exercise.setBodyParts(aMuscles);
+            session.save(exercise);
             tx.commit();
             return true;
         } catch (Exception e) {

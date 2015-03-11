@@ -10,6 +10,7 @@
 <% String title = "Exercice"; %>
 <%@ include file="header.jsp" %>
 <div class="page-container" id="exerciseDiv">
+
     <form id="formEx" class="form-horizontal" name="formEx" method="post" action="ExerciceServlet">
         <h1>Créer un Exercice</h1>
 
@@ -49,16 +50,14 @@
             for(AMuscle a:aMuscles)
             {
         %>
-        <label class="checkbox-inline">
-            <%=a.getName()%><input type="checkbox" name="inlineCheckboxMuscle" value="<%=a.getId()%>">
-        </label>
+            <%=a.getName()%><input class="checkbox" type="checkbox" name="inlineCheckboxMuscle" value="<%=a.getId()%>">
         <%}%>
         </p>
 
         <p><button type="submit">Enregistrer l'exercice</button></p>
     </form>
 
-    </hr>
+    </br>
 
     Affinez votre recherche :
     <select name="sessionUser" id="sessionUser">
@@ -169,7 +168,7 @@
                                     if (t.getBodyParts().size() != taille)
                                         out.print(muscle.getName() + ",");
                                     else
-                                        out.print(muscle.getId());
+                                        out.print(muscle.getName());
                                 }
 
                             }
