@@ -28,13 +28,13 @@ public class ExerciseService {
         return ourSessionFactory.openSession();
     }
 
-    public static void createExercise(AUser user, String descritpion, String name, int length,int nbRep,int niveau){
+    public static void createExercise(AUser user, String name, String description, int length,int niveau, int nbRep){
         Session session = getSession();
         Transaction tx = null;
 
         try{
             tx = session.beginTransaction();
-            Exercise exercise = new Exercise(user,length,nbRep,name,descritpion,niveau);
+            Exercise exercise = new Exercise(user,length,nbRep,name,description,niveau);
             session.save(exercise);
             tx.commit();
         }catch (Exception e) {

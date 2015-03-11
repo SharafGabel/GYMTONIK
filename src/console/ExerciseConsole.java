@@ -66,14 +66,28 @@ public class ExerciseConsole {
         String description = sc.nextLine();
         System.out.println("Durée (minutes)");
         int length = sc.nextInt();
-        System.out.println("Nombre de répétitions (>5)");
+        System.out.println("Nombre de répétitions (>=5)");
         int nbRep = sc.nextInt();
         System.out.println("Niveau [1..3]");
         int niveau = sc.nextInt();
 
-        ExerciseService.createExercise(user, name, description, length,niveau,nbRep);
+        if (nbRep >= 5 && niveau > 0 && niveau < 4) {
+            ExerciseService.createExercise(user, name, description, length, niveau, nbRep);
+            System.out.print("Ajout reussi");
+        } else {
+            if (nbRep < 5) {
+                System.out.println("Le nombre de répétitions doit être suppérieur ou égal à 5");
+            }
+            if (niveau < 1) {
+                System.out.println("Le niveau doit être compris entre 1 et 3 inclus");
+            }
+            if (niveau > 3) {
+                System.out.println("Le niveau doit être compris entre 1 et 3 inclus");
+            }
 
-        System.out.print("Ajout reussi");
+            System.out.println("\nAppuyez sur la touche Entrée pour continuer...");
+            sc.nextLine();
+        }
     }
 
     private static void updateExercise(AUser user, Exercise exo) {
