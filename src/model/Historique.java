@@ -36,6 +36,12 @@ public class Historique {
     @Type(type="date")
     private Date dateProgEffectue;
 
+    @Column(name="ratioRepet")
+    private float ratioRepet;
+
+    @Column(name="ratioDuree")
+    private float ratioDuree;
+
     @OneToOne(cascade={CascadeType.ALL},mappedBy = "historique")
     private Performance performance;
     //endregion
@@ -109,6 +115,14 @@ public class Historique {
 
     public void setPerformance(Performance performance) {
         this.performance = performance;
+    }
+
+    public void setRatioRepet(float ratioRepet) {
+        this.ratioRepet = ratioRepet;
+    }
+
+    public void setRatioDuree(float ratioDuree) {
+        this.ratioDuree = ratioDuree;
     }
 
     //endregion
