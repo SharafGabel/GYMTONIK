@@ -107,7 +107,7 @@ public class PerformanceService {
         return ratioDuree;
     }
 
-    public static void recupcalculPerformance(AUser user){
+    public static List<Historique> recupcalculPerformance(AUser user){
         Session session = getSession();
         Transaction tx = null;
         List<Historique> historiques = null;
@@ -116,14 +116,14 @@ public class PerformanceService {
 
             Query query = session.createQuery("Select h from Historique h where h.idUser="+user.getId());
             historiques = query.list();
-
             tx.commit();
+
         }   catch (Exception e) {
             if (tx != null)
                 tx.rollback();
             e.printStackTrace();
         }
-
+        return historiques;
     }
 
 
