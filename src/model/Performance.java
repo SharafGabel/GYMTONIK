@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name="Performance")
@@ -24,9 +25,10 @@ public class Performance implements Serializable {
     //endregion
 
     //region Constructor
-    public Performance()
+    public Performance(String name, Historique historique)
     {
-
+        this.name=name;
+        this.historique= historique;
     }
     //endregion
 
@@ -51,6 +53,8 @@ public class Performance implements Serializable {
         this.historique = historique;
         historique.setPerformance(this);
     }
+
+
 
     //endregion
 }
