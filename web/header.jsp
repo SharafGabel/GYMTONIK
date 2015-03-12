@@ -20,46 +20,9 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
     <script src="http://yui.yahooapis.com/3.8.1/build/yui/yui-min.js"></script>
-    <script>
-        YUI().use(
-                'charts',
-                'charts-legend',
-                'io',
-                function m(Y) {
-                    var data, urifordata = "./PerformanceServlet",
-                            marklinechart = Y.one("#pieChartId"), configuration = {
-                                method : 'POST',
-                                headers : {
-                                    'Content-Type' : 'application/json'
-                                },
-
-                                on : {
-                                    success : function(transactionid, response,     arguments)
-                                    {
-                                        data = JSON.parse(response.responseText),
-                                                pieChart = new Y.Chart(
-                                                        {
-                                                            type : "pie",
-                                                            stacked : true,
-                                                            dataProvider : data,
-                                                            categoryKey : 'Source',
-                                                            legend : {
-                                                                position : "right",
-                                                                width : 100,
-                                                                height : 100
-                                                            },
-                                                            render : marklinechart
-                                                        });
-                                    },
-
-                                    failure : function(transactionid, response,     arguments) {
-                                        alert("Error In Data Loading.");
-                                    }
-                                }
-                            };
-                    Y.io(urifordata, configuration);
-                });
-    </script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="./assets/js/visualisation-chart-script.js"></script>
     <style>
         #pieChartId {
             height: 400px;
@@ -100,7 +63,7 @@
 
             $('#sessionUserPerf').change(function(event) {
                 var sessionuser = $("select#sessionUserPerf").val();
-                $.get('HistoriqueServlet', {
+                $.get('PerformanceServlet', {
                     sessionUserPerf : sessionuser
                 }, function(response) {
                    // $('#affSeance').hide();
@@ -146,6 +109,30 @@
         });
     </script>
 
+    <script>
+        $(document).ready(function() {
+
+            $('#sessionUserPerf').change(function(event) {
+                var exerciselevel = $("select#sessionUserPerf").val();
+                $.get('PerformanceServlet', {
+                    exerciseLevel : exerciselevel
+                }, function(response) {
+                    $('#affSeance').hide();
+                    $('#table_exercices tbody').remove();
+                    $.each(response, function(key, value) {
+                        $('<tr>').append(
+                                $('<td>').text(value.name),
+                                $('<td>').text(value.explanation),
+                                $('<td>').text(value.dureeExo),
+                                $('<td>').text(value.niveau),
+                                $('<td>').text(value.nbRepetition)).appendTo('#table_exercices');
+
+                    });
+
+                });
+            });
+        });
+    </script>
 </head>
 
 <body>

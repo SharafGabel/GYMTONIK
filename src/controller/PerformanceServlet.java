@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -23,12 +24,18 @@ public class PerformanceServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("application/json");
-        List<Historique> historiques = PerformanceService.recupcalculPerformance(((User)request.getSession().getAttribute("User")));
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        // Convert Java Object to Json
-        String json = gson.toJson(historiques);
+        HttpSession session = request.getSession();
 
-        response.getWriter().print(json);
+        User user= (User)session.getAttribute("User");
+        List<Historique> listOfHistorique = PerformanceService.recupcalculPerformance(user);
+
+        Gson gson = new Gson();
+
+        String jsonString = gson.toJson(listOfHistorique);
+
+        response.setContentType("application/json");
+
+        response.getWriter().write(jsonString);
+
     }
 }

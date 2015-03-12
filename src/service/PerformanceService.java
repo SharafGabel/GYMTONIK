@@ -112,8 +112,7 @@ public class PerformanceService {
         Transaction tx = null;
         List<Historique> historiques = null;
         try {
-            tx = session.beginTransaction( );
-
+            tx = session.beginTransaction();
             Query query = session.createQuery("Select h from Historique h where h.idUser="+user.getId());
             historiques = query.list();
             tx.commit();

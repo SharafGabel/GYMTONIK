@@ -17,14 +17,13 @@
 Veuillez selectionner votre séance :
 <select name="sessionUserPerf" id="sessionUserPerf">
     <option name="optionName" value="0">Aucune Séance</option>
-    <%
-        List<SessionUser> sessionUserListJquery = SessionService.getSessionList((User) session.getAttribute("User"));
-        for(SessionUser a:sessionUserListJquery)
-        {
-    %>
-    <option name="optionName" value="<%=a.getIdS()%>"> <%=a.getName()+" ( Crée le "+a.getDateProgram()+" )"%></option>
-    <%}%>
+    <option name="optionName" value="<%=session.getAttribute("User")%>"> <%=session.getAttribute("User")%></option>
+
 </select>
+
+    <div id="student-bar-chart"></div>
+
+
 
 
 
