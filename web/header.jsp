@@ -23,14 +23,8 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript" src="./assets/js/visualisation-chart-script.js"></script>
-    <style>
-        #pieChartId {
-            height: 400px;
-            margin: 10px;
-            max-width: 500px;
-            width: 90%;
-        }
-    </style>
+
+    <script src="http://code.highcharts.com/highcharts.js"></script>
 
 
     <script>
@@ -133,6 +127,94 @@
             });
         });
     </script>
+
+    <!--Dynamic version - HighCharts Graph - performance.jsp-->
+    <script type="text/javascript">
+        $(function () {
+            var chart;
+            $(document).ready(function() {
+                chart = new Highcharts.Chart({
+
+                    chart: {
+                        renderTo: 'container',
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false
+                    },
+
+                    title: {
+                        text: 'Evolution de la performance '
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Nb de repetition '
+                        }
+                    },
+                    xAxis: {
+                        type: 'datetime',
+                        dateTimeLabelFormats: { // don't display the dummy year
+                            month: '%e. %b',
+                            year: '%b'
+                        },
+                        title: {
+                            text: 'Date'
+                        }
+                    },
+                    tooltip: {
+                       // pointFormat: '{series.name}: <b>{point.percentage}%</b>',
+                        pointFormat: '{point.x:}: {point.y:.2f} %',
+                        percentageDecimals: 1
+                    },
+                    plotOptions: {
+
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: true,
+                                color: '#000000',
+                                connectorColor: '#000000',
+                                formatter: function() {
+                                    //Highcharts.numberFormat(this.percentage,2)
+                                    return '<b>'+ this.point.name +'</b>: '+Highcharts.numberFormat(this.percentage,2) +' %';
+                                }
+                            }
+                        }
+                    },
+
+                    series: [{
+                        type: 'line',
+                        name: 'performance'
+                    }]
+                });
+            });
+
+
+            $.ajax({
+                type:"GET",
+                url:'PerformanceServlet',//Servlet
+                success:function(data){
+
+                    browsers = [],
+
+                            $.each(data,function(i,d){
+                                browsers.push([d.dateProgEffectue,d.ratioRepet]);
+                            });
+
+                    chart.series[0].setData(browsers);
+                },
+                error:function(e){
+                    alert(e);
+                }
+            });
+
+
+        });
+    </script>
+
+
+
+
 </head>
 
 <body>

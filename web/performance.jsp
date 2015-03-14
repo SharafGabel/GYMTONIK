@@ -21,29 +21,10 @@ Veuillez selectionner votre séance :
 
 </select>
 
-    <div id="student-bar-chart"></div>
 
+    <div id="container" style="height: 400px"></div>
+    <button id="button">Set new data</button>
 
-
-
-
-
-<table id="table_exercicesUser" class="table table-condensed">
-    <tr>
-        <thead>
-        <th>Nom de exercice</th>
-        <th>Description exercice</th>
-        <th>Duree de l'exercice</th>
-        <th>Niveau de l'exercice</th>
-        <th>Nombre de répetition</th>
-        <th>Muscles travaillée</th>
-        <thead>
-
-    </tr>
-</table>
-
-
-    <div id="pieChartId"></div>
 
     
 </div>
