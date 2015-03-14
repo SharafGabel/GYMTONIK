@@ -11,7 +11,7 @@ public class Historique {
 
     //region Property
     @Id
-    @Column(name = "idH", unique = true, nullable = false)
+    @Column(name = "idH", nullable = false)
     private int idH;
 
     @Column(name="idS",nullable = false)
@@ -48,6 +48,8 @@ public class Historique {
 
     //region Constructor
     public Historique() {
+        this.ratioRepet = 0;
+        this.ratioDuree = 0;
     }
 
     public Historique(int idS, int idEx,int idUser) {
@@ -56,6 +58,8 @@ public class Historique {
         String str = Integer.toString(idS) + Integer.toString(idEx);
         this.idH=Integer.parseInt(str);
         this.idUser = idUser;
+        this.ratioRepet = 0;
+        this.ratioDuree = 0;
     }
     //endregion
 

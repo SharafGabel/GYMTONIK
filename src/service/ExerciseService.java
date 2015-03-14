@@ -276,6 +276,29 @@ public class ExerciseService {
             tx.commit();
         } catch (Exception e) {
         }
+        finally {
+            session.close();
+        }
+
+        return exercises;
+    }
+
+
+    public static List<Exercise> getExercises(int idsessionUser) {
+        Session session = getSession();
+        List<Exercise> exercises = null;
+
+        try {
+            Transaction tx = session.getTransaction();
+            tx.begin();
+            Query query = session.createQuery("Select distinct e from Exercise e, Historique h where h.idS=" + idsessionUser + " and h.idEx=e.id");
+            exercises = query.list();
+            tx.commit();
+        } catch (Exception e) {
+        }
+        finally {
+            session.close();
+        }
 
         return exercises;
     }

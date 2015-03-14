@@ -2,8 +2,10 @@ package controller;
 
 import com.google.gson.Gson;
 import model.Exercise;
+import model.Historique;
 import model.SessionUser;
 import service.ExerciseService;
+import service.HistoriqueService;
 import service.SessionService;
 
 import javax.servlet.ServletException;
@@ -18,14 +20,12 @@ public class HistoriqueServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
-
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Enumeration paramNames = request.getParameterNames();
         String paramName = (String) paramNames.nextElement();
-
+        System.out.println("YEP");
         if (paramName.equalsIgnoreCase("sessionUser")) {
             String idSeance = request.getParameter("sessionUser");
             if(idSeance.equals("none"))
@@ -52,7 +52,24 @@ public class HistoriqueServlet extends HttpServlet {
                 System.out.println(json);//test
             }
         }
-        if (paramName.equalsIgnoreCase("exerciseLevel")) {
+        else if(paramName.equalsIgnoreCase("sessionUserH"))
+        {
+            String idSess = request.getParameter("sessionUserH");
+            List<Historique> objectList= HistoriqueService.getExercises(Integer.parseInt(idSess));
+            System.out.println("Here : "+objectList.toString());
+            /*GsonBuilder gsonBuilder = new GsonBuilder();
+            new GraphAdapterBuilder()
+                    .addType(Exercise.class)
+                    .registerOn(gsonBuilder);
+            Gson gson = gsonBuilder.create();*/
+            String json;
+            json = new Gson().toJson(objectList);
+            System.out.println("json : "+json);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+        }
+        else if (paramName.equalsIgnoreCase("exerciseLevel")) {
             String levelId = request.getParameter("exerciseLevel");
             List<Exercise> in;
             in = ExerciseService.getExercisesByLevel(Integer.parseInt(levelId));
@@ -62,8 +79,7 @@ public class HistoriqueServlet extends HttpServlet {
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(json);
         }
-        
-        if(paramName.equalsIgnoreCase("sessionUserPerf")){
+        else if(paramName.equalsIgnoreCase("sessionUserPerf")){
             String sessionUser = request.getParameter("sessionUserPerf");
             SessionUser sessionUsers = SessionService.getSessionById(Integer.parseInt(sessionUser));
             List<Exercise> in;

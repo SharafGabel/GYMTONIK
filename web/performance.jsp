@@ -1,7 +1,3 @@
-<%@ page import="model.SessionUser" %>
-<%@ page import="service.SessionService" %>
-<%@ page import="model.User" %>
-<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     // Si aucune session n'est créée, rediriger vers page de login / inscription

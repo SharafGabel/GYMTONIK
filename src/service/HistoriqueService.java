@@ -1,9 +1,6 @@
 package service;
 
-import model.ATraining;
-import model.Exercise;
-import model.SessionUser;
-import model.User;
+import model.*;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
@@ -12,7 +9,6 @@ import org.hibernate.service.ServiceRegistryBuilder;
 import java.util.List;
 
 public class HistoriqueService {
-
 
     private static final SessionFactory ourSessionFactory;
     private static final ServiceRegistry serviceRegistry;
@@ -75,5 +71,44 @@ public class HistoriqueService {
         }
     }
 
+    public static List<Historique> getExercises(int idSessionUser) {
+        Session session = getSession();
+        Transaction tx = null;
+        List<Historique> historiques;
+        try {
+            tx = session.beginTransaction();
+            Query query = session.createQuery("select distinct h from Historique h where h.idS="+idSessionUser);
+            historiques = query.list();
+            tx.commit();
+            return historiques;
+        } catch (Exception e) {
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+            return null;
+        }finally {
+            session.close();
+        }
+    }
 
+    public static List<Object> getExercisesAndHistorique(int idSeance) {
+        Session session = getSession();
+        Transaction tx = null;
+
+        List<Object> objectList;
+        try {
+            tx = session.beginTransaction();
+            Query query = session.createQuery("select e.name,e.niveau,h.dureeEffectue,h.nbRepetEffectue,h.timeSleep from Historique h,Exercise e where h.idEx=e.id and h.idS="+idSeance);
+            objectList = query.list();
+            System.out.println(objectList.toString());
+            return objectList;
+        } catch (Exception e) {
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+            return null;
+        }finally {
+            session.close();
+        }
+    }
 }
