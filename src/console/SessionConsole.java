@@ -78,8 +78,9 @@ public class SessionConsole {
             }
         } else System.out.println("Il n'y a aucun exercice pour cette séance");
 
-        System.out.println("Cliquez sur une touche pour continuer...");
+        System.out.println("Appuyez sur la touche Entrée pour continuer...");
         sc.nextLine();
+
 
     }
 }
