@@ -21,9 +21,6 @@ Veuillez selectionner votre séance :
 
 </select>
 
-
-
-    <div id="container" style="height: 400px"></div>
     <button id="button">Set new data</button>
 
     <p><label class="lab">TEST Niveau ?</label></p>
@@ -40,11 +37,11 @@ Veuillez selectionner votre séance :
     <table id="affExo" class="table table-condensed">
         <tr>
             <thead>
-            <th>Nom de exercice</th>
-            <th>Description exercice</th>
-            <th>Duree de l'exercice</th>
-            <th>Niveau de l'exercice</th>
-            <th>Nombre de répetition</th>
+            <th>Id exercice</th>
+            <th>Ratio Duree</th>
+            <th>Ratio Repetition</th>
+            <th>Temps de sommeil</th>
+            <th>Date exercice Effectué</th>
             <thead>
 
         </tr>
@@ -55,3 +52,26 @@ Veuillez selectionner votre séance :
     
 </div>
 <%@ include file="footer.jsp" %>
+<script>
+    $(document).ready(function() {
+
+        $('#SessionUserFromPerformancePage').change(function(event) {
+            var sessionUser = $("select#SessionUserFromPerformancePage").val();
+            $.get('PerformanceServlet', {
+                sessionUserFromPerformance : sessionUser
+            }, function(response) {
+                $('#affExo tbody').remove();
+                $.each(response, function(key, value) {
+                    $('<tr>').append(
+                            $('<td>').text(value.idEx),
+                            $('<td>').text(value.ratioDuree),
+                            $('<td>').text(value.ratioRepet),
+                            $('<td>').text(value.timeSleep),
+                            $('<td>').text(value.dateProgEffectue)).appendTo('#affExo');
+
+                });
+
+            });
+        });
+    });
+</script>

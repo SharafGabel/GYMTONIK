@@ -119,30 +119,6 @@
 
         $(document).ready(function() {
 
-            $('#SessionUserFromPerformancePage').change(function(event) {
-                var sessionUser = $("select#SessionUserFromPerformancePage").val();
-                $.get('HistoriqueServlet', {
-                    sessionUserFromPerformance : sessionUser
-                }, function(response) {
-                    $('#affExo tbody').remove();
-                    $.each(response, function(key, value) {
-                        $('<tr>').append(
-                                $('<td>').text(value.name),
-                                $('<td>').text(value.niveau),
-                                $('<td>').text(value.dureeEffectue),
-                                $('<td>').text(value.nbRepetEffectue),
-                                $('<td>').text(value.timeSleep)).appendTo('#affExo');
-
-                    });
-
-                });
-            });
-        });
-
-
-
-        $(document).ready(function() {
-
             $('#sessionUserPerf').change(function(event) {
                 var exerciselevel = $("select#sessionUserPerf").val();
                 $.get('PerformanceServlet', {

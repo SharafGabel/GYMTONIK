@@ -2,10 +2,12 @@ package controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import model.AUser;
 import model.Historique;
 import model.User;
 import service.HistoriqueService;
 import service.PerformanceService;
+import util.GsonExclusionStrategy;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,18 +28,15 @@ public class PerformanceServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
 
-        User user= (User)session.getAttribute("User");
-        List<Historique> listOfHistorique = PerformanceService.recupcalculPerformance(user);
-        Gson gson = new Gson();
-
-        String jsonString = gson.toJson(listOfHistorique);
-
+        int idS = Integer.parseInt(request.getParameter("sessionUserFromPerformance"));
+        List<Historique> listOfHistorique = HistoriqueService.getExercises(idS);
+        Gson gson = GsonExclusionStrategy.createGsonFromBuilder(new GsonExclusionStrategy(null));
+        String json = gson.toJson(listOfHistorique);
+        System.out.println("json : " + json);
         response.setContentType("application/json");
-
-        response.getWriter().write(jsonString);
-        System.out.println(jsonString);
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
 
     }
 }
