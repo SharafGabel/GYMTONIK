@@ -26,10 +26,12 @@
 <table id="affExo" name="affExo" class="table table-condensed">
     <thead>
     <tr>
-        <th>Id Exercice</th>
-        <th>Nombre de répétitions</th>
-        <th>Durée Effectuée</th>
-        <th>Heures de Sommeil</th>
+        <th>Nom de l'exercice</th>
+        <th>Niveau</th>
+        <th>Nombre de Répétitions effectuées</th>
+        <th>Duree Effectué</th>
+        <th>Temps de sommeil</th>
+        <th>Action</th>
     </tr>
     </thead>
     <tbody>
@@ -40,7 +42,8 @@
 </html>
 <%@ include file="footer.jsp" %>
 <script>
-    $(document).ready(function() {
+
+    /*$(document).ready(function() {
 
         $('#SessioNUSERR').change(function(event) {
             $('#affExo tbody').remove();
@@ -49,42 +52,103 @@
                 sessionUserH : sessionuser
             }, function(response) {
                 $.each(response, function(key, value) {
-                    $('<tr>').append(
+
+                    var tdName=document.createElement("td");
+                    tdName.text(value.name);
+
+                    var tdniveau = document.createElement("td");
+                    tdniveau.text(value.niveau);
+
+                    var f = document.createElement("form");
+                    f.setAttribute('method',"post");
+                    f.setAttribute('action',"HistoriqueServlet");
+
+                    var tr = document.createElement("tr");
+
+                    var  hidden = document.createElement("input");
+                    hidden.setAttribute('type',"hidden");
+                    hidden.setAttribute('name',"idEx");
+                    hidden.setAttribute('value',value.id);
+
+                    var inputRepet = document.createElement("input");
+                    inputRepet.setAttribute('type',"number");
+                    inputRepet.setAttribute('min',"5");
+                    inputRepet.setAttribute('max',"200");
+                    inputRepet.setAttribute('name',"nbRepet");
+
+                    var tdRepet = document.createElement("td");
+                    tdRepet.appendChild(inputRepet);
+
+                    var inputDuree = document.createElement("input");
+                    inputDuree.setAttribute('type',"number");
+                    inputDuree.setAttribute('min',"1");
+                    inputDuree.setAttribute('max',"120");
+                    inputDuree.setAttribute('name',"dureeEff");
+
+                    var tdDuree = document.createElement("td");
+                    tdDuree.appendChild(inputDuree);
+
+                    var inputTimeS = document.createElement("input");
+                    inputTimeS.setAttribute('type',"number");
+                    inputTimeS.setAttribute('min',"1");
+                    inputTimeS.setAttribute('max',"120");
+                    inputTimeS.setAttribute('name',"timeSleep");
+
+                    var tdTime = document.createElement("td");
+                    tdTime.appendChild(inputTimeS);
+
+                    var inputSubmit = document.createElement("input");
+                    inputSubmit.setAttribute('type',"submit");
+
+                    var tdSubmit = document.createElement("td");
+                    tdSubmit.appendChild(inputSubmit);
+
+                    tr.appendChild(tdName,tdniveau,hidden,tdRepet,tdDuree,tdRepet,tdTime,tdSubmit);
+                    f.appendChild(tr);
+
+                    var aff = document.getElementsByName('affExo');
+                    aff.appendChild(f);
+                    //f.appendTo('#affExo');
+
+                    /*$('<tr>').append(
                             $('<td>').text(value.name),
                             $('<td>').text(value.niveau)
-                            /*$('<td>').text(value.idEx),
-                            $('<td>').text(value.nbRepetEffectue),
-                            $('<td>').text(value.dureeEffectue),
-                            $('<td>').text(value.timeSleep)*/).appendTo('#affExo');
+                            ).appendTo('#affExo');
 
                 });
 
             });
         });
     });
-
-    /*$(document).ready(function() {
+*/
+    $(document).ready(function() {
 
      $('#SessioNUSERR').change(function(event) {
-     $('#affExo tbody').remove();
+
+         $('#affExo tbody').remove();
      var sessionuser = $("select#SessioNUSERR").val();
+
      $.get('HistoriqueServlet', {
      sessionUserH : sessionuser
      }, function(response) {
      $.each(response, function(key, value) {
-     $('<form action=\"HistoriqueServlet\">').append(
+     $('<form action=\"HistoriqueServlet\" method=\"post\">').append(
      $('<tr>').append(
      $('<td>').text(value.name),
-     $('<td>').text(value.niveau),
-     $('<input name=\"htoAdd\" type=\"hidden\" value='+value.id+'>'+'</input>'),
-     $('<td><input name=\"nbRepet\"/></td>'),
-     $('<td><input name=\"dureeEff\"/></td>'),
-     $('<td><input name=\"timeS\"/></td>'),
-     $('<td><input type=\"submit\">'+'Enregistrer"+'</input></td>'))).appendTo('#affExo');
+     $('</td>	<td>').text(value.niveau),
+     $('</td>	<td>').append('<input type=\"number\" min=\"5\" max=\"500\" name=\"nbRepet\"/>'),
+     $('</td>	<td>').append('<input type=\"number\" min=\"1\" max=\"120\" name=\"dureeEff\"/>'),
+     $('</td>	<td>').append('<input type=\"number\" min=\"1\" max=\"22\" name=\"timeS\"/>'),
+     $('<input name=\"dureeARealiser\" type=\"hidden\" value='+value.dureeExo+'>'),
+     $('<input name=\"nbRepetARealiser\" type=\"hidden\" value='+value.nbRepetition+'>'),
+     $('<input name=\"sessionS\" type=\"hidden\" value='+sessionuser+'>'),
+     $('<input name=\"htoAdd\" type=\"hidden\" value='+value.id+'>'),
+     $('</td>	<td>').append('<button type=\"submit\" value=\"Enregistrer\"/></td>')
+     )).appendTo('#affExo');
 
      });
 
      });
      });
-     });*/
+     });
 </script>

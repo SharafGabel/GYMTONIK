@@ -4,10 +4,7 @@ import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import model.AUser;
-import model.Exercise;
-import model.Historique;
-import model.SessionUser;
+import model.*;
 import service.ExerciseService;
 import service.HistoriqueService;
 import service.SessionService;
@@ -22,8 +19,19 @@ import java.util.Enumeration;
 import java.util.List;
 
 public class HistoriqueServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int idEx = Integer.parseInt(request.getParameter("htoAdd"));
+        int idS = Integer.parseInt(request.getParameter("sessionS"));
+        AUser user = (User)(request.getSession()).getAttribute("User");
+        int nbRepet = Integer.parseInt(request.getParameter("nbRepet"));
+        int dureeEff = Integer.parseInt(request.getParameter("dureeEff"));
+        int timeS = Integer.parseInt(request.getParameter("timeS"));
+        int dureeARealiser = Integer.parseInt(request.getParameter("dureeARealiser"));
+        int nbRepetARealiser= Integer.parseInt(request.getParameter("nbRepetARealiser"));
+
+        if(HistoriqueService.addExerciseDone(idS,idEx,user,dureeEff,nbRepet,timeS,nbRepetARealiser,dureeARealiser))
+            request.getRequestDispatcher("performance.jsp").forward(request, response);
 
     }
 
@@ -60,11 +68,9 @@ public class HistoriqueServlet extends HttpServlet {
         else if(paramName.equalsIgnoreCase("sessionUserH"))
         {
             String idSess = request.getParameter("sessionUserH");
-            //List<Historique> objectList= HistoriqueService.getExercises(Integer.parseInt(idSess));
             List<Exercise> objectList= ExerciseService.getExercises(Integer.parseInt(idSess));
             System.out.println("Here : "+objectList.toString());
             Gson gson = GsonExclusionStrategy.createGsonFromBuilder(new GsonExclusionStrategy(AUser.class));
-
             String json = gson.toJson(objectList);
             System.out.println("json : "+json);
             response.setContentType("application/json");

@@ -6,6 +6,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
+import java.util.Date;
 import java.util.List;
 
 public class HistoriqueService {
@@ -110,5 +111,32 @@ public class HistoriqueService {
         }finally {
             session.close();
         }
+    }
+
+    public static boolean addExerciseDone(int idS,int idEx,AUser user,int dureeEff,int nbRepEff,int timeSleep,int nbRepRequis,int dureeRequis) {
+        Session session = getSession();
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+            Historique historique = new Historique(idS,idEx,user.getId());
+            historique.setTimeSleep(timeSleep);
+            historique.setDureeEffectue(dureeEff);
+            historique.setNbRepetEffectue(nbRepEff);
+            historique.setDateProgEffectue(new Date());
+            historique.calculRatioDuree(dureeEff,dureeRequis);
+            historique.calculRatioRepet(nbRepEff,nbRepRequis);
+            session.save(historique);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+            return false;
+        }finally {
+            session.close();
+        }
+
     }
 }

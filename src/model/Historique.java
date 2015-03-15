@@ -1,5 +1,6 @@
 package model;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -11,6 +12,11 @@ public class Historique {
 
     //region Property
     @Id
+    @GeneratedValue(generator="idGen")
+    @GenericGenerator(name="idGen",strategy="org.hibernate.id.IncrementGenerator")
+    @Column(name = "id", unique = true, nullable = false)
+    protected Integer id;
+
     @Column(name = "idH", nullable = false)
     private int idH;
 
@@ -127,6 +133,38 @@ public class Historique {
 
     public void setRatioDuree(float ratioDuree) {
         this.ratioDuree = ratioDuree;
+    }
+
+    public Date getDateProgEffectue() {
+        return dateProgEffectue;
+    }
+
+    public void setDateProgEffectue(Date dateProgEffectue) {
+        this.dateProgEffectue = dateProgEffectue;
+    }
+
+    public float getRatioRepet() {
+        return ratioRepet;
+    }
+
+    public float getRatioDuree() {
+        return ratioDuree;
+    }
+
+    public float calculRatioDuree(int a,int b)
+    {
+        this.ratioDuree = (a*100)/b;
+        return ratioDuree;
+    }
+
+    public float calculRatioRepet(int a,int b)
+    {
+        this.ratioRepet = (a*100)/b;
+        return ratioRepet;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     //endregion

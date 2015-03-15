@@ -128,7 +128,6 @@ public class ExerciseServlet extends HttpServlet {
         getServletContext().getRequestDispatcher("/exercice.jsp").forward(request,response);
     }
 
-
     public static boolean addExercise(AUser user,SessionUser sessionUser,String length,String nbRepet,String name,String explanation,int niveau){
         if(sessionUser==null || sessionUser.getUser() == null){
             return false;
