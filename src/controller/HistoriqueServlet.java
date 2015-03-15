@@ -100,6 +100,31 @@ public class HistoriqueServlet extends HttpServlet {
             response.getWriter().write(json);
             System.out.println(json);//test
         }
+        else if(paramName.equalsIgnoreCase("sessionUserFromPerf")){
+            String sessionUser = request.getParameter("sessionUserDone");
+            List<Historique> in;
+            in = HistoriqueService.getExercisesAndHistorique(Integer.parseInt(sessionUser));
+            System.out.println(in.toString());
+            String json;
+            json = new Gson().toJson(in);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+            System.out.println(json);//test
+        }
+        else if(paramName.equalsIgnoreCase("sessionUserFromPerformance")){
+            String sessionUser = request.getParameter("sessionUserFromPerformance");
+            List<Historique> in;
+            in = HistoriqueService.getExercisesAndHistorique(Integer.parseInt(sessionUser));
+            System.out.println(in.toString());
+            String json;
+            json = new Gson().toJson(in);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+            System.out.println(json);//test
+        }
+
     }
 
 }

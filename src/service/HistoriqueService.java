@@ -92,17 +92,17 @@ public class HistoriqueService {
         }
     }
 
-    public static List<Object> getExercisesAndHistorique(int idSeance) {
+    public static List<Historique> getExercisesAndHistorique(int idSeance) {
         Session session = getSession();
         Transaction tx = null;
 
-        List<Object> objectList;
+        List<Historique> historiques;
         try {
             tx = session.beginTransaction();
             Query query = session.createQuery("select e.name,e.niveau,h.dureeEffectue,h.nbRepetEffectue,h.timeSleep from Historique h,Exercise e where h.idEx=e.id and h.idS="+idSeance);
-            objectList = query.list();
-            System.out.println(objectList.toString());
-            return objectList;
+            historiques = query.list();
+            System.out.println(historiques.toString());
+            return historiques;
         } catch (Exception e) {
             if (tx != null)
                 tx.rollback();
