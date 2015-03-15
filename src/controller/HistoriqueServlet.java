@@ -1,12 +1,17 @@
 package controller;
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import model.AUser;
 import model.Exercise;
 import model.Historique;
 import model.SessionUser;
 import service.ExerciseService;
 import service.HistoriqueService;
 import service.SessionService;
+import util.GsonExclusionStrategy;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +30,7 @@ public class HistoriqueServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Enumeration paramNames = request.getParameterNames();
         String paramName = (String) paramNames.nextElement();
-        System.out.println("YEP");
+
         if (paramName.equalsIgnoreCase("sessionUser")) {
             String idSeance = request.getParameter("sessionUser");
             if(idSeance.equals("none"))
@@ -55,15 +60,12 @@ public class HistoriqueServlet extends HttpServlet {
         else if(paramName.equalsIgnoreCase("sessionUserH"))
         {
             String idSess = request.getParameter("sessionUserH");
-            List<Historique> objectList= HistoriqueService.getExercises(Integer.parseInt(idSess));
+            //List<Historique> objectList= HistoriqueService.getExercises(Integer.parseInt(idSess));
+            List<Exercise> objectList= ExerciseService.getExercises(Integer.parseInt(idSess));
             System.out.println("Here : "+objectList.toString());
-            /*GsonBuilder gsonBuilder = new GsonBuilder();
-            new GraphAdapterBuilder()
-                    .addType(Exercise.class)
-                    .registerOn(gsonBuilder);
-            Gson gson = gsonBuilder.create();*/
-            String json;
-            json = new Gson().toJson(objectList);
+            Gson gson = GsonExclusionStrategy.createGsonFromBuilder(new GsonExclusionStrategy(AUser.class));
+
+            String json = gson.toJson(objectList);
             System.out.println("json : "+json);
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");

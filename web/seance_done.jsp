@@ -50,12 +50,12 @@
             }, function(response) {
                 $.each(response, function(key, value) {
                     $('<tr>').append(
-                            //$('<td>').text(value.name),
-                            //$('<td>').text(value.niveau),
-                            $('<td>').text(value.idEx),
+                            $('<td>').text(value.name),
+                            $('<td>').text(value.niveau)
+                            /*$('<td>').text(value.idEx),
                             $('<td>').text(value.nbRepetEffectue),
                             $('<td>').text(value.dureeEffectue),
-                            $('<td>').text(value.timeSleep)).appendTo('#affExo');
+                            $('<td>').text(value.timeSleep)*/).appendTo('#affExo');
 
                 });
 

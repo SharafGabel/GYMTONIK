@@ -5,12 +5,13 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class AMuscle{
+public abstract class AMuscle implements Serializable{
     //region Property    
     @Id
     @GeneratedValue(generator="idGen")

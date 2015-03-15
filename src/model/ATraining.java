@@ -1,7 +1,9 @@
 package model;
 
 import org.hibernate.annotations.*;
+import util.GsonExclude;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -13,7 +15,7 @@ import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class ATraining {
+public abstract class ATraining implements Serializable {
 
     //region Property
     @Id
@@ -37,10 +39,12 @@ public abstract class ATraining {
     @Column(name="niveau",nullable=false)
     private int niveau;
 
+    @GsonExclude
     @ManyToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER)
     @JoinTable(name = "ExerciceMuscle", joinColumns = @JoinColumn(name = "idEx"), inverseJoinColumns = @JoinColumn(name = "id"))
     private List<AMuscle> bodyParts;
 
+    @GsonExclude
     @ManyToOne
     @JoinColumn(name="userId",nullable=false)
     private AUser user;
