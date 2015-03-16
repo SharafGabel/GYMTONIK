@@ -20,10 +20,12 @@ Veuillez selectionner votre séance :
 
 </select>
 
-    <div id="container">
+    <div  class="page-container" id="container">
     <button id="button">Set new data</button>
     </div>
 <div class="page-container" id="exerciseDiv">
+    <form>
+    <input type="hidden" name="choose" value="listH"/>
     <p><label class="lab">TEST Niveau ?</label></p>
     <select name="SessionUserFromPerformancePage" id="SessionUserFromPerformancePage">
         <%
@@ -38,9 +40,10 @@ Veuillez selectionner votre séance :
     <table id="affExo" class="table table-condensed">
         <tr>
             <thead>
-            <th>Id exercice</th>
-            <th>Ratio Duree</th>
-            <th>Ratio Repetition</th>
+            <th>Nom exercice</th>
+            <th>Niveau</th>
+            <th>Pourcentage Duree Effectué</th>
+            <th>Pourcentage de Répétitions Réussi</th>
             <th>Temps de sommeil</th>
             <th>Date exercice Effectué</th>
             <thead>
@@ -49,7 +52,7 @@ Veuillez selectionner votre séance :
     </table>
 
 
-
+    </form>
     
 </div>
 <%@ include file="footer.jsp" %>
@@ -58,17 +61,22 @@ Veuillez selectionner votre séance :
 
         $('#SessionUserFromPerformancePage').change(function(event) {
             var sessionUser = $("select#SessionUserFromPerformancePage").val();
-            $.get('PerformanceServlet', {
+            $.get('HistoriqueServlet', {
                 sessionUserFromPerformance : sessionUser
             }, function(response) {
                 $('#affExo tbody').remove();
                 $.each(response, function(key, value) {
-                    $('<tr>').append(
-                            $('<td>').text(value.idEx),
-                            $('<td>').text(value.ratioDuree),
-                            $('<td>').text(value.ratioRepet),
-                            $('<td>').text(value.timeSleep),
-                            $('<td>').text(value.dateProgEffectue)).appendTo('#affExo');
+                        for(j=0;j<6;j++)
+                        {
+                                $('<tr>').append(
+                                        $('<td>').text(response[j][0]),
+                                        $('<td>').text(response[j][1]),
+                                        $('<td>').text(response[j][2]),
+                                        $('<td>').text(response[j][3]),
+                                        $('<td>').text(response[j][4]),
+                                        $('<td>').text(response[j][5])
+                                ).appendTo('#affExo');
+                        }
 
                 });
 

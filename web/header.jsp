@@ -165,9 +165,10 @@
                     },
                     xAxis: {
                         type: 'datetime',
-                        dateTimeLabelFormats: { // don't display the dummy year
-                            month: '%e. %b',
-                            year: '%b'
+                        labels: {
+                            format:'{value:%Y-%m-%d}',
+                            rotation:45,
+                            align:'right'
                         },
                         title: {
                             text: 'Date'
@@ -197,7 +198,9 @@
 
                     series: [{
                         type: 'line',
-                        name: 'performance'
+                        name: 'performance',
+                        pointStart:Date.UTC(2015,2,1),
+                        pointInterval:24*36e5
                     }]
                 });
             });
@@ -220,8 +223,6 @@
                     alert(e);
                 }
             });
-
-
         });
     </script>
 
