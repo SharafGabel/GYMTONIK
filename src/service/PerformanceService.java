@@ -110,19 +110,19 @@ public class PerformanceService {
     public static List<Historique> recupcalculPerformance(AUser user){
         Session session = getSession();
         Transaction tx = null;
-        List<Historique> historiques = null;
+        List<Historique> historiques ;
         try {
             tx = session.beginTransaction();
             Query query = session.createQuery("Select h from Historique h where  h.idUser="+user.getId()+" order by h.dateProgEffectue");
             historiques = query.list();
             tx.commit();
-
+            return historiques;
         }   catch (Exception e) {
             if (tx != null)
                 tx.rollback();
             e.printStackTrace();
         }
-        return historiques;
+        return null;
     }
 
 

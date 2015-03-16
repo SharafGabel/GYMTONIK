@@ -12,7 +12,6 @@
 <% String title = "Performances"; %>
 
 <%@ include file="header.jsp" %>
-<div class="page-container" id="exerciseDiv">
 
 Veuillez selectionner votre séance :
 <select name="sessionUserPerf" id="sessionUserPerf">
@@ -21,8 +20,10 @@ Veuillez selectionner votre séance :
 
 </select>
 
+    <div id="container">
     <button id="button">Set new data</button>
-
+    </div>
+<div class="page-container" id="exerciseDiv">
     <p><label class="lab">TEST Niveau ?</label></p>
     <select name="SessionUserFromPerformancePage" id="SessionUserFromPerformancePage">
         <%

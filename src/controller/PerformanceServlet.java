@@ -29,6 +29,7 @@ public class PerformanceServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        /*
         int idS = Integer.parseInt(request.getParameter("sessionUserFromPerformance"));
         List<Historique> listOfHistorique = HistoriqueService.getExercises(idS);
         Gson gson = GsonExclusionStrategy.createGsonFromBuilder(new GsonExclusionStrategy(null));
@@ -37,6 +38,19 @@ public class PerformanceServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);
+        */
+        HttpSession session = request.getSession();
 
+        User user= (User)session.getAttribute("User");
+        List<Historique> listOfHistorique = PerformanceService.recupcalculPerformance(user);
+        Gson gson = new Gson();
+
+        String jsonString = gson.toJson(listOfHistorique);
+
+        response.setContentType("application/json");
+
+        response.getWriter().write(jsonString);
+        System.out.println(jsonString);
+        
     }
 }
