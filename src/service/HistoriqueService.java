@@ -160,4 +160,44 @@ public class HistoriqueService {
         }
 
     }
+
+    public static Historique getHistoriqueByIdExerciseIdSeance(Integer idExercise,int idSeance){
+        Session session = getSession();
+        Historique historique = null;
+        try{
+            Transaction tx = session.beginTransaction();
+            Query query = session.createQuery("select h from Historique h where h.idEx="+idExercise+" and h.idS="+idSeance);
+            historique = (Historique) query.uniqueResult();
+            System.out.println(historique.toString());
+            tx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+        return historique;
+    }
+
+    /*à terminer*/
+    public static boolean updateHistorique(Historique historique,int idEx) {
+        Session session = getSession();
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+            historique.setIdEx(idEx);
+
+            session.save(historique);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+            return false;
+        }finally {
+            session.close();
+        }
+
+    }
 }

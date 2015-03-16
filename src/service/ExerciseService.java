@@ -5,6 +5,8 @@ import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
+import util.Util;
+
 import java.util.List;
 
 public class ExerciseService {
@@ -333,6 +335,26 @@ public class ExerciseService {
         }
 
         return exercises;
+    }
+
+    public static Integer getIdExerciseByExercise(String exerciseName) {
+        Session session = getSession();
+        Transaction tx = null;
+        Integer exerciseId = null;
+
+        try{
+            tx = session.beginTransaction();
+            Query query = session.createQuery("select e.id from Exercise e where e.name='"+exerciseName +"'");
+            exerciseId = (Integer)query.uniqueResult();
+            tx.commit();
+        }catch (Exception e){
+            if(tx != null)
+                tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return exerciseId;
     }
 
 

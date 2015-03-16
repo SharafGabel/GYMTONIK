@@ -46,6 +46,7 @@ Veuillez selectionner votre séance :
             <th>Pourcentage de Répétitions Réussi</th>
             <th>Temps de sommeil</th>
             <th>Date exercice Effectué</th>
+            <th>Action</th>
             <thead>
 
         </tr>
@@ -66,16 +67,24 @@ Veuillez selectionner votre séance :
             }, function(response) {
                 $('#affExo tbody').remove();
                 $.each(response, function(key, value) {
+
                         for(j=0;j<6;j++)
                         {
-                                $('<tr>').append(
+                            $('<form action=\"PerformanceServlet\" method=\"post\">').append(
+                                    $('<tr>').append(
                                         $('<td>').text(response[j][0]),
                                         $('<td>').text(response[j][1]),
                                         $('<td>').text(response[j][2]),
                                         $('<td>').text(response[j][3]),
                                         $('<td>').text(response[j][4]),
-                                        $('<td>').text(response[j][5])
-                                ).appendTo('#affExo');
+                                        $('<td>').text(response[j][5]),
+                                        $('<input name=\"seanceId\" type=\"hidden\" value='+sessionUser+'>'),
+                                        $('<input name=\"nomExo\" type=\"hidden\" value='+response[j][0]+'>'),
+                                        $('<input name=\"niveau\" type=\"hidden\" value='+response[j][1]+'>'),
+                                        $('<input name=\"dureeEffectuee\" type=\"hidden\" value='+response[j][2]+'>'),
+                                        $('<input name=\"repetReussi\" type=\"hidden\" value='+response[j][3]+'>'),
+                                        $('</td>	<td>').append('<button type=\"submit\" value=\"Enregistrer\">Evaluer</button></td>')
+                                    )).appendTo('#affExo');
                         }
 
                 });
