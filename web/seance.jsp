@@ -33,11 +33,15 @@
             out.println("<tr id='" + a.getIdS() + "'class='success'>");
             out.println("<td>" + a.getName() + "</td>");
             out.println("<td>" + a.getDateProgram() + "</td>");
-            out.println("<td><a href=''>Modifier</a></td>");
+            out.println("<form id=\"updateSession\" name=\"updateSession\" method=\"post\" action=\"update-seance.jsp\">");
+            out.println("<input type='hidden' name='sessionId' value='" + a.getIdS() + "'/>");
+            out.println("<input type='hidden' name='action' value='updateSession'/>");
+            out.println("<td><button class='btn btn-warning' type='submit'>Modifier</button></td>");
+            out.println("</form>");
             out.println("<form id=\"deleteSession\" name=\"deleteSession\" method=\"post\" action=\"SessionServlet\">");
             out.println("<input type='hidden' name='sessionId' value='" + a.getIdS() + "'/>");
             out.println("<input type='hidden' name='action' value='deleteSession'/>");
-            out.println("<td><button type='submit'>Supprimer</button></td>");
+            out.println("<td><button class='btn btn-warning' type='submit'>Supprimer</button></td>");
             out.println("</form>");
         }
      %>

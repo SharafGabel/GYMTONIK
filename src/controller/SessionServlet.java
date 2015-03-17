@@ -22,6 +22,13 @@ public class SessionServlet extends HttpServlet {
         if(action.equals("deleteSession")){
             SessionUser sessionUser = SessionService.getSessionById(Integer.parseInt(request.getParameter("sessionId")));
             this.deleteSession(sessionUser);
+            this.getServletContext().getRequestDispatcher("/seance.jsp").forward( request, response );//redirection
+        }
+        else if(action.equals("updateSession")){
+            SessionUser sessionUser = SessionService.getSessionById(Integer.parseInt(request.getParameter("sessionId")));
+            sessionUser.setName(request.getParameter("sessionName"));
+            this.updateSession(sessionUser);
+            this.getServletContext().getRequestDispatcher("/seance.jsp").forward( request, response );//redirection
         }else {
             try {
                 out.println("<html>");
