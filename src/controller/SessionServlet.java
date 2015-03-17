@@ -17,28 +17,35 @@ public class SessionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
 
-        try {
-            out.println("<html>");
-            out.println("<head>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<center>");
+        String action = request.getParameter("action");
 
-            HttpSession session = request.getSession();
-            User user = (User)session.getAttribute("User");
+        if(action.equals("deleteSession")){
+            SessionUser sessionUser = SessionService.getSessionById(Integer.parseInt(request.getParameter("sessionId")));
+            this.deleteSession(sessionUser);
+        }else {
+            try {
+                out.println("<html>");
+                out.println("<head>");
+                out.println("</head>");
+                out.println("<body>");
+                out.println("<center>");
 
-            if (addSession(user)) {
-                response.sendRedirect("exercise.jsp");
+                HttpSession session = request.getSession();
+                User user = (User)session.getAttribute("User");
+
+                if (addSession(user)) {
+                    response.sendRedirect("exercise.jsp");
+                }
+                else {
+                    response.sendRedirect("seance.jsp");
+                }
+
+                out.println("</center>");
+                out.println("</body>");
+                out.println("</html>");
+            } finally {
+                out.close();
             }
-            else {
-                response.sendRedirect("seance.jsp");
-            }
-
-            out.println("</center>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {
-            out.close();
         }
     }
 

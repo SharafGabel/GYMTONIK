@@ -19,8 +19,7 @@ public class ExerciseConsole {
          */
         int choix_exo = exos.size() + 1;
 
-        System.out.println("-- Exercises --\n");
-        System.out.println("1 - Créer un Exercise");
+        System.out.println("-- Exercises --\n1 - Créer un Exercise");
         if (exos.size() > 0)
             listExercise(exos);
         System.out.println((choix_exo + 1) + " - Retour");
@@ -59,8 +58,7 @@ public class ExerciseConsole {
         Util.clearConsole();
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Création d'un Exercise\n");
-        System.out.println("Nom de l'exercice");
+        System.out.println("Création d'un Exercise\nNom de l'exercice");
         String name = sc.nextLine();
         System.out.println("Description");
         String description = sc.nextLine();

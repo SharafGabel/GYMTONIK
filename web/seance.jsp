@@ -23,13 +23,22 @@
     <tr>
         <td>Nom Séance</td>
         <td>Date création séance</td>
+        <td>Modifier</td>
+        <td>Supprimer</td>
     </tr>
+
     <%
         List<SessionUser> sessionUserList = SessionService.getSessionList((User) session.getAttribute("User"));
         for(SessionUser a:sessionUserList) {
             out.println("<tr id='" + a.getIdS() + "'class='success'>");
             out.println("<td>" + a.getName() + "</td>");
             out.println("<td>" + a.getDateProgram() + "</td>");
+            out.println("<td><a href=''>Modifier</a></td>");
+            out.println("<form id=\"deleteSession\" name=\"deleteSession\" method=\"post\" action=\"SessionServlet\">");
+            out.println("<input type='hidden' name='sessionId' value='" + a.getIdS() + "'/>");
+            out.println("<input type='hidden' name='action' value='deleteSession'/>");
+            out.println("<td><button type='submit'>Supprimer</button></td>");
+            out.println("</form>");
         }
      %>
 </table>
