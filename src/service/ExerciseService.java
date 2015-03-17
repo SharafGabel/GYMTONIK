@@ -227,6 +227,27 @@ public class ExerciseService {
         }
     }
 
+    public static Exercise getExercise(String idEx,int test) {
+        Session session = getSession();
+        Transaction tx = null;
+
+        Exercise exercise;
+        try {
+            tx = session.beginTransaction();
+            Query query = session.createQuery("from Exercise where id="+ idEx+test);
+            exercise = (Exercise) query.uniqueResult();
+            tx.commit();
+            return exercise;
+        } catch (Exception e) {
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+            return null;
+        }finally {
+            session.close();
+        }
+    }
+
     public static boolean deleteExercise(AUser user,Exercise exercise){
         //Car un Utilisateur ne peut supprimer que des exercices qu'il a lui même créé
         if(exercise == null || user.getId()!=exercise.getUser().getId()){

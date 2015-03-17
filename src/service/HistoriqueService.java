@@ -179,15 +179,15 @@ public class HistoriqueService {
     }
 
     /*à terminer*/
-    public static boolean updateHistorique(Historique historique,int idEx) {
+    public static boolean updateHistorique(int idS,Exercise exercise,User user) {
         Session session = getSession();
         Transaction tx = null;
 
         try {
             tx = session.beginTransaction();
-            historique.setIdEx(idEx);
+            Historique historique1 = new Historique(idS,exercise.getId(),user.getId());
 
-            session.saveOrUpdate(historique);
+            session.save(historique1);
             tx.commit();
             return true;
         } catch (Exception e) {
