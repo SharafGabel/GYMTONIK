@@ -227,14 +227,14 @@ public class ExerciseService {
         }
     }
 
-    public static Exercise getExercise(String idEx,int test) {
+    public static Exercise getExercise(int idEx,int test) {
         Session session = getSession();
         Transaction tx = null;
 
         Exercise exercise;
         try {
             tx = session.beginTransaction();
-            Query query = session.createQuery("from Exercise where id="+ idEx+test);
+            Query query = session.createQuery("from Exercise where id="+ idEx+" and niveau="+test);
             exercise = (Exercise) query.uniqueResult();
             tx.commit();
             return exercise;

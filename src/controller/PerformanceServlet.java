@@ -23,7 +23,7 @@ public class PerformanceServlet extends HttpServlet {
         int dureeEff = Integer.parseInt(request.getParameter("dureeEffectuee"));
         int result = dureeEff+nbRepetReussi/2;
         int niveau = Integer.parseInt(request.getParameter("niveau"));
-        String idExercise = request.getParameter("idExo");
+        int idExercise = Integer.parseInt(request.getParameter("idExo"));
         Exercise exercise;
         if(result >70 && niveau!=3){
             exercise = ExerciseService.getExercise(idExercise,niveau+1);
