@@ -17,16 +17,14 @@ import java.util.List;
 
 public class PerformanceServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int numSeance = Integer.parseInt(request.getParameter("numSeance"));
+        int numSeance = Integer.parseInt(request.getParameter("seanceId"));
         int nbRepetReussi = Integer.parseInt(request.getParameter("repetReussi"));
         int dureeEff = Integer.parseInt(request.getParameter("dureeEffectuee"));
         int result = dureeEff+nbRepetReussi/2;
         int niveau = Integer.parseInt(request.getParameter("niveau"));
-        String nomExercice= request.getParameter("nomExo");
-        Integer idExercise;
+        int idExercise = Integer.parseInt(request.getParameter("idExo"));
         Historique historique;
         if(result >70){
-            idExercise = ExerciseService.getIdExerciseByExercise(nomExercice);
             /*Comment modifier le niveau ? */
             historique=HistoriqueService.getHistoriqueByIdExerciseIdSeance(idExercise,numSeance);
             HistoriqueService.updateHistorique(historique,idExercise);
@@ -35,7 +33,7 @@ public class PerformanceServlet extends HttpServlet {
 
         }
         else{
-
+            System.out.println("normal");
         }
 
     }

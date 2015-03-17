@@ -99,7 +99,7 @@ public class HistoriqueService {
         List<Object> historiques;
         try {
             tx = session.beginTransaction();
-            Query query = session.createQuery("select e.name,e.niveau,h.ratioDuree,h.ratioRepet,h.timeSleep,h.dateProgEffectue from Historique h,Exercise e where h.idEx=e.id and h.idS="+idSeance);
+            Query query = session.createQuery("select e.id,e.name,e.niveau,h.ratioDuree,h.ratioRepet,h.timeSleep,h.dateProgEffectue from Historique h,Exercise e where h.idEx=e.id and h.idS="+idSeance);
             historiques = query.list();
             System.out.println(historiques.toString());
             return historiques;
@@ -163,19 +163,19 @@ public class HistoriqueService {
 
     public static Historique getHistoriqueByIdExerciseIdSeance(Integer idExercise,int idSeance){
         Session session = getSession();
-        Historique historique = null;
+        List<Historique> historique = null;
         try{
             Transaction tx = session.beginTransaction();
             Query query = session.createQuery("select h from Historique h where h.idEx="+idExercise+" and h.idS="+idSeance);
-            historique = (Historique) query.uniqueResult();
-            System.out.println(historique.toString());
+            historique = query.list();
             tx.commit();
+            return historique.get(0);
         } catch (Exception e) {
             e.printStackTrace();
         }finally {
             session.close();
         }
-        return historique;
+        return historique.get(0);
     }
 
     /*à terminer*/
@@ -187,7 +187,7 @@ public class HistoriqueService {
             tx = session.beginTransaction();
             historique.setIdEx(idEx);
 
-            session.save(historique);
+            session.saveOrUpdate(historique);
             tx.commit();
             return true;
         } catch (Exception e) {

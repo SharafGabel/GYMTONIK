@@ -72,17 +72,17 @@ Veuillez selectionner votre séance :
                         {
                             $('<form action=\"PerformanceServlet\" method=\"post\">').append(
                                     $('<tr>').append(
-                                        $('<td>').text(response[j][0]),
                                         $('<td>').text(response[j][1]),
                                         $('<td>').text(response[j][2]),
                                         $('<td>').text(response[j][3]),
                                         $('<td>').text(response[j][4]),
                                         $('<td>').text(response[j][5]),
+                                        $('<td>').text(response[j][6]),
                                         $('<input name=\"seanceId\" type=\"hidden\" value='+sessionUser+'>'),
-                                        $('<input name=\"nomExo\" type=\"hidden\" value='+response[j][0]+'>'),
-                                        $('<input name=\"niveau\" type=\"hidden\" value='+response[j][1]+'>'),
-                                        $('<input name=\"dureeEffectuee\" type=\"hidden\" value='+response[j][2]+'>'),
-                                        $('<input name=\"repetReussi\" type=\"hidden\" value='+response[j][3]+'>'),
+                                        $('<input name=\"idExo\" type=\"hidden\" value='+response[j][0]+'>'),
+                                        $('<input name=\"niveau\" type=\"hidden\" value='+response[j][2]+'>'),
+                                        $('<input name=\"dureeEffectuee\" type=\"hidden\" value='+response[j][3]+'>'),
+                                        $('<input name=\"repetReussi\" type=\"hidden\" value='+response[j][4]+'>'),
                                         $('</td>	<td>').append('<button type=\"submit\" value=\"Enregistrer\">Evaluer</button></td>')
                                     )).appendTo('#affExo');
                         }
