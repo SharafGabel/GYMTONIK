@@ -2,7 +2,10 @@ package console;
 
 import model.AUser;
 import model.Exercise;
+import model.SessionUser;
+import model.User;
 import service.ExerciseService;
+import service.SessionService;
 import util.Util;
 
 import java.util.List;
@@ -104,6 +107,7 @@ public class ExerciseConsole {
 
         System.out.println("1 - Modifier");
         System.out.println("2 - Supprimer");
+        System.out.println("3 - Ajouter à une séance");
 
         Scanner sc = new Scanner(System.in);
         int choix = sc.nextInt();
@@ -114,6 +118,9 @@ public class ExerciseConsole {
                 break;
             case 2:
                 deleteExercise(user, exo);
+                break;
+            case 3:
+                addToSession(user, exo);
                 break;
             default:
                 System.out.println("Veuillez entrer 1 ou 2");
@@ -210,5 +217,37 @@ public class ExerciseConsole {
             sc.nextLine();
             deleteExercise(user, exo);
         }
+    }
+
+    private static void addToSession(AUser user, Exercise exo) {
+        Util.clearConsole();
+        Scanner sc = new Scanner(System.in);
+
+        List<SessionUser> sessions = SessionService.getSessionList((User)user);
+
+        System.out.println("Ajout de l'exercice " + exo.getName() + " à une séance\n");
+
+        if (sessions.size() == 0) {
+            System.out.println("Vous n'avez aucune séance d'enregistrée");
+        } else {
+            int i = 1;
+            for(SessionUser s : sessions) {
+                System.out.println(i + " - " + s.getName() + " du " + s.getDateProgram());
+            }
+
+            int choix = sc.nextInt();
+            sc.nextLine();
+            choix--;
+            if (choix >= 0 && choix < sessions.size()) {
+                SessionService.addOrUpdateExToSession(
+                        sessions.get(choix).getIdS(),
+                        exo.getId(),
+                        (User) user
+                );
+                System.out.println("L'exercice " + exo.getName() + " a été ajouté à la " + sessions.get(choix).getName());
+            } else System.out.println("Veuillez saisir un nombre entre 1 et " + sessions.size());
+        }
+        System.out.println("Appuyez sur Entrée pour continuer...");
+        sc.nextLine();
     }
 }

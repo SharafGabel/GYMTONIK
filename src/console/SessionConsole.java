@@ -67,6 +67,7 @@ public class SessionConsole {
         List<Exercise> exs = ExerciseService.getExercises(session);
 
         System.out.println("Séance " + session.getName() + " du " + session.getDateProgram());
+        System.out.println("Exercices :\n");
 
         if (exs.size() > 0) {
             for (Exercise exo : exs) {
