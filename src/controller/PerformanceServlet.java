@@ -1,8 +1,8 @@
 package controller;
 
 import com.google.gson.Gson;
+import model.ExerciceSession;
 import model.Exercise;
-import model.Historique;
 import model.User;
 import service.ExerciseService;
 import service.HistoriqueService;
@@ -40,10 +40,10 @@ public class PerformanceServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
             User user = (User) request.getSession().getAttribute("User");
-            List<Historique> listOfHistorique = PerformanceService.recupcalculPerformance(user);
+            List<ExerciceSession> listOfExerciceSession = PerformanceService.recupcalculPerformance(user);
             Gson gson = new Gson();
 
-            String jsonString = gson.toJson(listOfHistorique);
+            String jsonString = gson.toJson(listOfExerciceSession);
 
             response.setContentType("application/json");
 

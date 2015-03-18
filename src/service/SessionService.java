@@ -1,7 +1,7 @@
 package service;
 
+import model.ExerciceSession;
 import model.Exercise;
-import model.Historique;
 import model.SessionUser;
 import model.User;
 import org.hibernate.*;
@@ -59,28 +59,22 @@ public class SessionService {
         
     }
 
-    public static boolean addOrUpdateExToSession(int idS,  int idEx,User user)
+    public static boolean addOrUpdateExToSession(int idS,  int idEx, User user)
     {
-        System.out.println("1");
         Session session = getSession();
-        System.out.println("1.2");
         Transaction tx = null;
-        System.out.println("1.3");
         try{
             tx = session.beginTransaction();
-            System.out.println("123");
-            System.out.println("125");
-            Historique historique = new Historique(idS,idEx,user.getId());
-            System.out.println("126");
-            session.saveOrUpdate(historique);
-            System.out.println("127");
+            SessionUser sessionUser = SessionService.getSessionById(idS);
+            Exercise exercise = ExerciseService.getExerciseById(idEx);
+            ExerciceSession exerciceSession = new ExerciceSession(sessionUser, exercise);
+            session.saveOrUpdate(exerciceSession);
             tx.commit();
             return true;
         } catch (Exception e) {
             if (tx != null)
                 tx.rollback();
             e.printStackTrace();
-            System.out.println("PB");
             return false;
         }finally {
             session.close();

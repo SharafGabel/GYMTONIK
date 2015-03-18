@@ -29,7 +29,8 @@ public class SessionServlet extends HttpServlet {
             sessionUser.setName(request.getParameter("sessionName"));
             this.updateSession(sessionUser);
             this.getServletContext().getRequestDispatcher("/seance.jsp").forward( request, response );//redirection
-        }else {
+        }
+        else {
             try {
                 out.println("<html>");
                 out.println("<head>");

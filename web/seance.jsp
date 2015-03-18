@@ -13,7 +13,7 @@
 <%@ include file="header.jsp" %>
 <div class="form-group" id="seanceDiv">
     <form id="formSeance" class="form-horizontal" name="formSeance" method="post" action="SessionServlet">
-    <input type='hidden' name='action' value='createSession'/>");
+    <input type='hidden' name='action' value='createSession'/>
         <h1>Créer une séance</h1>
 
         <button class="btn btn-small btn-warning" type="submit">Créer une nouvelle séance</button>

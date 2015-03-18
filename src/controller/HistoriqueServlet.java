@@ -77,7 +77,7 @@ public class HistoriqueServlet extends HttpServlet {
         else if(paramName.equalsIgnoreCase("sessionUserFromPerformance"))
         {
             /*int idS = Integer.parseInt(request.getParameter("sessionUserFromPerformance"));
-            List<Historique> listOfHistorique = HistoriqueService.getExercises(idS);
+            List<ExerciceSession> listOfHistorique = HistoriqueService.getExercises(idS);
             Gson gson = GsonExclusionStrategy.createGsonFromBuilder(new GsonExclusionStrategy(null));
             String json = gson.toJson(listOfHistorique);
             System.out.println("json : " + json);
@@ -120,7 +120,7 @@ public class HistoriqueServlet extends HttpServlet {
         }
         else if(paramName.equalsIgnoreCase("sessionUserFromPerf")){
             String sessionUser = request.getParameter("sessionUserDone");
-            List<Historique> in;
+            List<ExerciceSession> in;
             in = HistoriqueService.getExercisesAndHistorique(Integer.parseInt(sessionUser));
             System.out.println(in.toString());
             String json;
@@ -132,7 +132,7 @@ public class HistoriqueServlet extends HttpServlet {
         }
         else if(paramName.equalsIgnoreCase("sessionUserFromPerformance")){
             String sessionUser = request.getParameter("sessionUserFromPerformance");
-            List<Historique> in;
+            List<ExerciceSession> in;
             in = HistoriqueService.getExercisesAndHistorique(Integer.parseInt(sessionUser));
             System.out.println(in.toString());
             String json;

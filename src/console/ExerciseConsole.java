@@ -70,7 +70,7 @@ public class ExerciseConsole {
         int niveau = sc.nextInt();
 
         if (nbRep >= 5 && niveau > 0 && niveau < 4 && length > 0 && length <= 20) {
-            ExerciseService.createExercise(user, name, description, length, niveau, nbRep);
+            //ExerciseService.createExercise(user, name, description, length, niveau, nbRep);
             System.out.print("Ajout reussi");
         } else {
             if (nbRep < 5) {

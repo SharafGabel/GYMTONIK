@@ -5,7 +5,6 @@ import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
-import util.Util;
 
 import java.util.List;
 
@@ -30,56 +29,36 @@ public class ExerciseService {
         return ourSessionFactory.openSession();
     }
 
-    public static void createExercise(AUser user, String name, String description, int length,int niveau, int nbRep){
+    public static Exercise createExercise(AUser user, String description, String name, int length,int nbRep,int niveau,List<AMuscle> aMuscles){
         Session session = getSession();
         Transaction tx = null;
 
         try{
             tx = session.beginTransaction();
             Exercise exercise = new Exercise(user,length,nbRep,name,description,niveau);
+            exercise.setBodyParts(aMuscles);
             session.save(exercise);
             tx.commit();
+            return exercise;
         }catch (Exception e) {
             if (tx != null)
                 tx.rollback();
             e.printStackTrace();
+            return null;
         }
         finally {
             session.close();
         }
     }
 
-    public static void createExerciseWithMuscle(AUser user, String descritpion, String name, int length,int nbRep,int niveau,List<AMuscle> aMuscles){
-        Session session = getSession();
-        Transaction tx = null;
-
-        try{
-            tx = session.beginTransaction();
-            Exercise exercise = new Exercise(user,length,nbRep,name,descritpion,niveau);
-            exercise.setBodyParts(aMuscles);
-            session.save(exercise);
-            tx.commit();
-        }catch (Exception e) {
-            if (tx != null)
-                tx.rollback();
-            e.printStackTrace();
-        }
-        finally {
-            session.close();
-        }
-    }
-
-    public static boolean addExercise(AUser user,SessionUser sessionUser,int length,int nbRep,String name,String explanation,int niveau) {
+    public static boolean addExerciseToSession(ATraining exercise,SessionUser sessionUser) {
         Session session = getSession();
         Transaction tx = null;
 
         try {
             tx = session.beginTransaction();
-            Exercise exercise = new Exercise(user,length,nbRep,name,explanation,niveau);
-            session.save(exercise);
-            session.saveOrUpdate(sessionUser);
-            Historique historique = new Historique(sessionUser.getIdS(),exercise.getId(),user.getId());
-            session.save(historique);
+            ExerciceSession exerciceSession = new ExerciceSession(sessionUser,exercise);
+            session.save(exerciceSession);
             tx.commit();
             return true;
         } catch (Exception e) {
@@ -93,76 +72,6 @@ public class ExerciseService {
 
     }
 
-    public static boolean addExerciseWithMuscle(AUser user,SessionUser sessionUser,int length,int nbRep,String name,String explanation,int niveau,List<AMuscle> aMuscles) {
-        Session session = getSession();
-        Transaction tx = null;
-
-        try {
-            tx = session.beginTransaction();
-            Exercise exercise = new Exercise(user,length,nbRep,name,explanation,niveau);
-            exercise.setBodyParts(aMuscles);
-            session.save(exercise);
-            session.saveOrUpdate(sessionUser);
-            Historique historique = new Historique(sessionUser.getIdS(),exercise.getId(),user.getId());
-            session.save(historique);
-            tx.commit();
-            return true;
-        } catch (Exception e) {
-            if (tx != null)
-                tx.rollback();
-            e.printStackTrace();
-            return false;
-        }finally {
-            session.close();
-        }
-
-    }
-
-    public static boolean addExerciseWithMuscleWithoutSession(AUser user,int length,int nbRep,String name,String explanation,int niveau,List<AMuscle> aMuscles) {
-        Session session = getSession();
-        Transaction tx = null;
-
-        try {
-            tx = session.beginTransaction();
-            Exercise exercise = new Exercise(user,length,nbRep,name,explanation,niveau);
-            exercise.setBodyParts(aMuscles);
-            session.save(exercise);
-            tx.commit();
-            return true;
-        } catch (Exception e) {
-            if (tx != null)
-                tx.rollback();
-            e.printStackTrace();
-            return false;
-        }finally {
-            session.close();
-        }
-
-    }
-
-    public static boolean addExerciseToSession(AUser user,SessionUser sessionUser,int length,int nbRep,String name,String explanation,int niveau) {
-        Session session = getSession();
-        Transaction tx = null;
-
-        try {
-            tx = session.beginTransaction();
-            Exercise exercise = new Exercise(user,length,nbRep,name,explanation,niveau);
-            session.save(exercise);
-            session.saveOrUpdate(sessionUser);
-            Historique historique = new Historique(sessionUser.getIdS(),exercise.getId(),user.getId());
-            session.save(historique);
-            tx.commit();
-            return true;
-        } catch (Exception e) {
-            if (tx != null)
-                tx.rollback();
-            e.printStackTrace();
-            return false;
-        }finally {
-            session.close();
-        }
-
-    }
 
     public static List<Exercise> getExercises() {
         Session session = getSession();
@@ -248,6 +157,27 @@ public class ExerciseService {
         }
     }
 
+    public static Exercise getExerciseById(int idEx) {
+        Session session = getSession();
+        Transaction tx = null;
+
+        Exercise exercise;
+        try {
+            tx = session.beginTransaction();
+            Query query = session.createQuery("from Exercise where id="+ idEx);
+            exercise = (Exercise) query.uniqueResult();
+            tx.commit();
+            return exercise;
+        } catch (Exception e) {
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+            return null;
+        }finally {
+            session.close();
+        }
+    }
+
     public static boolean deleteExercise(AUser user,Exercise exercise){
         //Car un Utilisateur ne peut supprimer que des exercices qu'il a lui même créé
         if(exercise == null || user.getId()!=exercise.getUser().getId()){
@@ -269,7 +199,7 @@ public class ExerciseService {
     }
 
     public static boolean updateExercise(AUser user,Exercise exercise){
-        if(exercise == null /*|| user.getId()!=exercise.getUser().getId()*/){
+        if(exercise == null || user.getId()!=exercise.getUser().getId()){
             return false;
         }
         Session session = getSession();
@@ -294,7 +224,7 @@ public class ExerciseService {
         try {
             Transaction tx = session.getTransaction();
             tx.begin();
-            Query query = session.createQuery("Select e from Exercise e, Historique h where h.idS=" + sessionUser.getIdS() + " and h.idEx=e.id");
+            Query query = session.createQuery("Select e from Exercise e, ExerciceSession h where h.sessionUser=" + sessionUser.getIdS() + " and h.training=+e.id");
             exercises = query.list();
             tx.commit();
         } catch (Exception e) {
@@ -314,7 +244,7 @@ public class ExerciseService {
         try {
             Transaction tx = session.getTransaction();
             tx.begin();
-            Query query = session.createQuery("Select distinct e from Exercise e, Historique h where h.idS=" + idsessionUser + " and h.idEx=e.id");
+            Query query = session.createQuery("Select distinct e from Exercise e, ExerciceSession h where h.sessionUser=" + idsessionUser + " and h.training.id=e.id");
             exercises = query.list();
             tx.commit();
         } catch (Exception e) {

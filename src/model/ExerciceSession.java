@@ -1,14 +1,18 @@
 package model;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Type;
 
+import javax.jms.Session;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
-@Table(name="Historique")
-public class Historique {
+@Table(name="ExerciceSession")
+public class ExerciceSession {
 
     //region Property
     @Id
@@ -16,18 +20,6 @@ public class Historique {
     @GenericGenerator(name="idGen",strategy="org.hibernate.id.IncrementGenerator")
     @Column(name = "id", unique = true, nullable = false)
     protected Integer id;
-
-    @Column(name = "idH", nullable = false)
-    private int idH;
-
-    @Column(name="idS",nullable = false)
-    private int idS;
-
-    @Column(name="idEx",nullable = false)
-    private int idEx;
-
-    @Column(name="idUser",nullable = false)
-    private int idUser;
 
     @Column(name="nbRepetEffectue")
     private int nbRepetEffectue;
@@ -48,32 +40,32 @@ public class Historique {
     @Column(name="ratioDuree")
     private float ratioDuree;
 
-    @OneToOne(cascade={CascadeType.ALL},mappedBy = "historique")
-    private Performance performance;
+    @ManyToOne(cascade={CascadeType.ALL})
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private SessionUser sessionUser;
+
+    @ManyToOne(cascade={CascadeType.ALL})
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private ATraining training;
     //endregion
 
     //region Constructor
-    public Historique() {
+    public ExerciceSession() {
         this.ratioRepet = 0;
         this.ratioDuree = 0;
     }
 
-    public Historique(int idS, int idEx,int idUser) {
-        this.idS = idS;
-        this.idEx = idEx;
-        String str = Integer.toString(idS) + Integer.toString(idEx);
-        this.idH=Integer.parseInt(str);
-        this.idUser = idUser;
+    public ExerciceSession(SessionUser sessionUser, ATraining training) {
+        this.sessionUser = sessionUser;
+        this.training = training;
+        sessionUser.getExerciceSessions().add(this);
+        training.getExerciceSessions().add(this);
         this.ratioRepet = 0;
         this.ratioDuree = 0;
     }
     //endregion
 
     //region Getters/Setters
-
-    public Performance getPerformance() {
-        return performance;
-    }
 
     public int getDureeEffectue() {
         return dureeEffectue;
@@ -83,20 +75,12 @@ public class Historique {
         return nbRepetEffectue;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public ATraining getTraining() {
+        return training;
     }
 
-    public int getIdEx() {
-        return idEx;
-    }
-
-    public int getIdS() {
-        return idS;
-    }
-
-    public int getIdH() {
-        return idH;
+    public SessionUser getSessionUser() {
+        return sessionUser;
     }
 
     public int getTimeSleep() {
@@ -107,10 +91,8 @@ public class Historique {
         this.timeSleep = timeSleep;
     }
 
-    public void setIdEx(int idEx) {
-        this.idEx = idEx;
-        String str = Integer.toString(idS) + Integer.toString(idEx);
-        this.idH=Integer.parseInt(str);
+    public void setTraining(ATraining training) {
+        this.training = training;
     }
 
     public void setNbRepetEffectue(int nbRepetEffectue) {
@@ -121,10 +103,6 @@ public class Historique {
     public void setDureeEffectue(int dureeEffectue) {
         this.dureeEffectue = dureeEffectue;
         this.dateProgEffectue = new Date();
-    }
-
-    public void setPerformance(Performance performance) {
-        this.performance = performance;
     }
 
     public void setRatioRepet(float ratioRepet) {
@@ -151,20 +129,22 @@ public class Historique {
         return ratioDuree;
     }
 
-    public float calculRatioDuree(int a,int b)
-    {
+    public float calculRatioDuree(int a,int b) {
         this.ratioDuree = (a*100)/b;
         return ratioDuree;
     }
 
-    public float calculRatioRepet(int a,int b)
-    {
+    public float calculRatioRepet(int a,int b) {
         this.ratioRepet = (a*100)/b;
         return ratioRepet;
     }
 
     public Integer getId() {
         return id;
+    }
+
+    public void setSessionUser(SessionUser sessionUser) {
+        this.sessionUser = sessionUser;
     }
 
     //endregion

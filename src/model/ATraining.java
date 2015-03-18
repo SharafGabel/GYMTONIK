@@ -44,6 +44,10 @@ public abstract class ATraining implements Serializable {
     @JoinTable(name = "ExerciceMuscle", joinColumns = @JoinColumn(name = "idEx"), inverseJoinColumns = @JoinColumn(name = "id"))
     private List<AMuscle> bodyParts;
 
+    @OneToMany(cascade={CascadeType.ALL})
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<ExerciceSession> exerciceSessions;
+
     @GsonExclude
     @ManyToOne
     @JoinColumn(name="userId",nullable=false)
@@ -136,10 +140,15 @@ public abstract class ATraining implements Serializable {
         this.niveau = niveau;
     }
 
-    //endregion
+    public List<ExerciceSession> getExerciceSessions() {
+        return exerciceSessions;
+    }
 
-    //region equals
+    public void setExerciceSessions(List<ExerciceSession> exerciceSessions) {
+        this.exerciceSessions = exerciceSessions;
+    }
 
+//endregion
 
     @Override
     public boolean equals(Object o) {

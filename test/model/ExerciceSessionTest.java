@@ -9,11 +9,11 @@ import util.HibernateUtil;
 
 import static org.testng.Assert.*;
 
-public class HistoriqueTest {
+public class ExerciceSessionTest {
 
-    Historique historique;
-    Historique historiqueNoDb;
-    Historique historiqueFaible;
+    ExerciceSession exerciceSession;
+    ExerciceSession exerciceSessionNoDb;
+    ExerciceSession exerciceSessionFaible;
     SessionUser sessionUser;
     Exercise exercise;
     User user;
@@ -21,25 +21,21 @@ public class HistoriqueTest {
     public void setUp() throws Exception {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
-        historique= (Historique)session.get(Historique.class,2);
-        historiqueFaible=(Historique)session.get(Historique.class,4);
+        exerciceSession = (ExerciceSession)session.get(ExerciceSession.class,2);
+        exerciceSessionFaible =(ExerciceSession)session.get(ExerciceSession.class,4);
         exercise = (Exercise)session.get(Exercise.class,4);
         sessionUser = (SessionUser)session.get(SessionUser.class,4);
         user = (User)session.get(User.class,2);
-        historiqueNoDb = new Historique(sessionUser.getIdS(),exercise.getId(),user.getId());
+        exerciceSessionNoDb = new ExerciceSession(sessionUser,exercise);
 
     }
 
     @Test
     public void testRatioExercise(){
         Exercise exerciseTest;
-/*
-        int nbRepetReussi = historique.getNbRepetEffectue();
-        int dureeEff = historique.getDureeEffectue();
-*/
 
-        int nbRepetReussi = historiqueFaible.getNbRepetEffectue();
-        int dureeEff = historiqueFaible.getDureeEffectue();
+        int nbRepetReussi = exerciceSessionFaible.getNbRepetEffectue();
+        int dureeEff = exerciceSessionFaible.getDureeEffectue();
         int niveau = exercise.getNiveau();
 
         int idExercise=4;
@@ -60,18 +56,5 @@ public class HistoriqueTest {
             assertTrue(HistoriqueService.updateHistorique(numSeance,exerciseTest,user));
         }
     }
-
-    @Test
-    public void testIdHistorique(){
-        assertEquals(44,historiqueNoDb.getIdH());//test la concaténation d'une séance et d'un id Exercise
-    }
-
-
-
-
-
-
-
-
 
 }
