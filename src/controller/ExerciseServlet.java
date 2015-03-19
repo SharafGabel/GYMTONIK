@@ -36,7 +36,12 @@ public class ExerciseServlet extends HttpServlet {
         }
         try {
 
-            if (action.equals("add"))
+            if(select.size()==0)
+            {
+                request.getRequestDispatcher("exercise.jsp").forward(request, response);
+                out.println("<h1><p><p>Sélectionner au moins 1 muscle</p></p><h1>");
+            }
+            else if (action.equals("add"))
             {
                 String sessionUserId = request.getParameter("sessionUser");
                 if(sessionUserId.equals("0") && length != null && !length.trim().isEmpty()
@@ -52,26 +57,26 @@ public class ExerciseServlet extends HttpServlet {
                          )
                 {
                     SessionUser sessionUsers = SessionService.getSessionById(Integer.parseInt(sessionUserId));
-
+                    Exercise exercise = ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length), Integer.parseInt(nbRepet),Integer.parseInt(niveau),select);
                     ExerciseService.addExerciseToSession(exercise,sessionUsers);
                 }
                     if(Integer.parseInt(niveau)==1) {
-                        //ExerciseService.createExerciseWithMuscle(user,description,nameExercise, Integer.parseInt(length)*2,Integer.parseInt(nbRepet)*2, 2,select);
-                        //ExerciseService.createExerciseWithMuscle(user,description,nameExercise, Integer.parseInt(length)*3,Integer.parseInt(nbRepet)*3, 3,select);
+                        ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length)*2,Integer.parseInt(nbRepet)*2, 2,select);
+                        ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length)*3,Integer.parseInt(nbRepet)*3, 3,select);
                     }
                     else if(Integer.parseInt(niveau)==2) {
-                        //ExerciseService.createExerciseWithMuscle(user,description,nameExercise, Integer.parseInt(length)/2,Integer.parseInt(nbRepet)/2, 1,select);
-                        //ExerciseService.createExerciseWithMuscle(user,description,nameExercise, Integer.parseInt(length)*3/2,Integer.parseInt(nbRepet)*3/2, 3,select);
+                        ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length)/2,Integer.parseInt(nbRepet)/2, 1,select);
+                        ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length)*3/2,Integer.parseInt(nbRepet)*3/2, 3,select);
                     }
                     else if(Integer.parseInt(niveau)==3){
-                        //ExerciseService.createExerciseWithMuscle(user,description,nameExercise, Integer.parseInt(length)/3,Integer.parseInt(nbRepet)/3, 1,select);
-                        //ExerciseService.createExerciseWithMuscle(user,description,nameExercise, Integer.parseInt(length)*2/3,Integer.parseInt(nbRepet)*2/3, 2,select);
+                        ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length)/3,Integer.parseInt(nbRepet)/3, 1,select);
+                        ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length)*2/3,Integer.parseInt(nbRepet)*2/3, 2,select);
                     }
                     out.println("<h1>Création de l'exercice réussie</h1>");
-                }
-                else {
+            }
+            else {
                      out.println("<h1>Création de l'exercise  échouée<h1>");
-                }
+            }
 
 
             if (action.equals("delete"))

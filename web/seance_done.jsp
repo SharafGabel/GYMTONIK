@@ -125,12 +125,13 @@
 
      $('#SessioNUSERR').change(function(event) {
 
-         $('#affExo tbody').remove();
+
      var sessionuser = $("select#SessioNUSERR").val();
 
      $.get('HistoriqueServlet', {
      sessionUserH : sessionuser
      }, function(response) {
+     $('#affExo tbody').remove();
      $.each(response, function(key, value) {
      $('<form action=\"HistoriqueServlet\" method=\"post\">').append(
      $('<tr>').append(

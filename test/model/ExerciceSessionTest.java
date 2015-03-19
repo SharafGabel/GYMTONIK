@@ -42,7 +42,7 @@ public class ExerciceSessionTest {
         Integer numSeance = 2;
 
 
-        int result = dureeEff+nbRepetReussi/2;
+        int result = (dureeEff+nbRepetReussi)/2;
         if(result >70 && niveau!=3){
             exerciseTest = ExerciseService.getExercise(idExercise + 1, niveau + 1);//retourne l'exercice du niveau supérieur
             assertTrue(HistoriqueService.updateHistorique(numSeance, exerciseTest, user));

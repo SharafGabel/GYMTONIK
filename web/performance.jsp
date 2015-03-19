@@ -65,9 +65,9 @@ Veuillez selectionner votre séance :
             $.get('HistoriqueServlet', {
                 sessionUserFromPerformance : sessionUser
             }, function(response) {
-                $('#affExo tbody').remove();
-                $.each(response, function(key, value) {
 
+                $.each(response, function(key, value) {
+                    $('#affExo tbody').remove();
                         for(j=0;j<6;j++)
                         {
                             $('<form action=\"PerformanceServlet\" method=\"post\">').append(
