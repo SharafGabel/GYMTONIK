@@ -16,6 +16,12 @@ import java.util.List;
 
 public class ExerciseServlet extends HttpServlet {
 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        /*L'utilisateur n'est pas censé atteindre cette page via une requête GET,
+        on le redirige vers vers index.jsp*/
+        getServletContext().getRequestDispatcher("/exercice.jsp").forward(request,response);
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
 
@@ -60,11 +66,11 @@ public class ExerciseServlet extends HttpServlet {
                     Exercise exercise = ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length), Integer.parseInt(nbRepet),Integer.parseInt(niveau),select);
                     ExerciseService.addExerciseToSession(exercise,sessionUsers);
                 }
-                    if(Integer.parseInt(niveau)==1) {
+                    if(Integer.parseInt(niveau)==1){
                         ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length)*2,Integer.parseInt(nbRepet)*2, 2,select);
                         ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length)*3,Integer.parseInt(nbRepet)*3, 3,select);
                     }
-                    else if(Integer.parseInt(niveau)==2) {
+                    else if(Integer.parseInt(niveau)==2){
                         ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length)/2,Integer.parseInt(nbRepet)/2, 1,select);
                         ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length)*3/2,Integer.parseInt(nbRepet)*3/2, 3,select);
                     }
@@ -77,8 +83,6 @@ public class ExerciseServlet extends HttpServlet {
             else {
                      out.println("<h1>Création de l'exercise  échouée<h1>");
             }
-
-
             if (action.equals("delete"))
             {
                 String idExercice = request.getParameter("idEx");
@@ -87,7 +91,6 @@ public class ExerciseServlet extends HttpServlet {
                     out.println("Exercice supprimé");
                 }
             }
-            
             if(action.equals("addToEx"))
             {
                 String sessionUserId = request.getParameter("sessionToAdd");
@@ -97,7 +100,6 @@ public class ExerciseServlet extends HttpServlet {
                 out.println("<h1>Ajout de l'exercice à la séance réussie</h1>");
 
             }
-            
             if (action.equals("update")) {
                 String idExercice = request.getParameter("idEx");
                 if (idExercice != null && !idExercice.trim().isEmpty()
@@ -105,21 +107,17 @@ public class ExerciseServlet extends HttpServlet {
                         && nameExercise != null && !nameExercise.trim().isEmpty()
                         && description != null && !description.trim().isEmpty()
                         && niveau != null && !niveau.trim().isEmpty()
-                ) {
-                    Exercise updatedExercice = ExerciseService.getExercise(idExercice);
-                    if (updatedExercice != null ) {
-                        updatedExercice.setName(nameExercise);
-                        updatedExercice.setDureeExo(Integer.parseInt(length));
-                        updatedExercice.setNbRepetition(Integer.parseInt(nbRepet));
-                        updatedExercice.setExplanation(description);
-                        updatedExercice.setNiveau(Integer.parseInt(niveau));
-                        updatedExercice.setBodyParts(new ArrayList<AMuscle>());
-
-                        if (updateExercise(user,updatedExercice)) {
+                )
+                {
+                        if (updateExercise(Integer.parseInt(idExercice),nameExercise,Integer.parseInt(length),Integer.parseInt(nbRepet),description,select)) {
                             out.println("Exercice mis à jour");
-                        } else out.println("Mise à jour échouée");
-                    }
-                } else out.println("Mise à jour échouée");
+                        }
+                        else
+                            out.println("Mise à jour échouée");
+
+                }
+                else
+                    out.println("Mise à jour échouée");
             }
             request.getRequestDispatcher("exercise.jsp").forward(request, response);
         } finally {
@@ -127,17 +125,9 @@ public class ExerciseServlet extends HttpServlet {
         }
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        /*L'utilisateur n'est pas censé atteindre cette page via une requête GET,
-        on le redirige vers vers index.jsp*/
-        getServletContext().getRequestDispatcher("/exercice.jsp").forward(request,response);
-    }
+    public static boolean updateExercise(int idEx,String nameExo,int length,int nbRepet,String description,List<AMuscle> aMuscles){
 
-    public static boolean addExercise(AUser user,SessionUser sessionUser,String length,String nbRepet,String name,String explanation,int niveau){
-        if(sessionUser==null || sessionUser.getUser() == null){
-            return false;
-        }
-        //ExerciseService.addExercise(user,sessionUser,Integer.parseInt(length),Integer.parseInt(nbRepet),name,explanation,niveau);
+        ExerciseService.updateExercise(idEx,nameExo,length,nbRepet,description,aMuscles);
         return true;
     }
 
@@ -149,13 +139,4 @@ public class ExerciseServlet extends HttpServlet {
         return true;
     }
 
-    public static boolean updateExercise(AUser aUser,Exercise exercise){
-        if(exercise == null){
-            return false;
-        }
-        ExerciseService.updateExercise(aUser,exercise);
-        return true;
-    }
-    
-    
 }

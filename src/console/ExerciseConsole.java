@@ -1,9 +1,6 @@
 package console;
 
-import model.AUser;
-import model.Exercise;
-import model.SessionUser;
-import model.User;
+import model.*;
 import service.ExerciseService;
 import service.SessionService;
 import util.Util;
@@ -114,7 +111,7 @@ public class ExerciseConsole {
 
         switch (choix) {
             case 1:
-                updateExercise(user, exo);
+                updateExercise(exo);
                 break;
             case 2:
                 deleteExercise(user, exo);
@@ -130,7 +127,7 @@ public class ExerciseConsole {
 
     }
 
-    private static void updateExercise(AUser user, Exercise exo) {
+    private static void updateExercise(Exercise exo) {
         Util.clearConsole();
         Scanner sc = new Scanner(System.in);
 
@@ -151,20 +148,10 @@ public class ExerciseConsole {
         int nbRepet = 0;
         String nbRepetString = sc.nextLine();
 
-        System.out.println("Niveau [" + exo.getNiveau() + "]");
-        int niveau = 0;
-        String niveauString = sc.nextLine();
-
-        /*  Les parseInt sont chacun dans leur propre bloc try/catch
-            car dans le cas où ils sont tous dans le même bloc,
-            si l'un d'eux échoue, on sort du bloc et les autres
-            ne seront pas effectué. Ce serait dommage dans le cas où
-             les autres champs ont été modifié. */
+        // TODO : I faut récupérer au moins 1 muscle
+        List<AMuscle> muscles = null;
         try {
             length = Integer.parseInt(lengthString);
-        } catch (Exception e) {}
-        try {
-            niveau = Integer.parseInt(niveauString);
         } catch (Exception e) {}
         try {
             nbRepet = Integer.parseInt(nbRepetString);
@@ -176,27 +163,22 @@ public class ExerciseConsole {
         if (!description.trim().isEmpty())
             exo.setExplanation(description);
 
-        if (length > 0 && length <= 20)
-            exo.setDureeExo(length);
+        if (length < 0 || length > 20)
+            length=1;
 
-        if(nbRepet>5 && nbRepet<=500)
-            exo.setNbRepetition(nbRepet);
-
-        if (niveau > 0 && niveau < 4)
-            exo.setNiveau(niveau);
+        if(nbRepet<5 || nbRepet>500)
+            nbRepet=5;
 
         if (length > 20)
-            System.out.println("La durée de l'exercice ne peut pas excéder 20 minutes");
+            System.out.println("La durée de l'exercice ne peut pas excéder 20 minutes, il sera fixé à "+length);
         if (nbRepet > 500)
-            System.out.println("Le nombre de répétitions de l'exercice ne peut pas excéder 500");
-        if (niveau > 3)
-            System.out.println("Le niveau de l'exercice doit être compris entre 1 et 3");
+            System.out.println("Le nombre de répétitions de l'exercice ne peut pas excéder 500, il sera fixé à "+nbRepet);
 
 
         System.out.println("\nAppuyez sur la touche Entrée pour continuer...");
         sc.nextLine();
 
-        ExerciseService.updateExercise(user, exo);
+        ExerciseService.updateExercise(exo.getId(),name,length,nbRepet,description,muscles);
     }
 
     private static void deleteExercise(AUser user, Exercise exo) {
