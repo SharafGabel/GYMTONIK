@@ -12,18 +12,46 @@
 <% String title = "Performances"; %>
 
 <%@ include file="header.jsp" %>
+<script>
+    $(document).ready(function() {
 
-Veuillez selectionner votre séance :
-<select name="sessionUserPerf" id="sessionUserPerf">
-    <option name="optionName" value="0">Aucune Séance</option>
-    <option name="optionName" value="<%=session.getAttribute("User")%>"> <%=session.getAttribute("User")%></option>
+        $('#SessionUserForChart').change(function(event) {
+            var seance = $("select#SessionUserForChart").val();
+            $.get('ChartServlet', {
+                seanceid : seance
+            }, function(response) {
 
-</select>
+                var select = $('#exerciseDynamic');
+                select.find('option').remove();
+                $.each(response, function(index, value) {
+                    $('<option>').val(value).text(value).appendTo(select);
+                });
+            });
+        });
+    });
+</script>
+
+
 
     <div  class="page-container" id="container">
     <button id="button">Set new data</button>
     </div>
 <div class="page-container" id="exerciseDiv">
+
+    Veuillez selectionner votre séance :
+    <select name="SessionUserForChart" id="SessionUserForChart">
+        <%
+            List<SessionUser> sessionUserListForChart = SessionService.getSessionList((User) session.getAttribute("User"));
+            for(SessionUser a:sessionUserListForChart)
+            {
+        %>
+        <option name="optionName" value="<%=a.getIdS()%>"> <%=a.getName()+" ( Crée le "+a.getDateProgram()+" )"%></option>
+        <%}%>
+    </select>
+    <select id="exerciseDynamic">
+        <option>Selectionner un exercice</option>
+    </select>
+
     <form>
     <input type="hidden" name="choose" value="listH"/>
     <p><label class="lab">TEST Niveau ?</label></p>

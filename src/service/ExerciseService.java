@@ -295,7 +295,27 @@ public class ExerciseService {
         try {
             Transaction tx = session.getTransaction();
             tx.begin();
-            Query query = session.createQuery("Select distinct e from Exercise e, ExerciceSession h where h.sessionUser=" + idsessionUser + " and h.training.id=e.id");
+            Query query = session.createQuery("Select distinct e from Exercise e, ExerciceSession h where h.sessionUser.idS=" + idsessionUser + " and h.training.id=e.id");
+            exercises = query.list();
+            tx.commit();
+        } catch (Exception e) {
+        }
+        finally {
+            session.close();
+        }
+
+        return exercises;
+    }
+
+
+    public static List<Exercise> getExercisesFromSession(int idsessionUser) {
+        Session session = getSession();
+        List<Exercise> exercises = null;
+
+        try {
+            Transaction tx = session.getTransaction();
+            tx.begin();
+            Query query = session.createQuery("Select  h from ExerciceSession h where h.sessionUser=" + idsessionUser);
             exercises = query.list();
             tx.commit();
         } catch (Exception e) {

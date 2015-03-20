@@ -36,8 +36,15 @@
         <servlet-name>PerformanceServlet</servlet-name>
         <servlet-class>controller.PerformanceServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChartServlet</servlet-name>
+        <servlet-class>controller.ChartServlet</servlet-class>
+    </servlet>
 
-
+    <servlet-mapping>
+        <servlet-name>ChartServlet</servlet-name>
+        <url-pattern>/ChartServlet</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PerformanceServlet</servlet-name>
         <url-pattern>/PerformanceServlet</url-pattern>
