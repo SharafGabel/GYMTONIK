@@ -29,4 +29,12 @@ public class GsonExclusionStrategy implements ExclusionStrategy{
         gsonbuilder.setExclusionStrategies(exs);
         return gsonbuilder.serializeNulls().create();
     }
+
+    public static Gson createGsonFromBuilder(ExclusionStrategy gsonExclusionStrategy, ExclusionStrategy gsonExclusionStrategy1) {
+
+        GsonBuilder gsonbuilder = new GsonBuilder();
+        gsonbuilder.setExclusionStrategies(gsonExclusionStrategy);
+        gsonbuilder.setExclusionStrategies(gsonExclusionStrategy1);
+        return gsonbuilder.serializeNulls().create();
+    }
 }

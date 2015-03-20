@@ -1,12 +1,11 @@
 package controller;
 
 import com.google.gson.Gson;
-import model.ExerciceSession;
-import model.Exercise;
-import model.User;
+import model.*;
 import service.ExerciseService;
 import service.HistoriqueService;
 import service.PerformanceService;
+import util.GsonExclusionStrategy;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -41,7 +40,7 @@ public class PerformanceServlet extends HttpServlet {
 
             User user = (User) request.getSession().getAttribute("User");
             List<ExerciceSession> listOfExerciceSession = PerformanceService.recupcalculPerformance(user);
-            Gson gson = new Gson();
+            Gson gson = GsonExclusionStrategy.createGsonFromBuilder(new GsonExclusionStrategy(SessionUser.class),new GsonExclusionStrategy(ATraining.class));
 
             String jsonString = gson.toJson(listOfExerciceSession);
 

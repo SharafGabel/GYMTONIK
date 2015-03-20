@@ -88,7 +88,8 @@ public class ExerciseService {
         try {
             Transaction tx = session.getTransaction();
             tx.begin();
-            Query query = session.createQuery("Select e from Exercise e where e.name="+exercise.getName()+" and e.explanation="+exercise.getExplanation());
+            //TODO : lorsque le nom est composé de plus d'un mot, il y a une erreur dans la requête SQL ( We have to find how to fix this problem )
+            Query query = session.createQuery("Select e from Exercise e where e.name="+exercise.getName());
             exercises = query.list();
             tx.commit();
         } catch (Exception e) {
@@ -106,9 +107,8 @@ public class ExerciseService {
         try{
             Transaction tx = session.beginTransaction();
             Exercise exercise = (Exercise)session.get(Exercise.class, idEx);
-            tx.commit();
+
             List<Exercise> exerciseList = getExercisesWithDifferentLevelFromExercise(exercise);
-            tx = session.beginTransaction();
             for(Exercise a:exerciseList) {
 
                 int l=length*a.getNiveau()/exercise.getNiveau();
@@ -128,8 +128,8 @@ public class ExerciseService {
                 }
                 a.setName(nameExo);
                 a.setExplanation(description);
+                a.setBodyParts(null);
                 a.setBodyParts(aMuscles);
-
                 session.update(a);
             }
             tx.commit();

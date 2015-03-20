@@ -12,26 +12,6 @@
 <% String title = "Performances"; %>
 
 <%@ include file="header.jsp" %>
-<script>
-    $(document).ready(function() {
-
-        $('#SessionUserForChart').change(function(event) {
-            var seance = $("select#SessionUserForChart").val();
-            $.get('ChartServlet', {
-                seanceid : seance
-            }, function(response) {
-
-                var select = $('#exerciseDynamic');
-                select.find('option').remove();
-                $.each(response, function(index, value) {
-                    $('<option>').val(value).text(value).appendTo(select);
-                });
-            });
-        });
-    });
-</script>
-
-
 
     <div  class="page-container" id="container">
     <button id="button">Set new data</button>
@@ -93,9 +73,8 @@
             $.get('HistoriqueServlet', {
                 sessionUserFromPerformance : sessionUser
             }, function(response) {
-
+                $('#affExo').children().remove();
                 $.each(response, function(key, value) {
-                    $('#affExo tbody').remove();
                         for(j=0;j<6;j++)
                         {
                             $('<form action=\"PerformanceServlet\" method=\"post\">').append(
@@ -120,4 +99,20 @@
             });
         });
     });
+
+    $(document).ready(function() {
+
+        $('#SessionUserForChart').change(function(event) {
+            var seance = $("select#SessionUserForChart").val();
+            $.get('ChartServlet', {
+                seanceid : seance
+            }, function(response) {
+                $('#exerciseDynamic').children().remove();
+                $.each(response, function(index, value) {
+                    $('<option>').val(value.id).text(value.name).appendTo('#exerciseDynamic');
+                });
+            });
+        });
+    });
+
 </script>

@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Type;
+import util.GsonExclude;
 
 import javax.jms.Session;
 import javax.persistence.*;
@@ -40,10 +41,12 @@ public class ExerciceSession {
     @Column(name="ratioDuree")
     private float ratioDuree;
 
+    @GsonExclude
     @ManyToOne(cascade={CascadeType.ALL})
     @LazyCollection(LazyCollectionOption.FALSE)
     private SessionUser sessionUser;
 
+    @GsonExclude
     @ManyToOne(cascade={CascadeType.ALL})
     @LazyCollection(LazyCollectionOption.FALSE)
     private ATraining training;
