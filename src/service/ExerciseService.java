@@ -31,9 +31,37 @@ public class ExerciseService {
     }
 
     //region create,add
-    public static Exercise createExercise(AUser user, String description, String name, int length,int nbRep,int niveau,List<AMuscle> aMuscles){
+    public static Exercise createExercise(AUser user, String description, String name, int length,int nbRep,int niveau, List<AMuscle> aMuscles){
         Session session = getSession();
         Transaction tx = null;
+
+        try{
+            tx = session.beginTransaction();
+            if(nbRep==0)
+                nbRep=5;
+            if(length==0)
+                length=1;
+            Exercise exercise = new Exercise(user,length,nbRep,name,description,niveau);
+            exercise.setBodyParts(aMuscles);
+            session.save(exercise);
+            tx.commit();
+            return exercise;
+        }catch (Exception e) {
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+            return null;
+        }
+        finally {
+            session.close();
+        }
+    }
+
+    public static Exercise createExercise(AUser user, String description, String name, int length,int nbRep,int niveau){
+        Session session = getSession();
+        Transaction tx = null;
+
+        List<AMuscle> aMuscles = new ArrayList<AMuscle>();
 
         try{
             tx = session.beginTransaction();
@@ -103,9 +131,10 @@ public class ExerciseService {
     public static boolean updateExercise(int idEx,String nameExo,int length,int nbRepet,String description,List<AMuscle> aMuscles)
     {
         Session session = getSession();
+        Transaction tx = null;
 
         try{
-            Transaction tx = session.beginTransaction();
+            tx = session.beginTransaction();
             Exercise exercise = (Exercise)session.get(Exercise.class, idEx);
 
             List<Exercise> exerciseList = getExercisesWithDifferentLevelFromExercise(exercise);
@@ -135,6 +164,29 @@ public class ExerciseService {
             tx.commit();
             return true;
         } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+            return false;
+        }finally {
+            session.close();
+        }
+    }
+
+    public static boolean updateExercise(Exercise exo) {
+        Session session = getSession();
+        Transaction tx = null;
+
+        try{
+            tx = session.beginTransaction();
+            session.update(exo);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
             e.printStackTrace();
             return false;
         }finally {

@@ -79,6 +79,8 @@ public class SessionConsole {
             }
         } else System.out.println("Il n'y a aucun exercice pour cette séance");
 
+        System.out.println("\nPour ajouter des exercices à cette séances, allez dans le menu Exercice\n");
+
         System.out.println("Appuyez sur la touche Entrée pour continuer...");
         sc.nextLine();
 

@@ -70,7 +70,7 @@ public class ExerciseConsole {
         int niveau = sc.nextInt();
 
         if (nbRep >= 5 && niveau > 0 && niveau < 4 && length > 0 && length <= 20) {
-            //ExerciseService.createExercise(user, name, description, length, niveau, nbRep);
+            ExerciseService.createExercise(user, description, name, length, nbRep, niveau);
             System.out.print("Ajout reussi");
         } else {
             if (nbRep < 5) {
@@ -102,27 +102,57 @@ public class ExerciseConsole {
         System.out.println(exo.getDureeExo() + "min - Niveau " + exo.getNiveau()
                 + " - " + exo.getNbRepetition() + " répétitions\n");
 
-        System.out.println("1 - Modifier");
-        System.out.println("2 - Supprimer");
-        System.out.println("3 - Ajouter à une séance");
+        if(user.equals(exo.getUser())) { // L'utilisateur est le propriétaire de l'exercice, il peut donc le modifier et le supprimer
 
-        Scanner sc = new Scanner(System.in);
-        int choix = sc.nextInt();
+            System.out.println("1 - Modifier");
+            System.out.println("2 - Supprimer");
+            System.out.println("3 - Ajouter à une séance");
+            System.out.println("4 - Retour");
 
-        switch (choix) {
-            case 1:
-                updateExercise(exo);
-                break;
-            case 2:
-                deleteExercise(user, exo);
-                break;
-            case 3:
-                addToSession(user, exo);
-                break;
-            default:
-                System.out.println("Veuillez entrer 1 ou 2");
-                displayExercise(user, exo);
-                break;
+            Scanner sc = new Scanner(System.in);
+            int choix = sc.nextInt();
+
+            switch (choix) {
+                case 1:
+                    updateExercise(exo);
+                    break;
+                case 2:
+                    deleteExercise(user, exo);
+                    break;
+                case 3:
+                    addToSession(user, exo);
+                    break;
+                case 4:
+                    break;
+                default:
+                    System.out.println("Veuillez entrer un chiffre entre 1 et 4");
+                    System.out.println("Appuyez sur la touche Entrée pour continuer");
+                    sc.nextLine();
+                    sc.nextLine();
+                    displayExercise(user, exo);
+                    break;
+            }
+        } else {
+            System.out.println("1 - Ajouter à une séance");
+            System.out.println("2 - Retour");
+
+            Scanner sc = new Scanner(System.in);
+            int choix = sc.nextInt();
+
+            switch (choix) {
+                case 1:
+                    addToSession(user, exo);
+                    break;
+                case 2:
+                    break;
+                default:
+                    System.out.println("Veuillez entrer un chiffre entre 1 et 2");
+                    System.out.println("Appuyez sur la touche Entrée pour continuer");
+                    sc.nextLine();
+                    sc.nextLine();
+                    displayExercise(user, exo);
+                    break;
+            }
         }
 
     }
@@ -148,8 +178,6 @@ public class ExerciseConsole {
         int nbRepet = 0;
         String nbRepetString = sc.nextLine();
 
-        // TODO : I faut récupérer au moins 1 muscle
-        List<AMuscle> muscles = null;
         try {
             length = Integer.parseInt(lengthString);
         } catch (Exception e) {}
@@ -163,22 +191,21 @@ public class ExerciseConsole {
         if (!description.trim().isEmpty())
             exo.setExplanation(description);
 
-        if (length < 0 || length > 20)
-            length=1;
+        if (length > 0 && length <= 20)
+            exo.setDureeExo(length);
 
-        if(nbRepet<5 || nbRepet>500)
-            nbRepet=5;
+        if(nbRepet >= 5 && nbRepet < 500)
+            exo.setNbRepetition(nbRepet);
 
         if (length > 20)
-            System.out.println("La durée de l'exercice ne peut pas excéder 20 minutes, il sera fixé à "+length);
-        if (nbRepet > 500)
-            System.out.println("Le nombre de répétitions de l'exercice ne peut pas excéder 500, il sera fixé à "+nbRepet);
+            System.out.println("La durée de l'exercice ne peut pas excéder 20 minutes");
+        if (nbRepet < 5 || nbRepet > 500)
+            System.out.println("Le nombre de répétitions de l'exercice ne peut pas excéder 500");
 
+        ExerciseService.updateExercise(exo);
 
         System.out.println("\nAppuyez sur la touche Entrée pour continuer...");
         sc.nextLine();
-
-        ExerciseService.updateExercise(exo.getId(),name,length,nbRepet,description,muscles);
     }
 
     private static void deleteExercise(AUser user, Exercise exo) {
