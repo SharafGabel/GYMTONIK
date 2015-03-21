@@ -203,8 +203,9 @@ public class ExerciseService {
         List<Exercise> exercises;
         try {
             tx = session.beginTransaction();
-            Query query = session.createQuery("Select e from Exercise e where e.niveau="+niveau+" and e.bodyParts in (:muscles)");
-            query.setParameter("muscles", muscles);
+            Query query = session.createQuery("Select e from Exercise e join e.bodyParts b where e.niveau=:niveaux and b.id = "+muscles.get(0).getId());
+            query.setParameter("niveaux",niveau);
+            //query.setParameterList("muscle",AMuscle.toStringFromList(muscles));
             exercises = query.list();
             tx.commit();
             return exercises;

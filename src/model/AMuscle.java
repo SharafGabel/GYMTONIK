@@ -61,4 +61,13 @@ public abstract class AMuscle implements Serializable{
         this.exercices.add(exercise);
     }
     //endregion
+
+    public static int []toStringFromList(List<AMuscle> muscles) {
+        int[] str=new int[muscles.size()];
+        for(int i=0;i<muscles.size();i++)
+        {
+            str[i]=muscles.get(i).getId();
+        }
+        return  str;
+    }
 }
