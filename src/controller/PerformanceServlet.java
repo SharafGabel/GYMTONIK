@@ -39,6 +39,34 @@ public class PerformanceServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
             User user = (User) request.getSession().getAttribute("User");
+            Integer idExercise = Integer.parseInt(request.getParameter("exerciseid"));
+
+            String choiceFromPerformance = request.getParameter("submit_choice");
+
+            if(choiceFromPerformance.equals("user_performance")){
+                List<ExerciceSession> listofUserExercise = PerformanceService.getUserPerformanceFromExerciseId(user,idExercise);
+                Gson gson = GsonExclusionStrategy.createGsonFromBuilder(new GsonExclusionStrategy(SessionUser.class),new GsonExclusionStrategy(ATraining.class));
+
+                String jsonString = gson.toJson(listofUserExercise);
+
+                response.setContentType("application/json");
+
+                response.getWriter().write(jsonString);
+                System.out.println(jsonString);
+            }
+            else if(choiceFromPerformance.equals("compare_performance")){
+
+                List<ExerciceSession> listofUserExercise = PerformanceService.getPerfFromExerciseId(idExercise);
+                Gson gson = GsonExclusionStrategy.createGsonFromBuilder(new GsonExclusionStrategy(SessionUser.class),new GsonExclusionStrategy(ATraining.class));
+
+                String jsonString = gson.toJson(listofUserExercise);
+
+                response.setContentType("application/json");
+
+                response.getWriter().write(jsonString);
+                System.out.println(jsonString);
+            }
+/*
             List<ExerciceSession> listOfExerciceSession = PerformanceService.recupcalculPerformance(user);
             Gson gson = GsonExclusionStrategy.createGsonFromBuilder(new GsonExclusionStrategy(SessionUser.class),new GsonExclusionStrategy(ATraining.class));
 
@@ -48,6 +76,6 @@ public class PerformanceServlet extends HttpServlet {
 
             response.getWriter().write(jsonString);
             System.out.println(jsonString);
-        
+*/
     }
 }

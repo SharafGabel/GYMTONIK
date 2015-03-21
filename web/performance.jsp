@@ -12,26 +12,117 @@
 <% String title = "Performances"; %>
 
 <%@ include file="header.jsp" %>
+<!--Dynamic version - HighCharts Graph - performance.jsp-->
+<script type="text/javascript">
+    $(function () {
+        var chart;
+        $(document).ready(function() {
+            chart = new Highcharts.Chart({
+
+                chart: {
+                    renderTo: 'container',
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+
+                title: {
+                    text: 'Evolution de la performance '
+                },
+                yAxis: {
+                    title: {
+                        text: 'Nb de repetition '
+                    }
+                },
+                xAxis: {
+                    type: 'datetime',
+                    labels: {
+                        format:'{value:%Y-%m-%d}',
+                        rotation:45,
+                        align:'right'
+                    },
+                    title: {
+                        text: 'Date'
+                    }
+                },
+                tooltip: {
+                    // pointFormat: '{series.name}: <b>{point.percentage}%</b>',
+                    pointFormat: '{point.x:}: {point.y:.2f} %',
+                    percentageDecimals: 1
+                },
+                plotOptions: {
+
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            color: '#000000',
+                            connectorColor: '#000000',
+                            formatter: function() {
+                                //Highcharts.numberFormat(this.percentage,2)
+                                return '<b>'+ this.point.name +'</b>: '+Highcharts.numberFormat(this.percentage,2) +' %';
+                            }
+                        }
+                    }
+                },
+
+                series: [{
+                    type: 'line',
+                    name: 'performance',
+                    pointStart:Date.UTC(2015,2,1),
+                    pointInterval:24*36e5
+                }]
+            });
+        });
+
+
+        $.ajax({
+            type:"GET",
+            // url:'PerformanceServlet?submit_choice='+document.getElementsByName("submit_choice").value,//Servlet
+            url:'PerformanceServlet',
+            dataType : 'json',
+            //data: {submit_choice: 'idTest'},
+            success:function(data){
+
+                browsers = [],
+
+                        $.each(data,function(i,d){
+                            browsers.push([d.dateProgEffectue,d.ratioRepet]);
+                        });
+
+                chart.series[0].setData(browsers);
+            },
+            error:function(e){
+                alert(e);
+            }
+        });
+    });
+</script>
+
+<div class="page-container" id="exerciseDiv">
+    <form id="formSeance" class="form-horizontal" name="formSeance" method="get" action="PerformanceServlet">
+        Veuillez selectionner votre séance :
+        <select name="SessionUserForChart" id="SessionUserForChart">
+            <%
+                List<SessionUser> sessionUserListForChart = SessionService.getSessionList((User) session.getAttribute("User"));
+                for(SessionUser a:sessionUserListForChart)
+                {
+            %>
+            <option name="optionName" value="<%=a.getIdS()%>"> <%=a.getName()+" ( Crée le "+a.getDateProgram()+" )"%></option>
+            <%}%>
+        </select>
+        <select name="exerciseid" id="exerciseDynamic">
+            <option>Selectionner un exercice</option>
+        </select>
+        <br>
+        <button class="btn btn-small btn-warning" name="submit_choice" value="user_performance" type="submit" >Voir mon evolution</button>
+        <button class="btn btn-small btn-warning" name="submit_choice" value="compare_performance" type="submit">comparer mes performances avec les autres</button>
+    </form> <!-- todo:j'obtiens le fichier json , mais je n'arrive pas a le passer au script js juste au-dessus(extraire les resultats du json) -->
 
     <div  class="page-container" id="container">
-    <button id="button">Set new data</button>
+        <button id="button">Set new data</button>
     </div>
-<div class="page-container" id="exerciseDiv">
-
-    Veuillez selectionner votre séance :
-    <select name="SessionUserForChart" id="SessionUserForChart">
-        <%
-            List<SessionUser> sessionUserListForChart = SessionService.getSessionList((User) session.getAttribute("User"));
-            for(SessionUser a:sessionUserListForChart)
-            {
-        %>
-        <option name="optionName" value="<%=a.getIdS()%>"> <%=a.getName()+" ( Crée le "+a.getDateProgram()+" )"%></option>
-        <%}%>
-    </select>
-    <select id="exerciseDynamic">
-        <option>Selectionner un exercice</option>
-    </select>
-
     <form>
     <input type="hidden" name="choose" value="listH"/>
     <p><label class="lab">TEST Niveau ?</label></p>
