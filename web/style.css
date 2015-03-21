@@ -306,3 +306,8 @@ footer a i b{
     color:#c92020;
     font-weight: normal;
 }
+
+.checkbox{
+    width: 10px;
+    height: 10px;
+}

@@ -49,7 +49,8 @@ public class ExerciseTest {
         user = (User)session.get(User.class,2);
         sessionUser= (SessionUser)session.get(SessionUser.class,2);
         exercise = new Exercise(user,50,7,"travail abdomen","travail les abdominaux",1);
-        exerciseRecup = (Exercise)session.get(Exercise.class,4);
+        exercise.addBodyPart((AMuscle)session.get(Muscle.class,4));
+        exerciseRecup = (Exercise)session.get(Exercise.class,7);
         session.close();
     }
 
@@ -61,22 +62,24 @@ public class ExerciseTest {
     @Test
     public void testAddExercise(){
         SessionUser sessionUsers = SessionService.getSessionById(sessionUser.getIdS());
-        assertTrue(ExerciseService.addExercise(user, sessionUsers, "50","7", exercise.getName(), exercise.getExplanation(),exercise.getNiveau()));
+        //assertTrue(ExerciseService.addExerciseWithMuscle(user, sessionUsers, 50,7, exercise.getName(), exercise.getExplanation(),exercise.getNiveau(),exercise.getBodyParts()));
 
     }
 
     @Test
     public void testDeleteExercise(){
+
         assertTrue(ExerciseService.deleteExercise(user,exerciseRecup));
     }
 
     @Test
     public void testUpdateExercise(){
-
+        /*
         exerciseRecup.setExplanation("travail les abdominaux et les pectoraux ");
         exerciseRecup.setDureeExo(40);
         exerciseRecup.setNbRepetition(5);
         exerciseRecup.setName("exercise  abdominaux intensif");
         assertTrue(ExerciseService.updateExercise(user,exerciseRecup));
+        */
     }
 }

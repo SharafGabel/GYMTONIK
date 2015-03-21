@@ -1,13 +1,17 @@
 package model;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class AMuscle{
+public abstract class AMuscle implements Serializable{
     //region Property    
     @Id
     @GeneratedValue(generator="idGen")
@@ -18,11 +22,14 @@ public abstract class AMuscle{
     @Column(name="name",nullable = false)
     protected String name;
 
+    @ManyToMany(cascade={CascadeType.ALL})
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<ATraining> exercices;
     //endregion
 
     //region Constructor
     public AMuscle(){
-
+        exercices = new ArrayList<ATraining>();
     }
     //endregion
 
@@ -39,5 +46,19 @@ public abstract class AMuscle{
         this.name = name;
     }
 
+    public List<ATraining> getExercices() {
+        return exercices;
+    }
+
+    public void setExercices(List<ATraining> exercices) {
+
+        this.exercices = exercices;
+
+    }
+
+    public void addExercice(ATraining exercise)
+    {
+        this.exercices.add(exercise);
+    }
     //endregion
 }

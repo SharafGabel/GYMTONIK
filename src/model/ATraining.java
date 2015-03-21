@@ -1,11 +1,13 @@
 package model;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.IndexColumn;
+import org.hibernate.annotations.*;
+import util.GsonExclude;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,7 +15,7 @@ import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class ATraining {
+public abstract class ATraining implements Serializable {
 
     //region Property
     @Id
@@ -37,9 +39,16 @@ public abstract class ATraining {
     @Column(name="niveau",nullable=false)
     private int niveau;
 
-    @OneToMany(cascade={CascadeType.ALL}, mappedBy = "id")
+    @GsonExclude
+    @ManyToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER)
+    @JoinTable(name = "ExerciceMuscle", joinColumns = @JoinColumn(name = "idEx"), inverseJoinColumns = @JoinColumn(name = "id"))
     private List<AMuscle> bodyParts;
 
+    @OneToMany(cascade={CascadeType.ALL})
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<ExerciceSession> exerciceSessions;
+
+    @GsonExclude
     @ManyToOne
     @JoinColumn(name="userId",nullable=false)
     private AUser user;
@@ -47,7 +56,9 @@ public abstract class ATraining {
 
     //region Constructor
     public ATraining()
-    {}
+    {
+        this.bodyParts = new ArrayList<AMuscle>();
+    }
 
     public ATraining(AUser user,int dureeExo,int nbRepetition, String name, String explanation,int niveau) {
         this.dureeExo = dureeExo;
@@ -56,6 +67,7 @@ public abstract class ATraining {
         this.bodyParts = new ArrayList<AMuscle>();
         this.user = user;
         this.niveau = niveau;
+        this.nbRepetition = nbRepetition;
     }
     //endregion
 
@@ -105,23 +117,18 @@ public abstract class ATraining {
         this.explanation = explanation;
     }
 
-    public List<AMuscle> getBodyPart() {
-        return this.bodyParts;
-    }
-
-    public void setBodyPart(List<AMuscle> bodyParts) {
-        this.bodyParts = bodyParts;
-    }
-
     public List<AMuscle> getBodyParts() {
         return bodyParts;
     }
 
     public void setBodyParts(List<AMuscle> bodyParts) {
+        for(AMuscle aMuscle:bodyParts)
+            aMuscle.addExercice(this);
         this.bodyParts = bodyParts;
     }
 
     public void addBodyPart(AMuscle bodyPart) {
+        bodyPart.addExercice(this);
         this.bodyParts.add(bodyPart);
     }
 
@@ -133,10 +140,15 @@ public abstract class ATraining {
         this.niveau = niveau;
     }
 
-    //endregion
+    public List<ExerciceSession> getExerciceSessions() {
+        return exerciceSessions;
+    }
 
-    //region equals
+    public void setExerciceSessions(List<ExerciceSession> exerciceSessions) {
+        this.exerciceSessions = exerciceSessions;
+    }
 
+//endregion
 
     @Override
     public boolean equals(Object o) {

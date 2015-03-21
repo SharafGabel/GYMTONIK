@@ -1,14 +1,19 @@
 package model;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="SessionUser")
-public class SessionUser {
+public class SessionUser implements Serializable {
     //region Property
     @Id
     @GeneratedValue(generator="idGen")
@@ -28,6 +33,10 @@ public class SessionUser {
     @JoinColumn(name="userId",nullable=false)
     private AUser user;
 
+    @OneToMany(cascade={CascadeType.ALL})
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<ExerciceSession> exerciceSessions;
+
 
     //endregion
 
@@ -35,6 +44,7 @@ public class SessionUser {
 
     public SessionUser() {
         this.dateProgram = new Date();
+        exerciceSessions = new ArrayList<ExerciceSession>();
 
     }
     //endregion
@@ -60,14 +70,17 @@ public class SessionUser {
         this.dateProgram = dateProgram;
     }
 
+    public List<ExerciceSession> getExerciceSessions() {
+        return exerciceSessions;
+    }
+
+    public void setExerciceSessions(List<ExerciceSession> exerciceSessions) {
+        this.exerciceSessions = exerciceSessions;
+    }
+
     //endregion
 
     //region Method
-
-    public int calculatePerformance(AUser user) {
-        return -1;
-    }
-
     public String getName() {
         return name;
     }

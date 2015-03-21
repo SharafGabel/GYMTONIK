@@ -191,8 +191,3 @@ button:active {
 
 .connect a:hover { background-position: center bottom; }
 
-select{
-    margin:40px;
-    background: lightgrey;
-    color:#000000;
-}
