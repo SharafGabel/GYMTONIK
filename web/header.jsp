@@ -157,6 +157,7 @@
         <li><a href="index.jsp">Accueil</a></li>
         <li><a href="seance.jsp">Séance</a></li>
         <li><a href="seance_done.jsp">Séance effectuée ?</a></li>
+        <li><a href="generate_seance.jsp">Générez votre séance</a></li>
         <li><a href="exercise.jsp">Exercice</a></li>
         <li><a href="performance.jsp">Performances</a></li>
         <li><a href="profil.jsp">Profil</a></li>

@@ -58,6 +58,32 @@ public class SessionService {
         }
         
     }
+    public static SessionUser addSessionUser(User user) {
+
+        Session session = getSession();
+        Transaction tx = null;
+        try {
+            tx = session.getTransaction();
+            tx.begin();
+            SessionUser sessionUser = new SessionUser();
+            sessionUser.setUser(user);
+            sessionUser.setName("seance "+sessionUser.getIdS());
+            System.out.println(sessionUser.toString());
+            session.save(sessionUser);
+            sessionUser.setName("seance "+sessionUser.getIdS());
+            session.update(sessionUser);
+            tx.commit();
+            return sessionUser;
+        } catch (Exception e) {
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+            return null;
+        }finally {
+            session.close();
+        }
+
+    }
 
     public static boolean addOrUpdateExToSession(int idS,  int idEx)
     {

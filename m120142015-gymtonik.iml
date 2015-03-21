@@ -79,6 +79,7 @@
     </orderEntry>
     <orderEntry type="library" name="javax.servlet.jsp:javax.servlet.jsp-api:2.3.0" level="project" />
     <orderEntry type="library" name="javax.jms:javax.jms-api:2.0.1" level="project" />
+    <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
   </component>
 </module>
 

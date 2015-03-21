@@ -195,6 +195,30 @@ public class ExerciseService {
     }
 //endregion
 
+//region exercices à partir de muscles
+    public static List<Exercise> getExercisesFromMuscles(List<AMuscle> muscles,int niveau) {
+        Session session = getSession();
+        Transaction tx = null;
+
+        List<Exercise> exercises;
+        try {
+            tx = session.beginTransaction();
+            Query query = session.createQuery("Select e from Exercise e where e.niveau="+niveau+" and e.bodyParts in (:muscles)");
+            query.setParameter("muscles", muscles);
+            exercises = query.list();
+            tx.commit();
+            return exercises;
+        } catch (Exception e) {
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+            return null;
+        }finally {
+            session.close();
+        }
+    }
+//endregion
+
     public static List<Exercise> getExercises() {
         Session session = getSession();
         Transaction tx = null;

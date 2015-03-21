@@ -1,7 +1,8 @@
 package controller;
 
-import model.SessionUser;
-import model.User;
+import model.*;
+import service.ExerciseService;
+import service.MuscleService;
 import service.SessionService;
 
 import javax.servlet.ServletException;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SessionServlet extends HttpServlet {
 
@@ -19,7 +22,38 @@ public class SessionServlet extends HttpServlet {
 
         String action = request.getParameter("action");
 
-        if(action.equals("deleteSession")){
+        if(action.equals("generateSession")){
+            if(request.getParameter("inlineCheckboxMuscle") != null) {
+                List<AMuscle> select = new ArrayList<AMuscle>();
+                String[] selecttype = request.getParameterValues("inlineCheckboxMuscle");
+                for (int i = 0; i < selecttype.length; i++) {
+                    select.add(MuscleService.getMuscleById((Integer.parseInt(selecttype[i]))));
+                }
+                if(select.size()!=0) {
+                    int niveau = Integer.parseInt(request.getParameter("niveau"));
+                    int nbExo = Integer.parseInt(request.getParameter("nbExo"));
+                    List<Exercise> exerciseList = ExerciseService.getExercisesFromMuscles(select, niveau);
+
+                    //Création de la séance
+                    SessionUser sessionUser = SessionService.addSessionUser((User) request.getSession().getAttribute("User"));
+
+                    if (nbExo > exerciseList.size())
+                        nbExo = exerciseList.size();
+
+                    for (int i = 0; i < nbExo; i++) {
+                        ExerciseService.addExerciseToSession(exerciseList.get(i), sessionUser);
+                    }
+                    out.println("<h1>"+sessionUser.getName()+" générée avec "+nbExo+" exercices</h1>");
+                    request.getRequestDispatcher("seance.jsp").forward(request, response);
+                }
+                else {
+                    out.println("<h1>Sélectionnez au moins 1 Muscle<h1>");
+                    request.getRequestDispatcher("generate_seance.jsp").forward(request, response);
+                }
+            }
+
+        }
+        else if(action.equals("deleteSession")){
             SessionUser sessionUser = SessionService.getSessionById(Integer.parseInt(request.getParameter("sessionId")));
             this.deleteSession(sessionUser);
             this.getServletContext().getRequestDispatcher("/seance.jsp").forward( request, response );//redirection
