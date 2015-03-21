@@ -96,7 +96,7 @@ public class ExerciseServlet extends HttpServlet {
                 String sessionUserId = request.getParameter("sessionToAdd");
                 String idExercice = request.getParameter("idEx");
                 System.out.println("idS : "+sessionUserId + " idEx : "+idExercice);
-                SessionService.addOrUpdateExToSession(Integer.parseInt(sessionUserId),Integer.parseInt(idExercice),user);
+                SessionService.addOrUpdateExToSession(Integer.parseInt(sessionUserId),Integer.parseInt(idExercice));
                 out.println("<h1>Ajout de l'exercice à la séance réussie</h1>");
 
             }

@@ -217,45 +217,7 @@ public class ExerciseService {
     }
 
     public static List<Exercise> getAllExercises() {
-        Session session = getSession();
-        Transaction tx = null;
-
-        List<Exercise> exercises;
-        try {
-            tx = session.beginTransaction();
-            Query query = session.createQuery("from Exercise");
-            exercises = query.list();
-            tx.commit();
-            return exercises;
-        } catch (Exception e) {
-            if (tx != null)
-                tx.rollback();
-            e.printStackTrace();
-            return null;
-        }finally {
-            session.close();
-        }
-    }
-
-    public static Exercise getExercise(String idEx) {
-        Session session = getSession();
-        Transaction tx = null;
-
-        Exercise exercise;
-        try {
-            tx = session.beginTransaction();
-            Query query = session.createQuery("from Exercise where id="+ idEx);
-            exercise = (Exercise) query.uniqueResult();
-            tx.commit();
-            return exercise;
-        } catch (Exception e) {
-            if (tx != null)
-                tx.rollback();
-            e.printStackTrace();
-            return null;
-        }finally {
-            session.close();
-        }
+        return getExercises();
     }
 
     public static Exercise getExercise(int idEx,int test) {
@@ -300,6 +262,10 @@ public class ExerciseService {
         }
     }
 
+    public static Exercise getExercise(String idEx) {
+        return getExerciseById(Integer.parseInt(idEx));
+    }
+
     public static boolean deleteExercise(AUser user,Exercise exercise){
         //Car un Utilisateur ne peut supprimer que des exercices qu'il a lui même créé
         if(exercise == null || user.getId()!=exercise.getUser().getId()){
@@ -321,22 +287,7 @@ public class ExerciseService {
     }
 
     public static List<Exercise> getExercises(SessionUser sessionUser) {
-        Session session = getSession();
-        List<Exercise> exercises = null;
-
-        try {
-            Transaction tx = session.getTransaction();
-            tx.begin();
-            Query query = session.createQuery("Select e from Exercise e, ExerciceSession h where h.sessionUser=" + sessionUser.getIdS() + " and h.training=+e.id");
-            exercises = query.list();
-            tx.commit();
-        } catch (Exception e) {
-        }
-        finally {
-            session.close();
-        }
-
-        return exercises;
+        return getExercises(sessionUser.getIdS());
     }
 
 
@@ -348,26 +299,6 @@ public class ExerciseService {
             Transaction tx = session.getTransaction();
             tx.begin();
             Query query = session.createQuery("Select distinct e from Exercise e, ExerciceSession h where h.sessionUser.idS=" + idsessionUser + " and h.training.id=e.id");
-            exercises = query.list();
-            tx.commit();
-        } catch (Exception e) {
-        }
-        finally {
-            session.close();
-        }
-
-        return exercises;
-    }
-
-
-    public static List<Exercise> getExercisesFromSession(int idsessionUser) {
-        Session session = getSession();
-        List<Exercise> exercises = null;
-
-        try {
-            Transaction tx = session.getTransaction();
-            tx.begin();
-            Query query = session.createQuery("Select  h from ExerciceSession h where h.sessionUser=" + idsessionUser);
             exercises = query.list();
             tx.commit();
         } catch (Exception e) {

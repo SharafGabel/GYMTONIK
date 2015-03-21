@@ -59,7 +59,7 @@ public class SessionService {
         
     }
 
-    public static boolean addOrUpdateExToSession(int idS,  int idEx, User user)
+    public static boolean addOrUpdateExToSession(int idS,  int idEx)
     {
         Session session = getSession();
         Transaction tx = null;

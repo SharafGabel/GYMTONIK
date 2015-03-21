@@ -1,6 +1,10 @@
 package console;
 
-import model.*;
+import model.AUser;
+import model.Exercise;
+import model.SessionUser;
+import model.User;
+import org.hibernate.NonUniqueObjectException;
 import service.ExerciseService;
 import service.SessionService;
 import util.Util;
@@ -199,8 +203,8 @@ public class ExerciseConsole {
 
         if (length > 20)
             System.out.println("La durée de l'exercice ne peut pas excéder 20 minutes");
-        if (nbRepet < 5 || nbRepet > 500)
-            System.out.println("Le nombre de répétitions de l'exercice ne peut pas excéder 500");
+        if (nbRepet != 0 && (nbRepet < 5 || nbRepet > 500))
+            System.out.println("Le nombre de répétitions de l'exercice doit être comprit entre 5 et 500");
 
         ExerciseService.updateExercise(exo);
 
@@ -248,12 +252,12 @@ public class ExerciseConsole {
             sc.nextLine();
             choix--;
             if (choix >= 0 && choix < sessions.size()) {
-                SessionService.addOrUpdateExToSession(
-                        sessions.get(choix).getIdS(),
-                        exo.getId(),
-                        (User) user
-                );
-                System.out.println("L'exercice " + exo.getName() + " a été ajouté à la " + sessions.get(choix).getName());
+                try {
+                    SessionService.addOrUpdateExToSession(sessions.get(choix).getIdS(), exo.getId());
+                    System.out.println("L'exercice " + exo.getName() + " a été ajouté à la " + sessions.get(choix).getName());
+                } catch (NonUniqueObjectException e) {
+                    System.out.println("L'exercice est déjà présent dans la séance choisie.");
+                }
             } else System.out.println("Veuillez saisir un nombre entre 1 et " + sessions.size());
         }
         System.out.println("Appuyez sur Entrée pour continuer...");
