@@ -127,7 +127,7 @@
                     $('#affSeance').hide();
                     $('#table_exercices tbody').remove();
                     $.each(response, function(key, value) {
-                        $('<tr>').append(
+                        $('<tr class=\"success\">').append(
                                 $('<td>').text(value.name),
                                 $('<td>').text(value.explanation),
                                 $('<td>').text(value.dureeExo),

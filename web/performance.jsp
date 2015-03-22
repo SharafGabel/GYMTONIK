@@ -49,8 +49,8 @@
     </select>
 
     <table id="affExo" class="table table-condensed">
+        <tbody>
         <tr>
-            <thead>
             <th>Nom exercice</th>
             <th>Niveau</th>
             <th>Pourcentage Duree Effectué</th>
@@ -58,9 +58,8 @@
             <th>Temps de sommeil</th>
             <th>Date exercice Effectué</th>
             <th>Action</th>
-            <thead>
-
         </tr>
+        </tbody>
     </table>
 
 

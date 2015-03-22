@@ -195,16 +195,15 @@
     </table>
 
     <table id="table_exercices" class="table table-condensed">
+        <tbody>
         <tr>
-            <thead>
             <th>Nom de exercice</th>
             <th>Description exercice</th>
             <th>Duree de l'exercice</th>
             <th>Niveau de l'exercice</th>
             <th>Nombre de répetition</th>
-            <thead>
-
         </tr>
+        </tbody>
     </table>
 
 
