@@ -6,6 +6,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,8 +44,9 @@ public class ExerciseService {
                 length=1;
             Exercise exercise = new Exercise(user,length,nbRep,name,description,niveau);
             exercise.setBodyParts(aMuscles);
-            session.save(exercise);
+            Serializable idEx = session.save(exercise);
             tx.commit();
+            exercise.setId(Integer.parseInt(idEx.toString()));
             return exercise;
         }catch (Exception e) {
             if (tx != null)
@@ -71,8 +73,9 @@ public class ExerciseService {
                 length=1;
             Exercise exercise = new Exercise(user,length,nbRep,name,description,niveau);
             exercise.setBodyParts(aMuscles);
-            session.save(exercise);
+            Serializable idEx = session.save(exercise);
             tx.commit();
+            exercise.setId(Integer.parseInt(idEx.toString()));
             return exercise;
         }catch (Exception e) {
             if (tx != null)
@@ -85,26 +88,6 @@ public class ExerciseService {
         }
     }
 
-    public static boolean addExerciseToSession(ATraining exercise,SessionUser sessionUser) {
-        Session session = getSession();
-        Transaction tx = null;
-
-        try {
-            tx = session.beginTransaction();
-            ExerciceSession exerciceSession = new ExerciceSession(sessionUser,exercise);
-            session.save(exerciceSession);
-            tx.commit();
-            return true;
-        } catch (Exception e) {
-            if (tx != null)
-                tx.rollback();
-            e.printStackTrace();
-            return false;
-        }finally {
-            session.close();
-        }
-
-    }
 //endregion
 
     //region update
