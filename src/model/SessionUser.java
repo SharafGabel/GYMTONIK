@@ -43,7 +43,6 @@ public class SessionUser implements Serializable {
     //region Constructor
 
     public SessionUser() {
-        int a=5;
         this.dateProgram = new Date();
         exerciceSessions = new ArrayList<ExerciceSession>();
 
