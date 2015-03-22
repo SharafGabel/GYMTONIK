@@ -62,9 +62,9 @@ public class ExerciseServlet extends HttpServlet {
                         && description != null && !description.trim().isEmpty()
                          )
                 {
-                    SessionUser sessionUsers = SessionService.getSessionById(Integer.parseInt(sessionUserId));
+                    SessionUser sessionUser = SessionService.getSessionById(Integer.parseInt(sessionUserId));
                     Exercise exercise = ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length), Integer.parseInt(nbRepet),Integer.parseInt(niveau),select);
-                    ExerciseService.addExerciseToSession(exercise,sessionUsers);
+                    SessionService.addOrUpdateExToSession(sessionUser, exercise);
                 }
                     if(Integer.parseInt(niveau)==1){
                         ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length)*2,Integer.parseInt(nbRepet)*2, 2,select);

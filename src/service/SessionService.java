@@ -1,9 +1,6 @@
 package service;
 
-import model.ExerciceSession;
-import model.Exercise;
-import model.SessionUser;
-import model.User;
+import model.*;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
@@ -106,6 +103,10 @@ public class SessionService {
             session.close();
         }
 
+    }
+
+    public static boolean addOrUpdateExToSession(SessionUser sessionUser,  ATraining exo) {
+        return addOrUpdateExToSession(sessionUser.getIdS(), exo.getId());
     }
 
     public static boolean deleteSession(SessionUser sessionUser){
