@@ -41,7 +41,7 @@ public class SessionServlet extends HttpServlet {
                         nbExo = exerciseList.size();
 
                     for (int i = 0; i < nbExo; i++) {
-                        ExerciseService.addExerciseToSession(exerciseList.get(i), sessionUser);
+                        SessionService.addOrUpdateExToSession(sessionUser,exerciseList.get(i));
                     }
                     out.println("<h1>"+sessionUser.getName()+" générée avec "+nbExo+" exercices</h1>");
                     request.getRequestDispatcher("seance.jsp").forward(request, response);
