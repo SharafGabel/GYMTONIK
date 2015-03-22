@@ -203,7 +203,10 @@ public class ExerciseService {
         List<Exercise> exercises;
         try {
             tx = session.beginTransaction();
-            Query query = session.createQuery("Select e from Exercise e join e.bodyParts b where e.niveau=:niveaux and b.id = "+muscles.get(0).getId());
+            //Query query = session.createQuery("Select e from Exercise e join e.bodyParts b where e.niveau=:niveaux and b.id = "+muscles.get(0).getId());
+            Query query = session.createQuery("Select e from Exercise e join e.bodyParts b where e.niveau=:niveaux and b.name in (:tags) group by e having count(b)=:tag_count");
+            query.setParameterList("tags",muscles.toString());
+            query.setParameter("tag_count",muscles.size());
             query.setParameter("niveaux",niveau);
             //query.setParameterList("muscle",AMuscle.toStringFromList(muscles));
             exercises = query.list();

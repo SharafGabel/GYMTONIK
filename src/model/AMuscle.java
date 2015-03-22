@@ -62,12 +62,29 @@ public abstract class AMuscle implements Serializable{
     }
     //endregion
 
-    public static int []toStringFromList(List<AMuscle> muscles) {
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    public static int []toIntFromList(List<AMuscle> muscles) {
         int[] str=new int[muscles.size()];
         for(int i=0;i<muscles.size();i++)
         {
             str[i]=muscles.get(i).getId();
         }
+        System.out.println(str);
+        return  str;
+    }
+
+    public static String []toStringFromList(List<AMuscle> muscles) {
+        String[] str=new String[muscles.size()];
+        for(int i=0;i<muscles.size();i++)
+        {
+            str[i]=muscles.get(i).getName();
+        }
+        System.out.println(str);
         return  str;
     }
 }
