@@ -64,6 +64,9 @@ public class SessionServlet extends HttpServlet {
             this.updateSession(sessionUser);
             this.getServletContext().getRequestDispatcher("/seance.jsp").forward( request, response );//redirection
         }
+        else if(action.equals("createSession")){
+            this.getServletContext().getRequestDispatcher("/createSession.jsp").forward( request, response );//redirection
+        }
         else {
             try {
                 out.println("<html>");

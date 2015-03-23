@@ -32,7 +32,7 @@ public class ExerciseService {
     }
 
     //region create,add
-    public static Exercise createExercise(AUser user, String description, String name, int length,int nbRep,int niveau, List<AMuscle> aMuscles){
+    public static ATraining createExercise(AUser user, String description, String name, int length,int nbRep,int niveau, List<AMuscle> aMuscles){
         Session session = getSession();
         Transaction tx = null;
 
@@ -42,7 +42,7 @@ public class ExerciseService {
                 nbRep=5;
             if(length==0)
                 length=1;
-            Exercise exercise = new Exercise(user,length,nbRep,name,description,niveau);
+            ATraining exercise = new Exercise(user,length,nbRep,name,description,niveau);
             exercise.setBodyParts(aMuscles);
             Serializable idEx = session.save(exercise);
             tx.commit();
@@ -59,7 +59,7 @@ public class ExerciseService {
         }
     }
 
-    public static Exercise createExercise(AUser user, String description, String name, int length,int nbRep,int niveau){
+    public static ATraining createExercise(AUser user, String description, String name, int length,int nbRep,int niveau){
         Session session = getSession();
         Transaction tx = null;
 
@@ -91,10 +91,10 @@ public class ExerciseService {
 //endregion
 
     //region update
-    public static List<Exercise> getExercisesWithDifferentLevelFromExercise(Exercise exercise)
+    public static List<ATraining> getExercisesWithDifferentLevelFromExercise(ATraining exercise)
     {
         Session session = getSession();
-        List<Exercise> exercises = null;
+        List<ATraining> exercises = null;
 
         try {
             Transaction tx = session.getTransaction();
@@ -120,11 +120,11 @@ public class ExerciseService {
 
         try{
             tx = session.beginTransaction();
-            Exercise exercise = getExerciseById(idEx);
+            ATraining exercise = getExerciseById(idEx);
 
-            List<Exercise> exerciseList = getExercisesWithDifferentLevelFromExercise(exercise);
+            List<ATraining> exerciseList = getExercisesWithDifferentLevelFromExercise(exercise);
 
-            for(Exercise a:exerciseList) {
+            for(ATraining a:exerciseList) {
 
                 int l=length*a.getNiveau()/exercise.getNiveau();
                 int r=nbRepet*a.getNiveau()/exercise.getNiveau();
@@ -160,7 +160,7 @@ public class ExerciseService {
         }
     }
 
-    public static boolean updateExercise(Exercise exo) {
+    public static boolean updateExercise(ATraining exo) {
         Session session = getSession();
         Transaction tx = null;
 
@@ -182,11 +182,11 @@ public class ExerciseService {
 //endregion
 
     //region exercices à partir de muscles
-    public static List<Exercise> getExercisesFromMuscles(List<AMuscle> muscles,int niveau) {
+    public static List<ATraining> getExercisesFromMuscles(List<AMuscle> muscles,int niveau) {
         Session session = getSession();
         Transaction tx = null;
 
-        List<Exercise> exercises;
+        List<ATraining> exercises;
         try {
             tx = session.beginTransaction();
             String str=" b.id="+muscles.get(0).getId();
@@ -219,10 +219,10 @@ public class ExerciseService {
         }
 
         Session session = getSession();
-        List<Exercise> exercises = getExercisesWithDifferentLevelFromExercise(exercise);
+        List<ATraining> exercises = getExercisesWithDifferentLevelFromExercise(exercise);
         try{
             Transaction tx = session.beginTransaction();
-            for(Exercise e:exercises)
+            for(ATraining e:exercises)
                 session.delete(e);
             tx.commit();
             return true;
@@ -235,11 +235,11 @@ public class ExerciseService {
     }
     //endregion
 
-    public static List<Exercise> getExercises() {
+    public static List<ATraining> getExercises() {
         Session session = getSession();
         Transaction tx = null;
 
-        List<Exercise> exercises;
+        List<ATraining> exercises;
         try {
             tx = session.beginTransaction();
             Query query = session.createQuery("Select e from Exercise e");
@@ -256,11 +256,11 @@ public class ExerciseService {
         }
     }
 
-    public static List<Exercise> getAllExercises() {
+    public static List<ATraining> getAllExercises() {
         return getExercises();
     }
 
-    public static Exercise getExercise(int idEx,int test) {
+    public static ATraining getExercise(int idEx,int test) {
         Session session = getSession();
         Transaction tx = null;
 
@@ -281,7 +281,7 @@ public class ExerciseService {
         }
     }
 
-    public static Exercise getExerciseById(int idEx) {
+    public static ATraining getExerciseById(int idEx) {
         Session session = getSession();
         Transaction tx = null;
 
@@ -302,18 +302,18 @@ public class ExerciseService {
         }
     }
 
-    public static Exercise getExercise(String idEx) {
+    public static ATraining getExercise(String idEx) {
         return getExerciseById(Integer.parseInt(idEx));
     }
 
-    public static List<Exercise> getExercises(SessionUser sessionUser) {
+    public static List<ATraining> getExercises(SessionUser sessionUser) {
         return getExercises(sessionUser.getIdS());
     }
 
 
-    public static List<Exercise> getExercises(int idsessionUser) {
+    public static List<ATraining> getExercises(int idsessionUser) {
         Session session = getSession();
-        List<Exercise> exercises = null;
+        List<ATraining> exercises = null;
 
         try {
             Transaction tx = session.getTransaction();
@@ -330,9 +330,9 @@ public class ExerciseService {
         return exercises;
     }
 
-    public static List<Exercise> getUserExercises(AUser user){
+    public static List<ATraining> getUserExercises(AUser user){
         Session session = getSession();
-        List<Exercise> exercises = null;
+        List<ATraining> exercises = null;
 
         try {
             Transaction tx = session.getTransaction();
@@ -346,9 +346,9 @@ public class ExerciseService {
         return exercises;
     }
 
-    public static List<Exercise> getExercisesByLevel(int level){
+    public static List<ATraining> getExercisesByLevel(int level){
         Session session = getSession();
-        List<Exercise> exercises = null;
+        List<ATraining> exercises = null;
 
         try {
             Transaction tx = session.getTransaction();
