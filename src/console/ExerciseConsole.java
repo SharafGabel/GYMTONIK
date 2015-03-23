@@ -1,9 +1,6 @@
 package console;
 
-import model.AUser;
-import model.Exercise;
-import model.SessionUser;
-import model.User;
+import model.*;
 import org.hibernate.NonUniqueObjectException;
 import service.ExerciseService;
 import service.SessionService;
@@ -16,7 +13,7 @@ public class ExerciseConsole {
     public static void menu(AUser user) {
         CoreConsole.getConnectedHeader(user);
         Scanner sc = new Scanner(System.in);
-        List<Exercise> exos = ExerciseService.getExercises();
+        List<ATraining> exos = ExerciseService.getExercises();
 
         /* choix_exo = 1 dans le cas où l'utilisateur n'aurait aucun exercice
            choix_exo = nb de exercice + 1 sinon
@@ -45,9 +42,9 @@ public class ExerciseConsole {
 
     }
 
-    private static void listExercise(List<Exercise> exos) {
+    private static void listExercise(List<ATraining> exos) {
         int i = 2;
-        for (Exercise exo : exos) {
+        for (ATraining exo : exos) {
             System.out.println(i + " - "
                     + exo.getName() + " : "
                     + exo.getExplanation()
@@ -99,7 +96,7 @@ public class ExerciseConsole {
         }
     }
 
-    private static void displayExercise(AUser user, Exercise exo) {
+    private static void displayExercise(AUser user, ATraining exo) {
         Util.clearConsole();
         System.out.println("Exercice " + exo.getName());
         System.out.println(exo.getExplanation());
@@ -161,7 +158,7 @@ public class ExerciseConsole {
 
     }
 
-    private static void updateExercise(Exercise exo) {
+    private static void updateExercise(ATraining exo) {
         Util.clearConsole();
         Scanner sc = new Scanner(System.in);
 
@@ -212,7 +209,7 @@ public class ExerciseConsole {
         sc.nextLine();
     }
 
-    private static void deleteExercise(AUser user, Exercise exo) {
+    private static void deleteExercise(AUser user, ATraining exo) {
         Util.clearConsole();
         System.out.println("Êtes-vous sûr de vouloir supprimer l'exercice " + exo.getName() + " ? [Oui/Non]");
 
@@ -232,7 +229,7 @@ public class ExerciseConsole {
         }
     }
 
-    private static void addToSession(AUser user, Exercise exo) {
+    private static void addToSession(AUser user, ATraining exo) {
         Util.clearConsole();
         Scanner sc = new Scanner(System.in);
 

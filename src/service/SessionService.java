@@ -89,7 +89,7 @@ public class SessionService {
         try{
             tx = session.beginTransaction();
             SessionUser sessionUser = SessionService.getSessionById(idS);
-            Exercise exercise = ExerciseService.getExerciseById(idEx);
+            ATraining exercise = ExerciseService.getExerciseById(idEx);
             ExerciceSession exerciceSession = new ExerciceSession(sessionUser, exercise);
             session.saveOrUpdate(exerciceSession);
             tx.commit();

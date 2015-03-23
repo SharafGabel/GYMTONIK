@@ -1,8 +1,8 @@
 package controller;
 
 import com.google.gson.Gson;
+import model.ATraining;
 import model.AUser;
-import model.Exercise;
 import service.ExerciseService;
 import util.GsonExclusionStrategy;
 
@@ -23,7 +23,7 @@ public class ChartServlet extends HttpServlet {
 
         int numSeance = Integer.parseInt(request.getParameter("seanceid"));
 
-        List<Exercise> exercises;
+        List<ATraining> exercises;
         exercises = ExerciseService.getExercises(numSeance);
         Gson gson = GsonExclusionStrategy.createGsonFromBuilder(new GsonExclusionStrategy(AUser.class));
         String json = gson.toJson(exercises);

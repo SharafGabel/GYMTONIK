@@ -1,6 +1,6 @@
 package console;
 
-import model.Exercise;
+import model.ATraining;
 import model.SessionUser;
 import model.User;
 import service.ExerciseService;
@@ -64,13 +64,13 @@ public class SessionConsole {
         Scanner sc = new Scanner(System.in);
         System.out.println("\n");
 
-        List<Exercise> exs = ExerciseService.getExercises(session);
+        List<ATraining> exs = ExerciseService.getExercises(session);
 
         System.out.println("Séance " + session.getName() + " du " + session.getDateProgram());
         System.out.println("Exercices :\n");
 
         if (exs.size() > 0) {
-            for (Exercise exo : exs) {
+            for (ATraining exo : exs) {
                 System.out.println(exo.getName() + " : "
                         + exo.getExplanation()
                         + " - Niveau :" + exo.getNiveau()

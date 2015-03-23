@@ -141,7 +141,7 @@ public class HistoriqueService {
         try {
             tx = session.beginTransaction();
             SessionUser sessionUser = SessionService.getSessionById(idS);
-            Exercise exercise = ExerciseService.getExerciseById(idEx);
+            ATraining exercise = ExerciseService.getExerciseById(idEx);
             ExerciceSession exerciceSession = new ExerciceSession(sessionUser,exercise);
             exerciceSession.setTimeSleep(timeSleep);
             exerciceSession.setDureeEffectue(dureeEff);
@@ -181,7 +181,7 @@ public class HistoriqueService {
     }
 
     /*à terminer*/
-    public static boolean updateHistorique(int idS,Exercise exercise,User user) {
+    public static boolean updateHistorique(int idS,ATraining exercise,User user) {
         SessionUser sessionUser = SessionService.getSessionById(idS);
         Session session = getSession();
         Transaction tx = null;

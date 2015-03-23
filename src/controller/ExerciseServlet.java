@@ -55,7 +55,7 @@ public class ExerciseServlet extends HttpServlet {
                         && description != null && !description.trim().isEmpty() && select.size()!=0
                   )
                 {
-                    Exercise exercise = ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length), Integer.parseInt(nbRepet),Integer.parseInt(niveau),select);
+                    ATraining exercise = ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length), Integer.parseInt(nbRepet),Integer.parseInt(niveau),select);
                 }
                 else if (length != null && !length.trim().isEmpty()
                         && nameExercise != null && !nameExercise.trim().isEmpty()
@@ -63,7 +63,7 @@ public class ExerciseServlet extends HttpServlet {
                          )
                 {
                     SessionUser sessionUser = SessionService.getSessionById(Integer.parseInt(sessionUserId));
-                    Exercise exercise = ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length), Integer.parseInt(nbRepet),Integer.parseInt(niveau),select);
+                    ATraining exercise = ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length), Integer.parseInt(nbRepet),Integer.parseInt(niveau),select);
                     SessionService.addOrUpdateExToSession(sessionUser, exercise);
                 }
                     if(Integer.parseInt(niveau)==1){
@@ -136,7 +136,7 @@ public class ExerciseServlet extends HttpServlet {
         return true;
     }
 
-    public static boolean deleteExercise(AUser aUser,Exercise exercise){
+    public static boolean deleteExercise(AUser aUser,ATraining exercise){
         if(exercise == null){
             return false;
         }

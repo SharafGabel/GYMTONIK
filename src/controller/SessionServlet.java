@@ -32,7 +32,7 @@ public class SessionServlet extends HttpServlet {
                 if(select.size()!=0) {
                     int niveau = Integer.parseInt(request.getParameter("niveau"));
                     int nbExo = Integer.parseInt(request.getParameter("nbExo"));
-                    List<Exercise> exerciseList = ExerciseService.getExercisesFromMuscles(select, niveau);
+                    List<ATraining> exerciseList = ExerciseService.getExercisesFromMuscles(select, niveau);
 
                     //Création de la séance
                     SessionUser sessionUser = SessionService.addSessionUser((User) request.getSession().getAttribute("User"));

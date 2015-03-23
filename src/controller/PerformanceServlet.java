@@ -24,7 +24,7 @@ public class PerformanceServlet extends HttpServlet {
         int niveau = Integer.parseInt(request.getParameter("niveau"));
         int idExercise = Integer.parseInt(request.getParameter("idExo"));
 
-        Exercise exercise;
+        ATraining exercise;
         if(result >70 && niveau!=3){
             exercise = ExerciseService.getExercise(idExercise,niveau+1);
             HistoriqueService.updateHistorique(numSeance,exercise,(User)request.getSession().getAttribute("User"));

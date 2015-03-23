@@ -40,7 +40,7 @@ public class HistoriqueServlet extends HttpServlet {
             String idSeance = request.getParameter("sessionUser");
             if(idSeance.equals("none"))
             {
-                List<Exercise> in;
+                List<ATraining> in;
                 in = ExerciseService.getAllExercises();
                 System.out.println(in.toString());
                 String json;
@@ -52,7 +52,7 @@ public class HistoriqueServlet extends HttpServlet {
             else
             {
                 SessionUser sessionUsers = SessionService.getSessionById(Integer.parseInt(idSeance));
-                List<Exercise> in;
+                List<ATraining> in;
                 in = ExerciseService.getExercises(sessionUsers);
                 String json;
                     json = new Gson().toJson(in);
@@ -65,7 +65,7 @@ public class HistoriqueServlet extends HttpServlet {
         else if(paramName.equalsIgnoreCase("sessionUserH"))
         {
             String idSess = request.getParameter("sessionUserH");
-            List<Exercise> objectList= ExerciseService.getExercises(Integer.parseInt(idSess));
+            List<ATraining> objectList= ExerciseService.getExercises(Integer.parseInt(idSess));
             System.out.println("Here : "+objectList.toString());
             Gson gson = GsonExclusionStrategy.createGsonFromBuilder(new GsonExclusionStrategy(AUser.class));
             String json = gson.toJson(objectList);
@@ -88,7 +88,7 @@ public class HistoriqueServlet extends HttpServlet {
         }
         else if (paramName.equalsIgnoreCase("exerciseLevel")) {
             String levelId = request.getParameter("exerciseLevel");
-            List<Exercise> in;
+            List<ATraining> in;
             in = ExerciseService.getExercisesByLevel(Integer.parseInt(levelId));
             String json;
             json = new Gson().toJson(in);
@@ -99,7 +99,7 @@ public class HistoriqueServlet extends HttpServlet {
         else if(paramName.equalsIgnoreCase("sessionUserPerf")){
             String sessionUser = request.getParameter("sessionUserPerf");
             SessionUser sessionUsers = SessionService.getSessionById(Integer.parseInt(sessionUser));
-            List<Exercise> in;
+            List<ATraining> in;
             in = ExerciseService.getExercises(sessionUsers);
             System.out.println(in.toString());
             String json;

@@ -212,7 +212,7 @@ public class ExerciseService {
 //endregion
 
     //region delete
-    public static boolean deleteExercise(AUser user,Exercise exercise){
+    public static boolean deleteExercise(AUser user,ATraining exercise){
         //Car un Utilisateur ne peut supprimer que des exercices qu'il a lui même créé
         if(exercise == null || user.getId()!=exercise.getUser().getId()){
             return false;
