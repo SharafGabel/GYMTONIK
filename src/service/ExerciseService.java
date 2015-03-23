@@ -123,7 +123,6 @@ public class ExerciseService {
             Exercise exercise = getExerciseById(idEx);
 
             List<Exercise> exerciseList = getExercisesWithDifferentLevelFromExercise(exercise);
-            System.out.println("NB exo : "+exerciseList.size());
 
             for(Exercise a:exerciseList) {
 
@@ -144,7 +143,6 @@ public class ExerciseService {
                 }
                 a.setName(nameExo);
                 a.setExplanation(description);
-                System.out.println(aMuscles.toString());
                 a.setBodyParts( new ArrayList<AMuscle>());
                 a.setBodyParts(aMuscles);
                 session.update(a);
@@ -212,6 +210,30 @@ public class ExerciseService {
         }
     }
 //endregion
+
+    //region delete
+    public static boolean deleteExercise(AUser user,Exercise exercise){
+        //Car un Utilisateur ne peut supprimer que des exercices qu'il a lui même créé
+        if(exercise == null || user.getId()!=exercise.getUser().getId()){
+            return false;
+        }
+
+        Session session = getSession();
+        List<Exercise> exercises = getExercisesWithDifferentLevelFromExercise(exercise);
+        try{
+            Transaction tx = session.beginTransaction();
+            for(Exercise e:exercises)
+                session.delete(e);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }finally {
+            session.close();
+        }
+    }
+    //endregion
 
     public static List<Exercise> getExercises() {
         Session session = getSession();
@@ -282,26 +304,6 @@ public class ExerciseService {
 
     public static Exercise getExercise(String idEx) {
         return getExerciseById(Integer.parseInt(idEx));
-    }
-
-    public static boolean deleteExercise(AUser user,Exercise exercise){
-        //Car un Utilisateur ne peut supprimer que des exercices qu'il a lui même créé
-        if(exercise == null || user.getId()!=exercise.getUser().getId()){
-            return false;
-        }
-
-        Session session = getSession();
-        try{
-            Transaction tx = session.beginTransaction();
-            session.delete(exercise);
-            tx.commit();
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }finally {
-            session.close();
-        }
     }
 
     public static List<Exercise> getExercises(SessionUser sessionUser) {
