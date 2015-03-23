@@ -90,7 +90,6 @@ public class ExerciseServlet extends HttpServlet {
                 String idExercice = request.getParameter("idEx");
                 if(idExercice != null && !idExercice.trim().isEmpty()) {
                     deleteExercise(user,ExerciseService.getExercise(idExercice));
-                    request.getRequestDispatcher("exercise.jsp").forward(request, response);
                     out.println("<h1>Exercice supprimé</h1>");
                 }
             }
@@ -114,17 +113,14 @@ public class ExerciseServlet extends HttpServlet {
                 )
                 {
                         if (updateExercise(Integer.parseInt(idExercice),nameExercise,Integer.parseInt(length),Integer.parseInt(nbRepet),description,select)) {
-                            request.getRequestDispatcher("exercise.jsp").forward(request, response);
                             out.println("Exercice mis à jour");
                         }
                     else {
-                            request.getRequestDispatcher("exercise.jsp").forward(request, response);
                             out.println("Mise à jour échouée");
                     }
 
                 }
                 else{
-                    request.getRequestDispatcher("exercise.jsp").forward(request, response);
                     out.println("Mise à jour échouée");
                 }
             }
