@@ -100,7 +100,9 @@ public class ExerciseService {
             Transaction tx = session.getTransaction();
             tx.begin();
             //TODO : lorsque le nom est composé de plus d'un mot, il y a une erreur dans la requête SQL ( We have to find how to fix this problem )
-            Query query = session.createQuery("Select e from Exercise e where e.name="+exercise.getName());
+            Query query = session.createQuery("Select e from Exercise e where e.name=(:exercice) and e.explanation=(:description)");
+            query.setParameter("exercice",exercise.getName());
+            query.setParameter("description",exercise.getExplanation());
             exercises = query.list();
             tx.commit();
         } catch (Exception e) {
@@ -118,15 +120,17 @@ public class ExerciseService {
 
         try{
             tx = session.beginTransaction();
-            Exercise exercise = (Exercise)session.get(Exercise.class, idEx);
+            Exercise exercise = getExerciseById(idEx);
 
             List<Exercise> exerciseList = getExercisesWithDifferentLevelFromExercise(exercise);
+            System.out.println("NB exo : "+exerciseList.size());
+
             for(Exercise a:exerciseList) {
 
                 int l=length*a.getNiveau()/exercise.getNiveau();
                 int r=nbRepet*a.getNiveau()/exercise.getNiveau();
 
-                if(exercise.getNiveau()==a.getNiveau()){
+                if(exercise.getNiveau()== a.getNiveau()){
                     a.setDureeExo(length);
                     a.setNbRepetition(nbRepet);
                 }
@@ -140,6 +144,8 @@ public class ExerciseService {
                 }
                 a.setName(nameExo);
                 a.setExplanation(description);
+                System.out.println(aMuscles.toString());
+                a.setBodyParts( new ArrayList<AMuscle>());
                 a.setBodyParts(aMuscles);
                 session.update(a);
             }
@@ -177,7 +183,7 @@ public class ExerciseService {
     }
 //endregion
 
-//region exercices à partir de muscles
+    //region exercices à partir de muscles
     public static List<Exercise> getExercisesFromMuscles(List<AMuscle> muscles,int niveau) {
         Session session = getSession();
         Transaction tx = null;
