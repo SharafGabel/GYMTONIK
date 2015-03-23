@@ -1,6 +1,6 @@
 package console;
 
-import model.Exercise;
+import model.ATraining;
 import model.SessionUser;
 import model.User;
 import service.ExerciseService;
@@ -55,30 +55,35 @@ public class SessionConsole {
         Util.clearConsole();
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Création d'une Séance\n");
-        System.out.println("Combien de temps avez-vous dormi ? (en heures)");
-        int sommeil = sc.nextInt();
+        System.out.println("Séance créée\n");
 
-        SessionService.addSession(user, String.valueOf(sommeil));
+        SessionService.addSession(user);
     }
 
     private static void displaySession(SessionUser session) {
         Scanner sc = new Scanner(System.in);
         System.out.println("\n");
 
-        List<Exercise> exs = ExerciseService.getExercises(session);
+        List<ATraining> exs = ExerciseService.getExercises(session);
 
         System.out.println("Séance " + session.getName() + " du " + session.getDateProgram());
+        System.out.println("Exercices :\n");
 
-        for (Exercise exo : exs) {
-            System.out.println(exo.getName() + " : "
-                    + exo.getExplanation()
-                    + " - Niveau :" + exo.getNiveau()
-                    + " (" + exo.getLength() + " min)");
-        }
+        if (exs.size() > 0) {
+            for (ATraining exo : exs) {
+                System.out.println(exo.getName() + " : "
+                        + exo.getExplanation()
+                        + " - Niveau :" + exo.getNiveau()
+                        + " (" + exo.getDureeExo() + " min)"
+                        + " (" + exo.getNbRepetition() + " répétitions)");
+            }
+        } else System.out.println("Il n'y a aucun exercice pour cette séance");
 
-        System.out.println("Cliquez sur une touche pour continuer...");
+        System.out.println("\nPour ajouter des exercices à cette séances, allez dans le menu Exercice\n");
+
+        System.out.println("Appuyez sur la touche Entrée pour continuer...");
         sc.nextLine();
+
 
     }
 }

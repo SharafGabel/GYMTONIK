@@ -38,33 +38,27 @@ public class UserTest {
 
     @Test
     public void testGetUsername(){
-        assertEquals("kuga",user.getUsername());
+        assertEquals("Yoshi",user.getUsername());
     }
 
     @Test
     public void testGetEmail(){
-        assertEquals("kuga@gmail.com",user.getEmail());
+        assertEquals("yoshi@gmail.com",user.getEmail());
     }
 
     @Test
     public void testValidatePassword(){
         assertFalse(user.validatePassword("wrongpass"));
-        assertTrue(user.validatePassword("kuga"));
+        assertTrue(user.validatePassword("yoshi"));
     }
     
     @Test 
     public void testRegisterUser(){
         //assertTrue(RegisterService.register(user));
+        //Attention : avant chaque test modifier les champs de l'user (car il peut etre déja présent dans la base)
         assertTrue(RegisterServlet.register(userNoDb.getUsername(),userNoDb.getEmail(),userNoDb.getPassword(),userNoDb.getEmail(),"175","50"));
     }
     
-    @Test
-    public void testLoggedUser(){
-
-       assertTrue(LoginServlet.login(user.getUsername(),"kuga"));
-        //RegisterService.register(user);
-        //assertTrue(LoginService.authenticate(user.getUsername(),user.getPassword()));
-    }
 
     @Test
     public void testUserExist(){

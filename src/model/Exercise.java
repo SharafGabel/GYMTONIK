@@ -14,9 +14,9 @@ public class Exercise extends ATraining implements Serializable {
     //region Constructor
     public Exercise()
     {}
-    public Exercise(AUser user,int length, String name, String explanation,int niveau)
+    public Exercise(AUser user,int duree,int nbRepet, String name, String explanation,int niveau)
     {
-        super(user,length, name, explanation,niveau);
+        super(user,duree,nbRepet, name, explanation,niveau);
     }
     //endregion
 

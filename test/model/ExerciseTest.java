@@ -48,8 +48,9 @@ public class ExerciseTest {
         Session session = getSession();
         user = (User)session.get(User.class,2);
         sessionUser= (SessionUser)session.get(SessionUser.class,2);
-        exercise = new Exercise(user,50,"travail abdomen","travail les abdominaux",1);
-        exerciseRecup = (Exercise)session.get(Exercise.class,4);
+        exercise = new Exercise(user,50,7,"travail abdomen","travail les abdominaux",1);
+        exercise.addBodyPart((AMuscle)session.get(Muscle.class,4));
+        exerciseRecup = (Exercise)session.get(Exercise.class,7);
         session.close();
     }
 
@@ -60,22 +61,27 @@ public class ExerciseTest {
 
     @Test
     public void testAddExercise(){
-        SessionUser sessionUsers = SessionService.getSessionById(sessionUser.getIdS());
-        assertTrue(ExerciseService.addExercise(user, sessionUsers, "50", exercise.getName(), exercise.getExplanation(),exercise.getNiveau()));
-
+        //SessionUser sessionUsers = SessionService.getSessionById(sessionUser.getIdS());
+       // assertTrue(ExerciseService.addExerciseWithMuscle(user, sessionUsers, 50,7, exercise.getName(), exercise.getExplanation(),exercise.getNiveau(),exercise.getBodyParts()));
+        //Exercise exercise = ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length), Integer.parseInt(nbRepet),Integer.parseInt(niveau),select);
+        assertEquals(exercise,ExerciseService.createExercise(user,exercise.getExplanation(),exercise.getName(),exercise.getDureeExo(),exercise.getNbRepetition(),exercise.getNiveau()));
+        //comment tester le retour d'un arraylist
     }
 
     @Test
     public void testDeleteExercise(){
+
         assertTrue(ExerciseService.deleteExercise(user,exerciseRecup));
     }
 
     @Test
     public void testUpdateExercise(){
-
+        /*
         exerciseRecup.setExplanation("travail les abdominaux et les pectoraux ");
-        exerciseRecup.setLength(40);
+        exerciseRecup.setDureeExo(40);
+        exerciseRecup.setNbRepetition(5);
         exerciseRecup.setName("exercise  abdominaux intensif");
         assertTrue(ExerciseService.updateExercise(user,exerciseRecup));
+        */
     }
 }

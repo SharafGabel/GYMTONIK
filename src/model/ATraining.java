@@ -1,11 +1,13 @@
 package model;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.IndexColumn;
+import org.hibernate.annotations.*;
+import util.GsonExclude;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,7 +15,8 @@ import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class ATraining {
+public abstract class ATraining implements Serializable {
+
     //region Property
     @Id
     @GeneratedValue(generator="idGen")
@@ -21,8 +24,11 @@ public abstract class ATraining {
     @Column(name = "idEx", unique = true, nullable = false)
     private int id;
     
-    @Column(name="length",nullable = false)
-    private int length;
+    @Column(name="dureeExo",nullable = false)
+    private int dureeExo;
+
+    @Column(name="nbRepetition",nullable = false)
+    private int nbRepetition;
 
     @Column(name="name",nullable = false)
     private String name;
@@ -30,15 +36,19 @@ public abstract class ATraining {
     @Column(name="explanation",nullable = false)
     private String explanation;
 
-    @ManyToMany(fetch = FetchType.LAZY,mappedBy = "trainings")
-    private List<SessionUser> sessionUser;
-
     @Column(name="niveau",nullable=false)
     private int niveau;
 
-    @OneToMany(cascade={CascadeType.ALL}, mappedBy = "id")
+    @GsonExclude
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "ExerciceMuscle", joinColumns = @JoinColumn(name = "idEx"), inverseJoinColumns = @JoinColumn(name = "id"))
     private List<AMuscle> bodyParts;
 
+    @OneToMany(cascade={CascadeType.ALL})
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<ExerciceSession> exerciceSessions;
+
+    @GsonExclude
     @ManyToOne
     @JoinColumn(name="userId",nullable=false)
     private AUser user;
@@ -46,16 +56,18 @@ public abstract class ATraining {
 
     //region Constructor
     public ATraining()
-    {}
+    {
+        this.bodyParts = new ArrayList<AMuscle>();
+    }
 
-    public ATraining(AUser user,int length, String name, String explanation,int niveau) {
-        this.length = length;
+    public ATraining(AUser user,int dureeExo,int nbRepetition, String name, String explanation,int niveau) {
+        this.dureeExo = dureeExo;
         this.explanation = explanation;
         this.name = name;
         this.bodyParts = new ArrayList<AMuscle>();
         this.user = user;
-        this.sessionUser = new ArrayList<SessionUser>();
         this.niveau = niveau;
+        this.nbRepetition = nbRepetition;
     }
     //endregion
 
@@ -72,13 +84,21 @@ public abstract class ATraining {
     public int getId() {
         return id;
     }
-    
-    public int getLength() {
-        return this.length;
+
+    public int getDureeExo() {
+        return dureeExo;
     }
-    
-    public void setLength(int length) {
-        this.length = length;
+
+    public void setDureeExo(int dureeExo) {
+        this.dureeExo = dureeExo;
+    }
+
+    public int getNbRepetition() {
+        return nbRepetition;
+    }
+
+    public void setNbRepetition(int nbRepetition) {
+        this.nbRepetition = nbRepetition;
     }
 
     public String getName() {
@@ -97,40 +117,18 @@ public abstract class ATraining {
         this.explanation = explanation;
     }
 
-    public List<AMuscle> getBodyPart() {
-        return this.bodyParts;
-    }
-
-    public void setBodyPart(List<AMuscle> bodyParts) {
-        this.bodyParts = bodyParts;
-    }
-
-    public List<SessionUser> getSessionUser() {
-        return sessionUser;
-    }
-
-    public void setSessionUser(List<SessionUser> sessionUser) {
-        this.sessionUser = sessionUser;
-    }
-
-    public boolean addSession(SessionUser sessionUser1)
-    {
-        if(!sessionUser.contains(sessionUser1)) {
-            this.sessionUser.add(sessionUser1);
-            return true;
-        }
-        return false;
-    }
-
     public List<AMuscle> getBodyParts() {
         return bodyParts;
     }
 
     public void setBodyParts(List<AMuscle> bodyParts) {
+        for(AMuscle aMuscle:bodyParts)
+            aMuscle.addExercice(this);
         this.bodyParts = bodyParts;
     }
 
     public void addBodyPart(AMuscle bodyPart) {
+        bodyPart.addExercice(this);
         this.bodyParts.add(bodyPart);
     }
 
@@ -142,9 +140,17 @@ public abstract class ATraining {
         this.niveau = niveau;
     }
 
-    //endregion
+    public List<ExerciceSession> getExerciceSessions() {
+        return exerciceSessions;
+    }
 
-    //region equals
+    public void setExerciceSessions(List<ExerciceSession> exerciceSessions) {
+        this.exerciceSessions = exerciceSessions;
+    }
+
+
+
+//endregion
 
     @Override
     public boolean equals(Object o) {
@@ -153,12 +159,15 @@ public abstract class ATraining {
 
         ATraining aTraining = (ATraining) o;
 
+        if (dureeExo != aTraining.dureeExo) return false;
         if (id != aTraining.id) return false;
-        if (length != aTraining.length) return false;
-        if (!bodyParts.equals(aTraining.bodyParts)) return false;
-        if (!explanation.equals(aTraining.explanation)) return false;
-        if (!name.equals(aTraining.name)) return false;
-        if (!user.equals(aTraining.user)) return false;
+        if (nbRepetition != aTraining.nbRepetition) return false;
+        if (niveau != aTraining.niveau) return false;
+        if (bodyParts != null ? !bodyParts.equals(aTraining.bodyParts) : aTraining.bodyParts != null) return false;
+        if (explanation != null ? !explanation.equals(aTraining.explanation) : aTraining.explanation != null)
+            return false;
+        if (name != null ? !name.equals(aTraining.name) : aTraining.name != null) return false;
+        if (user != null ? !user.equals(aTraining.user) : aTraining.user != null) return false;
 
         return true;
     }
@@ -166,23 +175,26 @@ public abstract class ATraining {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + length;
-        result = 31 * result + name.hashCode();
-        result = 31 * result + explanation.hashCode();
-        result = 31 * result + bodyParts.hashCode();
-        result = 31 * result + user.hashCode();
+        result = 31 * result + dureeExo;
+        result = 31 * result + nbRepetition;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (explanation != null ? explanation.hashCode() : 0);
+        result = 31 * result + niveau;
+        result = 31 * result + (bodyParts != null ? bodyParts.hashCode() : 0);
+        result = 31 * result + (user != null ? user.hashCode() : 0);
         return result;
     }
 
-    //endregion
     @Override
     public String toString() {
         return "ATraining{" +
                 "id=" + id +
-                ", length=" + length +
+                ", dureeExo=" + dureeExo +
+                ", nbRepetition=" + nbRepetition +
                 ", name='" + name + '\'' +
                 ", explanation='" + explanation + '\'' +
-                //", bodyParts=" + bodyParts +
+                ", niveau=" + niveau +
+                ", user=" + user +
                 '}';
     }
 }

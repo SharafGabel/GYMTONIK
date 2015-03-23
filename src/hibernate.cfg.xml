@@ -14,9 +14,9 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
         <mapping package="model"/>
         <mapping class="model.User"/>
-        <mapping class="model.Exercise"/>
         <mapping class="model.Muscle"/>
-        <mapping class="model.Performance"/>
         <mapping class="model.SessionUser"/>
+        <mapping class="model.Exercise"/>
+        <mapping class="model.ExerciceSession"/>
     </session-factory>
 </hibernate-configuration>
