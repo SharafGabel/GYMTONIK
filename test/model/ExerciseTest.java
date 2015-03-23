@@ -61,9 +61,11 @@ public class ExerciseTest {
 
     @Test
     public void testAddExercise(){
-        SessionUser sessionUsers = SessionService.getSessionById(sessionUser.getIdS());
-        //assertTrue(ExerciseService.addExerciseWithMuscle(user, sessionUsers, 50,7, exercise.getName(), exercise.getExplanation(),exercise.getNiveau(),exercise.getBodyParts()));
-
+        //SessionUser sessionUsers = SessionService.getSessionById(sessionUser.getIdS());
+       // assertTrue(ExerciseService.addExerciseWithMuscle(user, sessionUsers, 50,7, exercise.getName(), exercise.getExplanation(),exercise.getNiveau(),exercise.getBodyParts()));
+        //Exercise exercise = ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length), Integer.parseInt(nbRepet),Integer.parseInt(niveau),select);
+        assertEquals(exercise,ExerciseService.createExercise(user,exercise.getExplanation(),exercise.getName(),exercise.getDureeExo(),exercise.getNbRepetition(),exercise.getNiveau()));
+        //comment tester le retour d'un arraylist
     }
 
     @Test

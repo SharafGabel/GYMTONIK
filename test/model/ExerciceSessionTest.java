@@ -21,10 +21,10 @@ public class ExerciceSessionTest {
     public void setUp() throws Exception {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
-        exerciceSession = (ExerciceSession)session.get(ExerciceSession.class,2);
+        exerciceSession = (ExerciceSession)session.get(ExerciceSession.class,8);
         exerciceSessionFaible =(ExerciceSession)session.get(ExerciceSession.class,4);
         exercise = (Exercise)session.get(Exercise.class,4);
-        sessionUser = (SessionUser)session.get(SessionUser.class,4);
+        sessionUser = (SessionUser)session.get(SessionUser.class,17);
         user = (User)session.get(User.class,2);
         exerciceSessionNoDb = new ExerciceSession(sessionUser,exercise);
 

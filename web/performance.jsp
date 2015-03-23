@@ -13,7 +13,8 @@
 <%@ include file="header.jsp" %>
 
 <div class="page-container" id="exerciseDiv">
-    <form id="formSeance" class="form-horizontal" name="formSeance" method="get" action="PerformanceServlet">
+    <!--
+    <form id="formSeance" class="form-horizontal" name="formSeance" method="get" action="PerformanceServlet">-->
         Veuillez selectionner votre séance :
         <select name="SessionUserForChart" id="SessionUserForChart">
             <%
@@ -28,9 +29,9 @@
             <option>Selectionner un exercice</option>
         </select>
         <br>
-        <button class="btn btn-small btn-warning" name="submit_choice" value="user_performance" type="submit" >Voir mon evolution</button>
+        <button class="btn btn-small btn-warning" name="submit_choice" id="user_performance" value="user_performance" type="submit" >Voir mon evolution</button>
         <button class="btn btn-small btn-warning" name="submit_choice" value="compare_performance" type="submit">comparer mes performances avec les autres</button>
-    </form> <!-- todo:j'obtiens le fichier json , mais je n'arrive pas a le passer au script js juste au-dessus(extraire les resultats du json) -->
+   <!-- </form>--> <!-- todo:j'obtiens le fichier json , mais je n'arrive pas a le passer au script js juste au-dessus(extraire les resultats du json) -->
 
     <div  class="page-container" id="container">
         <button id="button">Set new data</button>
@@ -181,13 +182,42 @@
         });
 
 
+        $('#user_performance').click(function() {
+        function perfData (data) {
+            $('#container').highcharts({
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: 'Average Visitors'
+                },
+                xAxis: {
+                    type: 'datetime',
+                    labels: {
+                        format:'{value:%Y-%m-%d}',
+                        rotation:45,
+                        align:'right'
+                    },
+                    title: {
+                        text: 'Date'
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: 'Ration'
+                    }
+                },
+                series: data,
+            });
+        }
         $.ajax({
             type:"GET",
-            // url:'PerformanceServlet?submit_choice='+document.getElementsByName("submit_choice").value,//Servlet
-            url:'PerformanceServlet',
+            url:'PerformanceServlet?submit_choice='+ this.val(),//Servlet
+            //url:'PerformanceServlet',
             dataType : 'json',
             //data: {submit_choice: 'idTest'},
             success:function(data){
+                perfData(data);
 
                 browsers = [],
 
@@ -200,6 +230,7 @@
             error:function(e){
                 alert(e);
             }
+        });
         });
     });
 

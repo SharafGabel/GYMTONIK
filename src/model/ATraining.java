@@ -148,6 +148,8 @@ public abstract class ATraining implements Serializable {
         this.exerciceSessions = exerciceSessions;
     }
 
+
+
 //endregion
 
     @Override
