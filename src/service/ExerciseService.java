@@ -46,7 +46,7 @@ public class ExerciseService {
             exercise.setBodyParts(aMuscles);
             Serializable idEx = session.save(exercise);
             tx.commit();
-            exercise.setId(Integer.parseInt(idEx.toString()));
+            exercise = (Exercise) session.get(Exercise.class, idEx);
             return exercise;
         }catch (Exception e) {
             if (tx != null)
@@ -75,7 +75,7 @@ public class ExerciseService {
             exercise.setBodyParts(aMuscles);
             Serializable idEx = session.save(exercise);
             tx.commit();
-            exercise.setId(Integer.parseInt(idEx.toString()));
+            exercise = (Exercise) session.get(Exercise.class, idEx);
             return exercise;
         }catch (Exception e) {
             if (tx != null)

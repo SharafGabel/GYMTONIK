@@ -85,10 +85,6 @@ public abstract class ATraining implements Serializable {
         return id;
     }
 
-    public void setId(int idEx) {
-        id = idEx;
-    }
-
     public int getDureeExo() {
         return dureeExo;
     }
