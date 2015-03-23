@@ -22,8 +22,6 @@
     <form id="formEx" name="formEx" method="post" action="ExerciceServlet">
         <h1>Modifier un exercice</h1>
 
-        <!-- Champs cachés afin d'indiquer au servlet l'action qu'on souhaite réaliser,
-        ici modifier l'exercice d'identifiant idExercice -->
         <input type="hidden" name="action" value="update" />
         <input type="hidden" name="idEx" value="<%= exercise.getId()%>" />
 

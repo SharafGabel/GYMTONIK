@@ -42,12 +42,12 @@ public class ExerciceSession {
     private float ratioDuree;
 
     @GsonExclude
-    @ManyToOne(cascade={CascadeType.ALL})
+    @ManyToOne
     @LazyCollection(LazyCollectionOption.FALSE)
     private SessionUser sessionUser;
 
     @GsonExclude
-    @ManyToOne(cascade={CascadeType.ALL})
+    @ManyToOne
     @LazyCollection(LazyCollectionOption.FALSE)
     private ATraining training;
     //endregion

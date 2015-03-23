@@ -140,7 +140,6 @@ public class ExerciseService {
                 }
                 a.setName(nameExo);
                 a.setExplanation(description);
-                a.setBodyParts(null);
                 a.setBodyParts(aMuscles);
                 session.update(a);
             }

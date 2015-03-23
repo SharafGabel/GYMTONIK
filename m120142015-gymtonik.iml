@@ -28,7 +28,7 @@
         <datasource-mapping>
           <factory-entry name="NewPersistenceUnit" value="9824f67d-c129-4b8a-91be-7aba139aa4e9" />
         </datasource-mapping>
-        <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/META-INF/persistence.xml" />
+        <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/META-INF/persistence.xml" />
       </configuration>
     </facet>
     <facet type="hibernate" name="Hibernate">
@@ -77,8 +77,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="javax.servlet.jsp:javax.servlet.jsp-api:2.3.0" level="project" />
-    <orderEntry type="library" name="javax.jms:javax.jms-api:2.0.1" level="project" />
   </component>
 </module>
 
