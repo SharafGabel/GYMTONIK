@@ -40,7 +40,7 @@ public abstract class ATraining implements Serializable {
     private int niveau;
 
     @GsonExclude
-    @ManyToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "ExerciceMuscle", joinColumns = @JoinColumn(name = "idEx"), inverseJoinColumns = @JoinColumn(name = "id"))
     private List<AMuscle> bodyParts;
 
