@@ -246,6 +246,7 @@ public class ExerciseConsole {
             int i = 1;
             for(SessionUser s : sessions) {
                 System.out.println(i + " - " + s.getName() + " du " + s.getDateProgram());
+                i++;
             }
 
             int choix = sc.nextInt();
