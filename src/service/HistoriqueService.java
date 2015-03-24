@@ -37,7 +37,7 @@ public class HistoriqueService {
         List<SessionUser> seances;
         try {
             tx = session.beginTransaction();
-            Query query = session.createQuery("select distinct s from SessionUser s,ExerciceSession h where h.sessionUser.id=s.idS and h.training!="+exercise.getId()+" and s.user.id="+user.getId());
+            Query query = session.createQuery("select distinct s from SessionUser s,ExerciceSession h where h.sessionUser.idS=s.idS and h.training.id!="+exercise.getId()+" and s.user.id="+user.getId());
             seances = query.list();
             tx.commit();
             return seances;
@@ -78,7 +78,7 @@ public class HistoriqueService {
         List<ExerciceSession> exerciceSessions;
         try {
             tx = session.beginTransaction();
-            Query query = session.createQuery("select distinct h from ExerciceSession h where h.sessionUser.id="+idSessionUser);
+            Query query = session.createQuery("select distinct h from ExerciceSession h where h.sessionUser.idS="+idSessionUser);
             exerciceSessions = query.list();
             tx.commit();
             return exerciceSessions;
@@ -99,7 +99,7 @@ public class HistoriqueService {
         List<Object> historiques;
         try {
             tx = session.beginTransaction();
-            Query query = session.createQuery("select e.id,e.name,e.niveau,h.ratioDuree,h.ratioRepet,h.timeSleep,h.dateProgEffectue from ExerciceSession h,Exercise e where h.training.id=e.id and h.sessionUser.id="+idSeance);
+            Query query = session.createQuery("select e.id,e.name,e.niveau,h.ratioDuree,h.ratioRepet,h.timeSleep,h.dateProgEffectue from ExerciceSession h,Exercise e where h.training.id=e.id and h.sessionUser.idS="+idSeance);
             historiques = query.list();
             System.out.println(historiques.toString());
             return historiques;
@@ -120,7 +120,7 @@ public class HistoriqueService {
         List<ExerciceSession> exerciceSessions;
         try {
             tx = session.beginTransaction();
-            Query query = session.createQuery("select e.name,e.niveau,h.dureeEffectue,h.nbRepetEffectue,h.timeSleep from ExerciceSession h,Exercise e where h.training.id=e.id and h.sessionUser.id="+idSeance);
+            Query query = session.createQuery("select e.name,e.niveau,h.dureeEffectue,h.nbRepetEffectue,h.timeSleep from ExerciceSession h,Exercise e where h.training.id=e.id and h.sessionUser.idS="+idSeance);
             exerciceSessions = query.list();
             System.out.println(exerciceSessions.toString());
             return exerciceSessions;

@@ -35,16 +35,42 @@ public class ExerciseService {
     public static ATraining createExercise(AUser user, String description, String name, int length,int nbRep,int niveau, List<AMuscle> aMuscles){
         Session session = getSession();
         Transaction tx = null;
-
+        ATraining exercice2;
+        ATraining exercice3;
         try{
             tx = session.beginTransaction();
-            if(nbRep==0)
-                nbRep=5;
-            if(length==0)
-                length=1;
+            //Creation du premier exercice
+
             ATraining exercise = new Exercise(user,length,nbRep,name,description,niveau);
             exercise.setBodyParts(aMuscles);
+
+            //Creation du deuxieme et troisieme exercice
+            if(niveau == 1)
+            {
+                exercice2 = new Exercise(user,length*2,nbRep*2,name,description,2);
+                exercice2.setBodyParts(aMuscles);
+
+                exercice3 = new Exercise(user,length*3,nbRep*3,name,description,3);
+                exercice3.setBodyParts(aMuscles);
+            }
+            else if(niveau == 2)
+            {
+                exercice2 = new Exercise(user,length/2,nbRep/2,name,description,1);
+                exercice2.setBodyParts(aMuscles);
+
+                exercice3 = new Exercise(user,length*3/2,nbRep*3/2,name,description,3);
+                exercice3.setBodyParts(aMuscles);
+            }
+            else {
+                exercice2 = new Exercise(user,length/3,nbRep/3,name,description,1);
+                exercice2.setBodyParts(aMuscles);
+
+                exercice3 = new Exercise(user,length*2/3,nbRep*2/3,name,description,2);
+                exercice3.setBodyParts(aMuscles);
+            }
             Serializable idEx = session.save(exercise);
+            session.save(exercice2);
+            session.save(exercice3);
             tx.commit();
             exercise = (Exercise) session.get(Exercise.class, idEx);
             return exercise;
@@ -70,7 +96,6 @@ public class ExerciseService {
         try {
             Transaction tx = session.getTransaction();
             tx.begin();
-            //TODO : lorsque le nom est composé de plus d'un mot, il y a une erreur dans la requête SQL ( We have to find how to fix this problem )
             Query query = session.createQuery("Select e from Exercise e where e.name=(:exercice) and e.explanation=(:description)");
             query.setParameter("exercice",exercise.getName());
             query.setParameter("description",exercise.getExplanation());

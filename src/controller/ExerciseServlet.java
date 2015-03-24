@@ -66,18 +66,6 @@ public class ExerciseServlet extends HttpServlet {
                     ATraining exercise = ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length), Integer.parseInt(nbRepet),Integer.parseInt(niveau),select);
                     SessionService.addOrUpdateExToSession(sessionUser, exercise);
                 }
-                    if(Integer.parseInt(niveau)==1){
-                        ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length)*2,Integer.parseInt(nbRepet)*2, 2,select);
-                        ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length)*3,Integer.parseInt(nbRepet)*3, 3,select);
-                    }
-                    else if(Integer.parseInt(niveau)==2){
-                        ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length)/2,Integer.parseInt(nbRepet)/2, 1,select);
-                        ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length)*3/2,Integer.parseInt(nbRepet)*3/2, 3,select);
-                    }
-                    else if(Integer.parseInt(niveau)==3){
-                        ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length)/3,Integer.parseInt(nbRepet)/3, 1,select);
-                        ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length)*2/3,Integer.parseInt(nbRepet)*2/3, 2,select);
-                    }
                 request.getRequestDispatcher("exercise.jsp").forward(request, response);
                 out.println("<h1>Création de l'exercice réussie</h1>");
             }
