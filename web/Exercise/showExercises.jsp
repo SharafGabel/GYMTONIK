@@ -5,12 +5,10 @@
 <%@ page import="model.AMuscle" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% String title = "Exercises des utilisateurs"; %>
-<%@ include file="Core/header.jsp" %>
-
-<%@ include file="footer.jsp" %>
+<%@ include file="../Core/header.jsp" %>
 <%
     if (session.getAttribute("User") == null) {
-        response.sendRedirect("welcome.jsp");
+        response.sendRedirect("../welcome.jsp");
     }
 
 %>
@@ -19,7 +17,7 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8">
-            <p><a class="btn btn-small btn-warning" href="createExercice.jsp">Créer un Exercice</a></p>
+            <p><a class="btn btn-small btn-warning" href="createExercise.jsp">Créer un Exercice</a></p>
             <table id="affSeance" class="table table-condensed">
                 <thead>
                 <tr>
@@ -96,3 +94,4 @@
     });
 
 </script>
+<%@ include file="../footer.jsp" %>
