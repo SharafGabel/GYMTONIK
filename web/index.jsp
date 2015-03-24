@@ -6,5 +6,5 @@
     }
 %>
 <% String title = "Accueil"; %>
-<%@ include file="header.jsp" %>
+<%@ include file="Core/header.jsp" %>
 <%@ include file="footer.jsp" %>

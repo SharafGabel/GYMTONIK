@@ -11,7 +11,7 @@
     }
 %>
 <% String title = "Mes Exercices"; %>
-<%@ include file="header.jsp" %>
+<%@ include file="Core/header.jsp" %>
 
 <div class="container">
     <div class="row">

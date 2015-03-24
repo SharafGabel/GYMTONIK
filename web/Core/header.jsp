@@ -156,7 +156,7 @@
     <hr />
     <ul class="nav navmenu-nav">
         <li><a href="index.jsp">Accueil</a></li>
-        <li><a href="Session/showSessions.jsp">Séance</a></li>
+        <li><a href="../Session/showSessions.jsp">Séance</a></li>
         <li><a href="seance_done.jsp">Séance effectuée ?</a></li>
         <li><a href="generate_seance.jsp">Générez votre séance</a></li>
         <li><a href="exercise.jsp">Exercice</a></li>

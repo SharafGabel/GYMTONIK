@@ -5,7 +5,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% String title = "Exercice"; %>
-<%@ include file="../header.jsp" %>
+<%@ include file="../Core/header.jsp" %>
 <%
     List<ATraining> trainingList = ExerciseService.getExercises();
 %>

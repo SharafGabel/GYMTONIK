@@ -10,7 +10,7 @@
     }
 %>
 <% String title = "Performances"; %>
-<%@ include file="header.jsp" %>
+<%@ include file="Core/header.jsp" %>
 
 <script type="text/javascript">
     $(document).ready(

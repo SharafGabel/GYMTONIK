@@ -5,7 +5,7 @@
 <%@ page import="service.HistoriqueService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% String title = "Seance Effectuée ?"; %>
-<%@ include file="header.jsp" %>
+<%@ include file="Core/header.jsp" %>
 <html>
 <head>
     <title></title>

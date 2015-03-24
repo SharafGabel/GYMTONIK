@@ -5,7 +5,7 @@
 <%@ page import="model.AMuscle" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% String title = "Exercises des utilisateurs"; %>
-<%@ include file="header.jsp" %>
+<%@ include file="Core/header.jsp" %>
 
 <%@ include file="footer.jsp" %>
 <%

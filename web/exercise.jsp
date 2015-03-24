@@ -8,7 +8,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% String title = "Exercice"; %>
-<%@ include file="header.jsp" %>
+<%@ include file="Core/header.jsp" %>
 <%
     // Si aucune session n'est créée, rediriger vers page de login / inscription
     if (session.getAttribute("User") == null) {

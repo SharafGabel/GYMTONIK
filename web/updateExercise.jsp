@@ -5,7 +5,7 @@
 <%@ page import="model.ATraining" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% String title = "Exercice"; %>
-<%@ include file="header.jsp" %>
+<%@ include file="Core/header.jsp" %>
 
 <%
     String idExercice = request.getParameter("idEx");

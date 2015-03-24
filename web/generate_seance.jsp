@@ -9,7 +9,7 @@
     }
 %>
 <% String title = "Générer une séance"; %>
-<%@ include file="header.jsp" %>
+<%@ include file="Core/header.jsp" %>
 
 <div class="page-container">
     <form id="generateSession" class="form-horizontal" name="generateSession" method="post" action="SessionServlet">

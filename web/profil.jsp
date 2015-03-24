@@ -1,7 +1,7 @@
 <%@ page import="model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% String title = "Profil"; %>
-<%@ include file="header.jsp" %>
+<%@ include file="Core/header.jsp" %>
     <%
         User user = (User)session.getAttribute("User");
     %>
