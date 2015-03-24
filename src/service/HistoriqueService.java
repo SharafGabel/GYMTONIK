@@ -134,7 +134,7 @@ public class HistoriqueService {
         }
     }
 
-    public static boolean addExerciseDone(int idS,int idEx,AUser user,int dureeEff,int nbRepEff,int timeSleep,int nbRepRequis,int dureeRequis) {
+    public static boolean addExerciseDone(int idS, int idEx, int dureeEff, int nbRepEff, int timeSleep, int nbRepRequis, int dureeRequis) {
         Session session = getSession();
         Transaction tx = null;
 
@@ -149,6 +149,33 @@ public class HistoriqueService {
             exerciceSession.setDateProgEffectue(new Date());
             exerciceSession.calculRatioDuree(dureeEff,dureeRequis);
             exerciceSession.calculRatioRepet(nbRepEff,nbRepRequis);
+            session.save(exerciceSession);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+            return false;
+        }finally {
+            session.close();
+        }
+
+    }
+
+    public static boolean addExerciseDone(SessionUser sessionUser, ATraining exercise, int dureeEff, int nbRepEff, int timeSleep) {
+        Session session = getSession();
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+            ExerciceSession exerciceSession = new ExerciceSession(sessionUser,exercise);
+            exerciceSession.setTimeSleep(timeSleep);
+            exerciceSession.setDureeEffectue(dureeEff);
+            exerciceSession.setNbRepetEffectue(nbRepEff);
+            exerciceSession.setDateProgEffectue(new Date());
+            exerciceSession.calculRatioDuree(dureeEff,exercise.getDureeExo());
+            exerciceSession.calculRatioRepet(nbRepEff,exercise.getNbRepetition());
             session.save(exerciceSession);
             tx.commit();
             return true;
@@ -181,7 +208,7 @@ public class HistoriqueService {
     }
 
     /*à terminer*/
-    public static boolean updateHistorique(int idS,ATraining exercise,User user) {
+    public static boolean updateHistorique(int idS, ATraining exercise) {
         SessionUser sessionUser = SessionService.getSessionById(idS);
         Session session = getSession();
         Transaction tx = null;

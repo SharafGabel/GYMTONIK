@@ -27,7 +27,7 @@ public class HistoriqueServlet extends HttpServlet {
         int dureeARealiser = Integer.parseInt(request.getParameter("dureeARealiser"));
         int nbRepetARealiser= Integer.parseInt(request.getParameter("nbRepetARealiser"));
 
-        if(HistoriqueService.addExerciseDone(idS,idEx,user,dureeEff,nbRepet,timeS,nbRepetARealiser,dureeARealiser))
+        if(HistoriqueService.addExerciseDone(idS,idEx, dureeEff,nbRepet,timeS,nbRepetARealiser,dureeARealiser))
             request.getRequestDispatcher("performance.jsp").forward(request, response);
 
     }

@@ -45,15 +45,15 @@ public class ExerciceSessionTest {
         int result = (dureeEff+nbRepetReussi)/2;
         if(result >70 && niveau!=3){
             exerciseTest = ExerciseService.getExercise(idExercise + 1, niveau + 1);//retourne l'exercice du niveau supérieur
-            assertTrue(HistoriqueService.updateHistorique(numSeance, exerciseTest, user));
+            assertTrue(HistoriqueService.updateHistorique(numSeance, exerciseTest));
         }
         else if(result <30 && niveau!=1){
             exerciseTest = ExerciseService.getExercise(idExercise - 1,niveau-1);//retourne l'exercice du niveau inférieur
-            assertTrue(HistoriqueService.updateHistorique(numSeance,exerciseTest,user));
+            assertTrue(HistoriqueService.updateHistorique(numSeance,exerciseTest));
         }
         else if(result<30 && niveau ==1){
             exerciseTest = ExerciseService.getExercise(idExercise ,niveau);//retourne l'exercice du niveau inférieur
-            assertTrue(HistoriqueService.updateHistorique(numSeance,exerciseTest,user));
+            assertTrue(HistoriqueService.updateHistorique(numSeance,exerciseTest));
         }
     }
 

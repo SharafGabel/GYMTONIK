@@ -28,11 +28,11 @@ public class PerformanceServlet extends HttpServlet {
         ATraining exercise;
         if(result >70 && niveau!=3){
             exercise = ExerciseService.getExercise(idExercise,niveau+1);
-            HistoriqueService.updateHistorique(numSeance,exercise,(User)request.getSession().getAttribute("User"));
+            HistoriqueService.updateHistorique(numSeance,exercise);
         }
         else if(result <30 && niveau!=1){
             exercise = ExerciseService.getExercise(idExercise,niveau-1);
-            HistoriqueService.updateHistorique(numSeance,exercise,(User)request.getSession().getAttribute("User"));
+            HistoriqueService.updateHistorique(numSeance,exercise);
         }
         request.getRequestDispatcher("performance.jsp").include(request, response);
         response.getWriter().println("Evaluation effectuée");
