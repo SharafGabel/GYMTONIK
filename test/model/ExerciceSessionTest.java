@@ -21,9 +21,9 @@ public class ExerciceSessionTest {
     public void setUp() throws Exception {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
-        exerciceSession = (ExerciceSession)session.get(ExerciceSession.class,8);
-        exerciceSessionFaible =(ExerciceSession)session.get(ExerciceSession.class,4);
-        exercise = (Exercise)session.get(Exercise.class,4);
+        exerciceSession = (ExerciceSession)session.get(ExerciceSession.class,7);
+//        exerciceSessionFaible =(ExerciceSession)session.get(ExerciceSession.class,4);
+        exercise = (Exercise)session.get(Exercise.class,8);
         sessionUser = (SessionUser)session.get(SessionUser.class,17);
         user = (User)session.get(User.class,2);
         exerciceSessionNoDb = new ExerciceSession(sessionUser,exercise);
@@ -34,11 +34,11 @@ public class ExerciceSessionTest {
     public void testRatioExercise(){
         ATraining exerciseTest;
 
-        int nbRepetReussi = exerciceSessionFaible.getNbRepetEffectue();
-        int dureeEff = exerciceSessionFaible.getDureeEffectue();
+        int nbRepetReussi = exerciceSession.getNbRepetEffectue();
+        int dureeEff = exerciceSession.getDureeEffectue();
         int niveau = exercise.getNiveau();
 
-        int idExercise=4;
+        int idExercise=7;
         Integer numSeance = 2;
 
 

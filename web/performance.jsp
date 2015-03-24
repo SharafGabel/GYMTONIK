@@ -12,6 +12,17 @@
 <% String title = "Performances"; %>
 <%@ include file="header.jsp" %>
 
+<script type="text/javascript">
+    $(document).ready(
+            function()
+            {
+                $.getJSON('localhost:8080/PerformanceServlet?SessionUserForChart=1&exerciseid=6&submit_choice=user_performance', function(data)
+                {
+                    Alert(Data);
+                });
+            });
+</script>
+
 <div class="page-container" id="exerciseDiv">
     <!--
     <form id="formSeance" class="form-horizontal" name="formSeance" method="get" action="PerformanceServlet">-->
@@ -186,7 +197,22 @@
 
         $('#user_performance').click(function() {
         function perfData (data) {
-            $('#container').highcharts({
+           alert(1);
+            alert('porjet'+data[0]);
+            browsers = [],
+
+                    $.each(data,function(i,d){
+                        alert(d.ratioRepet);
+                        alert(data[0].ratioRepet);
+                        browsers.push([d.dateProgEffectue,d.ratioRepet]);
+                    });
+
+            chart.series[0].setData(browsers);
+            alert("browser"+browsers);
+           /* var char;
+            
+            char=$('#container').highcharts({
+                
                 chart: {
                     type: 'line'
                 },
@@ -209,25 +235,23 @@
                         text: 'Ration'
                     }
                 },
-                series: data,
-            });
+                series: [{
+                    type: 'line',
+                    name: 'test'
+                }]
+            });*/
+
+           
         }
         $.ajax({
             type:"GET",
-            url:'PerformanceServlet?submit_choice='+ this.val(),//Servlet
-            //url:'PerformanceServlet',
+            url:'PerformanceServlet?submit_choice='+$(this).attr('value')+'&exerciseid='+$('#exerciseDynamic option:selected').attr('value'),//Servlet
             dataType : 'json',
-            //data: {submit_choice: 'idTest'},
             success:function(data){
+                console.log(data[0]);
+                alert(data[0].nbRepetEffectue);
                 perfData(data);
-
-                browsers = [],
-
-                        $.each(data,function(i,d){
-                            browsers.push([d.dateProgEffectue,d.ratioRepet]);
-                        });
-
-                chart.series[0].setData(browsers);
+               
             },
             error:function(e){
                 alert(e);

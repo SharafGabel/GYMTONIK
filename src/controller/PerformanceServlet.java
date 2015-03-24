@@ -53,7 +53,8 @@ public class PerformanceServlet extends HttpServlet {
                 response.setContentType("application/json");
 
                 response.getWriter().write(jsonString);
-                System.out.println(jsonString);
+                
+                //System.out.println(jsonString);
             }
             else if(choiceFromPerformance.equals("compare_performance")){
 
@@ -65,7 +66,9 @@ public class PerformanceServlet extends HttpServlet {
                 response.setContentType("application/json");
 
                 response.getWriter().write(jsonString);
-                System.out.println(jsonString);
+                
+                
+                //System.out.println(jsonString);
             }
 /*
             List<ExerciceSession> listOfExerciceSession = PerformanceService.recupcalculPerformance(user);
