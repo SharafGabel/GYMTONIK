@@ -9,6 +9,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% String title = "Exercice"; %>
 <%@ include file="header.jsp" %>
+<%
+    // Si aucune session n'est créée, rediriger vers page de login / inscription
+    if (session.getAttribute("User") == null) {
+        response.sendRedirect("welcome.jsp");
+    }
+%>
 <div class="page-container" id="exerciseDiv">
 
     <form id="formEx" class="form-horizontal" name="formEx" method="post" action="ExerciceServlet">
