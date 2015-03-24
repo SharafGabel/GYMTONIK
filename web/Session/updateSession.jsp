@@ -18,28 +18,36 @@
         response.sendRedirect("showSessions.jsp");
     } else {
 %>
-<div class="page-container" id="exerciseDiv">
-
-    <form id="sessionForm" name="formEx" method="post" action="SessionServlet">
-        <h1>Modifier une séance</h1>
-        <h1>Création d'une séance d'entraînement</h1>
-        <label>Nom de la séance</label>
-        <input type="text" class="form-control" id="sessionName" name="sessionName"/><br/>
-        <label>Date de planification</label>
-        <script type="text/javascript">
-            $(function () {
-                $('#datepicker').datepicker({ dateFormat: 'dd-mm-yy' });
-            });
-        </script>
-        <input type='text' id='datepicker' name='datepicker' class="form-control" />
-        <%
-            for(ATraining training:trainingList)
-            {
-        %>
-        <input class="checkbox" type="checkbox" name="checkBoxTraining" value="<%=training.getId()%>"><%=training.getName()%><%=training.getNiveau()%>
-        <%  }%>
-        <input type="submit" class="btn btn-small btn-warning" value="Modifier"/>
-    </form>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <form id="sessionForm" name="sessionForm" method="post" action="SessionServlet">
+                <input type="hidden" name="action" value="updateSessionAction" />
+                <input type="hidden" name="sessionId" value="<%= sessionId %>" />
+                <h1>Modifier une séance</h1>
+                <label>Nom de la séance</label>
+                <input type="text" class="form-control" id="sessionName" name="sessionName" value="<%=sessionUser.getName()%>"/><br/>
+                <label>Date de planification</label>
+                <script type="text/javascript">
+                    $(function () {
+                        $('#datepicker').datepicker({ dateFormat: 'dd-mm-yy' });
+                    });
+                </script>
+                <input type='text' id='datepicker' name='datepicker' class="form-control" value="<%=sessionUser.getName()%>"/>
+                <%
+                    for(ATraining training:trainingList)
+                    {
+                %>
+                <input class="checkbox" type="checkbox" name="checkBoxTraining" value="<%=training.getId()%>"><%=training.getName()%><%=training.getNiveau()%>
+                <%  }%>
+                <input type="submit" class="btn btn-small btn-warning" value="Modifier"/>
+            </form>
+        </div>
+    </div>
 </div>
 <%
     } //else

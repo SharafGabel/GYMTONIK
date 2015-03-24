@@ -28,7 +28,6 @@ public class LoginServlet extends HttpServlet{
                 HttpSession session = request.getSession();
                 session.setAttribute("User",LoginService.getUserByUsername(username));
                 session.setAttribute("username", LoginService.getUserByUsername(username).getUsername());
-                out.println("<h1>Login Successful</h1>");
                 request.getRequestDispatcher("accueil.jsp").include(request, response);
             }
             else {

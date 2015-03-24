@@ -65,8 +65,23 @@ public class SessionServlet extends HttpServlet {
             this.getServletContext().getRequestDispatcher("/Session/showSessions.jsp").forward( request, response );//redirection
         }
         else if(action.equals("updateSession")){
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yy");
             SessionUser sessionUser = SessionService.getSessionById(Integer.parseInt(request.getParameter("sessionId")));
             sessionUser.setName(request.getParameter("sessionName"));
+            Date sessionProgram = new Date();
+            try {
+                sessionProgram = formatter.parse(request.getParameter("datepicker"));
+            } catch(ParseException pe){
+                this.getServletContext().getRequestDispatcher("/createSession.jsp").forward( request, response );//redirection
+            }
+            sessionUser.setDateProgram(sessionProgram);
+            if(request.getParameter("checkBoxTraining") != null) {
+                String[] selectedTrainings = request.getParameterValues("checkBoxTraining");
+                for(String selectedTraining : selectedTrainings) {
+                    SessionService.addOrUpdateExToSession(sessionUser.getIdS(),Integer.parseInt(selectedTraining));
+                }
+            }
+
             this.updateSession(sessionUser);
             this.getServletContext().getRequestDispatcher("/Session/showSessions.jsp").forward( request, response );//redirection
         }
@@ -76,7 +91,6 @@ public class SessionServlet extends HttpServlet {
         else if(action.equals("createSessionAction")){
             SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yy");
             String sessionName = request.getParameter("sessionName");
-            System.out.println(sessionName);
             Date sessionProgram = new Date();
             try {
                 sessionProgram = formatter.parse(request.getParameter("datepicker"));

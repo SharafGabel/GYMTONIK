@@ -9,7 +9,6 @@
 <%
     List<ATraining> trainingList = ExerciseService.getExercises();
 %>
-<-- import for calendar -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -22,14 +21,14 @@
                 <input type="hidden" name="action" value="createSessionAction" />
                 <h1>Création d'une séance d'entraînement</h1>
                 <label>Nom de la séance</label>
-                <input type="text" class="form-control" id="sessionName" name="sessionName"/><br/>
+                <input type="text" class="form-control" id="sessionName" name="sessionName" placeholder="Nom de la séance"/><br/>
                 <label>Date de planification</label>
                 <script type="text/javascript">
                     $(function () {
                         $('#datepicker').datepicker({ dateFormat: 'dd-mm-yy' });
                     });
                 </script>
-                <input type='text' id='datepicker' name='datepicker' class="form-control" />
+                <input type='text' id='datepicker' name='datepicker' class="form-control" placeholder="Date de la session"/>
                 <%
                     for(ATraining training:trainingList)
                     {
