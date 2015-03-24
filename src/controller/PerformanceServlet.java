@@ -64,7 +64,7 @@ public class PerformanceServlet extends HttpServlet {
                 List<ExerciceSession> listPerformance = new ArrayList<ExerciceSession>();
                 Gson gson = GsonExclusionStrategy.createGsonFromBuilder(new GsonExclusionStrategy(SessionUser.class),new GsonExclusionStrategy(ATraining.class));
 
-                listofUserExercise.addAll(avgPerf);
+                //listofUserExercise.addAll(avgPerf);
                 //listPerformance.addAll(listofUserExercise);
                 //listPerformance.addAll(avgPerf);
                 String jsonString = gson.toJson(listofUserExercise);

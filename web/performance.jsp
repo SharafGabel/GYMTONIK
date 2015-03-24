@@ -204,8 +204,8 @@
 
         $('#user_performance').click(function() {
         function perfData (data) {
-           alert(1);
-            alert('porjet'+data[0]);
+           //alert(1);
+            //alert('porjet'+data[0]);
             browsers = [],
 
                     $.each(data,function(i,d){
@@ -256,7 +256,7 @@
             dataType : 'json',
             success:function(data){
                 console.log(data[0]);
-                alert(data[0].nbRepetEffectue);
+                //alert(data[0].nbRepetEffectue);
                 perfData(data);
                
             },
@@ -267,17 +267,23 @@
         });
 
         $('#compare_performance').click(function() {
-            function perfData (data) {
-                alert(1);
-                alert('porjet'+data[0]);
-                alert('other'+data[1]);
+
+            function perfDataCompare (data) {
+                alert("perfdataCompare");
+               // alert(data);
+                //alert(1);
+                //alert('porjet'+data[0]);
+                //alert('other'+data[1]);
                 browsers = [],
 
                         $.each(data,function(i,d){
-                            alert(d.ratioRepet);
-                            alert(data[0].ratioRepet);
-                            browsers.push([d.dateProgEffectue,d.ratioRepet]);
+                           // alert(d.ratioRepet);
+                            //alert(data[0]);
+                            //alert(data[2]);
+                            browsers.push([d,d]);
                         });
+
+                alert(browsers);
 
                 var browsersOther = [];
 /*
@@ -287,14 +293,15 @@
                             browsersOther.push([d.dateProgEffectue,d.ratioRepet]);
                         });
   */
+                alert("data longueur"+data.length);
                 for (var i = data.length; i <= data.length; i++) {
-                    browsersOther.push(data[i],data[i]);
-
+                    browsersOther.push([data[i],data[i]]);
                 }
+
                 chart.series[0].setData(browsers);
                 chart.series[1].setData(browsersOther);
-                alert("browser"+browsers);
-                alert("browser 2"+browsers2);
+                //alert("browser"+browsers);
+                alert("browser 2"+ browsers2);
 
                 /* var char;
 
@@ -337,7 +344,7 @@
                 success:function(data){
                     console.log(data[0]);
                     alert(data[0].nbRepetEffectue);
-                    perfData(data);
+                    perfDataCompare(data);
                     chart.series = data;
                     alert("chart series"+chart.series);
 
