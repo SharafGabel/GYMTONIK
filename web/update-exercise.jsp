@@ -1,15 +1,15 @@
 <%@ page import="java.util.List" %>
-<%@ page import="model.Exercise" %>
 <%@ page import="service.ExerciseService" %>
 <%@ page import="model.AMuscle" %>
 <%@ page import="service.MuscleService" %>
+<%@ page import="model.ATraining" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% String title = "Exercice"; %>
 <%@ include file="header.jsp" %>
 
 <%
     String idExercice = request.getParameter("idEx");
-    Exercise exercise = ExerciseService.getExercise(idExercice);
+    ATraining exercise = ExerciseService.getExercise(idExercice);
 
     /*  Dans le cas où l'utilisateur s'amuserait à appeler cette page
         avec le mauvais identifiant ou sans identifiant */

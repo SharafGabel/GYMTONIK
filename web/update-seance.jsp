@@ -1,6 +1,4 @@
 <%@ page import="model.SessionUser" %>
-<%@ page import="model.User" %>
-<%@ page import="java.util.List" %>
 <%@ page import="model.SessionUser" %>
 <%@ page import="service.SessionService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>

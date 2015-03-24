@@ -50,7 +50,7 @@
     </select>
 
     <table id="affExo" class="table table-condensed">
-        <tbody>
+        <thead>
         <tr>
             <th>Nom exercice</th>
             <th>Niveau</th>
@@ -60,6 +60,8 @@
             <th>Date exercice Effectué</th>
             <th>Action</th>
         </tr>
+        </thead>
+        <tbody>
         </tbody>
     </table>
 

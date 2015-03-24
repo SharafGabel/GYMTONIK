@@ -93,7 +93,7 @@
         <tbody>
             <%
                     User user = (User)session.getAttribute("User");
-                    List<Exercise> trainingList = ExerciseService.getExercises();
+                    List<ATraining> trainingList = ExerciseService.getExercises();
                     for (ATraining t : trainingList)
                     {
                          if (t.getUser().getId() == user.getId())
@@ -195,7 +195,7 @@
     </table>
 
     <table id="table_exercices" class="table table-condensed">
-        <tbody>
+        <thead>
         <tr>
             <th>Nom de exercice</th>
             <th>Description exercice</th>
@@ -203,9 +203,10 @@
             <th>Niveau de l'exercice</th>
             <th>Nombre de répetition</th>
         </tr>
+        </thead>
+        <tbody>
         </tbody>
     </table>
-
 
 </div>
 <%@ include file="footer.jsp" %>
