@@ -1,6 +1,9 @@
 package controller;
 
-import model.*;
+import model.AMuscle;
+import model.ATraining;
+import model.SessionUser;
+import model.User;
 import service.ExerciseService;
 import service.MuscleService;
 import service.SessionService;
@@ -12,7 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class SessionServlet extends HttpServlet {
@@ -66,6 +72,27 @@ public class SessionServlet extends HttpServlet {
         }
         else if(action.equals("createSession")){
             this.getServletContext().getRequestDispatcher("/createSession.jsp").forward( request, response );//redirection
+        }
+        else if(action.equals("createSessionAction")){
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yy");
+            String sessionName = request.getParameter("sessionName");
+            System.out.println(sessionName);
+            Date sessionProgram = new Date();
+            try {
+                sessionProgram = formatter.parse(request.getParameter("datepicker"));
+            } catch(ParseException pe){
+                this.getServletContext().getRequestDispatcher("/createSession.jsp").forward( request, response );//redirection
+            }
+            SessionUser sessionUser = new SessionUser(sessionName, sessionProgram);
+            SessionService.createSession((User) request.getSession().getAttribute("User"), sessionUser);
+
+            if(request.getParameter("checkBoxTraining") != null) {
+                String[] selectedTrainings = request.getParameterValues("checkBoxTraining");
+                for(String selectedTraining : selectedTrainings) {
+                    SessionService.addOrUpdateExToSession(sessionUser.getIdS(),Integer.parseInt(selectedTraining));
+                }
+            }
+            this.getServletContext().getRequestDispatcher("/seance.jsp").forward( request, response );//redirection
         }
         else {
             try {

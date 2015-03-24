@@ -29,6 +29,26 @@ public class SessionService {
         return ourSessionFactory.openSession();
     }
 
+    public static void createSession(User user, SessionUser sessionUser){
+        Session session = getSession();
+        Transaction tx = null;
+        try {
+            tx = session.getTransaction();
+            tx.begin();
+            sessionUser.setUser(user);
+            session.save(sessionUser);
+            session.update(sessionUser);
+            tx.commit();
+        } catch (Exception e) {
+            System.out.println("bug session");
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+    }
+
     public static boolean addSession(User user) {
 
         Session session = getSession();
@@ -38,10 +58,10 @@ public class SessionService {
             tx.begin();
             SessionUser sessionUser = new SessionUser();
             sessionUser.setUser(user);
-            sessionUser.setName("seance "+sessionUser.getIdS());
+            sessionUser.setName("seance " + sessionUser.getIdS());
             System.out.println(sessionUser.toString());
             session.save(sessionUser);
-           sessionUser.setName("seance "+sessionUser.getIdS());
+           sessionUser.setName("seance " + sessionUser.getIdS());
             session.update(sessionUser);
             tx.commit();
             return true;

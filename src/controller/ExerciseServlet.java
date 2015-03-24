@@ -35,9 +35,9 @@ public class ExerciseServlet extends HttpServlet {
         String action = request.getParameter("action");
         List<AMuscle> select = new ArrayList<AMuscle>();
         if(request.getParameter("inlineCheckboxMuscle") != null) {
-            String[] selecttype = request.getParameterValues("inlineCheckboxMuscle");
-            for (int i = 0; i < selecttype.length; i++) {
-                select.add(MuscleService.getMuscleById((Integer.parseInt(selecttype[i]))));
+            String[] selectedMuscles = request.getParameterValues("inlineCheckboxMuscle");
+            for (String selectedMuscle : selectedMuscles) {
+                select.add(MuscleService.getMuscleById((Integer.parseInt(selectedMuscle))));
             }
         }
         try {
