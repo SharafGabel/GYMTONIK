@@ -1,87 +1,56 @@
 package model;
 
-import controller.ExerciseServlet;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import service.ExerciseService;
-import service.SessionService;
-import util.HibernateUtil;
-
-import static org.testng.Assert.*;
+import service.LoginService;
 
 public class ExerciseTest {
+    static final String NAME_EXERCISE = "Exercice de test";
+    static final String DESC_EXERCISE = "Description de test";
+    static final int LENGHT_EXERCISE = 10;
+    static final int NB_REP_EXERCISE = 25;
+    static final int NIVEAU_EXERCISE = 1;
 
-    SessionUser sessionUser;
-    Exercise exercise;
-    User user;
-    Exercise exerciseRecup;
-
-    private static final SessionFactory ourSessionFactory;
-    private static final ServiceRegistry serviceRegistry;
-
-    static {
-        try {
-            Configuration configuration = new Configuration();
-            configuration.configure();
-
-            serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
-            ourSessionFactory = configuration.buildSessionFactory(serviceRegistry);
-        } catch (Throwable ex) {
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
-
-    private static Session getSession() throws HibernateException {
-        return ourSessionFactory.openSession();
-    }
+    boolean testDelete;
+    ATraining exercise;
+    AUser user;
 
     @BeforeMethod
     public void setUp() throws Exception {
-
-        Session session = getSession();
-        user = (User)session.get(User.class,2);
-        sessionUser= (SessionUser)session.get(SessionUser.class,2);
-        exercise = new Exercise(user,50,7,"travail abdomen","travail les abdominaux",1);
-        exercise.addBodyPart((AMuscle)session.get(Muscle.class,4));
-        exerciseRecup = (Exercise)session.get(Exercise.class,7);
-        session.close();
+        testDelete = false;
+        user = LoginService.getUserByUsername("axel");
     }
 
     @AfterMethod
     public void tearDown() throws Exception {
+        if(!testDelete)
+            ExerciseService.deleteExercise(user, exercise);
+    }
+
+    @Test
+    public void testCreateExerciseSansMuscle() {
+        exercise = ExerciseService.createExercise(user, DESC_EXERCISE, NAME_EXERCISE, LENGHT_EXERCISE, NB_REP_EXERCISE, NIVEAU_EXERCISE);
+        assert (exercise != null);
+    }
+
+    // TODO :
+    /*@Test
+    public void testCreateExerciseAvecMuscle() {
+        exercise = ExerciseService.createExercise(user, DESC_EXERCISE, NAME_EXERCISE, LENGHT_EXERCISE, NB_REP_EXERCISE, NIVEAU_EXERCISE);
+        assert (exercise != null);
+    }*/
+
+    @Test
+    public void testAddExerciseToSession() {
 
     }
 
     @Test
-    public void testAddExercise(){
-        //SessionUser sessionUsers = SessionService.getSessionById(sessionUser.getIdS());
-       // assertTrue(ExerciseService.addExerciseWithMuscle(user, sessionUsers, 50,7, exercise.getName(), exercise.getExplanation(),exercise.getNiveau(),exercise.getBodyParts()));
-        //Exercise exercise = ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length), Integer.parseInt(nbRepet),Integer.parseInt(niveau),select);
-        assertEquals(exercise,ExerciseService.createExercise(user,exercise.getExplanation(),exercise.getName(),exercise.getDureeExo(),exercise.getNbRepetition(),exercise.getNiveau()));
-        //comment tester le retour d'un arraylist
-    }
-
-    @Test
-    public void testDeleteExercise(){
-
-        assertTrue(ExerciseService.deleteExercise(user,exerciseRecup));
-    }
-
-    @Test
-    public void testUpdateExercise(){
-        /*
-        exerciseRecup.setExplanation("travail les abdominaux et les pectoraux ");
-        exerciseRecup.setDureeExo(40);
-        exerciseRecup.setNbRepetition(5);
-        exerciseRecup.setName("exercise  abdominaux intensif");
-        assertTrue(ExerciseService.updateExercise(user,exerciseRecup));
-        */
+    public void testDeleteExercise() {
+        testDelete = true;
+        exercise = ExerciseService.createExercise(user, DESC_EXERCISE, NAME_EXERCISE, LENGHT_EXERCISE, NB_REP_EXERCISE, NIVEAU_EXERCISE);
+        assert (ExerciseService.deleteExercise(user, exercise));
     }
 }

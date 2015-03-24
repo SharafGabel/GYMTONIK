@@ -31,7 +31,7 @@ public class ExerciseService {
         return ourSessionFactory.openSession();
     }
 
-    //region create,add
+    //region create
     public static ATraining createExercise(AUser user, String description, String name, int length,int nbRep,int niveau, List<AMuscle> aMuscles){
         Session session = getSession();
         Transaction tx = null;

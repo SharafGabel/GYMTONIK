@@ -32,7 +32,7 @@ public class ExerciceSessionTest {
 
     @Test
     public void testRatioExercise(){
-        Exercise exerciseTest;
+        ATraining exerciseTest;
 
         int nbRepetReussi = exerciceSessionFaible.getNbRepetEffectue();
         int dureeEff = exerciceSessionFaible.getDureeEffectue();
