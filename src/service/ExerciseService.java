@@ -143,8 +143,10 @@ public class ExerciseService {
                 }
                 a.setName(nameExo);
                 a.setExplanation(description);
-                a.setBodyParts( new ArrayList<AMuscle>());
-                a.setBodyParts(aMuscles);
+                if (aMuscles.size() > 0) {
+                    a.setBodyParts(new ArrayList<AMuscle>());
+                    a.setBodyParts(aMuscles);
+                }
                 session.update(a);
             }
             tx.commit();
@@ -160,24 +162,8 @@ public class ExerciseService {
         }
     }
 
-    public static boolean updateExercise(ATraining exo) {
-        Session session = getSession();
-        Transaction tx = null;
-
-        try{
-            tx = session.beginTransaction();
-            session.update(exo);
-            tx.commit();
-            return true;
-        } catch (Exception e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-            return false;
-        }finally {
-            session.close();
-        }
+    public static boolean updateExercise(ATraining exercise, List<AMuscle> muscles) {
+        return updateExercise(exercise.getId(), exercise.getName(), exercise.getDureeExo(), exercise.getNbRepetition(), exercise.getExplanation(), muscles);
     }
 //endregion
 

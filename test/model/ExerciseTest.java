@@ -29,11 +29,11 @@ public class ExerciseTest {
             ExerciseService.deleteExercise(user, exercise);
     }
 
-    @Test
+    /*@Test
     public void testCreateExerciseSansMuscle() {
         exercise = ExerciseService.createExercise(user, DESC_EXERCISE, NAME_EXERCISE, LENGHT_EXERCISE, NB_REP_EXERCISE, NIVEAU_EXERCISE);
         assert (exercise != null);
-    }
+    }*/
 
     // TODO :
     /*@Test
@@ -42,15 +42,10 @@ public class ExerciseTest {
         assert (exercise != null);
     }*/
 
-    @Test
-    public void testAddExerciseToSession() {
-
-    }
-
-    @Test
+    /*@Test
     public void testDeleteExercise() {
         testDelete = true;
         exercise = ExerciseService.createExercise(user, DESC_EXERCISE, NAME_EXERCISE, LENGHT_EXERCISE, NB_REP_EXERCISE, NIVEAU_EXERCISE);
         assert (ExerciseService.deleteExercise(user, exercise));
-    }
+    }*/
 }
