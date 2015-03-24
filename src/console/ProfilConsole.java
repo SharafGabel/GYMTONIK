@@ -2,7 +2,6 @@ package console;
 
 import model.AUser;
 import service.ProfilService;
-import util.Util;
 
 import java.util.Scanner;
 
@@ -41,6 +40,9 @@ public class ProfilConsole {
                             int weight = sc2.nextInt();
                             ProfilService.changeWeight(user, weight);
                             break;
+                        case 5:
+                            error = false;
+                            break;
                         default:
                             System.out.println("Veuillez entre un nombre entre 1 et 4");
                             break;
@@ -67,6 +69,7 @@ public class ProfilConsole {
         System.out.println("2 - Modifier votre adresse email");
         System.out.println("3 - Modifier votre taille");
         System.out.println("4 - Modifier votre poid");
+        System.out.println("5 - Retour");
 
         profilRouting(user, 1);
     }
