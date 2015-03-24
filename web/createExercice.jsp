@@ -1,10 +1,13 @@
-<%@ page import="model.SessionUser" %>
-<%@ page import="service.SessionService" %>
-<%@ page import="model.User" %>
 <%@ page import="java.util.List" %>
 <%@ page import="model.AMuscle" %>
 <%@ page import="service.MuscleService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    // Si aucune session n'est créée, rediriger vers page de login / inscription
+    if (session.getAttribute("User") == null) {
+        response.sendRedirect("welcome.jsp");
+    }
+%>
 <% String title = "Creation d'exercice"; %>
 <%@ include file="header.jsp" %>
 <div class="container">
@@ -44,8 +47,8 @@
 
                 <p><button class="btn btn-small btn-success" type="submit">Enregistrer l'exercice</button></p>
             </form>
-            
         </div>
+        <div class="col-md-2"></div>
     </div>
     
 </div>

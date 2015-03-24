@@ -167,13 +167,3 @@
     <hr />
     <a href="#" class="navmenu-brand"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> ${sessionScope.username}</a>
 </div>
-
-<div class="navbar navbar-default navbar-fixed-top">
-    <button type="button" class="navbar-toggle hidden-md hidden-lg" data-toggle="offcanvas" data-target="#navMenu" data-canvas="body">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-    </button>
-    <a class="navmenu-brand" id="titleProject" href="#"><% if (title != null) out.print(title); %></a>
-</div>
