@@ -118,7 +118,7 @@
 </head>
 <body>
 <%
-    if(request.getSession()==null)
+    if(request.getSession().getAttribute("User")==null)
     {
     %>
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="myLoginModal">
@@ -146,7 +146,7 @@
         <div class="center"><h2>GymTonik</h2></div>
         <div class="floatRight">
             <%
-                if(request.getSession()==null){
+                if(request.getSession().getAttribute("User")==null){
             %>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myLoginModal">Se connecter</button>
             <%}
@@ -160,7 +160,7 @@
         <div class="centered-pills menuBar" role="navigation">
             <ul class="nav nav-pills">
       <%
-          if(request.getSession()!=null){
+          if(request.getSession().getAttribute("User")!=null){
       %>
                 <li class="divider-vertical"></li>
                 <li>
