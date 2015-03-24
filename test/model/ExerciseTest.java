@@ -65,6 +65,7 @@ public class ExerciseTest {
         exercise = ExerciseService.createExercise(user, name, descr, lenght, nbRep, niveau, muscles);
 
         assert (ExerciseService.updateExercise(exercise.getId(), name, lenght, nbRep, descr, muscles));
+        exercise = ExerciseService.getExercise(exercise.getId());
     }
 
     @Test(dataProvider = "create")

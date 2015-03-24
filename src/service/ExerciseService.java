@@ -116,7 +116,7 @@ public class ExerciseService {
 
         try{
             tx = session.beginTransaction();
-            ATraining exercise = getExerciseById(idEx);
+            ATraining exercise = getExercise(idEx);
 
             List<ATraining> exerciseList = getExercisesWithDifferentLevelFromExercise(exercise);
 
@@ -263,7 +263,7 @@ public class ExerciseService {
         }
     }
 
-    public static ATraining getExerciseById(int idEx) {
+    public static ATraining getExercise(int idEx) {
         Session session = getSession();
         Transaction tx = null;
 
@@ -285,7 +285,7 @@ public class ExerciseService {
     }
 
     public static ATraining getExercise(String idEx) {
-        return getExerciseById(Integer.parseInt(idEx));
+        return getExercise(Integer.parseInt(idEx));
     }
 
     public static List<ATraining> getExercises(SessionUser sessionUser) {

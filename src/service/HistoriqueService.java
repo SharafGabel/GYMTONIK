@@ -141,7 +141,7 @@ public class HistoriqueService {
         try {
             tx = session.beginTransaction();
             SessionUser sessionUser = SessionService.getSessionById(idS);
-            ATraining exercise = ExerciseService.getExerciseById(idEx);
+            ATraining exercise = ExerciseService.getExercise(idEx);
             ExerciceSession exerciceSession = new ExerciceSession(sessionUser,exercise);
             exerciceSession.setTimeSleep(timeSleep);
             exerciceSession.setDureeEffectue(dureeEff);
