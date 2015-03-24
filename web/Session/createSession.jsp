@@ -5,7 +5,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% String title = "Exercice"; %>
-<%@ include file="header.jsp" %>
+<%@ include file="../header.jsp" %>
 <%
     List<ATraining> trainingList = ExerciseService.getExercises();
 %>
@@ -36,7 +36,7 @@
                 %>
                 <input class="checkbox" type="checkbox" name="checkBoxTraining" value="<%=training.getId()%>"><%=training.getName()%><%=training.getNiveau()%>
                 <%  }%>
-                <input type="submit" class="btn btn-small btn-warning"/>
+                <input type="submit" class="btn btn-small btn-warning" value="Créer"/>
             </form>
         </div>
         <div class="col-md-3"></div>

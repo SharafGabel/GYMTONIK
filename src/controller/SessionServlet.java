@@ -50,7 +50,7 @@ public class SessionServlet extends HttpServlet {
                         SessionService.addOrUpdateExToSession(sessionUser,exerciseList.get(i));
                     }
                     out.println("<h1>"+sessionUser.getName()+" générée avec "+nbExo+" exercices</h1>");
-                    request.getRequestDispatcher("seance.jsp").forward(request, response);
+                    request.getRequestDispatcher("showSessions.jsp").forward(request, response);
                 }
                 else {
                     out.println("<h1>Sélectionnez au moins 1 Muscle<h1>");
@@ -62,16 +62,16 @@ public class SessionServlet extends HttpServlet {
         else if(action.equals("deleteSession")){
             SessionUser sessionUser = SessionService.getSessionById(Integer.parseInt(request.getParameter("sessionId")));
             this.deleteSession(sessionUser);
-            this.getServletContext().getRequestDispatcher("/seance.jsp").forward( request, response );//redirection
+            this.getServletContext().getRequestDispatcher("/Session/showSessions.jsp").forward( request, response );//redirection
         }
         else if(action.equals("updateSession")){
             SessionUser sessionUser = SessionService.getSessionById(Integer.parseInt(request.getParameter("sessionId")));
             sessionUser.setName(request.getParameter("sessionName"));
             this.updateSession(sessionUser);
-            this.getServletContext().getRequestDispatcher("/seance.jsp").forward( request, response );//redirection
+            this.getServletContext().getRequestDispatcher("/Session/showSessions.jsp").forward( request, response );//redirection
         }
         else if(action.equals("createSession")){
-            this.getServletContext().getRequestDispatcher("/createSession.jsp").forward( request, response );//redirection
+            this.getServletContext().getRequestDispatcher("/Session/createSession.jsp").forward( request, response );//redirection
         }
         else if(action.equals("createSessionAction")){
             SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yy");
@@ -92,7 +92,7 @@ public class SessionServlet extends HttpServlet {
                     SessionService.addOrUpdateExToSession(sessionUser.getIdS(),Integer.parseInt(selectedTraining));
                 }
             }
-            this.getServletContext().getRequestDispatcher("/seance.jsp").forward( request, response );//redirection
+            this.getServletContext().getRequestDispatcher("/Session/showSessions.jsp").forward( request, response );//redirection
         }
         else {
             try {
@@ -109,7 +109,7 @@ public class SessionServlet extends HttpServlet {
                     response.sendRedirect("exercise.jsp");
                 }
                 else {
-                    response.sendRedirect("seance.jsp");
+                    response.sendRedirect("showSessions.jsp");
                 }
 
                 out.println("</center>");
