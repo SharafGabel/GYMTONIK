@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PerformanceServlet extends HttpServlet {
@@ -59,9 +60,15 @@ public class PerformanceServlet extends HttpServlet {
             else if(choiceFromPerformance.equals("compare_performance")){
 
                 List<ExerciceSession> listofUserExercise = PerformanceService.getPerfFromExerciseId(idExercise);
+                List<ExerciceSession> avgPerf = PerformanceService.getAveragePerfFromExerciseId(idExercise);
+                List<ExerciceSession> listPerformance = new ArrayList<ExerciceSession>();
                 Gson gson = GsonExclusionStrategy.createGsonFromBuilder(new GsonExclusionStrategy(SessionUser.class),new GsonExclusionStrategy(ATraining.class));
 
+                listofUserExercise.addAll(avgPerf);
+                //listPerformance.addAll(listofUserExercise);
+                //listPerformance.addAll(avgPerf);
                 String jsonString = gson.toJson(listofUserExercise);
+                //String jsonString2 = gson.toJson(avgPerf);
 
                 response.setContentType("application/json");
 
