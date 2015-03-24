@@ -17,9 +17,8 @@ import java.util.List;
 public class ExerciseServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        /*L'utilisateur n'est pas censé atteindre cette page via une requête GET,
-        on le redirige vers vers index.jsp*/
-        getServletContext().getRequestDispatcher("/exercice.jsp").forward(request,response);
+
+        request.getRequestDispatcher("showMyExercise.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -87,7 +86,7 @@ public class ExerciseServlet extends HttpServlet {
                 String idExercice = request.getParameter("idEx");
                 System.out.println("idS : "+sessionUserId + " idEx : "+idExercice);
                 SessionService.addOrUpdateExToSession(Integer.parseInt(sessionUserId),Integer.parseInt(idExercice));
-                request.getRequestDispatcher("exercise.jsp").forward(request, response);
+                request.getRequestDispatcher("showMyExercise.jsp").forward(request, response);
                 out.println("<h1>Ajout de l'exercice à la séance réussie</h1>");
 
             }
@@ -101,9 +100,11 @@ public class ExerciseServlet extends HttpServlet {
                 )
                 {
                         if (updateExercise(Integer.parseInt(idExercice),nameExercise,Integer.parseInt(length),Integer.parseInt(nbRepet),description,select)) {
+                            request.getRequestDispatcher("showMyExercise.jsp").forward(request, response);
                             out.println("Exercice mis à jour");
                         }
                     else {
+                            request.getRequestDispatcher("showMyExercise.jsp").forward(request, response);
                             out.println("Mise à jour échouée");
                     }
 

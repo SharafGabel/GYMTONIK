@@ -217,6 +217,39 @@ public class ExerciseService {
     }
     //endregion
 
+    //region getExercice
+    public static List<ATraining> getUserExercises(AUser user){
+        Session session = getSession();
+        List<ATraining> exercises = null;
+
+        try {
+            Transaction tx = session.getTransaction();
+            tx.begin();
+            Query query = session.createQuery("from Exercise where user.id="+user.getId());
+            exercises = query.list();
+            tx.commit();
+        } catch (Exception e) {
+        }
+
+        return exercises;
+    }
+
+    public static List<ATraining> getExercisesNotOfThis(AUser user){
+        Session session = getSession();
+        List<ATraining> exercises = null;
+
+        try {
+            Transaction tx = session.getTransaction();
+            tx.begin();
+            Query query = session.createQuery(" Select e from Exercise e where e.user.id!="+user.getId());
+            exercises = query.list();
+            tx.commit();
+        } catch (Exception e) {
+        }
+
+        return exercises;
+    }
+
     public static List<ATraining> getExercises() {
         Session session = getSession();
         Transaction tx = null;
@@ -241,7 +274,8 @@ public class ExerciseService {
     public static List<ATraining> getAllExercises() {
         return getExercises();
     }
-
+    //endregion
+    
     public static ATraining getExercise(int idEx,int test) {
         Session session = getSession();
         Transaction tx = null;
@@ -312,21 +346,6 @@ public class ExerciseService {
         return exercises;
     }
 
-    public static List<ATraining> getUserExercises(AUser user){
-        Session session = getSession();
-        List<ATraining> exercises = null;
-
-        try {
-            Transaction tx = session.getTransaction();
-            tx.begin();
-            Query query = session.createQuery("from Exercise where user.id="+user.getId());
-            exercises = query.list();
-            tx.commit();
-        } catch (Exception e) {
-        }
-
-        return exercises;
-    }
 
     public static List<ATraining> getExercisesByLevel(int level){
         Session session = getSession();
