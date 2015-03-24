@@ -3,11 +3,15 @@ package console;
 import model.*;
 import org.hibernate.NonUniqueObjectException;
 import service.ExerciseService;
+import service.MuscleService;
 import service.SessionService;
 import util.Util;
 
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class ExerciseConsole {
     public static void menu(AUser user) {
@@ -59,6 +63,8 @@ public class ExerciseConsole {
         Util.clearConsole();
         Scanner sc = new Scanner(System.in);
 
+        List<AMuscle> muscles = MuscleService.getAllMuscles();
+
         System.out.println("Création d'un Exercise\nNom de l'exercice");
         String name = sc.nextLine();
         System.out.println("Description");
@@ -70,9 +76,33 @@ public class ExerciseConsole {
         System.out.println("Niveau [1..3]");
         int niveau = sc.nextInt();
 
-        if (nbRep >= 5 && niveau > 0 && niveau < 4 && length > 0 && length <= 20) {
-            ExerciseService.createExercise(user, description, name, length, nbRep, niveau);
-            System.out.print("Ajout reussi");
+        System.out.println("\nMuscles travaillés : (entrez les numéros séparés par des espaces)");
+
+        int i = 1;
+        for (AMuscle m : muscles) {
+            System.out.println(i + " - " + m.getName());
+            i++;
+        }
+        sc.nextLine();
+        String choixMuscles = sc.nextLine();
+
+        List<AMuscle> musclesChoisis = new ArrayList<AMuscle>();
+        try {
+            StringTokenizer st = new StringTokenizer(choixMuscles);
+            while (st.hasMoreTokens()) {
+                musclesChoisis.add(
+                        muscles.get(Integer.parseInt(st.nextToken()) - 1)
+                );
+            }
+        } catch (IndexOutOfBoundsException ioobe) {
+            System.out.println("Vous devez entrer un nombre entre 1 et " + muscles.size());
+        } catch (NumberFormatException nfe) {
+            System.out.println("Vous devez uniquement entrer des nombres.");
+        }
+
+        if (nbRep >= 5 && niveau > 0 && niveau < 4 && length > 0 && length <= 20 && musclesChoisis.size() > 0) {
+            ExerciseService.createExercise(user, description, name, length, nbRep, niveau, musclesChoisis);
+            System.out.println("Ajout reussi");
         } else {
             if (nbRep < 5) {
                 System.out.println("Le nombre de répétitions doit être suppérieur ou égal à 5");
@@ -89,19 +119,28 @@ public class ExerciseConsole {
             if (length < 0) {
                 System.out.println("La durée de l'exercice doit être suppérieure à 0.");
             }
+            if (musclesChoisis.size() == 0) {
+                System.out.println("Veuillez choisir au moins un muscle");
+            }
 
             System.out.println("\nAppuyez sur la touche Entrée pour continuer...");
-            sc.nextLine();
             sc.nextLine();
         }
     }
 
     private static void displayExercise(AUser user, ATraining exo) {
         Util.clearConsole();
+        String muscles = "";
+        for (AMuscle m : exo.getBodyParts()) {
+            muscles += m.getName() + " ";
+        }
+
         System.out.println("Exercice " + exo.getName());
         System.out.println(exo.getExplanation());
         System.out.println(exo.getDureeExo() + "min - Niveau " + exo.getNiveau()
                 + " - " + exo.getNbRepetition() + " répétitions\n");
+
+        System.out.println("Muscles travaillés : " + muscles + "\n");
 
         if(user.equals(exo.getUser())) { // L'utilisateur est le propriétaire de l'exercice, il peut donc le modifier et le supprimer
 
@@ -160,6 +199,7 @@ public class ExerciseConsole {
 
     private static void updateExercise(ATraining exo) {
         Util.clearConsole();
+        List<AMuscle> muscles = MuscleService.getAllMuscles();
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Modification de l'exercice " + exo.getName());
@@ -178,6 +218,33 @@ public class ExerciseConsole {
         System.out.println("Nombre de répétitions [" + exo.getNbRepetition() + "]");
         int nbRepet = 0;
         String nbRepetString = sc.nextLine();
+
+        String musclesString = "";
+        for (AMuscle m : exo.getBodyParts()) {
+            musclesString += m.getName() + " ";
+        }
+
+        System.out.println("Muscles travaillés [" + musclesString + "]");
+        int i = 1;
+        for (AMuscle m : muscles) {
+            System.out.println(i + " - " + m.getName());
+            i++;
+        }
+        String choixMuscles = sc.nextLine();
+
+        List<AMuscle> musclesChoisis = new ArrayList<AMuscle>();
+        try {
+            StringTokenizer st = new StringTokenizer(choixMuscles);
+            while (st.hasMoreTokens()) {
+                musclesChoisis.add(
+                        muscles.get(Integer.parseInt(st.nextToken()) - 1)
+                );
+            }
+        } catch (IndexOutOfBoundsException ioobe) {
+            System.out.println("Vous devez entrer un nombre entre 1 et " + muscles.size());
+        } catch (NumberFormatException nfe) {
+            System.out.println("Vous devez uniquement entrer des nombres.");
+        }
 
         try {
             length = Integer.parseInt(lengthString);
@@ -203,7 +270,9 @@ public class ExerciseConsole {
         if (nbRepet != 0 && (nbRepet < 5 || nbRepet > 500))
             System.out.println("Le nombre de répétitions de l'exercice doit être comprit entre 5 et 500");
 
-        ExerciseService.updateExercise(exo);
+        if (ExerciseService.updateExercise(exo, musclesChoisis)) {
+            System.out.println("Exercice modifié");
+        }
 
         System.out.println("\nAppuyez sur la touche Entrée pour continuer...");
         sc.nextLine();

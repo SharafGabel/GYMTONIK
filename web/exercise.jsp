@@ -8,7 +8,13 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% String title = "Exercice"; %>
-<%@ include file="header.jsp" %>
+<%@ include file="Core/header.jsp" %>
+<%
+    // Si aucune session n'est créée, rediriger vers page de login / inscription
+    if (session.getAttribute("User") == null) {
+        response.sendRedirect("welcome.jsp");
+    }
+%>
 <div class="page-container" id="exerciseDiv">
 
     <form id="formEx" class="form-horizontal" name="formEx" method="post" action="ExerciceServlet">
@@ -93,7 +99,7 @@
         <tbody>
             <%
                     User user = (User)session.getAttribute("User");
-                    List<Exercise> trainingList = ExerciseService.getExercises();
+                    List<ATraining> trainingList = ExerciseService.getExercises();
                     for (ATraining t : trainingList)
                     {
                          if (t.getUser().getId() == user.getId())
@@ -128,7 +134,7 @@
                             out.println("<button type=\"submit\">Supprimer</button>");
                             out.println("</form>");
 
-                            out.println("<form method=\"post\" action=\"update-exercise.jsp\">");
+                            out.println("<form method=\"post\" action=\"updateExercise.jsp\">");
                             out.println("<input type=\"hidden\" name=\"idEx\" value=\"" + t.getId() + "\" />");
                             out.println("<button type=\"submit\">Modifier</button>");
                             out.println("</form>");
@@ -195,7 +201,7 @@
     </table>
 
     <table id="table_exercices" class="table table-condensed">
-        <tbody>
+        <thead>
         <tr>
             <th>Nom de exercice</th>
             <th>Description exercice</th>
@@ -203,9 +209,10 @@
             <th>Niveau de l'exercice</th>
             <th>Nombre de répetition</th>
         </tr>
+        </thead>
+        <tbody>
         </tbody>
     </table>
-
 
 </div>
 <%@ include file="footer.jsp" %>

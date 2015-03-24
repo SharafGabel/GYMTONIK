@@ -4,6 +4,7 @@ import model.ATraining;
 import model.SessionUser;
 import model.User;
 import service.ExerciseService;
+import service.HistoriqueService;
 import service.SessionService;
 import util.Util;
 
@@ -70,20 +71,61 @@ public class SessionConsole {
         System.out.println("Exercices :\n");
 
         if (exs.size() > 0) {
+            int i = 1;
             for (ATraining exo : exs) {
-                System.out.println(exo.getName() + " : "
+                System.out.println( i + " - "
+                        + exo.getName() + " : "
                         + exo.getExplanation()
                         + " - Niveau :" + exo.getNiveau()
                         + " (" + exo.getDureeExo() + " min)"
                         + " (" + exo.getNbRepetition() + " répétitions)");
+                i++;
             }
+            System.out.println( i + " - Retour");
         } else System.out.println("Il n'y a aucun exercice pour cette séance");
 
         System.out.println("\nPour ajouter des exercices à cette séances, allez dans le menu Exercice\n");
+        System.out.println("Sélectionnez l'exercice ou l'action que vous souhaitez effectuer :");
 
-        System.out.println("Appuyez sur la touche Entrée pour continuer...");
-        sc.nextLine();
+        if (exs.size() > 0) {
+            int choix = sc.nextInt();
+            sc.nextLine();
 
+            if (choix > 0 && choix < exs.size() + 1) {
+                doExercise(session, exs.get(choix - 1));
+            } else if (choix > exs.size() + 1) {
+                System.out.println("Veuillez entrer un chiffre entre 1 et " + exs.size() + 1);
 
+                System.out.printf("Appuyez sur la touche Entrée pour continuer...");
+                sc.nextLine();
+                displaySession(session);
+            }
+        } else {
+            System.out.printf("Appuyez sur la touche Entrée pour continuer...");
+            sc.nextLine();
+        }
+
+    }
+
+    private static void doExercise(SessionUser sessionUser, ATraining exercise) {
+        Util.clearConsole();
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Exercice : " + exercise.getName() + " - Niveau " + exercise.getNiveau());
+        System.out.println(exercise.getExplanation());
+        System.out.println(exercise.getDureeExo() + " minutes - " + exercise.getNbRepetition() + " répétitions\n");
+
+        System.out.println("Combien d'heure avez-vous dormi cette nuit ?");
+        int sleep = sc.nextInt();
+
+        System.out.println("Combien de répétions avez-vous effectué ?");
+        int nbRep = sc.nextInt();
+
+        System.out.println("En combien de minutes avez-vous effectué l'exercice ?");
+        int duree = sc.nextInt();
+
+        if (HistoriqueService.addExerciseDone(sessionUser, exercise, duree, nbRep, sleep)) {
+            System.out.println("Exercice enregistré");
+        }
     }
 }

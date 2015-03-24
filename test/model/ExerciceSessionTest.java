@@ -21,9 +21,9 @@ public class ExerciceSessionTest {
     public void setUp() throws Exception {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
-        exerciceSession = (ExerciceSession)session.get(ExerciceSession.class,8);
-        exerciceSessionFaible =(ExerciceSession)session.get(ExerciceSession.class,4);
-        exercise = (Exercise)session.get(Exercise.class,4);
+        exerciceSession = (ExerciceSession)session.get(ExerciceSession.class,7);
+//        exerciceSessionFaible =(ExerciceSession)session.get(ExerciceSession.class,4);
+        exercise = (Exercise)session.get(Exercise.class,8);
         sessionUser = (SessionUser)session.get(SessionUser.class,17);
         user = (User)session.get(User.class,2);
         exerciceSessionNoDb = new ExerciceSession(sessionUser,exercise);
@@ -32,28 +32,28 @@ public class ExerciceSessionTest {
 
     @Test
     public void testRatioExercise(){
-        Exercise exerciseTest;
+        ATraining exerciseTest;
 
-        int nbRepetReussi = exerciceSessionFaible.getNbRepetEffectue();
-        int dureeEff = exerciceSessionFaible.getDureeEffectue();
+        int nbRepetReussi = exerciceSession.getNbRepetEffectue();
+        int dureeEff = exerciceSession.getDureeEffectue();
         int niveau = exercise.getNiveau();
 
-        int idExercise=4;
+        int idExercise=7;
         Integer numSeance = 2;
 
 
         int result = (dureeEff+nbRepetReussi)/2;
         if(result >70 && niveau!=3){
             exerciseTest = ExerciseService.getExercise(idExercise + 1, niveau + 1);//retourne l'exercice du niveau supérieur
-            assertTrue(HistoriqueService.updateHistorique(numSeance, exerciseTest, user));
+            assertTrue(HistoriqueService.updateHistorique(numSeance, exerciseTest));
         }
         else if(result <30 && niveau!=1){
             exerciseTest = ExerciseService.getExercise(idExercise - 1,niveau-1);//retourne l'exercice du niveau inférieur
-            assertTrue(HistoriqueService.updateHistorique(numSeance,exerciseTest,user));
+            assertTrue(HistoriqueService.updateHistorique(numSeance,exerciseTest));
         }
         else if(result<30 && niveau ==1){
             exerciseTest = ExerciseService.getExercise(idExercise ,niveau);//retourne l'exercice du niveau inférieur
-            assertTrue(HistoriqueService.updateHistorique(numSeance,exerciseTest,user));
+            assertTrue(HistoriqueService.updateHistorique(numSeance,exerciseTest));
         }
     }
 

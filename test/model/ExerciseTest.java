@@ -1,87 +1,77 @@
 package model;
 
-import controller.ExerciseServlet;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import service.ExerciseService;
-import service.SessionService;
-import util.HibernateUtil;
+import service.LoginService;
+import service.MuscleService;
 
-import static org.testng.Assert.*;
+import java.util.List;
 
 public class ExerciseTest {
+    private final static String NAME_MOD = "Exercice de test BIS";
+    private final static String DESCR_MOD ="Description de test BIS";
+    private final static int LENGHT_MOD = 11;
+    private final static int NB_REP_MOD = 26;
+    private final static int LEVEL_MOD = 2;
 
-    SessionUser sessionUser;
-    Exercise exercise;
-    User user;
-    Exercise exerciseRecup;
+    private boolean testDelete;
+    private ATraining exercise;
+    private AUser user;
+    private List<AMuscle> muscles;
 
-    private static final SessionFactory ourSessionFactory;
-    private static final ServiceRegistry serviceRegistry;
-
-    static {
-        try {
-            Configuration configuration = new Configuration();
-            configuration.configure();
-
-            serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
-            ourSessionFactory = configuration.buildSessionFactory(serviceRegistry);
-        } catch (Throwable ex) {
-            throw new ExceptionInInitializerError(ex);
-        }
+    @DataProvider(name = "create")
+    public static Object[][] baseExercise() {
+        return new Object[][] {{"Exercice de test", "Description de test", 10, 25, 1}};
     }
 
-    private static Session getSession() throws HibernateException {
-        return ourSessionFactory.openSession();
-    }
 
     @BeforeMethod
     public void setUp() throws Exception {
-
-        Session session = getSession();
-        user = (User)session.get(User.class,2);
-        sessionUser= (SessionUser)session.get(SessionUser.class,2);
-        exercise = new Exercise(user,50,7,"travail abdomen","travail les abdominaux",1);
-        exercise.addBodyPart((AMuscle)session.get(Muscle.class,4));
-        exerciseRecup = (Exercise)session.get(Exercise.class,7);
-        session.close();
+        testDelete = false;
+        user = LoginService.getUserByUsername("axel");
+        muscles = MuscleService.getAllMuscles();
     }
 
     @AfterMethod
     public void tearDown() throws Exception {
-
+        if(!testDelete)
+            ExerciseService.deleteExercise(user, exercise);
     }
 
-    @Test
-    public void testAddExercise(){
-        //SessionUser sessionUsers = SessionService.getSessionById(sessionUser.getIdS());
-       // assertTrue(ExerciseService.addExerciseWithMuscle(user, sessionUsers, 50,7, exercise.getName(), exercise.getExplanation(),exercise.getNiveau(),exercise.getBodyParts()));
-        //Exercise exercise = ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length), Integer.parseInt(nbRepet),Integer.parseInt(niveau),select);
-        assertEquals(exercise,ExerciseService.createExercise(user,exercise.getExplanation(),exercise.getName(),exercise.getDureeExo(),exercise.getNbRepetition(),exercise.getNiveau()));
-        //comment tester le retour d'un arraylist
+    @Test(dataProvider = "create")
+    public void testCreateExercise(String name, String descr, int lenght, int nbRep, int niveau) {
+        exercise = ExerciseService.createExercise(user, name, descr, lenght, nbRep, niveau, muscles);
+        assert (exercise != null);
     }
 
-    @Test
-    public void testDeleteExercise(){
+    @Test(dataProvider = "create")
+    public void testUpdateExercise(String name, String descr, int lenght, int nbRep, int niveau) {
+        exercise = ExerciseService.createExercise(user, name, descr, lenght, nbRep, niveau, muscles);
 
-        assertTrue(ExerciseService.deleteExercise(user,exerciseRecup));
+        exercise.setName(NAME_MOD);
+        exercise.setExplanation(DESCR_MOD);
+        exercise.setDureeExo(LENGHT_MOD);
+        exercise.setNbRepetition(NB_REP_MOD);
+        exercise.setNiveau(LEVEL_MOD);
+
+        assert (ExerciseService.updateExercise(exercise, muscles));
     }
 
-    @Test
-    public void testUpdateExercise(){
-        /*
-        exerciseRecup.setExplanation("travail les abdominaux et les pectoraux ");
-        exerciseRecup.setDureeExo(40);
-        exerciseRecup.setNbRepetition(5);
-        exerciseRecup.setName("exercise  abdominaux intensif");
-        assertTrue(ExerciseService.updateExercise(user,exerciseRecup));
-        */
+    @Test(dataProvider = "create")
+    public void testUpdateExerciseParams(String name, String descr, int lenght, int nbRep, int niveau) {
+        exercise = ExerciseService.createExercise(user, name, descr, lenght, nbRep, niveau, muscles);
+
+        assert (ExerciseService.updateExercise(exercise.getId(), name, lenght, nbRep, descr, muscles));
+        exercise = ExerciseService.getExercise(exercise.getId());
+    }
+
+    @Test(dataProvider = "create")
+    public void testDeleteExercise(String name, String descr, int lenght, int nbRep, int niveau) {
+        testDelete = true;
+        exercise = ExerciseService.createExercise(user, name, descr, lenght, nbRep, niveau, muscles);
+        assert (ExerciseService.deleteExercise(user, exercise));
     }
 }

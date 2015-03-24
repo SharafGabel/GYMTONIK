@@ -47,6 +47,12 @@ public class SessionUser implements Serializable {
         exerciceSessions = new ArrayList<ExerciceSession>();
 
     }
+
+    public SessionUser(String name,Date dateProgram) {
+        this.dateProgram = dateProgram;
+        this.name = name;
+        this.exerciceSessions = new ArrayList<ExerciceSession>();
+    }
     //endregion
 
     //region Getter/Setter

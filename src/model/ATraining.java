@@ -61,6 +61,10 @@ public abstract class ATraining implements Serializable {
     }
 
     public ATraining(AUser user,int dureeExo,int nbRepetition, String name, String explanation,int niveau) {
+        if(nbRepetition==0)
+            nbRepetition=5;
+        if(dureeExo==0)
+            dureeExo=1;
         this.dureeExo = dureeExo;
         this.explanation = explanation;
         this.name = name;

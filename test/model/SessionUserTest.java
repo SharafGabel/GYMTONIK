@@ -24,7 +24,7 @@ public class SessionUserTest {
     AMuscle m2;
     AMuscle m3;
     List<AMuscle> select;
-    List<Exercise> exerciseList;
+    List<ATraining> exerciseList;
     SessionUser sessionUser;
     User user;
     int niveau;
@@ -58,7 +58,7 @@ public class SessionUserTest {
 
         user= (User)session.get(User.class,1);
         select = new ArrayList<AMuscle>();
-        exerciseList = new ArrayList<Exercise>();
+        exerciseList = new ArrayList<ATraining>();
         select.add(m1);
         select.add(m2);
         select.add(m3);

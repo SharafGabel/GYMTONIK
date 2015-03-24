@@ -37,7 +37,7 @@ public class HistoriqueService {
         List<SessionUser> seances;
         try {
             tx = session.beginTransaction();
-            Query query = session.createQuery("select distinct s from SessionUser s,ExerciceSession h where h.sessionUser.id=s.idS and h.training!="+exercise.getId()+" and s.user.id="+user.getId());
+            Query query = session.createQuery("select distinct s from SessionUser s,ExerciceSession h where h.sessionUser.idS=s.idS and h.training.id!="+exercise.getId()+" and s.user.id="+user.getId());
             seances = query.list();
             tx.commit();
             return seances;
@@ -78,7 +78,7 @@ public class HistoriqueService {
         List<ExerciceSession> exerciceSessions;
         try {
             tx = session.beginTransaction();
-            Query query = session.createQuery("select distinct h from ExerciceSession h where h.sessionUser.id="+idSessionUser);
+            Query query = session.createQuery("select distinct h from ExerciceSession h where h.sessionUser.idS="+idSessionUser);
             exerciceSessions = query.list();
             tx.commit();
             return exerciceSessions;
@@ -99,7 +99,7 @@ public class HistoriqueService {
         List<Object> historiques;
         try {
             tx = session.beginTransaction();
-            Query query = session.createQuery("select e.id,e.name,e.niveau,h.ratioDuree,h.ratioRepet,h.timeSleep,h.dateProgEffectue from ExerciceSession h,Exercise e where h.training.id=e.id and h.sessionUser.id="+idSeance);
+            Query query = session.createQuery("select e.id,e.name,e.niveau,h.ratioDuree,h.ratioRepet,h.timeSleep,h.dateProgEffectue from ExerciceSession h,Exercise e where h.training.id=e.id and h.sessionUser.idS="+idSeance);
             historiques = query.list();
             System.out.println(historiques.toString());
             return historiques;
@@ -120,7 +120,7 @@ public class HistoriqueService {
         List<ExerciceSession> exerciceSessions;
         try {
             tx = session.beginTransaction();
-            Query query = session.createQuery("select e.name,e.niveau,h.dureeEffectue,h.nbRepetEffectue,h.timeSleep from ExerciceSession h,Exercise e where h.training.id=e.id and h.sessionUser.id="+idSeance);
+            Query query = session.createQuery("select e.name,e.niveau,h.dureeEffectue,h.nbRepetEffectue,h.timeSleep from ExerciceSession h,Exercise e where h.training.id=e.id and h.sessionUser.idS="+idSeance);
             exerciceSessions = query.list();
             System.out.println(exerciceSessions.toString());
             return exerciceSessions;
@@ -134,14 +134,14 @@ public class HistoriqueService {
         }
     }
 
-    public static boolean addExerciseDone(int idS,int idEx,AUser user,int dureeEff,int nbRepEff,int timeSleep,int nbRepRequis,int dureeRequis) {
+    public static boolean addExerciseDone(int idS, int idEx, int dureeEff, int nbRepEff, int timeSleep, int nbRepRequis, int dureeRequis) {
         Session session = getSession();
         Transaction tx = null;
 
         try {
             tx = session.beginTransaction();
             SessionUser sessionUser = SessionService.getSessionById(idS);
-            ATraining exercise = ExerciseService.getExerciseById(idEx);
+            ATraining exercise = ExerciseService.getExercise(idEx);
             ExerciceSession exerciceSession = new ExerciceSession(sessionUser,exercise);
             exerciceSession.setTimeSleep(timeSleep);
             exerciceSession.setDureeEffectue(dureeEff);
@@ -149,6 +149,33 @@ public class HistoriqueService {
             exerciceSession.setDateProgEffectue(new Date());
             exerciceSession.calculRatioDuree(dureeEff,dureeRequis);
             exerciceSession.calculRatioRepet(nbRepEff,nbRepRequis);
+            session.save(exerciceSession);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+            return false;
+        }finally {
+            session.close();
+        }
+
+    }
+
+    public static boolean addExerciseDone(SessionUser sessionUser, ATraining exercise, int dureeEff, int nbRepEff, int timeSleep) {
+        Session session = getSession();
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+            ExerciceSession exerciceSession = new ExerciceSession(sessionUser,exercise);
+            exerciceSession.setTimeSleep(timeSleep);
+            exerciceSession.setDureeEffectue(dureeEff);
+            exerciceSession.setNbRepetEffectue(nbRepEff);
+            exerciceSession.setDateProgEffectue(new Date());
+            exerciceSession.calculRatioDuree(dureeEff,exercise.getDureeExo());
+            exerciceSession.calculRatioRepet(nbRepEff,exercise.getNbRepetition());
             session.save(exerciceSession);
             tx.commit();
             return true;
@@ -181,7 +208,7 @@ public class HistoriqueService {
     }
 
     /*à terminer*/
-    public static boolean updateHistorique(int idS,ATraining exercise,User user) {
+    public static boolean updateHistorique(int idS, ATraining exercise) {
         SessionUser sessionUser = SessionService.getSessionById(idS);
         Session session = getSession();
         Transaction tx = null;
