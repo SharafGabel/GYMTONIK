@@ -11,13 +11,13 @@
     }
 %>
 <% String title = "Mes Exercices"; %>
-<%@ include file="Core/header.jsp" %>
+<%@ include file="../Core/header.jsp" %>
 
 <div class="container">
     <div class="row">
         <div class="col-md-2"></div>
             <div class="col-md-8">
-                <p><a class="btn btn-small btn-warning" href="createExercice.jsp">Créer un Exercice</a></p>
+                <p><a class="btn btn-small btn-warning" href="createExercise.jsp">Créer un Exercice</a></p>
                 <table id="affSeance" class="table table-condensed">
                     <thead>
                     <tr>
@@ -64,7 +64,7 @@
                                 }
                                 out.println("</td>");
                                 out.println("\t<td>");
-                                out.println("<form method=\"post\" action=\"ExerciceServlet\">");
+                                out.println("<form method=\"post\" action=\"../ExerciceServlet\">");
                                 out.println("<input type=\"hidden\" name=\"action\" value=\"delete\" />");
                                 out.println("<input type=\"hidden\" name=\"idEx\" value=\"" + t.getId() + "\" />");
                                 out.println("<button class=\"btn btn-small btn-danger\" type=\"submit\">Supprimer</button>");
@@ -108,5 +108,5 @@
     });
     
 </script>
-<%@ include file="footer.jsp" %>
+<%@ include file="../footer.jsp" %>
 

@@ -2,7 +2,7 @@
 <%
     // Si aucune session n'est créée, rediriger vers page de login / inscription
     if (session.getAttribute("User") == null) {
-        response.sendRedirect("welcome.jsp");
+        response.sendRedirect("Core/welcome.jsp");
     }
 %>
 <% String title = "Accueil"; %>

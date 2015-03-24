@@ -132,7 +132,7 @@ public class PerformanceService {
         List<ExerciceSession> exerciceSessions;
         try {
             tx = session.beginTransaction();
-            Query query = session.createQuery("Select h,avg(ratioRepet) from ExerciceSession h where h.training.id="+idExercise+ " order by h.dateProgEffectue");
+            Query query = session.createQuery("Select h.ratioRepet,h.dateProgEffectue,avg(ratioRepet) as moyenne from ExerciceSession h where h.training.id="+idExercise+ " order by h.dateProgEffectue");
             exerciceSessions = query.list();
             tx.commit();
             return exerciceSessions;

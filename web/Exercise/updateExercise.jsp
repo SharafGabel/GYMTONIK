@@ -5,7 +5,7 @@
 <%@ page import="model.ATraining" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% String title = "Exercice"; %>
-<%@ include file="Core/header.jsp" %>
+<%@ include file="../Core/header.jsp" %>
 
 <%
     String idExercice = request.getParameter("idEx");
@@ -24,7 +24,7 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-    <form id="formEx" name="formEx" class="form-horizontal" method="post" action="ExerciceServlet">
+    <form id="formEx" name="formEx" class="form-horizontal" method="post" action="../ExerciceServlet">
         <h1>Modifier un exercice</h1>
 
         <input type="hidden" name="action" value="update" />
@@ -57,10 +57,10 @@
         </p>
 
         <p><button class="btn btn-small btn-success" type="submit">Enregistrer la modification</button></p>
-        <p><a class="btn btn-small btn-warning" href="showMyExercise.jsp">Voir mes exercices</a></p>
+        <p><a class="btn btn-small btn-warning" href="showMyExercises.jsp">Voir mes exercices</a></p>
     </form>
 </div>
             <div class="col-md-3"></div>
         </div>
     </div>
-<%@ include file="footer.jsp" %>
+<%@ include file="../footer.jsp" %>

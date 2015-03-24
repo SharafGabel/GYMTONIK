@@ -117,14 +117,51 @@
     </script>
 </head>
 <body>
-<!--modal ici si pas co' -->
+<%
+    if(request.getSession().getAttribute("User")==null)
+    {
+    %>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="myLoginModal">
+    <div class="modal-dialog modal-lg" style="width: 450px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title label label-info modalFS" id="mySmallModalLabel">Se connecter</h2>
+            </div>
+            <div class="modal-body">
+                <form id="formLogin" class="form-horizontal" name="formLogin" method="post" action="../LoginServlet">
+                    <label>Nom d'utilisateur</label>
+                    <input class="form-control" type="text" name="username" id="username" placeholder="Nom d'utilisateur" />
+
+                    <label>Mot de Passe</label>
+                    <input class="form-control" type="password" name="password" id="password" placeholder="Mot de Passe" />
+
+                    <button class="btn btn-small btn-success" type="submit">Log in</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<%}%>
     <header>
         <div class="center"><h2>GymTonik</h2></div>
-        <div class="floatRight"></div>
+        <div class="floatRight">
+            <%
+                if(request.getSession().getAttribute("User")==null){
+            %>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myLoginModal">Se connecter</button>
+            <%}
+                else{
+            %>
+            <a href="LogoutServlet" class="label-info" >Se Déconecter</a>
+            <%}%>
+        </div>
     </header>
     <nav>
         <div class="centered-pills menuBar" role="navigation">
             <ul class="nav nav-pills">
+      <%
+          if(request.getSession().getAttribute("User")!=null){
+      %>
                 <li class="divider-vertical"></li>
                 <li>
                     <a class="menuButton center" id="seance" data-target="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -171,6 +208,7 @@
                     <a class="menuButton center" href="../performance.jsp">Performances</a>
                 </li>
                 <li class="divider-vertical"></li>
+                <%}%>
             </ul>
         </div>
     </nav>
