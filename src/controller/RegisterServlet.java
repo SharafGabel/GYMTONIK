@@ -73,7 +73,7 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
 
-        getServletContext().getRequestDispatcher("/welcome.jsp").forward(request,response);
+        getServletContext().getRequestDispatcher("/Core/welcome.jsp").forward(request,response);
     }
 
     public static boolean isInteger(String s) {
