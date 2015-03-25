@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:mysql://mysql1.alwaysdata.com/gymtonik_database</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.username">gymtonik</property>
+        <property name="connection.password">projetsi2014gym</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.cache.use_second_level_cache">false</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <mapping package="model"/>
+        <mapping class="model.User"/>
+        <mapping class="model.Muscle"/>
+        <mapping class="model.SessionUser"/>
+        <mapping class="model.Exercise"/>
+        <mapping class="model.ExerciceSession"/>
+    </session-factory>
+</hibernate-configuration>
