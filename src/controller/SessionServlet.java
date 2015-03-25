@@ -3,8 +3,10 @@ package controller;
 import model.AMuscle;
 import model.ATraining;
 import model.SessionUser;
+import model.ExerciceSession;
 import model.User;
 import service.ExerciseService;
+import service.HistoriqueService;
 import service.MuscleService;
 import service.SessionService;
 
@@ -76,9 +78,13 @@ public class SessionServlet extends HttpServlet {
             }
             sessionUser.setDateProgram(sessionProgram);
             if(request.getParameter("checkBoxTraining") != null) {
+                System.out.println(sessionUser.getExerciceSessions());
+                for(ExerciceSession es : sessionUser.getExerciceSessions()){
+                    HistoriqueService.deleteExerciceSession(es, sessionUser);
+                }
                 String[] selectedTrainings = request.getParameterValues("checkBoxTraining");
                 for(String selectedTraining : selectedTrainings) {
-                    SessionService.addOrUpdateExToSession(sessionUser.getIdS(),Integer.parseInt(selectedTraining));
+                    SessionService.addOrUpdateExToSession(sessionUser.getIdS(), Integer.parseInt(selectedTraining));
                 }
             }
 
@@ -107,9 +113,6 @@ public class SessionServlet extends HttpServlet {
                 }
             }
             this.getServletContext().getRequestDispatcher("/Session/showSessions.jsp").forward( request, response );//redirection
-        }
-        else if(action.equals("createJSP")){
-            this.getServletContext().getRequestDispatcher("/createSession.jsp").forward( request, response );
         }
     }
 

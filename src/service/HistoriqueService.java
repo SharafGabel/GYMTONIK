@@ -239,12 +239,15 @@ public class HistoriqueService {
     }
 
 
-    public static void deleteExerciceSession(ExerciceSession es) {
+    public static void deleteExerciceSession(ExerciceSession es, SessionUser su) {
         Session session = getSession();
         Transaction tx = null;
         try{
             tx  = session.beginTransaction();
-            session.delete(es);
+            ExerciceSession exerciceSession = (ExerciceSession)session.get(ExerciceSession.class,es.getId());
+            SessionUser sessionUser = (SessionUser)session.get(SessionUser.class, su.getIdS());
+            sessionUser.getExerciceSessions().clear();
+            session.saveOrUpdate(sessionUser);
             tx.commit();
         } catch (Exception e) {
             if (tx != null)

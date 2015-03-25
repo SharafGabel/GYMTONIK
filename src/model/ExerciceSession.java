@@ -42,7 +42,7 @@ public class ExerciceSession {
     private float ratioDuree;
 
     @GsonExclude
-    @ManyToOne(cascade={CascadeType.ALL})
+    @ManyToOne
     @LazyCollection(LazyCollectionOption.FALSE)
     private SessionUser sessionUser;
 
@@ -61,8 +61,8 @@ public class ExerciceSession {
     public ExerciceSession(SessionUser sessionUser, ATraining training) {
         this.sessionUser = sessionUser;
         this.training = training;
-        sessionUser.getExerciceSessions().add(this);
-        training.getExerciceSessions().add(this);
+        sessionUser.addExerciceSession(this);
+        training.addExerciceSession(this);
         this.ratioRepet = 0;
         this.ratioDuree = 0;
     }

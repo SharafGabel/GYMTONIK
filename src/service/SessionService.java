@@ -114,6 +114,7 @@ public class SessionService {
             ATraining exercise = ExerciseService.getExercise(idEx);
             ExerciceSession exerciceSession = new ExerciceSession(sessionUser, exercise);
             session.saveOrUpdate(exerciceSession);
+            session.saveOrUpdate(sessionUser);
             tx.commit();
             return true;
         } catch (Exception e) {
@@ -127,6 +128,27 @@ public class SessionService {
 
     }
 
+    public static boolean addExToSession(int idS, int idEx){
+        Session session = getSession();
+        Transaction tx = null;
+        try{
+            SessionUser sessionUser = SessionService.getSessionById(idS);
+            ATraining exercise = ExerciseService.getExercise(idEx);
+            tx = session.beginTransaction();
+            ExerciceSession exerciceSession = new ExerciceSession(sessionUser, exercise);
+            session.save(exerciceSession);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+            return false;
+        }finally {
+            session.close();
+        }
+    }
+
     public static boolean addOrUpdateExToSession(SessionUser sessionUser,  ATraining exo) {
         return addOrUpdateExToSession(sessionUser.getIdS(), exo.getId());
     }
@@ -136,7 +158,7 @@ public class SessionService {
         Transaction tx = null;
         try{
             for(ExerciceSession es: sessionUser.getExerciceSessions()){
-                HistoriqueService.deleteExerciceSession(es);
+                HistoriqueService.deleteExerciceSession(es, sessionUser);
             }
             tx  = session.beginTransaction();
             session.delete(sessionUser);
@@ -196,7 +218,7 @@ public class SessionService {
         List<SessionUser> list = null;
 
         try{
-            Query query=session.createQuery("from SessionUser where id="+idS);
+            Query query=session.createQuery("from SessionUser where idS="+idS);
             list = query.list();
 
         }

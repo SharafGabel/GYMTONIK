@@ -80,6 +80,10 @@ public class SessionUser implements Serializable {
         return exerciceSessions;
     }
 
+    public void addExerciceSession(ExerciceSession es){
+        this.exerciceSessions.add(es);
+    }
+
     public void setExerciceSessions(List<ExerciceSession> exerciceSessions) {
         this.exerciceSessions = exerciceSessions;
     }
