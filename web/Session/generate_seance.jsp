@@ -9,10 +9,13 @@
     }
 %>
 <% String title = "Générer une séance"; %>
-<%@ include file="Core/header.jsp" %>
+<%@ include file="../Core/header.jsp" %>
 
-<div class="page-container">
-    <form id="generateSession" class="form-horizontal" name="generateSession" method="post" action="SessionServlet">
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+    <form id="generateSession" class="form-horizontal" name="generateSession" method="post" action="../SessionServlet">
         <input type="hidden" name="action" value="generateSession" />
     <p>
         Sélectionner les muscles pour générer une séance :
@@ -27,13 +30,15 @@
         <%}%>
     </p>
         <p><label class="lab">Sélectionner le niveau de l'exercice souhaité</label></p>
-        <input type="number" min="1" max="3" name="niveau" id="niveau" />
+        <input class="form-control" type="number" min="1" max="3" name="niveau" id="niveau" />
 
         <p><label class="lab">Nombre d'exercices souhaité</label></p>
-        <input type="number" min="1" max="15" name="nbExo" id="nbExo" />
+        <input class="form-control" type="number" min="1" max="15" name="nbExo" id="nbExo" />
 
-        <p><button type="submit">Générer la séance</button></p>
+        <p><button class="btn btn-small btn-success"  type="submit">Générer la séance</button></p>
     </form>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
 </div>
-
-<%@ include file="footer.jsp" %>
+<%@ include file="../footer.jsp" %>

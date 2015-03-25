@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-            <form id="formEx" class="form-horizontal" name="formEx" method="post" action="ExerciceServlet">
+            <form id="formEx" class="form-horizontal" name="formEx" method="post" action="../ExerciceServlet">
                 <h1>Créer un Exercice</h1>
 
                 <!-- Champ caché afin d'indiquer au servlet l'action qu'on souhaite réaliser,

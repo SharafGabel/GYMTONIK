@@ -178,10 +178,10 @@
                             <a class="menuButton center" href="../Session/createSession.jsp">Créer une séance</a>
                         </li>
                         <li>
-                            <a class="menuButton center" href="../seance_done.jsp">Valider une séance</a>
+                            <a class="menuButton center" href="../Session/seance_done.jsp">Valider une séance</a>
                         </li>
                         <li>
-                            <a class="menuButton center" href="../generate_seance.jsp">Générer une séance</a>
+                            <a class="menuButton center" href="../Session/generate_seance.jsp">Générer une séance</a>
                         </li>
                         <li>
                             <a class="menuButton center" href="../Session/evaluateSession.jsp">Evaluer une séance</a>

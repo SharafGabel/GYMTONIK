@@ -52,11 +52,11 @@ public class SessionServlet extends HttpServlet {
                         SessionService.addOrUpdateExToSession(sessionUser,exerciseList.get(i));
                     }
                     out.println("<h1>"+sessionUser.getName()+" générée avec "+nbExo+" exercices</h1>");
-                    request.getRequestDispatcher("showSessions.jsp").forward(request, response);
+                    request.getRequestDispatcher("/Session/showSessions.jsp").forward(request, response);
                 }
                 else {
                     out.println("<h1>Sélectionnez au moins 1 Muscle<h1>");
-                    request.getRequestDispatcher("generate_seance.jsp").forward(request, response);
+                    request.getRequestDispatcher("/Session/generate_seance.jsp").forward(request, response);
                 }
             }
 
@@ -71,6 +71,7 @@ public class SessionServlet extends HttpServlet {
             SessionUser sessionUser = SessionService.getSessionById(Integer.parseInt(request.getParameter("sessionId")));
             sessionUser.setName(request.getParameter("sessionName"));
             Date sessionProgram = new Date();
+            System.out.println("sessionUser" + sessionUser.getIdS());
             try {
                 sessionProgram = formatter.parse(request.getParameter("datepicker"));
             } catch(ParseException pe){
@@ -99,7 +100,7 @@ public class SessionServlet extends HttpServlet {
             try {
                 sessionProgram = formatter.parse(request.getParameter("datepicker"));
             } catch(ParseException pe){
-                this.getServletContext().getRequestDispatcher("/createSession.jsp").forward( request, response );//redirection
+                this.getServletContext().getRequestDispatcher("/Session/createSession.jsp").forward( request, response );//redirection
             }
             SessionUser sessionUser = new SessionUser(sessionName, sessionProgram);
            sessionUser = SessionService.createSession((User) request.getSession().getAttribute("User"), sessionUser);
