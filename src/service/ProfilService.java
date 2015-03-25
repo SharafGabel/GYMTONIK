@@ -37,6 +37,11 @@ public class ProfilService {
         updateUser(user);
     }
 
+    public static void changePassword(AUser user, String password) {
+        user.setPassword(password);
+        updateUser(user);
+    }
+
     public static void changeEmail(AUser user, String email) {
         user.setEmail(email);
         updateUser(user);
@@ -57,6 +62,19 @@ public class ProfilService {
         try{
             Transaction tx = session.beginTransaction();
             session.update(user);
+            tx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+    }
+
+    public static void deleteUser(AUser user) {
+        Session session = getSession();
+        try{
+            Transaction tx = session.beginTransaction();
+            session.delete(user);
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
