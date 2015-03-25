@@ -39,22 +39,8 @@
                     });
                 </script>
                 <input type='text' id='datepicker' name='datepicker' class="form-control" value="<%=sessionUser.getDateProgram()%>"/>
-                <%
-                    boolean done = false;
-                    for(ATraining training:trainingList)
-                    {
-                        done = false;
-                        for(ExerciceSession es:sessionUser.getExerciceSessions()){
-                            if(es.getTraining().getId() == training.getId()){
-                                done = true;
-                %>
-                                <input class="checkbox" type="checkbox" name="checkBoxTraining" value="<%=training.getId()%>" checked><%=training.getName()%><%=training.getNiveau()%>
-                <%          }
-                        }
-                        if(!done){
-                            %><input class="checkbox" type="checkbox" name="checkBoxTraining" value="<%=training.getId()%>"><%=training.getName()%><%=training.getNiveau()%><%
-                        }
-                    }%>
+                <div class="selectedExercices"></div>
+                <div class="exercices"></div>
                 <input type="submit" class="btn btn-small btn-warning" value="Modifier"/>
             </form>
         </div>

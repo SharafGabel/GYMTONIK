@@ -64,7 +64,7 @@ public class SessionServlet extends HttpServlet {
             this.deleteSession(sessionUser);
             this.getServletContext().getRequestDispatcher("/Session/showSessions.jsp").forward( request, response );//redirection
         }
-        else if(action.equals("updateSession")){
+        else if(action.equals("updateSessionAction")){
             SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yy");
             SessionUser sessionUser = SessionService.getSessionById(Integer.parseInt(request.getParameter("sessionId")));
             sessionUser.setName(request.getParameter("sessionName"));
@@ -111,35 +111,9 @@ public class SessionServlet extends HttpServlet {
         else if(action.equals("createJSP")){
             this.getServletContext().getRequestDispatcher("/createSession.jsp").forward( request, response );
         }
-        else {
-            try {
-                out.println("<html>");
-                out.println("<head>");
-                out.println("</head>");
-                out.println("<body>");
-                out.println("<center>");
-
-                HttpSession session = request.getSession();
-                User user = (User)session.getAttribute("User");
-
-                if (addSession(user)) {
-                    response.sendRedirect("exercise.jsp");
-                }
-                else {
-                    response.sendRedirect("showSessions.jsp");
-                }
-
-                out.println("</center>");
-                out.println("</body>");
-                out.println("</html>");
-            } finally {
-                out.close();
-            }
-        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 
 

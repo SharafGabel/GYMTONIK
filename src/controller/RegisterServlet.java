@@ -29,12 +29,11 @@ public class RegisterServlet extends HttpServlet {
 
             if(register(username, email, password,emailVerif,poids,taille))
             {
-                request.getRequestDispatcher("welcome.jsp").include(request, response);
+                request.getRequestDispatcher("/Core/welcome.jsp").include(request, response);
                 out.println("<h1>Registration Successful</h1>");
             } else
             {
-                request.getRequestDispatcher("welcome.jsp").include(request, response);
-                // TODO: Message et/ou tests à revoir, puisque l'échec de l'inscription peut également être dû à un username ou email déjà existant
+                request.getRequestDispatcher("/Core/welcome.jsp").include(request, response);
                 out.println("<h1>Registration Unsuccessful</h1><p>Un des champs obligatoire est vide</p>");
             }
 
@@ -45,12 +44,6 @@ public class RegisterServlet extends HttpServlet {
     }
 
     public static boolean register(String username, String email, String password,String emailVerif, String poids, String taille) {
-
-        // BORDEL MAIS ARRÊTEZ AVEC STRING.EQUALS(NULL)!
-        /*  String.equals() permet de comparer le *contenu* d'une chaîne de caractère
-            or ici on souhaite vérifier que la variable ne pointe pas vers null (et éviter un bête NullPointerException)
-            donc c'est **var == null**
-         */
         if ( username == null || username.trim().isEmpty() ||
                 email == null || email.trim().isEmpty() ||
                 password == null || password.trim().isEmpty() || !emailVerif.equals(email) )
