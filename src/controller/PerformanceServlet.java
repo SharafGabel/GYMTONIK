@@ -6,6 +6,7 @@ import service.ExerciseService;
 import service.HistoriqueService;
 import service.PerformanceService;
 import util.GsonExclusionStrategy;
+import util.ObjectForGson;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -58,17 +59,20 @@ public class PerformanceServlet extends HttpServlet {
                 //System.out.println(jsonString);
             }
             else if(choiceFromPerformance.equals("compare_performance")){
+                Integer seanceId = Integer.parseInt(request.getParameter("seanceId"));
 
-                List<ExerciceSession> listofUserExercise = PerformanceService.getPerfFromExerciseId(idExercise);
-                List<ExerciceSession> avgPerf = PerformanceService.getAveragePerfFromExerciseId(idExercise);
-                List<ExerciceSession> listPerformance = new ArrayList<ExerciceSession>();
+
+                List<ExerciceSession> listofUserExercise = PerformanceService.getPerfFromExerciseId(idExercise,seanceId);
+                
+                Double avgPerf = PerformanceService.getAveragePerfFromExerciseId(idExercise);
                 Gson gson = GsonExclusionStrategy.createGsonFromBuilder(new GsonExclusionStrategy(SessionUser.class),new GsonExclusionStrategy(ATraining.class));
 
-                //listofUserExercise.addAll(avgPerf);
-                //listPerformance.addAll(listofUserExercise);
-                //listPerformance.addAll(avgPerf);
-                String jsonString = gson.toJson(listofUserExercise);
-                //String jsonString2 = gson.toJson(avgPerf);
+                ObjectForGson jsonGenerator = new ObjectForGson(listofUserExercise,avgPerf);
+                
+
+                String jsonString = gson.toJson(jsonGenerator);
+                System.out.println(jsonString);
+                //String jsonString2 = gson.toJson(avgPerf);x
 
                 response.setContentType("application/json");
 

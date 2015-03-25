@@ -3,6 +3,7 @@ package service;
 import model.AUser;
 import model.ExerciceSession;
 import model.Exercise;
+import model.SessionUser;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
@@ -74,7 +75,7 @@ public class PerformanceService {
                 tx = session.beginTransaction();
                 Query query = session.createQuery("Select e from Exercise e where e.id =" + h.getTraining());
                 extemp = query.list();
-                h.setRatioDuree(h.getDureeEffectue()*100 / extemp.get(0).getDureeExo());
+                h.setRatioDuree(h.getDureeEffectue() * 100 / extemp.get(0).getDureeExo());
                 ratioDuree.add(h.getDureeEffectue()*100 / extemp.get(0).getDureeExo());
                 session.saveOrUpdate(h);
                 tx.commit();
@@ -126,13 +127,13 @@ public class PerformanceService {
         return null;
     }
 
-    public static List<ExerciceSession> getPerfFromExerciseId(int idExercise){
+    public static List<ExerciceSession> getPerfFromExerciseId(int idExercise, int sessionId){
         Session session = getSession();
         Transaction tx = null;
         List<ExerciceSession> exerciceSessions;
         try {
             tx = session.beginTransaction();
-            Query query = session.createQuery("Select h.ratioRepet,h.dateProgEffectue,avg(ratioRepet) as moyenne from ExerciceSession h where h.training.id="+idExercise+ " order by h.dateProgEffectue");
+            Query query = session.createQuery("Select h  from ExerciceSession h where h.sessionUser.idS="+ sessionId +" and h.training.id="+idExercise+ " order by h.dateProgEffectue");
             exerciceSessions = query.list();
             tx.commit();
             return exerciceSessions;
@@ -144,14 +145,14 @@ public class PerformanceService {
         return null;
     }
 
-    public static List<ExerciceSession> getAveragePerfFromExerciseId(int idExercise){
+    public static Double getAveragePerfFromExerciseId(int idExercise){
         Session session = getSession();
         Transaction tx = null;
-        List<ExerciceSession> exerciceSessions;
+        Double exerciceSessions;
         try {
             tx = session.beginTransaction();
-            Query query = session.createQuery("Select  avg(h.ratioRepet) from ExerciceSession h where h.training.id="+idExercise+ "");
-            exerciceSessions = query.list();
+            Query query = session.createQuery("Select avg(h.ratioRepet) from ExerciceSession h where h.training.id="+idExercise);
+            exerciceSessions = (Double)query.uniqueResult();
             tx.commit();
             return exerciceSessions;
         }   catch (Exception e) {

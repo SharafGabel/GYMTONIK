@@ -274,7 +274,18 @@
         $('#compare_performance').click(function() {
 
             function perfDataCompare (data) {
-                alert("perfdataCompare");
+                               //alert("perfdataCompare");
+               //alert(data.length);
+                //("test1 - data 0");
+               // alert(data[0]);
+               // alert("test1 - data 1");
+                //alert(data[1]);
+                alert("data00"+data[0][0]);
+                var tab;
+                for(var i=0;i<=data.length;i++){
+                    //alert(data[i]);
+                    
+                }
                // alert(data);
                 //alert(1);
                 //alert('porjet'+data[0]);
@@ -282,13 +293,17 @@
                 browsers = [],
 
                         $.each(data,function(i,d){
+                            alert(data[0][0]);
+                            alert("d");
+                            alert(d);
+                            alert(d.nbRepetEffectue);
                            // alert(d.ratioRepet);
                             //alert(data[0]);
                             //alert(data[2]);
                             browsers.push([d,d]);
                         });
 
-                alert(browsers);
+              //  alert(browsers);
 
                 var browsersOther = [];
 /*
@@ -306,7 +321,7 @@
                 chart.series[0].setData(browsers);
                 chart.series[1].setData(browsersOther);
                 //alert("browser"+browsers);
-                alert("browser 2"+ browsers2);
+                //alert("browser 2"+ browsers2);
 
                 /* var char;
 
@@ -344,14 +359,29 @@
             }
             $.ajax({
                 type:"GET",
-                url:'PerformanceServlet?submit_choice='+$(this).attr('value')+'&exerciseid='+$('#exerciseDynamic option:selected').attr('value'),//Servlet
+                url:'PerformanceServlet?submit_choice='+$(this).attr('value')+'&exerciseid='+$('#exerciseDynamic option:selected').attr('value')+'&seanceId='+$('#SessionUserForChart option:selected').attr('value'),//Servlet
                 dataType : 'json',
                 success:function(data){
-                    console.log(data[0]);
-                    alert(data[0].nbRepetEffectue);
+                   // alert(data[1]);
+                    //alert(data[data.length]);
+                    alert(data.exerciceSessions[id]);
+                    console.log(data.exerciceSessions[1]);
+                    //console.log(data[exerciceSessions][0]);
+                    var d, i;
+
+                    for (i = 0; i < dictionary.data.length; i++) {
+                        d = dictionary.data[i];
+                        alert(d.id + ' ' + d.name);
+                    }
+                    
+                    
+                    console.log(data[exerciceSessions]);
+                    alert(data[exerciceSessions][0]);
+                    alert(data[moyenneGenerale]);
+                    //alert(data[0].nbRepetEffectue);
                     perfDataCompare(data);
                     chart.series = data;
-                    alert("chart series"+chart.series);
+                    //alert("chart series"+chart.series);
 
                 },
                 error:function(e){
