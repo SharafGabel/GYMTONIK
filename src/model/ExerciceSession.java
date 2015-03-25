@@ -133,7 +133,7 @@ public class ExerciceSession {
     }
 
     public float calculRatioDuree(int a,int b) {
-        this.ratioDuree = (a*100)/b;
+        this.ratioDuree = (b*100)/a;
         return ratioDuree;
     }
 
