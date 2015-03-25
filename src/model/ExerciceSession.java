@@ -1,13 +1,13 @@
 package model;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-import org.hibernate.annotations.Type;
+import org.hibernate.annotations.*;
 import util.GsonExclude;
 
 import javax.jms.Session;
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.List;
 
@@ -42,7 +42,7 @@ public class ExerciceSession {
     private float ratioDuree;
 
     @GsonExclude
-    @ManyToOne
+    @ManyToOne(cascade={CascadeType.ALL})
     @LazyCollection(LazyCollectionOption.FALSE)
     private SessionUser sessionUser;
 

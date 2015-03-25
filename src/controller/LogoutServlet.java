@@ -20,11 +20,11 @@ public class LogoutServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out=response.getWriter();
 
-        request.getRequestDispatcher("welcome.jsp").include(request, response);
+
 
         HttpSession session=request.getSession();
         session.invalidate();
-
+        response.sendRedirect("/Core/welcome.jsp");
         out.print("You are successfully logged out!");
 
         out.close();
