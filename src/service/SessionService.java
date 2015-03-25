@@ -220,14 +220,14 @@ public class SessionService {
         try{
             Query query=session.createQuery("from SessionUser where idS="+idS);
             list = query.list();
-
+            return list.get(0);
         }
         catch(Exception ex){
             ex.printStackTrace();
+            return null;
         } finally {
             session.close();
         }
-        return list.get(0);
     }
 
 }
