@@ -6,6 +6,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -230,5 +231,22 @@ public class HistoriqueService {
             session.close();
         }
 
+    }
+
+    public static void deleteExerciceSession(ExerciceSession es) {
+        Session session = getSession();
+        Transaction tx = null;
+        try{
+            tx  = session.beginTransaction();;
+            session.delete(es);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null)
+                System.out.println("rollback");
+                tx.rollback();
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
     }
 }

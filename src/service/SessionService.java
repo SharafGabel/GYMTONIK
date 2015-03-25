@@ -6,6 +6,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class SessionService {
@@ -129,23 +130,20 @@ public class SessionService {
         return addOrUpdateExToSession(sessionUser.getIdS(), exo.getId());
     }
 
-    public static boolean deleteSession(SessionUser sessionUser){
-        if(sessionUser == null){
-            return false;
-        }
-
+    public static void deleteSession(SessionUser sessionUser){
         Session session = getSession();
         Transaction tx = null;
         try{
             tx  = session.beginTransaction();
+            for(ExerciceSession es: sessionUser.getExerciceSessions()){
+                HistoriqueService.deleteExerciceSession(es);
+            }
             session.delete(sessionUser);
             tx.commit();
-            return true;
         } catch (Exception e) {
             if (tx != null)
                 tx.rollback();
             e.printStackTrace();
-            return false;
         }finally {
             session.close();
         }

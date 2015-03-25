@@ -46,7 +46,7 @@
                         out.println("<tr>");
                         out.println("\t<td>" + a.getName() + "</td>");
                         out.println("\t<td>" + a.getDateProgram() + "</td>");
-                        out.println("<form id=\"updateSession\" name=\"updateSession\" method=\"post\" action=\"updateSession.jsp\">");
+                        out.println("<form id=\"updateSession\" name=\"updateSession\" method=\"post\" action=\"/updateSession.jsp\">");
                         out.println("<input type='hidden' name='sessionId' value='" + a.getIdS() + "'/>");
                         out.println("<input type='hidden' name='action' value='updateSession'/>");
                         out.println("<td><button class='btn btn-small btn-primary' type='submit'>Modifier</button></td>");
