@@ -162,13 +162,13 @@ public class PerformanceService {
         return null;
     }
 
-    public static List<ExerciceSession> getPerfFromExerciseId(int sessionId){
+    public static List<ExerciceSession> getPerfFromSessionId( int sessionId){
         Session session = getSession();
         Transaction tx = null;
         List<ExerciceSession> exerciceSessions;
         try {
             tx = session.beginTransaction();
-            Query query = session.createQuery("Select h  from ExerciceSession h where h.sessionUser.idS="+ sessionId +" and h.training.id="+idExercise+ " order by h.dateProgEffectue");
+            Query query = session.createQuery("Select h  from ExerciceSession h where h.sessionUser.idS="+ sessionId +" order by h.dateProgEffectue");
             exerciceSessions = query.list();
             tx.commit();
             return exerciceSessions;
