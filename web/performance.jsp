@@ -43,7 +43,10 @@
         </select>
         <br>
         <button class="btn btn-small btn-warning center" name="submit_choice" id="user_performance" value="user_performance" type="submit" >Voir mon evolution</button>
-        <button class="btn btn-small btn-warning center" name="submit_choice" id="compare_performance" value="compare_performance" type="submit">comparer mes performances avec les autres</button>
+        <button class="btn btn-small btn-warning center" name="submit_choice" id="compare_performance" value="compare_performance" type="submit">Comparer mes performances avec les autres</button>
+        <button class="btn btn-small btn-warning center" name="resetChart" id="resetChart" value="resetChart">Reset</button>
+
+
     </div>
     <div class="col-md-2"></div>
 </div>
@@ -136,19 +139,28 @@
         });
 
 
+        $('#resetChart').click(function() {
+            var chart = $('#container').highcharts();
+            if (chart.series.length) {
+                chart.series[0].remove();
+            }
+        });
+        
+        
+
+
         $('#user_performance').click(function() {
         function perfData (data) {
-           //alert(1);
-            //alert('porjet'+data[0]);
+
             browsers = [],
 
                     $.each(data,function(i,d){
-                        alert(d.ratioRepet);
-                        alert(data[0].ratioRepet);
                         browsers.push([d.dateProgEffectue,d.ratioRepet]);
                     });
-
+   
             chart.series[0].setData(browsers);
+           
+
             alert("browser"+browsers);
            /* var char;
             
@@ -209,19 +221,13 @@
                // alert(data[0]);
                // alert("test1 - data 1");
                 //alert(data[1]);
-                alert("data00"+data[0][0]);
-                var tab;
-                for(var i=0;i<=data.length;i++){
-                    //alert(data[i]);
-                    
-                }
                // alert(data);
                 //alert(1);
                 //alert('porjet'+data[0]);
                 //alert('other'+data[1]);
-                browsers = [],
+               /* browsers = [],
 
-                        $.each(data,function(i,d){
+                      /$.each(data,function(i,d){
                             alert(data[0][0]);
                             alert("d");
                             alert(d);
@@ -230,8 +236,11 @@
                             //alert(data[0]);
                             //alert(data[2]);
                             browsers.push([d,d]);
-                        });
-
+                        });*/
+                var browsers = [];
+                for(var i=0;i<data.exerciceSessions.length;i++) {
+                    browsers.push(data.exerciceSessions[i].ratioRepet);
+                }
               //  alert(browsers);
 
                 var browsersOther = [];
@@ -242,9 +251,8 @@
                             browsersOther.push([d.dateProgEffectue,d.ratioRepet]);
                         });
   */
-                alert("data longueur"+data.length);
-                for (var i = data.length; i <= data.length; i++) {
-                    browsersOther.push([data[i],data[i]]);
+                for (var j = 0; j < 2; j++) {
+                    browsersOther.push(data.moyenneGenerale);
                 }
 
                 chart.series[0].setData(browsers);
@@ -291,26 +299,8 @@
                 url:'PerformanceServlet?submit_choice='+$(this).attr('value')+'&exerciseid='+$('#exerciseDynamic option:selected').attr('value')+'&seanceId='+$('#SessionUserForChart option:selected').attr('value'),//Servlet
                 dataType : 'json',
                 success:function(data){
-                   // alert(data[1]);
-                    //alert(data[data.length]);
-                    alert(data.exerciceSessions[id]);
-                    console.log(data.exerciceSessions[1]);
-                    //console.log(data[exerciceSessions][0]);
-                    var d, i;
-
-                    for (i = 0; i < dictionary.data.length; i++) {
-                        d = dictionary.data[i];
-                        alert(d.id + ' ' + d.name);
-                    }
-                    
-                    
-                    console.log(data[exerciceSessions]);
-                    alert(data[exerciceSessions][0]);
-                    alert(data[moyenneGenerale]);
-                    //alert(data[0].nbRepetEffectue);
                     perfDataCompare(data);
                     chart.series = data;
-                    //alert("chart series"+chart.series);
 
                 },
                 error:function(e){
