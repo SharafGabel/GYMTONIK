@@ -8,6 +8,7 @@ import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
+import org.hibernate.type.Type;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -154,6 +155,33 @@ public class PerformanceService {
             Query query = session.createQuery("Select avg(h.ratioRepet) from ExerciceSession h where h.training.id="+idExercise);
             exerciceSessions = (Double)query.uniqueResult();
             tx.commit();
+            return exerciceSessions;
+        }   catch (Exception e) {
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Double[] getAveragePerfsFromExerciseId(int idExercise){
+        Session session = getSession();
+        Transaction tx = null;
+        Double[] exerciceSessions = new Double[4];
+        try {
+            tx = session.beginTransaction();
+            Query queryRepet = session.createQuery("Select avg(h.nbRepetEffectue) from ExerciceSession h where h.training.id="+idExercise);
+            exerciceSessions[0] = (Double)queryRepet.uniqueResult();
+
+            Query queryRatioRepet = session.createQuery("Select avg(h.ratioRepet) from ExerciceSession h where h.training.id="+idExercise);
+            exerciceSessions[1] = (Double)queryRatioRepet.uniqueResult();
+
+            Query queryDuree = session.createQuery("Select avg(h.dureeEffectue) from ExerciceSession h where h.training.id="+idExercise);
+            exerciceSessions[2] = (Double)queryDuree.uniqueResult();
+
+            Query queryDureeRatio = session.createQuery("Select avg(h.ratioDuree) from ExerciceSession h where h.training.id="+idExercise);
+            exerciceSessions[3] = (Double)queryDureeRatio.uniqueResult();
+
             return exerciceSessions;
         }   catch (Exception e) {
             if (tx != null)
