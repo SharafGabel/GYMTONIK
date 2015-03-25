@@ -185,6 +185,8 @@ public class SessionService {
         }
         catch(Exception ex){
             ex.printStackTrace();
+        } finally {
+            session.close();
         }
         return list;
     }
@@ -201,8 +203,9 @@ public class SessionService {
         }
         catch(Exception ex){
             ex.printStackTrace();
+        } finally {
+            session.close();
         }
-        session.close();
         return list.get(0);
     }
 

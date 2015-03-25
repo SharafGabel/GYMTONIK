@@ -1,9 +1,11 @@
 package console;
 
-/**
- * Created by driss on 17/03/2015.
- */
+import model.AUser;
+
 public class PerformanceConsole {
 
+    public static void menu(AUser user) {
+
+    }
 
 }
