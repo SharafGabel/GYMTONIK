@@ -33,7 +33,7 @@ public class SessionUser implements Serializable {
     @JoinColumn(name="userId",nullable=false)
     private AUser user;
 
-    @OneToMany(cascade={CascadeType.ALL})
+    @OneToMany(cascade={CascadeType.ALL},orphanRemoval=true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<ExerciceSession> exerciceSessions;
 

@@ -239,13 +239,14 @@ public class HistoriqueService {
     }
 
 
-    public static void deleteExerciceSession(ExerciceSession es, SessionUser su) {
+    public static SessionUser deleteExerciceSession(ExerciceSession es, SessionUser su) {
         Session session = getSession();
         Transaction tx = null;
+        SessionUser sessionUser = null;
         try{
-            tx  = session.beginTransaction();
             ExerciceSession exerciceSession = (ExerciceSession)session.get(ExerciceSession.class,es.getId());
-            SessionUser sessionUser = (SessionUser)session.get(SessionUser.class, su.getIdS());
+            sessionUser = (SessionUser)session.get(SessionUser.class, su.getIdS());
+            tx  = session.beginTransaction();
             sessionUser.getExerciceSessions().clear();
             session.saveOrUpdate(sessionUser);
             tx.commit();
@@ -257,5 +258,27 @@ public class HistoriqueService {
         }finally {
             session.close();
         }
+        return sessionUser;
     }
+
+    public static SessionUser deleteAllExerciceSessions(SessionUser su){
+        Session session = getSession();
+        Transaction tx = null;
+        SessionUser sessionUser = null;
+        try {
+            sessionUser = (SessionUser) session.get(SessionUser.class, su.getIdS());
+            sessionUser.getExerciceSessions().clear();
+            session.update(sessionUser);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null)
+                System.out.println("rollback");
+            tx.rollback();
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+        return sessionUser;
+    }
+
 }
