@@ -22,11 +22,11 @@ public class Main {
             switch (i) {
                 case 1:
                     user = LoginConsole.login();
-                    error = user != null;
+                    error = user == null;
                     break;
                 case 2:
                     user = RegisterConsole.register();
-                    error = user != null;
+                    error = user == null;
                     break;
                 default:
                     System.out.println("Une erreur est survenue durant votre saisie !");

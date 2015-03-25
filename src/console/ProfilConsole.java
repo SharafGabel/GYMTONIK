@@ -6,49 +6,41 @@ import service.ProfilService;
 import java.util.Scanner;
 
 public class ProfilConsole {
-    public static void profilRouting(AUser user, int scenario){
+    public static void profilRouting(AUser user){
         boolean error = true; int entry = 0;
         while(error) {
-            switch (scenario) {
-                case 1:
-                    Scanner sc = new Scanner(System.in);
-                    Scanner sc2 = new Scanner(System.in);
-                    try{
-                        entry = sc.nextInt();
-                        System.out.println(entry);
-                        error = false;
-                    }catch (Exception e){
-                    }
-                    switch (entry){
-                        case 1:
-                            System.out.println("Entrez votre nouveau nom d'utilisateur: ");
-                            String username = sc2.nextLine();
-                            ProfilService.changeUsername(user, username);
-                            break;
-                        case 2:
-                            System.out.println("Entrez votre nouveau mail: ");
-                            String email = sc2.nextLine();
-                            ProfilService.changeEmail(user, email);
-                            break;
-                        case 3:
-                            System.out.println("Entrez votre nouvelle taille : ");
-                            int height = sc2.nextInt();
-                            ProfilService.changeHeight(user, height);
-                            break;
-                        case 4:
-                            System.out.println("Entrez votre nouveau poid: ");
-                            int weight = sc2.nextInt();
-                            ProfilService.changeWeight(user, weight);
-                            break;
-                        case 5:
-                            error = false;
-                            break;
-                        default:
-                            System.out.println("Veuillez entre un nombre entre 1 et 4");
-                            break;
-                    }
-                    break;
+            Scanner sc = new Scanner(System.in);
+            Scanner sc2 = new Scanner(System.in);
 
+            entry = sc.nextInt();
+
+            switch (entry){
+                case 1:
+                    System.out.println("Entrez votre nouveau nom d'utilisateur : ");
+                    String username = sc2.nextLine();
+                    ProfilService.changeUsername(user, username);
+                    break;
+                case 2:
+                    System.out.println("Entrez votre nouveau mail : ");
+                    String email = sc2.nextLine();
+                    ProfilService.changeEmail(user, email);
+                    break;
+                case 3:
+                    System.out.println("Entrez votre nouvelle taille : ");
+                    int height = sc2.nextInt();
+                    ProfilService.changeHeight(user, height);
+                    break;
+                case 4:
+                    System.out.println("Entrez votre nouveau poid : ");
+                    int weight = sc2.nextInt();
+                    ProfilService.changeWeight(user, weight);
+                    break;
+                case 5:
+                    error = false;
+                    break;
+                default:
+                    System.out.println("Veuillez entre un nombre entre 1 et 4");
+                    break;
             }
         }
     }
@@ -71,6 +63,6 @@ public class ProfilConsole {
         System.out.println("4 - Modifier votre poid");
         System.out.println("5 - Retour");
 
-        profilRouting(user, 1);
+        profilRouting(user);
     }
 }
