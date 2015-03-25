@@ -109,11 +109,10 @@ public class SessionService {
         Session session = getSession();
         Transaction tx = null;
         try{
-            tx = session.beginTransaction();
             SessionUser sessionUser = SessionService.getSessionById(idS);
             ATraining exercise = ExerciseService.getExercise(idEx);
+            tx = session.beginTransaction();
             ExerciceSession exerciceSession = new ExerciceSession(sessionUser, exercise);
-            session.saveOrUpdate(exerciceSession);
             session.saveOrUpdate(sessionUser);
             tx.commit();
             return true;
@@ -230,4 +229,23 @@ public class SessionService {
         }
     }
 
+    public static SessionUser cleanSession(SessionUser sessionUser) {
+        Session session = getSession();
+        Transaction tx = null;
+        try{
+            for(ExerciceSession es: sessionUser.getExerciceSessions()){
+                HistoriqueService.deleteExerciceSession(es, sessionUser);
+            }
+            tx  = session.beginTransaction();
+            session.update(sessionUser);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+        return sessionUser;
+    }
 }

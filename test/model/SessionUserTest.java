@@ -44,6 +44,7 @@ public class SessionUserTest {
 
         SessionService.deleteSession(sessionUser);
         sessionUser = SessionService.getSessionById(sessionUser.getIdS());
+        assert (sessionUser == null);
         testDelete = true;
     }
 
@@ -72,8 +73,7 @@ public class SessionUserTest {
 
    @AfterMethod
     public void tearDown() throws Exception {
-        if (!testDelete) {
+        if (!testDelete)
             SessionService.deleteSession(sessionUser);
-        }
     }
 }
