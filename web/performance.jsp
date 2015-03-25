@@ -120,6 +120,7 @@
                     }
                 },
 
+                
                 series: [{
                     type: 'line',
                     name: 'performance',
