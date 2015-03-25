@@ -275,7 +275,31 @@ public class ExerciseService {
         return getExercises();
     }
     //endregion
-    
+
+    //region getNext or Previous LevelOfThisExercise
+    public static ATraining getNextOrPreviousLevelOfThisExercises(ATraining exercise,int level)
+    {
+        Session session = getSession();
+        List<ATraining> exerciseA = null;
+
+        try {
+            Transaction tx = session.getTransaction();
+            tx.begin();
+            Query query = session.createQuery("Select e from Exercise e where e.name=(:exercice) and e.explanation=(:description) and e.niveau=(:niveau)");
+            query.setParameter("exercice",exercise.getName());
+            query.setParameter("description",exercise.getExplanation());
+            query.setParameter("niveau",level);
+            exerciseA = query.list();
+            tx.commit();
+        } catch (Exception e) {
+        }
+        finally {
+            session.close();
+        }
+        return exerciseA.get(0);
+    }
+    //endregion
+
     public static ATraining getExercise(int idEx,int test) {
         Session session = getSession();
         Transaction tx = null;

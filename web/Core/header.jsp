@@ -183,6 +183,9 @@
                         <li>
                             <a class="menuButton center" href="../generate_seance.jsp">Générer une séance</a>
                         </li>
+                        <li>
+                            <a class="menuButton center" href="../Session/evaluateSession.jsp">Evaluer une séance</a>
+                        </li>
                     </ul>
                 </li>
                 <li class="divider-vertical"></li>

@@ -31,6 +31,36 @@ public class HistoriqueService {
         return ourSessionFactory.openSession();
     }
 
+    //region update ExerciceSession
+    public static boolean updateHistorique(int idS, ATraining exercise,ATraining newExercise) {
+        SessionUser sessionUser = SessionService.getSessionById(idS);
+        Session session = getSession();
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+            Query query = session.createQuery("Select h from ExerciceSession h where h.sessionUser.idS=(:idSession) and h.training.id=(:idEx)");
+            query.setParameter("idSession",idS);
+            query.setParameter("idEx",exercise.getId());
+
+            List<ExerciceSession> exerciceSession1 = query.list();
+            ExerciceSession exerciceSession = (ExerciceSession)session.get(ExerciceSession.class,exerciceSession1.get(0).getId());
+            exerciceSession.setTraining(null);
+            exerciceSession.setTraining(newExercise);
+            session.update(exerciceSession);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+            return false;
+        }finally {
+            session.close();
+        }
+    }
+    //endregion
+
     public static List<SessionUser> getSessionUserNotHaveThisExercise(ATraining exercise, User user) {
         Session session = getSession();
         Transaction tx = null;
@@ -208,30 +238,6 @@ public class HistoriqueService {
         return exerciceSession.get(0);
     }
 
-    /*à terminer*/
-    public static boolean updateHistorique(int idS, ATraining exercise) {
-        SessionUser sessionUser = SessionService.getSessionById(idS);
-        Session session = getSession();
-        Transaction tx = null;
-
-        try {
-            tx = session.beginTransaction();
-
-            ExerciceSession exerciceSession1 = new ExerciceSession(sessionUser,exercise);
-
-            session.save(exerciceSession1);
-            tx.commit();
-            return true;
-        } catch (Exception e) {
-            if (tx != null)
-                tx.rollback();
-            e.printStackTrace();
-            return false;
-        }finally {
-            session.close();
-        }
-
-    }
 
     public static void deleteExerciceSession(ExerciceSession es) {
         Session session = getSession();

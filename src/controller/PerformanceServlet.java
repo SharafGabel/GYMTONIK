@@ -20,23 +20,26 @@ public class PerformanceServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int numSeance = Integer.parseInt(request.getParameter("seanceId"));
+        System.out.println("num Seance :"+numSeance);
         int nbRepetReussi = Integer.parseInt(request.getParameter("repetReussi"));
         int dureeEff = Integer.parseInt(request.getParameter("dureeEffectuee"));
         int result = dureeEff+nbRepetReussi/2;
+        System.out.println("Result"+result);
         int niveau = Integer.parseInt(request.getParameter("niveau"));
         int idExercise = Integer.parseInt(request.getParameter("idExo"));
 
-        ATraining exercise;
+        ATraining exercise = ExerciseService.getExercise(idExercise);
+        ATraining exerciseMAJ = null;
         if(result >70 && niveau!=3){
-            exercise = ExerciseService.getExercise(idExercise,niveau+1);
-            HistoriqueService.updateHistorique(numSeance,exercise);
+            exerciseMAJ = ExerciseService.getNextOrPreviousLevelOfThisExercises(exercise,niveau+1);
+            HistoriqueService.updateHistorique(numSeance,exercise,exerciseMAJ);
         }
         else if(result <30 && niveau!=1){
-            exercise = ExerciseService.getExercise(idExercise,niveau-1);
-            HistoriqueService.updateHistorique(numSeance,exercise);
+            exerciseMAJ = ExerciseService.getNextOrPreviousLevelOfThisExercises(exercise,niveau-1);
+            HistoriqueService.updateHistorique(numSeance,exercise,exerciseMAJ);
         }
-        request.getRequestDispatcher("performance.jsp").include(request, response);
-        response.getWriter().println("Evaluation effectuée");
+        request.getRequestDispatcher("/Session/evaluateSession.jsp").include(request, response);
+        //response.getWriter().println("<h1 class=\"center\">Evaluation effectuée</h1>");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
