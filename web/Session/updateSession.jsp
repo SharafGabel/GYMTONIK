@@ -1,5 +1,6 @@
 <%@ page import="model.ATraining" %>
 <%@ page import="model.SessionUser" %>
+<%@ page import="model.ExerciceSession" %>
 <%@ page import="service.ExerciseService" %>
 <%@ page import="service.SessionService" %>
 <%@ page import="java.util.List" %>
@@ -25,7 +26,7 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-            <form id="sessionForm" name="sessionForm" method="post" action="SessionServlet">
+            <form id="sessionForm" name="sessionForm" method="post" action="../SessionServlet">
                 <input type="hidden" name="action" value="updateSessionAction" />
                 <input type="hidden" name="sessionId" value="<%= sessionId %>" />
                 <h1>Modifier une séance</h1>
@@ -37,13 +38,23 @@
                         $('#datepicker').datepicker({ dateFormat: 'dd-mm-yy' });
                     });
                 </script>
-                <input type='text' id='datepicker' name='datepicker' class="form-control" value="<%=sessionUser.getName()%>"/>
+                <input type='text' id='datepicker' name='datepicker' class="form-control" value="<%=sessionUser.getDateProgram()%>"/>
                 <%
+                    boolean done = false;
                     for(ATraining training:trainingList)
                     {
+                        done = false;
+                        for(ExerciceSession es:sessionUser.getExerciceSessions()){
+                            if(es.getTraining().getId() == training.getId()){
+                                done = true;
                 %>
-                <input class="checkbox" type="checkbox" name="checkBoxTraining" value="<%=training.getId()%>"><%=training.getName()%><%=training.getNiveau()%>
-                <%  }%>
+                                <input class="checkbox" type="checkbox" name="checkBoxTraining" value="<%=training.getId()%>" checked><%=training.getName()%><%=training.getNiveau()%>
+                <%          }
+                        }
+                        if(!done){
+                            %><input class="checkbox" type="checkbox" name="checkBoxTraining" value="<%=training.getId()%>"><%=training.getName()%><%=training.getNiveau()%><%
+                        }
+                    }%>
                 <input type="submit" class="btn btn-small btn-warning" value="Modifier"/>
             </form>
         </div>

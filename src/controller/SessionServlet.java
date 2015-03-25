@@ -72,7 +72,7 @@ public class SessionServlet extends HttpServlet {
             try {
                 sessionProgram = formatter.parse(request.getParameter("datepicker"));
             } catch(ParseException pe){
-                this.getServletContext().getRequestDispatcher("/createSession.jsp").forward( request, response );//redirection
+                this.getServletContext().getRequestDispatcher("/updateSession.jsp").forward( request, response );//redirection
             }
             sessionUser.setDateProgram(sessionProgram);
             if(request.getParameter("checkBoxTraining") != null) {
