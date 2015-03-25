@@ -33,7 +33,7 @@ public class SessionUser implements Serializable {
     @JoinColumn(name="userId",nullable=false)
     private AUser user;
 
-    @OneToMany(cascade={CascadeType.ALL})
+    @OneToMany(cascade={CascadeType.ALL},orphanRemoval=true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<ExerciceSession> exerciceSessions;
 
@@ -78,6 +78,10 @@ public class SessionUser implements Serializable {
 
     public List<ExerciceSession> getExerciceSessions() {
         return exerciceSessions;
+    }
+
+    public void addExerciceSession(ExerciceSession es){
+        this.exerciceSessions.add(es);
     }
 
     public void setExerciceSessions(List<ExerciceSession> exerciceSessions) {

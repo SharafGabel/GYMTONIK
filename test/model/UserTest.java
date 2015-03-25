@@ -1,70 +1,90 @@
 package model;
 
-import controller.LoginServlet;
-import controller.RegisterServlet;
-import org.hibernate.Session;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import service.LoginService;
+import service.ProfilService;
 import service.RegisterService;
-import util.HibernateUtil;
-
-import static org.testng.Assert.*;
 
 public class UserTest {
-    User user;
-    User userNoDb;
+    private boolean testDelete;
+    private User user;
+
+    @DataProvider(name = "create")
+    public static Object[][] baseUser() {
+        return new Object[][] {{"Test", "test@gymtonik.fr", "test"}};
+    }
 
     @BeforeMethod
     public void setUp() throws Exception {
-
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        user= (User)session.get(User.class,2);
-        userNoDb = new User("sharaf","sharaf@gmail.com","sharaf");
+        testDelete = false;
     }
 
     @AfterMethod
     public void tearDown() throws Exception {
+        if (!testDelete)
+            ProfilService.deleteUser(user);
     }
 
-    @Test
-    public void testUser(){
-        User user = new User("sharaf","sharaf@gmail.com","sharaf");
-        assertEquals("sharaf",user.getUsername());
-        testGetEmail();
-        testValidatePassword();
+    @Test(dataProvider = "create")
+    public void testCreateUser(String username, String email, String password) {
+        user = new User(username, email, password);
+        RegisterService.register(user);
+
+        user = LoginService.getUserByUsername(username);
+
+        assert (user != null);
     }
 
-    @Test
-    public void testGetUsername(){
-        assertEquals("Yoshi",user.getUsername());
+    @Test(dataProvider = "create")
+    public void testDeleteUser(String username, String email, String password) {
+        user = new User(username, email, password);
+        RegisterService.register(user);
+
+        user = LoginService.getUserByUsername(username);
+        ProfilService.deleteUser(user);
+
+        user = LoginService.getUserByUsername(username);
+        assert(user == null);
+
+        testDelete = true;
     }
 
-    @Test
-    public void testGetEmail(){
-        assertEquals("yoshi@gmail.com",user.getEmail());
+    @Test(dataProvider = "create")
+    public void testUpdateUsername(String username, String email, String password) {
+        user = new User(username, email, password);
+        RegisterService.register(user);
+
+        user = LoginService.getUserByUsername(username);
+        ProfilService.changeUsername(user, "Test!");
+
+        user = LoginService.getUserByUsername(username);
+        assert (user.getUsername().equals("Test!"));
     }
 
-    @Test
-    public void testValidatePassword(){
-        assertFalse(user.validatePassword("wrongpass"));
-        assertTrue(user.validatePassword("yoshi"));
-    }
-    
-    @Test 
-    public void testRegisterUser(){
-        //assertTrue(RegisterService.register(user));
-        //Attention : avant chaque test modifier les champs de l'user (car il peut etre déja présent dans la base)
-        assertTrue(RegisterServlet.register(userNoDb.getUsername(),userNoDb.getEmail(),userNoDb.getPassword(),userNoDb.getEmail(),"175","50"));
-    }
-    
+    @Test(dataProvider = "create")
+    public void testUpdateEmail(String username, String email, String password) {
+        user = new User(username, email, password);
+        RegisterService.register(user);
 
-    @Test
-    public void testUserExist(){
-        assertFalse(RegisterServlet.register(user.getUsername(),user.getEmail(),user.getPassword(),user.getEmail(),"170","100"));
+        user = LoginService.getUserByUsername(username);
+        ProfilService.changeEmail(user, "test1@gymtonik.fr");
+
+        user = LoginService.getUserByUsername(username);
+        assert (user.getEmail().equals("test1@gymtonik.fr"));
     }
-    
-   
-    
+
+    @Test(dataProvider = "create")
+    public void testUpdatePassword(String username, String email, String password) {
+        user = new User(username, email, password);
+        RegisterService.register(user);
+
+        user = LoginService.getUserByUsername(username);
+        ProfilService.changePassword(user, "test1");
+
+        user = LoginService.getUserByUsername(username);
+        assert (user.validatePassword("test1"));
+    }
 }

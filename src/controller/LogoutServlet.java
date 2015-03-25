@@ -8,9 +8,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-/**
- * Created by kuga on 23/02/2015.
- */
 public class LogoutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -20,11 +17,11 @@ public class LogoutServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out=response.getWriter();
 
-        request.getRequestDispatcher("welcome.jsp").include(request, response);
+
 
         HttpSession session=request.getSession();
         session.invalidate();
-
+        response.sendRedirect("/Core/welcome.jsp");
         out.print("You are successfully logged out!");
 
         out.close();

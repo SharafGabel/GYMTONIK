@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet{
                 request.getRequestDispatcher("accueil.jsp").include(request, response);
             }
             else {
-                request.getRequestDispatcher("welcome.jsp").include(request, response);
+                request.getRequestDispatcher("/Core/welcome.jsp").include(request, response);
                 out.println("Mauvaise combinaison Username/Mot de passe");
             }
 

@@ -125,9 +125,9 @@
     <div class="modal-dialog modal-lg" style="width: 450px;">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title label label-info modalFS" id="mySmallModalLabel">Se connecter</h2>
+                <h2 class="modal-title label label-success modalFS" id="mySmallModalLabel">Se connecter</h2>
             </div>
-            <div class="modal-body">
+            <div class="modal-body center">
                 <form id="formLogin" class="form-horizontal" name="formLogin" method="post" action="../LoginServlet">
                     <label>Nom d'utilisateur</label>
                     <input class="form-control" type="text" name="username" id="username" placeholder="Nom d'utilisateur" />
@@ -135,7 +135,7 @@
                     <label>Mot de Passe</label>
                     <input class="form-control" type="password" name="password" id="password" placeholder="Mot de Passe" />
 
-                    <button class="btn btn-small btn-success" type="submit">Log in</button>
+                    <button class="btn btn-small btn-success" style="margin-top: 4px;" type="submit">Log in</button>
                 </form>
             </div>
         </div>
@@ -143,16 +143,16 @@
 </div>
 <%}%>
     <header>
-        <div class="center"><h2>GymTonik</h2></div>
+        <div class="center"><img src="/assets/img/logo.png" alt="Logo" id="header-logo"/></div>
         <div class="floatRight">
             <%
                 if(request.getSession().getAttribute("User")==null){
             %>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myLoginModal">Se connecter</button>
+            <button type="button" class="btn btn-success" style="margin-top: -49px;margin-right: 30px;" data-toggle="modal" data-target="#myLoginModal">Se connecter</button>
             <%}
                 else{
             %>
-            <a href="LogoutServlet" class="label-info" >Se Déconecter</a>
+            <a href="../LogoutServlet" style="margin-top: -49px;margin-right: 30px;" class="btn btn-success" >Se Déconnecter</a>
             <%}%>
         </div>
     </header>
@@ -177,10 +177,13 @@
                             <a class="menuButton center" href="../Session/createSession.jsp">Créer une séance</a>
                         </li>
                         <li>
-                            <a class="menuButton center" href="../seance_done.jsp">Valider une séance</a>
+                            <a class="menuButton center" href="../Session/seance_done.jsp">Valider une séance</a>
                         </li>
                         <li>
-                            <a class="menuButton center" href="../generate_seance.jsp">Générer une séance</a>
+                            <a class="menuButton center" href="../Session/generate_seance.jsp">Générer une séance</a>
+                        </li>
+                        <li>
+                            <a class="menuButton center" href="../Session/evaluateSession.jsp">Evaluer une séance</a>
                         </li>
                     </ul>
                 </li>

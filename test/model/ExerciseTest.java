@@ -12,10 +12,6 @@ import java.util.List;
 
 public class ExerciseTest {
     private final static String NAME_MOD = "Exercice de test BIS";
-    private final static String DESCR_MOD ="Description de test BIS";
-    private final static int LENGHT_MOD = 11;
-    private final static int NB_REP_MOD = 26;
-    private final static int LEVEL_MOD = 2;
 
     private boolean testDelete;
     private ATraining exercise;
@@ -52,26 +48,31 @@ public class ExerciseTest {
         exercise = ExerciseService.createExercise(user, name, descr, lenght, nbRep, niveau, muscles);
 
         exercise.setName(NAME_MOD);
-        exercise.setExplanation(DESCR_MOD);
-        exercise.setDureeExo(LENGHT_MOD);
-        exercise.setNbRepetition(NB_REP_MOD);
-        exercise.setNiveau(LEVEL_MOD);
 
-        assert (ExerciseService.updateExercise(exercise, muscles));
+        ExerciseService.updateExercise(exercise, muscles);
+        exercise = ExerciseService.getExercise(exercise.getId());
+
+        assert (exercise.getName().equals(NAME_MOD));
     }
 
     @Test(dataProvider = "create")
     public void testUpdateExerciseParams(String name, String descr, int lenght, int nbRep, int niveau) {
         exercise = ExerciseService.createExercise(user, name, descr, lenght, nbRep, niveau, muscles);
 
-        assert (ExerciseService.updateExercise(exercise.getId(), name, lenght, nbRep, descr, muscles));
+        ExerciseService.updateExercise(exercise.getId(), NAME_MOD, lenght, nbRep, descr, muscles);
         exercise = ExerciseService.getExercise(exercise.getId());
+
+        assert (exercise.getName().equals(NAME_MOD));
     }
 
     @Test(dataProvider = "create")
     public void testDeleteExercise(String name, String descr, int lenght, int nbRep, int niveau) {
         testDelete = true;
         exercise = ExerciseService.createExercise(user, name, descr, lenght, nbRep, niveau, muscles);
-        assert (ExerciseService.deleteExercise(user, exercise));
+
+        ExerciseService.deleteExercise(user, exercise);
+        exercise = ExerciseService.getExercise(exercise.getId());
+
+        assert (exercise == null);
     }
 }

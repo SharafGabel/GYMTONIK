@@ -2,6 +2,19 @@ a {
     text-decoration: none !important;
     color:black;
 }
+
+.container{
+    margin-top: 40px !important;
+}
+
+.mb25{
+    margin-bottom: 25px !important;
+}
+
+.mt25{
+    margin-top: 25px !important;
+}
+
 .center {
     text-align:center;
 }
@@ -70,6 +83,11 @@ ul .dropdown-menu {
 .centered-pills li { display:inline; }
 .centered-pills a { float:left; }
 
+#header-logo {
+    max-width: 300px;
+    height: auto;
+    margin: 10px;
+}
 
 
 * html .centered-pills ul.nav-pills { display:inline; } /* IE6 */

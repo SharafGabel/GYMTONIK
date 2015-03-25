@@ -152,6 +152,10 @@ public abstract class ATraining implements Serializable {
         this.exerciceSessions = exerciceSessions;
     }
 
+    public void addExerciceSession(ExerciceSession es){
+        this.exerciceSessions.add(es);
+    }
+
 
 
 //endregion

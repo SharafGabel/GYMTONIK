@@ -3,8 +3,10 @@ package controller;
 import model.AMuscle;
 import model.ATraining;
 import model.SessionUser;
+import model.ExerciceSession;
 import model.User;
 import service.ExerciseService;
+import service.HistoriqueService;
 import service.MuscleService;
 import service.SessionService;
 
@@ -50,11 +52,11 @@ public class SessionServlet extends HttpServlet {
                         SessionService.addOrUpdateExToSession(sessionUser,exerciseList.get(i));
                     }
                     out.println("<h1>"+sessionUser.getName()+" générée avec "+nbExo+" exercices</h1>");
-                    request.getRequestDispatcher("showSessions.jsp").forward(request, response);
+                    request.getRequestDispatcher("/Session/showSessions.jsp").forward(request, response);
                 }
                 else {
                     out.println("<h1>Sélectionnez au moins 1 Muscle<h1>");
-                    request.getRequestDispatcher("generate_seance.jsp").forward(request, response);
+                    request.getRequestDispatcher("/Session/generate_seance.jsp").forward(request, response);
                 }
             }
 
@@ -64,41 +66,44 @@ public class SessionServlet extends HttpServlet {
             this.deleteSession(sessionUser);
             this.getServletContext().getRequestDispatcher("/Session/showSessions.jsp").forward( request, response );//redirection
         }
-        else if(action.equals("updateSession")){
-            SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yy");
+        else if(action.equals("updateSessionAction")){
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-dd-mm");
             SessionUser sessionUser = SessionService.getSessionById(Integer.parseInt(request.getParameter("sessionId")));
             sessionUser.setName(request.getParameter("sessionName"));
             Date sessionProgram = new Date();
+            System.out.println("sessionUser" + sessionUser.getIdS());
             try {
                 sessionProgram = formatter.parse(request.getParameter("datepicker"));
             } catch(ParseException pe){
-                this.getServletContext().getRequestDispatcher("/createSession.jsp").forward( request, response );//redirection
+                this.getServletContext().getRequestDispatcher("/updateSession.jsp").forward( request, response );//redirection
             }
             sessionUser.setDateProgram(sessionProgram);
-            if(request.getParameter("checkBoxTraining") != null) {
-                String[] selectedTrainings = request.getParameterValues("checkBoxTraining");
-                for(String selectedTraining : selectedTrainings) {
-                    SessionService.addOrUpdateExToSession(sessionUser.getIdS(),Integer.parseInt(selectedTraining));
+            String[] selectedTrainings = request.getParameterValues("checkBoxTraining");
+            SessionService.cleanSession(sessionUser);
+            if(selectedTrainings != null) {
+                for (String selectedTraining : selectedTrainings) {
+                    SessionService.addOrUpdateExToSession(sessionUser.getIdS(), Integer.parseInt(selectedTraining));
                 }
             }
 
-            this.updateSession(sessionUser);
+
+           // this.updateSession(sessionUser);
             this.getServletContext().getRequestDispatcher("/Session/showSessions.jsp").forward( request, response );//redirection
         }
         else if(action.equals("createSession")){
             this.getServletContext().getRequestDispatcher("/Session/createSession.jsp").forward( request, response );//redirection
         }
         else if(action.equals("createSessionAction")){
-            SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yy");
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-dd-mm");
             String sessionName = request.getParameter("sessionName");
             Date sessionProgram = new Date();
             try {
                 sessionProgram = formatter.parse(request.getParameter("datepicker"));
             } catch(ParseException pe){
-                this.getServletContext().getRequestDispatcher("/createSession.jsp").forward( request, response );//redirection
+                this.getServletContext().getRequestDispatcher("/Session/createSession.jsp").forward( request, response );//redirection
             }
             SessionUser sessionUser = new SessionUser(sessionName, sessionProgram);
-            SessionService.createSession((User) request.getSession().getAttribute("User"), sessionUser);
+           sessionUser = SessionService.createSession((User) request.getSession().getAttribute("User"), sessionUser);
 
             if(request.getParameter("checkBoxTraining") != null) {
                 String[] selectedTrainings = request.getParameterValues("checkBoxTraining");
@@ -108,35 +113,9 @@ public class SessionServlet extends HttpServlet {
             }
             this.getServletContext().getRequestDispatcher("/Session/showSessions.jsp").forward( request, response );//redirection
         }
-        else {
-            try {
-                out.println("<html>");
-                out.println("<head>");
-                out.println("</head>");
-                out.println("<body>");
-                out.println("<center>");
-
-                HttpSession session = request.getSession();
-                User user = (User)session.getAttribute("User");
-
-                if (addSession(user)) {
-                    response.sendRedirect("exercise.jsp");
-                }
-                else {
-                    response.sendRedirect("showSessions.jsp");
-                }
-
-                out.println("</center>");
-                out.println("</body>");
-                out.println("</html>");
-            } finally {
-                out.close();
-            }
-        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 
 

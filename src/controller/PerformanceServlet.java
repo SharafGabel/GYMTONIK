@@ -6,6 +6,7 @@ import service.ExerciseService;
 import service.HistoriqueService;
 import service.PerformanceService;
 import util.GsonExclusionStrategy;
+import util.ObjectForGson;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,27 +20,30 @@ public class PerformanceServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int numSeance = Integer.parseInt(request.getParameter("seanceId"));
+        System.out.println("num Seance :"+numSeance);
         int nbRepetReussi = Integer.parseInt(request.getParameter("repetReussi"));
         int dureeEff = Integer.parseInt(request.getParameter("dureeEffectuee"));
         int result = dureeEff+nbRepetReussi/2;
+        System.out.println("Result"+result);
         int niveau = Integer.parseInt(request.getParameter("niveau"));
         int idExercise = Integer.parseInt(request.getParameter("idExo"));
 
-        ATraining exercise;
+        ATraining exercise = ExerciseService.getExercise(idExercise);
+        ATraining exerciseMAJ = null;
+
         if(result >70 && niveau!=3){
-            exercise = ExerciseService.getExercise(idExercise,niveau+1);
-            HistoriqueService.updateHistorique(numSeance,exercise);
+            exerciseMAJ = ExerciseService.getNextOrPreviousLevelOfThisExercises(exercise,niveau+1);
+            HistoriqueService.updateHistorique(numSeance,exercise,exerciseMAJ);
         }
         else if(result <30 && niveau!=1){
-            exercise = ExerciseService.getExercise(idExercise,niveau-1);
-            HistoriqueService.updateHistorique(numSeance,exercise);
+            exerciseMAJ = ExerciseService.getNextOrPreviousLevelOfThisExercises(exercise,niveau-1);
+            HistoriqueService.updateHistorique(numSeance,exercise,exerciseMAJ);
         }
-        request.getRequestDispatcher("performance.jsp").include(request, response);
-        response.getWriter().println("Evaluation effectuée");
+        request.getRequestDispatcher("/Session/evaluateSession.jsp").include(request, response);
+        //response.getWriter().println("<h1 class=\"center\">Evaluation effectuée</h1>");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
             User user = (User) request.getSession().getAttribute("User");
             Integer idExercise = Integer.parseInt(request.getParameter("exerciseid"));
 
@@ -58,17 +62,20 @@ public class PerformanceServlet extends HttpServlet {
                 //System.out.println(jsonString);
             }
             else if(choiceFromPerformance.equals("compare_performance")){
+                Integer seanceId = Integer.parseInt(request.getParameter("seanceId"));
 
-                List<ExerciceSession> listofUserExercise = PerformanceService.getPerfFromExerciseId(idExercise);
-                List<ExerciceSession> avgPerf = PerformanceService.getAveragePerfFromExerciseId(idExercise);
-                List<ExerciceSession> listPerformance = new ArrayList<ExerciceSession>();
+
+                List<ExerciceSession> listofUserExercise = PerformanceService.getPerfFromExerciseId(idExercise,seanceId);
+                
+                Double avgPerf = PerformanceService.getAveragePerfFromExerciseId(idExercise);
                 Gson gson = GsonExclusionStrategy.createGsonFromBuilder(new GsonExclusionStrategy(SessionUser.class),new GsonExclusionStrategy(ATraining.class));
 
-                //listofUserExercise.addAll(avgPerf);
-                //listPerformance.addAll(listofUserExercise);
-                //listPerformance.addAll(avgPerf);
-                String jsonString = gson.toJson(listofUserExercise);
-                //String jsonString2 = gson.toJson(avgPerf);
+                ObjectForGson jsonGenerator = new ObjectForGson(listofUserExercise,avgPerf);
+                
+
+                String jsonString = gson.toJson(jsonGenerator);
+                System.out.println(jsonString);
+                //String jsonString2 = gson.toJson(avgPerf);x
 
                 response.setContentType("application/json");
 

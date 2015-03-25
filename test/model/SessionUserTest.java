@@ -1,101 +1,79 @@
 package model;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import service.ExerciseService;
+import service.LoginService;
 import service.SessionService;
-import util.HibernateUtil;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
-import static org.testng.Assert.*;
 
 public class SessionUserTest {
 
-    AMuscle m1;
-    AMuscle m2;
-    AMuscle m3;
-    List<AMuscle> select;
-    List<ATraining> exerciseList;
-    SessionUser sessionUser;
-    User user;
-    int niveau;
-    int nbExo;
+    private boolean testDelete;
+    private AUser user;
+    private List<ATraining> exercises;
+    private SessionUser sessionUser;
 
-    private static final SessionFactory ourSessionFactory;
-    private static final ServiceRegistry serviceRegistry;
-
-    static {
-        try {
-            Configuration configuration = new Configuration();
-            configuration.configure();
-
-            serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
-            ourSessionFactory = configuration.buildSessionFactory(serviceRegistry);
-        } catch (Throwable ex) {
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
-    private static Session getSession() throws HibernateException {
-        return ourSessionFactory.openSession();
+    @DataProvider(name = "create")
+    public static Object[][] baseSession() {
+        return new Object[][] {{"Séance de test", 2015, 03, 25}};
     }
 
     @BeforeMethod
     public void setUp() throws Exception {
-
-        Session session = getSession();
-        m1 = (AMuscle)session.get(AMuscle.class,1);// on récupère le muscle trapeze
-        m2 = (AMuscle)session.get(AMuscle.class,2);// on récupère le muscle deltoide
-        m3 = (AMuscle)session.get(AMuscle.class,7);// on récupère le muscle deltoide
-
-        user= (User)session.get(User.class,1);
-        select = new ArrayList<AMuscle>();
-        exerciseList = new ArrayList<ATraining>();
-        select.add(m1);
-        select.add(m2);
-        select.add(m3);
-        niveau = 2;
-        nbExo = 3;
-
+        testDelete = false;
+        user = LoginService.getUserByUsername("axel");
+        exercises = ExerciseService.getExercises();
     }
 
-   @Test
-   public void testListMuscle(){
-       assertFalse(select.isEmpty()); // on test si la liste des muscles est vide
-   }
-/*
-    @Test
-    public void testGetExercicesFromMuscle(){
-        assertEquals(exerciseList,ExerciseService.getExercisesFromMuscles(select, niveau));
+    @Test(dataProvider = "create")
+    public void testCreateSession(String name, int year, int month, int day) {
+        sessionUser = new SessionUser(name, new Date(year, month, day));
+        sessionUser = SessionService.createSession((User)user, sessionUser);
+        assert (sessionUser.getIdS() != null);
     }
 
-    @Test
-    public void testAjoutSeance(){
-        assertEquals(sessionUser,SessionService.addSessionUser(user));
-    }
-*/
-    @Test
-    public void testGenerateSeance(){
-            exerciseList = ExerciseService.getExercisesFromMuscles(select, niveau);
-            sessionUser = SessionService.addSessionUser(user);
+    @Test(dataProvider = "create")
+    public void testDeleteSession(String name, int year, int month, int day) {
+        sessionUser = new SessionUser(name, new Date(year, month, day));
+        sessionUser = SessionService.createSession((User)user, sessionUser);
 
-             if (nbExo > exerciseList.size())
-                nbExo = exerciseList.size();
-             for (int i = 0; i < nbExo; i++) {
-               assertTrue(SessionService.addOrUpdateExToSession(sessionUser,exerciseList.get(i)));
-             }
+        SessionService.deleteSession(sessionUser);
+        sessionUser = SessionService.getSessionById(sessionUser.getIdS());
+        assert (sessionUser == null);
+        testDelete = true;
     }
 
-    @AfterMethod
+    @Test(dataProvider = "create")
+    public void testUpdateSession(String name, int year, int month, int day) {
+        sessionUser = new SessionUser(name, new Date(year, month, day));
+        sessionUser = SessionService.createSession((User)user, sessionUser);
+
+        sessionUser.setName("Titre modifié");
+        SessionService.updateSession(sessionUser);
+
+        sessionUser = SessionService.getSessionById(sessionUser.getIdS());
+        assert (sessionUser.getName().equals("Titre modifié"));
+    }
+
+    @Test(dataProvider = "create")
+    public void testAddExercises(String name, int year, int month, int day) {
+        sessionUser = new SessionUser(name, new Date(year, month, day));
+        sessionUser = SessionService.createSession((User)user, sessionUser);
+
+        SessionService.addOrUpdateExToSession(sessionUser, exercises.get(0));
+        sessionUser = SessionService.getSessionById(sessionUser.getIdS());
+
+        assert (sessionUser.getExerciceSessions().size() > 0);
+    }
+
+   @AfterMethod
     public void tearDown() throws Exception {
-
+        if (!testDelete)
+            SessionService.deleteSession(sessionUser);
     }
 }

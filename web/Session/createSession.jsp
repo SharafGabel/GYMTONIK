@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-            <form id="createSession" name="createSession" method="post" action="SessionServlet">
+            <form id="createSession" name="createSession" method="post" action="../SessionServlet">
                 <input type="hidden" name="action" value="createSessionAction" />
                 <h1>Création d'une séance d'entraînement</h1>
                 <label>Nom de la séance</label>
@@ -29,15 +29,43 @@
                     });
                 </script>
                 <input type='text' id='datepicker' name='datepicker' class="form-control" placeholder="Date de la session"/>
-                <%
-                    for(ATraining training:trainingList)
-                    {
-                %>
-                <input class="checkbox" type="checkbox" name="checkBoxTraining" value="<%=training.getId()%>"><%=training.getName()%><%=training.getNiveau()%>
-                <%  }%>
-                <input type="submit" class="btn btn-small btn-warning" value="Créer"/>
+                <label class="mt25">Exercices dans la séance</label><br/>
+                <div class="list-group" id="selectedExercices">
+                </div>
+                <label class="mt25">Autres exercices</label><br/>
+                <div class="list-group" id="exercices">
+                    <%
+                        for(ATraining training:trainingList)
+                        {
+                    %>
+                    <div id="<%=training.getId()%>" class="list-group item" value="<%=training.getId()%>">
+                        <%=training.getName()%><%=training.getNiveau()%>
+                        <input id="input<%=training.getId()%>" type="hidden" name="" value="<%=training.getId()%>"/>
+                        <a class="glyphicon glyphicon-plus floatRight" onclick="change(<%=training.getId()%>)"></a>
+                    </div>
+                    <%
+
+                        }
+                    %>
+                </div>
+                <input type="submit" class="btn btn-small btn-success" value="Créer"/>
             </form>
         </div>
         <div class="col-md-3"></div>
     </div>
 </div>
+<script language="javaScript">
+    function change(divId) {
+        if($("#"+divId).parent().prop('id') == "selectedExercices"){
+            $("#exercices").prepend($("#"+divId));
+            $("#"+divId+" > a").removeClass().addClass("glyphicon glyphicon-plus floatRight");
+            $("#input"+divId).attr("name", "");
+        }
+        else if($("#"+divId).parent().prop('id') == "exercices"){
+            $("#selectedExercices").prepend($("#"+divId));
+            $("#"+divId+" > a").removeClass().addClass("glyphicon glyphicon-minus floatRight");
+            $("#input"+divId).attr("name", "checkBoxTraining");
+        }
+    }
+</script>
+

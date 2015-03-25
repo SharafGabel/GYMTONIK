@@ -22,11 +22,11 @@ public class Main {
             switch (i) {
                 case 1:
                     user = LoginConsole.login();
-                    error = false;
+                    error = user == null;
                     break;
                 case 2:
                     user = RegisterConsole.register();
-                    error = false;
+                    error = user == null;
                     break;
                 default:
                     System.out.println("Une erreur est survenue durant votre saisie !");
@@ -42,7 +42,8 @@ public class Main {
 
         System.out.println("1 - Séances");
         System.out.println("2 - Exercices");
-        System.out.println("3 - Profil");
+        System.out.println("3 - Performances");
+        System.out.println("4 - Profil");
 
         int choix = sc.nextInt();
 
@@ -54,6 +55,9 @@ public class Main {
                 ExerciseConsole.menu(user);
                 break;
             case 3:
+                PerformanceConsole.menu(user);
+                break;
+            case 4:
                 ProfilConsole.showProfil(user);
                 break;
             default:

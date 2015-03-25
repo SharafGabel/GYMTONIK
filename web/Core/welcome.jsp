@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-md-4"></div>
            
-            <div class="col-md-4" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div class="col-md-4 center" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                 <form id="formRegister" class="form-horizontal" name="formRegister" method="post" action="../RegisterServlet" >
                     <h1>S'inscrire</h1>
     
@@ -29,7 +29,7 @@
                     <label>Poids (en kg)</label>
                     <input class="form-control" type="number" name="weight" id="weight" placeholder="Entrez votre poids" />
     
-                    <p><button class="btn btn-small btn-primary" type="submit">Register</button>
+                    <p><button class="btn btn-small btn-success" style="margin-top: 4px;" type="submit">Register</button>
     
                     <label>* (Obligatoire)</label>
                 </form>
@@ -39,8 +39,6 @@
         </div>
 
 <script src="../assets/js/jquery-1.8.2.min.js"></script>
-<script src="../assets/js/supersized.3.2.7.min.js"></script>
-<script src="../assets/js/supersized-init.js"></script>
 <script src="../assets/js/scripts.js"></script>
 
 <%@ include file="../footer.jsp" %>

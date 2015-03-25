@@ -6,6 +6,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -29,6 +30,36 @@ public class HistoriqueService {
     private static Session getSession() throws HibernateException {
         return ourSessionFactory.openSession();
     }
+
+    //region update ExerciceSession
+    public static boolean updateHistorique(int idS, ATraining exercise,ATraining newExercise) {
+        SessionUser sessionUser = SessionService.getSessionById(idS);
+        Session session = getSession();
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+            Query query = session.createQuery("Select h from ExerciceSession h where h.sessionUser.idS=(:idSession) and h.training.id=(:idEx)");
+            query.setParameter("idSession",idS);
+            query.setParameter("idEx",exercise.getId());
+
+            List<ExerciceSession> exerciceSession1 = query.list();
+            ExerciceSession exerciceSession = (ExerciceSession)session.get(ExerciceSession.class,exerciceSession1.get(0).getId());
+            exerciceSession.setTraining(null);
+            exerciceSession.setTraining(newExercise);
+            session.update(exerciceSession);
+            tx.commit();
+            return true;
+        } catch (Exception e) {
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+            return false;
+        }finally {
+            session.close();
+        }
+    }
+    //endregion
 
     public static List<SessionUser> getSessionUserNotHaveThisExercise(ATraining exercise, User user) {
         Session session = getSession();
@@ -207,28 +238,47 @@ public class HistoriqueService {
         return exerciceSession.get(0);
     }
 
-    /*à terminer*/
-    public static boolean updateHistorique(int idS, ATraining exercise) {
-        SessionUser sessionUser = SessionService.getSessionById(idS);
+
+    public static SessionUser deleteExerciceSession(ExerciceSession es, SessionUser su) {
         Session session = getSession();
         Transaction tx = null;
-
-        try {
-            tx = session.beginTransaction();
-
-            ExerciceSession exerciceSession1 = new ExerciceSession(sessionUser,exercise);
-
-            session.save(exerciceSession1);
+        SessionUser sessionUser = null;
+        try{
+            ExerciceSession exerciceSession = (ExerciceSession)session.get(ExerciceSession.class,es.getId());
+            sessionUser = (SessionUser)session.get(SessionUser.class, su.getIdS());
+            tx  = session.beginTransaction();
+            sessionUser.getExerciceSessions().clear();
+            session.saveOrUpdate(sessionUser);
             tx.commit();
-            return true;
         } catch (Exception e) {
             if (tx != null)
+                System.out.println("rollback");
                 tx.rollback();
             e.printStackTrace();
-            return false;
         }finally {
             session.close();
         }
-
+        return sessionUser;
     }
+
+    public static SessionUser deleteAllExerciceSessions(SessionUser su){
+        Session session = getSession();
+        Transaction tx = null;
+        SessionUser sessionUser = null;
+        try {
+            sessionUser = (SessionUser) session.get(SessionUser.class, su.getIdS());
+            sessionUser.getExerciceSessions().clear();
+            session.update(sessionUser);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null)
+                System.out.println("rollback");
+            tx.rollback();
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+        return sessionUser;
+    }
+
 }

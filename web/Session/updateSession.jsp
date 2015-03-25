@@ -1,5 +1,6 @@
 <%@ page import="model.ATraining" %>
 <%@ page import="model.SessionUser" %>
+<%@ page import="model.ExerciceSession" %>
 <%@ page import="service.ExerciseService" %>
 <%@ page import="service.SessionService" %>
 <%@ page import="java.util.List" %>
@@ -25,7 +26,7 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-            <form id="sessionForm" name="sessionForm" method="post" action="SessionServlet">
+            <form id="sessionForm" name="sessionForm" method="post" action="../SessionServlet">
                 <input type="hidden" name="action" value="updateSessionAction" />
                 <input type="hidden" name="sessionId" value="<%= sessionId %>" />
                 <h1>Modifier une séance</h1>
@@ -37,13 +38,43 @@
                         $('#datepicker').datepicker({ dateFormat: 'dd-mm-yy' });
                     });
                 </script>
-                <input type='text' id='datepicker' name='datepicker' class="form-control" value="<%=sessionUser.getName()%>"/>
-                <%
-                    for(ATraining training:trainingList)
-                    {
-                %>
-                <input class="checkbox" type="checkbox" name="checkBoxTraining" value="<%=training.getId()%>"><%=training.getName()%><%=training.getNiveau()%>
-                <%  }%>
+                <input type='text' id='datepicker' name='datepicker' class="form-control" value="<%=sessionUser.getDateProgram()%>"/>
+                <label class="mt25">Exercices dans la séance</label><br/>
+                <div class="list-group" id="selectedExercices">
+                    <% for(ATraining training:trainingList) {
+                          for(ExerciceSession es:sessionUser.getExerciceSessions()){
+                              if(es.getTraining().getId() == training.getId()){
+                    %>
+                                  <div id="<%=training.getId()%>" class="list-group item" value="<%=training.getId()%>"><%=training.getName()%><%=training.getNiveau()%><%=training.getNiveau()%>
+                                      <input id="input<%=training.getId()%>" type="hidden" name="checkBoxTraining" value="<%=training.getId()%>"/>
+                                      <a class="glyphicon glyphicon-minus floatRight" onclick="change(<%=training.getId()%>)"></a>
+                                  </div>
+                    <%
+                              }
+                          }
+                      }
+                    %>
+                </div>
+                <label class="mt25">Autres exercices</label><br/>
+                <div class="list-group" id="exercices">
+                    <% for(ATraining training:trainingList) {
+                        boolean done = false;
+                          for(ExerciceSession es:sessionUser.getExerciceSessions()){
+                              if(es.getTraining().getId() == training.getId()){
+                                  done = true;
+                              }
+                          }
+                        if(!done){
+                    %>
+                            <div id="<%=training.getId()%>" class="list-group item" value="<%=training.getId()%>"><%=training.getName()%><%=training.getNiveau()%>
+                                <input id="input<%=training.getId()%>" type="hidden" name="" value="<%=training.getId()%>"/>
+                                <a class="glyphicon glyphicon-plus floatRight" onclick="change(<%=training.getId()%>)"></a>
+                            </div>
+                    <%
+                        }
+                    }
+                    %>
+                </div>
                 <input type="submit" class="btn btn-small btn-warning" value="Modifier"/>
             </form>
         </div>
@@ -52,3 +83,17 @@
 <%
     } //else
 %>
+<script language="javaScript">
+    function change(divId) {
+        if($("#"+divId).parent().prop('id') == "selectedExercices"){
+            $("#exercices").prepend($("#"+divId));
+            $("#"+divId+" > a").removeClass().addClass("glyphicon glyphicon-plus floatRight");
+            $("#input"+divId).attr("name", "");
+        }
+        else if($("#"+divId).parent().prop('id') == "exercices"){
+            $("#selectedExercices").prepend($("#"+divId));
+            $("#"+divId+" > a").removeClass().addClass("glyphicon glyphicon-minus floatRight");
+            $("#input"+divId).attr("name", "checkBoxTraining");
+        }
+    }
+</script>

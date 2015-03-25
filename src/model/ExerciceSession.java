@@ -1,13 +1,13 @@
 package model;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-import org.hibernate.annotations.Type;
+import org.hibernate.annotations.*;
 import util.GsonExclude;
 
 import javax.jms.Session;
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.List;
 
@@ -61,8 +61,8 @@ public class ExerciceSession {
     public ExerciceSession(SessionUser sessionUser, ATraining training) {
         this.sessionUser = sessionUser;
         this.training = training;
-        sessionUser.getExerciceSessions().add(this);
-        training.getExerciceSessions().add(this);
+        sessionUser.addExerciceSession(this);
+        training.addExerciceSession(this);
         this.ratioRepet = 0;
         this.ratioDuree = 0;
     }
@@ -133,7 +133,7 @@ public class ExerciceSession {
     }
 
     public float calculRatioDuree(int a,int b) {
-        this.ratioDuree = (a*100)/b;
+        this.ratioDuree = (b*100)/a;
         return ratioDuree;
     }
 

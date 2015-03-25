@@ -17,22 +17,21 @@
     <div class="row">
         <div class="col-md-2"></div>
             <div class="col-md-8">
-                <p><a class="btn btn-small btn-warning" href="createExercise.jsp">Créer un Exercice</a></p>
+                <p class="center"><a class="btn btn-small btn-success" href="createExercise.jsp">Créer un Exercice</a></p>
                 <table id="affSeance" class="table table-condensed">
                     <thead>
-                    <tr>
-                        <th>Nom Exercice</th>
-                        <th>Durée</th>
-                        <th>Nombre de répétitions</th>
-                        <th>Description</th>
-                        <th>Niveau</th>
-                        <th>Muscles Travaillés</th>
-                        <th>Action</th>
-                    </tr>
+                        <tr>
+                            <th>Nom Exercice</th>
+                            <th>Durée</th>
+                            <th>Nombre de répétitions</th>
+                            <th>Description</th>
+                            <th>Niveau</th>
+                            <th>Muscles Travaillés</th>
+                            <th>Action</th>
+                        </tr>
                     </thead>
-                    <div class="input-group"> <span class="input-group-addon">Filtrer</span>
-
-                        <input id="filter" type="text" class="form-control" placeholder="Type here...">
+                    <div class="input-group mb25"> <span class="input-group-addon">Filtre</span>
+                        <input id="filter" type="text" class="form-control" placeholder="Entrez un mot clé">
                     </div>
                     <tbody class="searchable">
                     <%

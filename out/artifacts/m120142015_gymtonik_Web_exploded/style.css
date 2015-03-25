@@ -1,0 +1,76 @@
+a {
+    text-decoration: none !important;
+    color:black;
+}
+.center {
+    text-align:center;
+}
+
+.menuBar{
+    background: none repeat scroll 0% 0% #5cb85c;
+    height: 40px !important;
+}
+
+.floatRight{
+    float:right;
+}
+
+.menuButton {
+    margin-right: -3px;
+    background-color: #5cb85c;
+    display: inline-block;
+    cursor: pointer;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    height: 40px;
+    width: 200px;
+}
+
+.nav .open > a, .nav .open > a:focus, .nav .open > a:hover {
+    background-image: linear-gradient(to right, #5cb85c, #5cb85c);
+    color: #ffffff;
+}
+
+.dropdown-menu > li > a:focus, .dropdown-menu > li > a:hover {
+    background-image: linear-gradient(to right, #5cb85c, #5cb85c);
+    color: #ffffff;
+}
+
+.menuButton:hover {
+    background-image: linear-gradient(to bottom, #5cb85c, #007F22);
+    background-color: #007F22;
+    color: #ffffff;
+}
+
+.divider-vertical{
+    border-left: 1px solid #007F22;
+    border-right: 1px solid #5cb85c;
+    height: 40px !important;
+    display:inline-block;
+}
+
+.nav-pills > li.active > a,.nav-pills > li.active > a:hover{
+    background-image: linear-gradient(to bottom, #5cb85c, #007F22);
+    background-color: #5cb85c;
+    color: #ffffff;
+}
+
+.dropdown-menu{
+    width: 206px;
+    margin: -1px -5px 0px;
+}
+
+ul .dropdown-menu {
+    background-color: #5cb85c;
+}
+
+.centered-pills { text-align:center; }
+.centered-pills ul.nav-pills { display:inline-block; }
+.centered-pills li { display:inline; }
+.centered-pills a { float:left; }
+
+
+
+* html .centered-pills ul.nav-pills { display:inline; } /* IE6 */
+*+html .centered-pills ul.nav-pills { display:inline; } /* IE7 */

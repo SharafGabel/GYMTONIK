@@ -43,13 +43,13 @@ public class ExerciseServlet extends HttpServlet {
 
             if(select.size()==0)
             {
-                request.getRequestDispatcher("exercise.jsp").forward(request, response);
-                out.println("<h1><p><p>Sélectionner au moins 1 muscle</p></p><h1>");
+                request.getRequestDispatcher("/Exercise/showMyExercises.jsp").forward(request, response);
+                //out.println("<h1><p><p>Sélectionner au moins 1 muscle</p></p><h1>");
             }
             else if (action.equals("add"))
             {
                 String sessionUserId = request.getParameter("sessionUser");
-                if(sessionUserId.equals("0") && length != null && !length.trim().isEmpty()
+                if(length != null && !length.trim().isEmpty()
                         && nameExercise != null && !nameExercise.trim().isEmpty()
                         && description != null && !description.trim().isEmpty() && select.size()!=0
                   )
@@ -65,19 +65,19 @@ public class ExerciseServlet extends HttpServlet {
                     ATraining exercise = ExerciseService.createExercise(user,description,nameExercise, Integer.parseInt(length), Integer.parseInt(nbRepet),Integer.parseInt(niveau),select);
                     SessionService.addOrUpdateExToSession(sessionUser, exercise);
                 }
-                request.getRequestDispatcher("exercise.jsp").forward(request, response);
-                out.println("<h1>Création de l'exercice réussie</h1>");
+                request.getRequestDispatcher("/Exercise/showMyExercises.jsp").forward(request, response);
+                //out.println("<h1>Création de l'exercice réussie</h1>");
             }
             else {
-                request.getRequestDispatcher("exercise.jsp").forward(request, response);
-                out.println("<h1>Création de l'exercise  échouée<h1>");
+                request.getRequestDispatcher("/Exercise/showMyExercises.jsp").forward(request, response);
+                //out.println("<h1>Création de l'exercise  échouée<h1>");
             }
             if (action.equals("delete"))
             {
                 String idExercice = request.getParameter("idEx");
                 if(idExercice != null && !idExercice.trim().isEmpty()) {
                     deleteExercise(user,ExerciseService.getExercise(idExercice));
-                    out.println("<h1>Exercice supprimé</h1>");
+                    //out.println("<h1>Exercice supprimé</h1>");
                 }
             }
             if(action.equals("addToEx"))
@@ -86,8 +86,8 @@ public class ExerciseServlet extends HttpServlet {
                 String idExercice = request.getParameter("idEx");
                 System.out.println("idS : "+sessionUserId + " idEx : "+idExercice);
                 SessionService.addOrUpdateExToSession(Integer.parseInt(sessionUserId),Integer.parseInt(idExercice));
-                request.getRequestDispatcher("showMyExercises.jsp").forward(request, response);
-                out.println("<h1>Ajout de l'exercice à la séance réussie</h1>");
+                request.getRequestDispatcher("/Exercise/showMyExercises.jsp").forward(request, response);
+                //out.println("<h1>Ajout de l'exercice à la séance réussie</h1>");
 
             }
             if (action.equals("update")) {
@@ -100,17 +100,17 @@ public class ExerciseServlet extends HttpServlet {
                 )
                 {
                         if (updateExercise(Integer.parseInt(idExercice),nameExercise,Integer.parseInt(length),Integer.parseInt(nbRepet),description,select)) {
-                            request.getRequestDispatcher("showMyExercises.jsp").forward(request, response);
-                            out.println("Exercice mis à jour");
+                            request.getRequestDispatcher("/Exercise/showMyExercises.jsp").forward(request, response);
+                            //out.println("Exercice mis à jour");
                         }
                     else {
-                            request.getRequestDispatcher("showMyExercises.jsp").forward(request, response);
-                            out.println("Mise à jour échouée");
+                            request.getRequestDispatcher("/Exercise/showMyExercises.jsp").forward(request, response);
+                            //out.println("Mise à jour échouée");
                     }
 
                 }
                 else{
-                    out.println("Mise à jour échouée");
+                    //out.println("Mise à jour échouée");
                 }
             }
 
