@@ -23,13 +23,16 @@
             });
 </script>
 
-<div class="container" id="exerciseDiv">
+<div class="container" id="container" id="exerciseDiv">
+    </div>
     <!--
     <form id="formSeance" class="form-horizontal" name="formSeance" method="get" action="PerformanceServlet">-->
     <div class="col-md-2"></div>
     <div class="col-md-8">
         Veuillez selectionner votre séance :
         <select class="form-control center" name="SessionUserForChart" id="SessionUserForChart">
+            <option>Selectionner une seance</option>
+
             <%
                 List<SessionUser> sessionUserListForChart = SessionService.getSessionList((User) session.getAttribute("User"));
                 for(SessionUser a:sessionUserListForChart)
@@ -86,16 +89,11 @@
                 },
                 yAxis: {
                     title: {
-                        text: 'Nb de repetition '
+                        text: 'Ratio Nb de repetition '
                     }
                 },
                 xAxis: {
                     type: 'datetime',
-                    labels: {
-                        format:'{value:%Y-%m-%d}',
-                        rotation:45,
-                        align:'right'
-                    },
                     title: {
                         text: 'Date'
                     }
@@ -137,16 +135,6 @@
 
             });
         });
-
-
-        $('#resetChart').click(function() {
-            var chart = $('#container').highcharts();
-            if (chart.series.length) {
-                chart.series[0].remove();
-            }
-        });
-        
-        
 
 
         $('#user_performance').click(function() {
@@ -251,7 +239,7 @@
                             browsersOther.push([d.dateProgEffectue,d.ratioRepet]);
                         });
   */
-                for (var j = 0; j < 2; j++) {
+                for (var j = 0; j < data.exerciceSessions.length; j++) {
                     browsersOther.push(data.moyenneGenerale);
                 }
 

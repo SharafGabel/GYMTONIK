@@ -43,7 +43,6 @@ public class PerformanceServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
             User user = (User) request.getSession().getAttribute("User");
             Integer idExercise = Integer.parseInt(request.getParameter("exerciseid"));
 
