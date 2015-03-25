@@ -127,7 +127,7 @@
             <div class="modal-header">
                 <h2 class="modal-title label label-info modalFS" id="mySmallModalLabel">Se connecter</h2>
             </div>
-            <div class="modal-body">
+            <div class="modal-body center">
                 <form id="formLogin" class="form-horizontal" name="formLogin" method="post" action="../LoginServlet">
                     <label>Nom d'utilisateur</label>
                     <input class="form-control" type="text" name="username" id="username" placeholder="Nom d'utilisateur" />
@@ -135,7 +135,7 @@
                     <label>Mot de Passe</label>
                     <input class="form-control" type="password" name="password" id="password" placeholder="Mot de Passe" />
 
-                    <button class="btn btn-small btn-success" type="submit">Log in</button>
+                    <button class="btn btn-small btn-success" style="margin-top: 4px;" type="submit">Log in</button>
                 </form>
             </div>
         </div>
@@ -148,11 +148,12 @@
             <%
                 if(request.getSession().getAttribute("User")==null){
             %>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myLoginModal">Se connecter</button>
+            <button type="button" class="btn btn-success" style="margin-top: -49px;margin-right: 30px;" data-toggle="modal" data-target="#myLoginModal">Se connecter</button>
             <%}
                 else{
             %>
-            <a href="LogoutServlet" class="label-info" >Se Déconecter</a>
+            <a href="../LogoutServlet" style="margin-top: -49px;margin-right: 30px;" class="btn btn-primary" >Se Déconecter</a>
+            <a href="#" style="margin-right: 70px;margin-top: -40px;float: left;"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> ${sessionScope.username}</a>
             <%}%>
         </div>
     </header>
