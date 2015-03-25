@@ -30,6 +30,7 @@ public class PerformanceServlet extends HttpServlet {
 
         ATraining exercise = ExerciseService.getExercise(idExercise);
         ATraining exerciseMAJ = null;
+
         if(result >70 && niveau!=3){
             exerciseMAJ = ExerciseService.getNextOrPreviousLevelOfThisExercises(exercise,niveau+1);
             HistoriqueService.updateHistorique(numSeance,exercise,exerciseMAJ);
