@@ -79,6 +79,11 @@ ul .dropdown-menu {
 .centered-pills li { display:inline; }
 .centered-pills a { float:left; }
 
+#header-logo {
+    max-width: 300px;
+    height: auto;
+    margin: 10px;
+}
 
 
 * html .centered-pills ul.nav-pills { display:inline; } /* IE6 */

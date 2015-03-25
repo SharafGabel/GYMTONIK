@@ -143,7 +143,7 @@
 </div>
 <%}%>
     <header>
-        <div class="center"><h2>GymTonik</h2></div>
+        <div class="center"><img src="/assets/img/logo.png" alt="Logo" id="header-logo"/></div>
         <div class="floatRight">
             <%
                 if(request.getSession().getAttribute("User")==null){
