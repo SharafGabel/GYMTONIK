@@ -134,10 +134,10 @@ public class SessionService {
         Session session = getSession();
         Transaction tx = null;
         try{
-            tx  = session.beginTransaction();
             for(ExerciceSession es: sessionUser.getExerciceSessions()){
                 HistoriqueService.deleteExerciceSession(es);
             }
+            tx  = session.beginTransaction();
             session.delete(sessionUser);
             tx.commit();
         } catch (Exception e) {

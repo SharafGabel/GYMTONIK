@@ -237,7 +237,7 @@ public class HistoriqueService {
         Session session = getSession();
         Transaction tx = null;
         try{
-            tx  = session.beginTransaction();;
+            tx  = session.beginTransaction();
             session.delete(es);
             tx.commit();
         } catch (Exception e) {
