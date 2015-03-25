@@ -30,21 +30,22 @@ public class SessionService {
         return ourSessionFactory.openSession();
     }
 
-    public static void createSession(User user, SessionUser sessionUser){
+    public static SessionUser createSession(User user, SessionUser sessionUser){
         Session session = getSession();
         Transaction tx = null;
         try {
             tx = session.getTransaction();
             tx.begin();
             sessionUser.setUser(user);
-            session.save(sessionUser);
-            session.update(sessionUser);
+            Serializable id = session.save(sessionUser);
+            SessionUser sessionUser1 = (SessionUser)session.get(SessionUser.class, id);
             tx.commit();
+            return sessionUser1;
         } catch (Exception e) {
-            System.out.println("bug session");
             if (tx != null)
                 tx.rollback();
             e.printStackTrace();
+            return null;
         }finally {
             session.close();
         }

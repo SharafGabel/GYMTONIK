@@ -1,6 +1,7 @@
 package console;
 
 import model.ATraining;
+import model.Exercise;
 import model.SessionUser;
 import model.User;
 import service.ExerciseService;
@@ -60,13 +61,13 @@ public class SessionConsole {
     private static void createSession(User user) {
         Util.clearConsole();
         Scanner sc = new Scanner(System.in);
+        List<ATraining> exercises = ExerciseService.getAllExercises();
 
         System.out.println("Nom de la séance :");
         String name = sc.nextLine();
 
         System.out.println("Date de la séance (yyyy-mm-dd) :");
         String dateString = sc.nextLine();
-
 
         Date sessionProgram = new Date();
         if (!dateString.trim().isEmpty()) {
@@ -80,9 +81,50 @@ public class SessionConsole {
             }
         }
 
+        SessionUser sessionUser = null;
         if (!name.trim().isEmpty() && sessionProgram != null) {
-            SessionUser sessionUser = new SessionUser(name, sessionProgram);
-            SessionService.createSession(user, sessionUser);
+            sessionUser = new SessionUser(name, sessionProgram);
+            sessionUser = SessionService.createSession(user, sessionUser);
+        }
+
+        if (sessionUser == null) {
+            System.out.println("Échec de la création de la séance.");
+            System.out.println("Appuyez sur la touche Entrée pour continuer...");
+            sc.nextLine();
+        } else {
+            if (exercises.size() > 0) {
+                System.out.println("Exercices à ajouter à la séance :");
+                int i = 1;
+
+                for (ATraining exo : exercises) {
+                    System.out.println(i + " - " + exo.getName()
+                                    + " : " + exo.getExplanation()
+                                    + " - Niveau " + exo.getNiveau()
+                                    + " (" + exo.getDureeExo() + "min) "
+                                    + " (" + exo.getNbRepetition() + "répétitions) "
+                    );
+                    i++;
+                }
+                System.out.println("(Séparez vos choix par un espace)");
+                String exos = sc.nextLine();
+
+                try {
+                    StringTokenizer st = new StringTokenizer(exos);
+                    while (st.hasMoreTokens()) {
+                        SessionService.addOrUpdateExToSession(
+                                sessionUser,
+                                exercises.get(Integer.parseInt(st.nextToken()) - 1));
+                    }
+                } catch (IndexOutOfBoundsException ioobe) {
+                    System.out.println("Veuillez entrer un nombre entre 1 et " + exercises.size());
+                    System.out.println("Appuyez sur la touche Entrée pour continuer...");
+                    sc.nextLine();
+                } catch (NumberFormatException nfe) {
+                    System.out.println("Veuillez entrer des nombres.");
+                    System.out.println("Appuyez sur la touche Entrée pour continuer...");
+                    sc.nextLine();
+                }
+            }
         }
 
     }
@@ -165,6 +207,7 @@ public class SessionConsole {
     private static void updateSession(SessionUser sessionUser) {
         Util.clearConsole();
         Scanner sc = new Scanner(System.in);
+        List<ATraining> exercises = ExerciseService.getAllExercises();
 
         System.out.println("Modification de la séance " + sessionUser.getName());
         System.out.println("(Laissez le champ vide pour ne pas modifier la valeur)\n");
@@ -174,6 +217,40 @@ public class SessionConsole {
 
         System.out.println("Date de la séance [" + sessionUser.getDateProgram() + "]");
         String dateString = sc.nextLine();
+
+        if (exercises.size() > 0) {
+            System.out.println("Exercices à ajouter à la séance");
+            int i = 1;
+
+            for (ATraining exo : exercises) {
+                System.out.println(i + " - " + exo.getName()
+                                + " : " + exo.getExplanation()
+                                + " - Niveau " + exo.getNiveau()
+                                + " (" + exo.getDureeExo() + "min) "
+                                + " (" + exo.getNbRepetition() + "répétitions) "
+                );
+                i++;
+            }
+            System.out.println("(Séparez vos choix par un espace)");
+            String exos = sc.nextLine();
+
+            try {
+                StringTokenizer st = new StringTokenizer(exos);
+                while (st.hasMoreTokens()) {
+                    SessionService.addOrUpdateExToSession(
+                            sessionUser,
+                            exercises.get(Integer.parseInt(st.nextToken()) - 1));
+                }
+            } catch (IndexOutOfBoundsException ioobe) {
+                System.out.println("Veuillez entrer un nombre entre 1 et " + exercises.size());
+                System.out.println("Appuyez sur la touche Entrée pour continuer...");
+                sc.nextLine();
+            } catch (NumberFormatException nfe) {
+                System.out.println("Veuillez entrer des nombres.");
+                System.out.println("Appuyez sur la touche Entrée pour continuer...");
+                sc.nextLine();
+            }
+        }
 
         if (!name.trim().isEmpty())
             sessionUser.setName(name);
