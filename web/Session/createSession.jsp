@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-            <form id="createSession" name="createSession" method="post" action="SessionServlet">
+            <form id="createSession" name="createSession" method="post" action="../SessionServlet">
                 <input type="hidden" name="action" value="createSessionAction" />
                 <h1>Création d'une séance d'entraînement</h1>
                 <label>Nom de la séance</label>

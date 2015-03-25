@@ -23,11 +23,13 @@
             });
 </script>
 
-<div class="page-container" id="exerciseDiv">
+<div class="container" id="exerciseDiv">
     <!--
     <form id="formSeance" class="form-horizontal" name="formSeance" method="get" action="PerformanceServlet">-->
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
         Veuillez selectionner votre séance :
-        <select name="SessionUserForChart" id="SessionUserForChart">
+        <select class="form-control center" name="SessionUserForChart" id="SessionUserForChart">
             <%
                 List<SessionUser> sessionUserListForChart = SessionService.getSessionList((User) session.getAttribute("User"));
                 for(SessionUser a:sessionUserListForChart)
@@ -36,30 +38,33 @@
             <option name="optionName" value="<%=a.getIdS()%>"> <%=a.getName()+" ( Crée le "+a.getDateProgram()+" )"%></option>
             <%}%>
         </select>
-        <select name="exerciseid" id="exerciseDynamic">
+        <select class="form-control center" name="exerciseid" id="exerciseDynamic">
             <option>Selectionner un exercice</option>
         </select>
         <br>
-        <button class="btn btn-small btn-warning" name="submit_choice" id="user_performance" value="user_performance" type="submit" >Voir mon evolution</button>
-        <button class="btn btn-small btn-warning" name="submit_choice" id="compare_performance" value="compare_performance" type="submit">comparer mes performances avec les autres</button>
-   <!-- </form>--> <!-- todo:j'obtiens le fichier json , mais je n'arrive pas a le passer au script js juste au-dessus(extraire les resultats du json) -->
-
-    <div  class="page-container" id="container">
-        <button id="button">Set new data</button>
+        <button class="btn btn-small btn-warning center" name="submit_choice" id="user_performance" value="user_performance" type="submit" >Voir mon evolution</button>
+        <button class="btn btn-small btn-warning center" name="submit_choice" id="compare_performance" value="compare_performance" type="submit">comparer mes performances avec les autres</button>
     </div>
-    <form>
+    <div class="col-md-2"></div>
+</div>
+    <div  class="container" id="container">
+    </div>
+    <form class="form-inline">
     <input type="hidden" name="choose" value="listH"/>
-    <p><label class="lab">TEST Niveau ?</label></p>
-    <select name="SessionUserFromPerformancePage" id="SessionUserFromPerformancePage">
-        <%
-            List<SessionUser> sessionUserList = SessionService.getSessionList((User) session.getAttribute("User"));
-            for(SessionUser a:sessionUserList)
-            {
-        %>
-        <option name="optionName" value="<%=a.getIdS()%>"> <%=a.getName()+" ( Crée le "+a.getDateProgram()+" )"%></option>
-        <%}%>
-    </select>
 
+
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <p><label>Evaluation des exerices d'un séance</label></p>
+            <select class="form-control center" name="SessionUserFromPerformancePage" id="SessionUserFromPerformancePage">
+                <%
+                    List<SessionUser> sessionUserList = SessionService.getSessionList((User) session.getAttribute("User"));
+                    for(SessionUser a:sessionUserList)
+                    {
+                %>
+                <option name="optionName" value="<%=a.getIdS()%>"> <%=a.getName()+" ( Crée le "+a.getDateProgram()+" )"%></option>
+                <%}%>
+            </select>
     <table id="affExo" class="table table-condensed">
         <thead>
         <tr>
@@ -75,10 +80,10 @@
         <tbody>
         </tbody>
     </table>
-
-
+<div>
+    </div>
+            <div class="col-md-2"></div>
     </form>
-    
 </div>
 <%@ include file="footer.jsp" %>
 <script>
@@ -89,7 +94,7 @@
             $.get('HistoriqueServlet', {
                 sessionUserFromPerformance : sessionUser
             }, function(response) {
-                $('#affExo').children().remove();
+                $('#affExo tbody').remove();
                 $.each(response, function(key, value) {
                         for(j=0;j<6;j++)
                         {
@@ -101,13 +106,13 @@
                                         $('<td>').text(response[j][4]),
                                         $('<td>').text(response[j][5]),
                                         $('<td>').text(response[j][6]),
-                                        $('<input name=\"seanceId\" type=\"hidden\" value='+sessionUser+'>'),
-                                        $('<input name=\"idExo\" type=\"hidden\" value='+response[j][0]+'>'),
-                                        $('<input name=\"niveau\" type=\"hidden\" value='+response[j][2]+'>'),
-                                        $('<input name=\"dureeEffectuee\" type=\"hidden\" value='+response[j][3]+'>'),
+                                        $('<input class=\"form-control\" name=\"seanceId\" type=\"hidden\" value='+sessionUser+'>'),
+                                        $('<input class=\"form-control\" name=\"idExo\" type=\"hidden\" value='+response[j][0]+'>'),
+                                        $('<input class=\"form-control\" name=\"niveau\" type=\"hidden\" value='+response[j][2]+'>'),
+                                        $('<input class=\"form-control\" name=\"dureeEffectuee\" type=\"hidden\" value='+response[j][3]+'>'),
                                         $('<input name=\"repetReussi\" type=\"hidden\" value='+response[j][4]+'>'),
                                         $('</td>	<td>').append('<button type=\"submit\" value=\"Enregistrer\">Evaluer</button></td>')
-                                    )).appendTo('#affExo');
+                                    )).appendTo('#affExo tbody');
                         }
 
                 });
