@@ -38,7 +38,8 @@
                         for(ATraining training:trainingList)
                         {
                     %>
-                    <div id="<%=training.getId()%>" class="list-group item" value="<%=training.getId()%>"><%=training.getName()%><%=training.getNiveau()%>
+                    <div id="<%=training.getId()%>" class="list-group item" value="<%=training.getId()%>">
+                        <%=training.getName()%><%=training.getNiveau()%>
                         <input id="input<%=training.getId()%>" type="hidden" name="" value="<%=training.getId()%>"/>
                         <a class="glyphicon glyphicon-plus floatRight" onclick="change(<%=training.getId()%>)"></a>
                     </div>
@@ -47,7 +48,7 @@
                         }
                     %>
                 </div>
-                <input type="submit" class="btn btn-small btn-warning" value="Créer"/>
+                <input type="submit" class="btn btn-small btn-success" value="Créer"/>
             </form>
         </div>
         <div class="col-md-3"></div>
@@ -59,13 +60,11 @@
             $("#exercices").prepend($("#"+divId));
             $("#"+divId+" > a").removeClass().addClass("glyphicon glyphicon-plus floatRight");
             $("#input"+divId).attr("name", "");
-            $("#"+divId+" > a").onclick.value="select(divId)";
         }
         else if($("#"+divId).parent().prop('id') == "exercices"){
             $("#selectedExercices").prepend($("#"+divId));
             $("#"+divId+" > a").removeClass().addClass("glyphicon glyphicon-minus floatRight");
             $("#input"+divId).attr("name", "checkBoxTraining");
-            $("#"+divId+" > a").onclick.value="unselect(divId)";
         }
     }
 </script>

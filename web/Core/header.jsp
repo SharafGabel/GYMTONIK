@@ -125,7 +125,7 @@
     <div class="modal-dialog modal-lg" style="width: 450px;">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title label label-info modalFS" id="mySmallModalLabel">Se connecter</h2>
+                <h2 class="modal-title label label-success modalFS" id="mySmallModalLabel">Se connecter</h2>
             </div>
             <div class="modal-body center">
                 <form id="formLogin" class="form-horizontal" name="formLogin" method="post" action="../LoginServlet">
@@ -152,8 +152,7 @@
             <%}
                 else{
             %>
-            <a href="../LogoutServlet" style="margin-top: -49px;margin-right: 30px;" class="btn btn-primary" >Se Déconecter</a>
-            <a href="#" style="margin-right: 70px;margin-top: -40px;float: left;"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> ${sessionScope.username}</a>
+            <a href="../LogoutServlet" style="margin-top: -49px;margin-right: 30px;" class="btn btn-success" >Se Déconnecter</a>
             <%}%>
         </div>
     </header>

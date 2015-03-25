@@ -49,7 +49,7 @@ public class ExerciseServlet extends HttpServlet {
             else if (action.equals("add"))
             {
                 String sessionUserId = request.getParameter("sessionUser");
-                if(sessionUserId.equals("0") && length != null && !length.trim().isEmpty()
+                if(length != null && !length.trim().isEmpty()
                         && nameExercise != null && !nameExercise.trim().isEmpty()
                         && description != null && !description.trim().isEmpty() && select.size()!=0
                   )

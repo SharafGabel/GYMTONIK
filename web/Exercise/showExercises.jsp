@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8">
-            <p><a class="btn btn-small btn-warning" href="createExercise.jsp">Créer un Exercice</a></p>
+            <p class="center"><a class="btn btn-small btn-success" href="createExercise.jsp">Créer un Exercice</a></p>
             <table id="affSeance" class="table table-condensed">
                 <thead>
                     <tr>

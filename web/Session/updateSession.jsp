@@ -89,13 +89,11 @@
             $("#exercices").prepend($("#"+divId));
             $("#"+divId+" > a").removeClass().addClass("glyphicon glyphicon-plus floatRight");
             $("#input"+divId).attr("name", "");
-            $("#"+divId+" > a").onclick.value="select(divId)";
         }
         else if($("#"+divId).parent().prop('id') == "exercices"){
             $("#selectedExercices").prepend($("#"+divId));
             $("#"+divId+" > a").removeClass().addClass("glyphicon glyphicon-minus floatRight");
             $("#input"+divId).attr("name", "checkBoxTraining");
-            $("#"+divId+" > a").onclick.value="unselect(divId)";
         }
     }
 </script>
