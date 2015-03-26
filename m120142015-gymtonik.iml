@@ -80,6 +80,33 @@
     <orderEntry type="library" name="javax.servlet.jsp:javax.servlet.jsp-api:2.3.0" level="project" />
     <orderEntry type="library" name="javax.jms:javax.jms-api:2.0.1" level="project" />
     <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$USER_HOME$/Desktop/LIBGRAPHE/jcommon-1.0.16" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$USER_HOME$/Desktop/LIBGRAPHE/jcommon-1.0.16/source" />
+        </SOURCES>
+        <jarDirectory url="file://$USER_HOME$/Desktop/LIBGRAPHE/jcommon-1.0.16" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$USER_HOME$/Desktop/LIBGRAPHE/jfreechart-1.0.13" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$USER_HOME$/Desktop/LIBGRAPHE/jfreechart-1.0.13/swt" />
+          <root url="file://$USER_HOME$/Desktop/LIBGRAPHE/jfreechart-1.0.13/tests" />
+          <root url="file://$USER_HOME$/Desktop/LIBGRAPHE/jfreechart-1.0.13/source" />
+          <root url="file://$USER_HOME$/Desktop/LIBGRAPHE/jfreechart-1.0.13/experimental" />
+        </SOURCES>
+        <jarDirectory url="file://$USER_HOME$/Desktop/LIBGRAPHE/jfreechart-1.0.13" recursive="false" />
+      </library>
+    </orderEntry>
   </component>
 </module>
 
