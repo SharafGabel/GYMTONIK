@@ -127,13 +127,11 @@
                 series: [{
                     type: 'line',
                     name: 'performance',
-                   // pointStart:Date.UTC(2015,2,1),
-                   // pointInterval:24*36e5
+                   
                 },{
                     type: 'line',
                     name: 'performance moyennes',
-                    //pointStart:Date.UTC(2015,2,1),
-                    //pointInterval:24*36e5
+
                 }]
 
 
