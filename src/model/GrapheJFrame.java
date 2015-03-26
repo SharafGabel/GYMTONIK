@@ -5,10 +5,12 @@ import  org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartPanel;
 import  org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.category.DefaultCategoryDataset;
-import  org.jfree.data.general.DefaultPieDataset;
+
+import org.jfree.data.DefaultCategoryDataset;
 import service.PerformanceService;
 import service.*;
+
+import service.PerformanceService;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -23,7 +25,6 @@ import java.util.Map;
  * Created by driss on 25/03/2015.
  */
 
-
     public class GrapheJFrame extends JFrame {
 
         private JDialog grapheJdialog;
@@ -36,9 +37,12 @@ import java.util.Map;
 
 
             @Override
-           /* public void actionPerformed(ActionEvent arg0) {
+            /*
+            public void actionPerformed(ActionEvent arg0) {
                 System.out.println("coucou");
-            }*/
+            }
+*/
+
             public void actionPerformed(ActionEvent e) {
                 grapheJdialog = new JDialog();
                 grapheJdialog.setTitle("Graphe Ratios Exos");
@@ -51,8 +55,8 @@ import java.util.Map;
                     duree.add(Math.ceil((double)exerc.get(i).getRatioDuree()));
                     repet.add(Math.ceil((double)exerc.get(i).getRatioRepet()));
                 }
-
-                /*final Map<Integer, Integer> duree = new HashMap<Integer, Integer>();
+/*
+                final Map<Integer, Integer> duree = new HashMap<Integer, Integer>();
                 final Map<Integer, Integer> repet = new HashMap<Integer, Integer>();
                    for (int i = 0; i <= 20; i++) {
                     repartitionHomme.put(i, 0);
@@ -64,8 +68,8 @@ import java.util.Map;
                     incrementNb(ex.getRatioDuree(), duree);
 
                     incrementNb(ex.getRatioRepet(), repet);
-                }*/
-
+                }
+*/
                 final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
                 for (int i = 0; i < exerc.size(); i++) {
@@ -102,6 +106,7 @@ import java.util.Map;
                 boutons.add(new JButton(new GrapheAction()));
 
                 getContentPane().add(boutons);
+
             }
 }
 

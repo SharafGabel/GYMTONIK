@@ -127,7 +127,7 @@
                 series: [{
                     type: 'line',
                     name: 'performance',
-                   
+
                 },{
                     type: 'line',
                     name: 'performance moyennes',
