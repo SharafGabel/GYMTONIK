@@ -89,13 +89,17 @@
                 },
                 yAxis: {
                     title: {
-                        text: 'Ratio Nb de repetition '
+                        text: 'Ratio Nb de repetitions '
                     }
                 },
                 xAxis: {
-                    type: 'datetime',
+                    //type: 'datetime',
                     title: {
                         text: 'Date'
+                    },
+                    labels:
+                    {
+                        enabled: false
                     }
                 },
                 tooltip: {
@@ -123,19 +127,23 @@
                 series: [{
                     type: 'line',
                     name: 'performance',
-                    pointStart:Date.UTC(2015,2,1),
-                    pointInterval:24*36e5
+                   // pointStart:Date.UTC(2015,2,1),
+                   // pointInterval:24*36e5
                 },{
                     type: 'line',
                     name: 'performance moyennes',
-                    pointStart:Date.UTC(2015,2,1),
-                    pointInterval:24*36e5
+                    //pointStart:Date.UTC(2015,2,1),
+                    //pointInterval:24*36e5
                 }]
 
 
             });
         });
 
+
+        $('#resetChart').click(function() {
+            location.reload();
+        });
 
         $('#user_performance').click(function() {
         function perfData (data) {
@@ -147,42 +155,7 @@
                     });
    
             chart.series[0].setData(browsers);
-           
 
-            alert("browser"+browsers);
-           /* var char;
-            
-            char=$('#container').highcharts({
-                
-                chart: {
-                    type: 'line'
-                },
-                title: {
-                    text: 'Average Visitors'
-                },
-                xAxis: {
-                    type: 'datetime',
-                    labels: {
-                        format:'{value:%Y-%m-%d}',
-                        rotation:45,
-                        align:'right'
-                    },
-                    title: {
-                        text: 'Date'
-                    }
-                },
-                yAxis: {
-                    title: {
-                        text: 'Ration'
-                    }
-                },
-                series: [{
-                    type: 'line',
-                    name: 'test'
-                }]
-            });*/
-
-           
         }
         $.ajax({
             type:"GET",
@@ -203,83 +176,21 @@
         $('#compare_performance').click(function() {
 
             function perfDataCompare (data) {
-                               //alert("perfdataCompare");
-               //alert(data.length);
-                //("test1 - data 0");
-               // alert(data[0]);
-               // alert("test1 - data 1");
-                //alert(data[1]);
-               // alert(data);
-                //alert(1);
-                //alert('porjet'+data[0]);
-                //alert('other'+data[1]);
-               /* browsers = [],
 
-                      /$.each(data,function(i,d){
-                            alert(data[0][0]);
-                            alert("d");
-                            alert(d);
-                            alert(d.nbRepetEffectue);
-                           // alert(d.ratioRepet);
-                            //alert(data[0]);
-                            //alert(data[2]);
-                            browsers.push([d,d]);
-                        });*/
                 var browsers = [];
                 for(var i=0;i<data.exerciceSessions.length;i++) {
                     browsers.push(data.exerciceSessions[i].ratioRepet);
                 }
-              //  alert(browsers);
+
 
                 var browsersOther = [];
-/*
-                        $.each(data,function(i,d){
-                            alert(d.ratioRepet);
-                            alert(data[0].ratioRepet);
-                            browsersOther.push([d.dateProgEffectue,d.ratioRepet]);
-                        });
-  */
+
                 for (var j = 0; j < data.exerciceSessions.length; j++) {
                     browsersOther.push(data.moyenneGenerale);
                 }
 
                 chart.series[0].setData(browsers);
                 chart.series[1].setData(browsersOther);
-                //alert("browser"+browsers);
-                //alert("browser 2"+ browsers2);
-
-                /* var char;
-
-                 char=$('#container').highcharts({
-
-                 chart: {
-                 type: 'line'
-                 },
-                 title: {
-                 text: 'Average Visitors'
-                 },
-                 xAxis: {
-                 type: 'datetime',
-                 labels: {
-                 format:'{value:%Y-%m-%d}',
-                 rotation:45,
-                 align:'right'
-                 },
-                 title: {
-                 text: 'Date'
-                 }
-                 },
-                 yAxis: {
-                 title: {
-                 text: 'Ration'
-                 }
-                 },
-                 series: [{
-                 type: 'line',
-                 name: 'test'
-                 }]
-                 });*/
-
 
             }
             $.ajax({
