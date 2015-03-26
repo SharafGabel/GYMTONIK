@@ -12,10 +12,7 @@ import util.Util;
 import java.lang.reflect.Modifier;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class SessionConsole {
     public static void menu(User user) {
@@ -110,6 +107,7 @@ public class SessionConsole {
 
                 try {
                     StringTokenizer st = new StringTokenizer(exos);
+
                     while (st.hasMoreTokens()) {
                         SessionService.addOrUpdateExToSession(
                                 sessionUser,
@@ -219,7 +217,7 @@ public class SessionConsole {
         String dateString = sc.nextLine();
 
         if (exercises.size() > 0) {
-            System.out.println("Exercices à ajouter à la séance");
+            System.out.println("Exercices de la séance");
             int i = 1;
 
             for (ATraining exo : exercises) {
@@ -236,10 +234,17 @@ public class SessionConsole {
 
             try {
                 StringTokenizer st = new StringTokenizer(exos);
+
+                List<ATraining> choosenExercises = new ArrayList<ATraining>();
+
                 while (st.hasMoreTokens()) {
-                    SessionService.addOrUpdateExToSession(
-                            sessionUser,
-                            exercises.get(Integer.parseInt(st.nextToken()) - 1));
+                    choosenExercises.add(exercises.get(Integer.parseInt(st.nextToken()) - 1));
+                }
+
+                if (choosenExercises.size() > 0) {
+                    SessionService.cleanSession(sessionUser);
+                    for (ATraining ex : choosenExercises)
+                        SessionService.addOrUpdateExToSession(sessionUser, ex);
                 }
             } catch (IndexOutOfBoundsException ioobe) {
                 System.out.println("Veuillez entrer un nombre entre 1 et " + exercises.size());
@@ -277,6 +282,7 @@ public class SessionConsole {
         String choix = sc.nextLine();
 
         if (choix.trim().toLowerCase().equals("o") || choix.trim().toLowerCase().equals("oui")) {
+            SessionService.deleteSession(sessionUser);
             SessionService.deleteSession(sessionUser);
         } else if (choix.trim().toLowerCase().equals("n") || choix.trim().toLowerCase().equals("non")) {
             return;
