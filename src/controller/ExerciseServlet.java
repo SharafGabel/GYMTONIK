@@ -33,6 +33,10 @@ public class ExerciseServlet extends HttpServlet {
 
         String action = request.getParameter("action");
         List<AMuscle> select = new ArrayList<AMuscle>();
+
+        if(action.equals("redirectUpdate")){
+            request.getRequestDispatcher("/Exercise/updateExercise.jsp").forward(request, response);
+        }
         if(request.getParameter("inlineCheckboxMuscle") != null) {
             String[] selectedMuscles = request.getParameterValues("inlineCheckboxMuscle");
             for (String selectedMuscle : selectedMuscles) {
@@ -120,7 +124,7 @@ public class ExerciseServlet extends HttpServlet {
     }
 
     public static boolean updateExercise(int idEx,String nameExo,int length,int nbRepet,String description,List<AMuscle> aMuscles){
-
+        System.out.println(aMuscles.size());
         ExerciseService.updateExercise(idEx,nameExo,length,nbRepet,description,aMuscles);
         return true;
     }

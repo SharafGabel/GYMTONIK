@@ -45,7 +45,8 @@
                           for(ExerciceSession es:sessionUser.getExerciceSessions()){
                               if(es.getTraining().getId() == training.getId()){
                     %>
-                                  <div id="<%=training.getId()%>" class="list-group item" value="<%=training.getId()%>"><%=training.getName()%><%=training.getNiveau()%><%=training.getNiveau()%>
+                                  <div id="<%=training.getId()%>" class="list-group item" value="<%=training.getId()%>">
+                                      <%=training.getName()%><%=training.getNiveau()%><%=training.getNiveau()%>
                                       <input id="input<%=training.getId()%>" type="hidden" name="checkBoxTraining" value="<%=training.getId()%>"/>
                                       <a class="glyphicon glyphicon-minus floatRight" onclick="change(<%=training.getId()%>)"></a>
                                   </div>
@@ -66,7 +67,8 @@
                           }
                         if(!done){
                     %>
-                            <div id="<%=training.getId()%>" class="list-group item" value="<%=training.getId()%>"><%=training.getName()%><%=training.getNiveau()%>
+                            <div id="<%=training.getId()%>" class="list-group item" value="<%=training.getId()%>">
+                                <%=training.getName()%><%=training.getNiveau()%>
                                 <input id="input<%=training.getId()%>" type="hidden" name="" value="<%=training.getId()%>"/>
                                 <a class="glyphicon glyphicon-plus floatRight" onclick="change(<%=training.getId()%>)"></a>
                             </div>

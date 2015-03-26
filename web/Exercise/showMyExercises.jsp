@@ -69,7 +69,8 @@
                                 out.println("<button class=\"btn btn-small btn-danger\" type=\"submit\">Supprimer</button>");
                                 out.println("</form>");
 
-                                out.println("<form method=\"post\" action=\"updateExercise.jsp\">");
+                                out.println("<form method=\"post\" action=\"../ExerciceServlet\">");
+                            out.println("<input type=\"hidden\" name=\"action\" value=\"redirectUpdate\" />");
                                 out.println("<input type=\"hidden\" name=\"idEx\" value=\"" + t.getId() + "\" />");
                                 out.println("<button class=\"btn btn-small btn-primary\" type=\"submit\">Modifier</button>");
                                 out.println("</form>");
