@@ -8,15 +8,15 @@ Nous devons réaliser un outil permettant le suivi d’entraînements sportif.
 ###Expression des besoins et objectifs du projet
 Proposer une application web permettant d’améliorer ses performances pour la pratique d’un sport. Cela s’articulera principalement sur le suivi des progrès réalisés, afin de pouvoir mieux connaître ses performances actuelles par rapport  à soi-même et aux autres. 
 
-Elle proposera différents exercices, les séances pourront être pré-crées à partir d’une suite d’exercice. 
-Les séances pourront aussi être assemblées par un utilisateur, qui renseignera les exercices, le nombre de répétitions pour chaque exercice, l’ordre des exercices, et les éventuels temps de pose entre chaque exercice. 
-En fonction de tout ça, ainsi que du poid et de la taille de l'utilisateur, un indice sera calculé afin de dire si oui ou non, la séance crée est adapté à l’entraînement désiré (par exemple : entraînement sur un ou plusieurs muscles). Cette dernière phrase implique que chaque exercice aura une liste de muscles travaillés, ce qui permettra d’adapter au maximum les séances. 
+Dans l'application, un exercice peut-être crée par différents utilisateurs.
+Un exercice pourra être modifié ou supprimé par son créateur uniquement.
+Un utilisateur pourra créer une séance, générer une séance à partir des muscles qu'il veut travailler, valider une séance en inscrivant le nombre de répétitions, la durée et le temps de sommeil de cette exercice et pourra aussi évaluer les exercices d'une séance afin de passer au niveau supérieur si la moyenne de ratios repétition et durée est important ou de descendre d'un niveau si la moyenne de ratios est faible.
 
-Il pourra aussi renseigner son nombre d’heures de sommeil et lui conseiller un nombre d’heures de sommeil adapté à ses séances.
+Un utilisateur pourra ajouter ses exercices ou ceux des autres utilisateurs à une séance.
+Il pourra visualiser ses exercices et les exercices des autres utilisateurs.
 
-Le choix des heures de sommeil, et du niveau d’alimentation sera optionnel, tout comme l’élaboration d’une séance à partir d’exercices par l’utilisateur.
-
-L’application donnera la possibilité à l’utilisateur d’avoir un aperçu plus concret des progrès réalisés grâce à diverses représentations graphiques de ces performances.
+L’application donnera la possibilité à l’utilisateur d’avoir un aperçu plus concret des progrès réalisés grâce à diverses représentations graphiques de ces performances.Il pourra visualiser son évolution (comparaison des différents ratios en fonction du temps) pour un exercice d'une séance donnée.
+Il pourra aussi comparer ses performances d'un exercice d'une séance donnée par rapport aux performances d'un exercice des autres utilisateurs (comparaison des ratios avec la moyenne des ratios des utilisateurs de la base de données).
 
 #Traduction de la demande
 
